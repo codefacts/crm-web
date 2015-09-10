@@ -1,0 +1,36 @@
+<div class="row">
+    <form class="form">
+
+        <div class="col-md-3">
+            <select class="form-control" name="destination">
+                <option value="">Select destination</option>
+                ~for dests in destinations:
+                <option ~dests.selected~>~dests.label~</option>
+                :else:
+                <option>No destination</option>
+                :~
+
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <textarea class="form-control" name="header"> ~header~ </textarea>
+        </div>
+
+        <div class="col-md-6">
+            <textarea class="form-control" name="body"> ~body~ </textarea>
+        </div>
+
+        <div class="col-md-1">
+            <input class="btn btn-default btn-block" type="submit" value="send">
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <h5 class=".h4">Reply</h5>
+
+    <div class="col-md-12 col-sm-12 col-xm-12">
+        <textarea class="form-control" name="header" style="height: 800px;"> ~reply~ </textarea>
+    </div>
+</div>
