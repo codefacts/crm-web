@@ -10,6 +10,7 @@ import java.nio.file.Paths;
  * Created by someone on 07/09/2015.
  */
 public class Page extends Template {
+    private static final String templateDir = "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\templates\\en_US";
     private final String page_title;
     private final Template body;
 
@@ -21,7 +22,7 @@ public class Page extends Template {
 
     @Override
     protected void addSubTemplates(TemplateMap.SubTemplates subTemplates) {
-        subTemplates.add("body", Util.getOrDefault(body, Templates.EMPTY));
+        subTemplates.add("body", Util.getOrDefault(body, TemplateUtil.EMPTY_TEMPLATE));
     }
 
     @Override
@@ -30,6 +31,7 @@ public class Page extends Template {
     }
 
     public static String templatePath(String filename) {
-        return filename;
+
+        return "file:" + Paths.get(templateDir, filename);
     }
 }
