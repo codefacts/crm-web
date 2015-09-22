@@ -8,4 +8,10 @@ final public class ST {
     public static final String password = "password";
     public static final String currentUser = "currentUser";
     public static final String ok = "ok";
+    public static final java.lang.String userId = "userId";
+    public static final java.lang.String userName = "userName";
+    public static final java.lang.String employName = "employName";
+    public static final java.lang.String userType = "userType";
+    public static final java.lang.String typeName = "typeName";
+    public static final java.lang.String mobile = "mobile";
 }

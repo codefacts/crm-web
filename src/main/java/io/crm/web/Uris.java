@@ -4,11 +4,11 @@ package io.crm.web;
  * Created by someone on 21/09/2015.
  */
 public enum Uris {
-    home("/dashboard"),
+    dashboard("/dashboard"),
     login("/login"),
     register("/register"),
-    staticResources("/static/*"),
-    publicResources("/public/*"),
+    staticResourcesPattern("/static/*"),
+    publicResourcesPattern("/public/*"),
     event_publish_form("/event-publish-form"),
     logout("/logout");
 
