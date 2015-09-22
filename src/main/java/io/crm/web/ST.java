@@ -14,4 +14,7 @@ final public class ST {
     public static final java.lang.String userType = "userType";
     public static final java.lang.String typeName = "typeName";
     public static final java.lang.String mobile = "mobile";
+    public static final String uri = "uri";
+    public static final String label = "label";
+    public static final String active = "active";
 }

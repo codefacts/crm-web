@@ -1,10 +1,11 @@
 package io.crm.web;
 
+import io.crm.web.controller.CallController;
 import io.crm.web.controller.EventPublisherController;
 import io.crm.web.controller.HomeController;
 import io.crm.web.controller.LoginController;
 import io.crm.web.service.ApiService;
-import io.crm.web.view.*;
+import io.crm.web.template.*;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpClient;
@@ -127,6 +128,8 @@ public class MainVerticle extends AbstractVerticle {
 
         new HomeController(router).index();
 
+        new CallController(apiService, router);
+
         loginFormController(router);
         new LoginController(apiService, router).login();
         logoutController(router);
@@ -144,6 +147,10 @@ public class MainVerticle extends AbstractVerticle {
 
     private void loginFormController(final Router router) {
         router.get(Uris.login.value).handler(context -> {
+            if (WebUtils.isLoggedIn(context.session())) {
+                WebUtils.redirect(Uris.dashboard.value, context.response());
+                return;
+            }
             context.response().headers().set(CONTENT_TYPE, TEXT_HTML);
 
             context.response().end(

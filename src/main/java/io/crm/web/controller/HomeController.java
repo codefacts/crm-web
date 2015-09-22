@@ -2,8 +2,9 @@ package io.crm.web.controller;
 
 import io.crm.web.ST;
 import io.crm.web.Uris;
-import io.crm.web.view.DashboardTemplate;
-import io.crm.web.view.PageBuilder;
+import io.crm.web.template.DashboardTemplateBuilder;
+import io.crm.web.template.PageBuilder;
+import io.crm.web.template.SidebarTemplate;
 import io.vertx.ext.web.Router;
 
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
@@ -23,7 +24,11 @@ public class HomeController {
             context.response().headers().set(CONTENT_TYPE, "text/html");
             context.response().end(
                     new PageBuilder("Dashboard")
-                            .body(new DashboardTemplate(context.session().get(ST.currentUser)))
+                            .body(
+                                    new DashboardTemplateBuilder()
+                                            .setUser(context.session().get(ST.currentUser))
+                                            .setSidebarTemplate(new SidebarTemplate(context.request().uri()))
+                                            .build())
                             .build().render());
         });
     }

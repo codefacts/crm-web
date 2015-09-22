@@ -1,7 +1,7 @@
 import diag.Watch;
-import io.crm.web.view.EventPublisherForm;
-import io.crm.web.view.Page;
-import io.crm.web.view.PageBuilder;
+import io.crm.web.template.EventPublisherForm;
+import io.crm.web.template.Page;
+import io.crm.web.template.PageBuilder;
 
 import java.util.Collections;
 

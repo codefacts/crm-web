@@ -1,9 +1,9 @@
 package io.crm.web.controller;
 
 import io.crm.web.Uris;
-import io.crm.web.view.EventPublisherForm;
-import io.crm.web.view.Page;
-import io.crm.web.view.PageBuilder;
+import io.crm.web.template.EventPublisherForm;
+import io.crm.web.template.Page;
+import io.crm.web.template.PageBuilder;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
