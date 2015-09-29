@@ -49,8 +49,10 @@ public class MainVerticle extends AbstractVerticle {
         //Register Listeners
         registerFilters(router);
         registerRequestHandlers(router);
-        getVertx().createHttpServer().requestHandler(router::accept).listen(8085);
+        int port = 8085;
+        getVertx().createHttpServer().requestHandler(router::accept).listen(port);
         System.out.println("<----------------------------------WEB_SERVER_STARTED------------------------------------->");
+        System.out.println("PORT: " + port);
     }
 
     private void registerFilters(final Router router) {
