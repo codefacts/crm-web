@@ -1,15 +1,20 @@
 package io.crm.web;
 
+import io.crm.QC;
+import io.crm.model.User;
+import io.crm.util.ExceptionUtil;
 import io.crm.web.controller.CallController;
 import io.crm.web.controller.EventPublisherController;
 import io.crm.web.controller.HomeController;
 import io.crm.web.controller.LoginController;
-import io.crm.web.service.ApiService;
+import io.crm.web.service.callreview.ApiService;
 import io.crm.web.template.*;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpHeaders;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.SessionHandler;
@@ -36,8 +41,9 @@ public class MainVerticle extends AbstractVerticle {
     @Override
     public void start() throws Exception {
         httpClient = vertx.createHttpClient();
+        registerEvents();
+
         System.setProperty("dev-mode", "true");
-        apiService = new ApiService(httpClient);
 
         //Configure Router
         final Router router = Router.router(vertx);
@@ -55,10 +61,34 @@ public class MainVerticle extends AbstractVerticle {
         System.out.println("PORT: " + port);
     }
 
+    private void registerEvents() {
+        ApiService apiService = new ApiService(httpClient);
+
+        vertx.eventBus().consumer(ApiEvents.LOGIN_API, (Message<JsonObject> m) -> {
+
+            m.reply(new JsonObject()
+                    .put(QC.username, "Sohan")
+                    .put(QC.userId, "br-124")
+                    .put(User.mobile, "01553661069")
+                    .put(QC.userType,
+                            new JsonObject()
+                                    .put(QC.id, 1)
+                                    .put(QC.name, "Programmer")));
+
+//            apiService.loginApi(m.body().getString(ST.username),
+//                    m.body().getString(ST.password),
+//                    ExceptionUtil.withReply(user -> {
+//                        m.reply(user);
+//                    }, m));
+        });
+
+
+    }
+
     private void registerFilters(final Router router) {
         corsFilter(router);
         noCacheFilter(router);
-        authFilter(router);
+//        authFilter(router);
     }
 
     private void corsFilter(final Router router) {
@@ -133,7 +163,7 @@ public class MainVerticle extends AbstractVerticle {
         new CallController(apiService, router);
 
         loginFormController(router);
-        new LoginController(apiService, router).login();
+        new LoginController(vertx, router).login();
         logoutController(router);
     }
 

@@ -1,4 +1,4 @@
-package io.crm.web.service;
+package io.crm.web.service.callreview;
 
 import io.crm.QC;
 import io.crm.model.User;
@@ -6,6 +6,7 @@ import io.crm.util.AsyncUtil;
 import io.crm.web.ST;
 import io.crm.web.excpt.ApiServiceException;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.AsyncResultHandler;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.JsonObject;
@@ -23,7 +24,7 @@ public class ApiService {
         this.httpClient = httpClient;
     }
 
-    public void loginApi(final String username, final String password, final AsyncResultHandler<JsonObject> handler) {
+    public void loginApi(final String username, final String password, final io.vertx.core.Handler<AsyncResult<JsonObject>> handler) {
         httpClient
                 .post(apiPort, apiHost, apiBaseUri + "/login/apilogin")
                 .handler(event -> {
