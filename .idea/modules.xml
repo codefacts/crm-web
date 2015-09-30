@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../crm-common/common.iml" filepath="$PROJECT_DIR$/../crm-common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../crm-core/core.iml" filepath="$PROJECT_DIR$/../crm-core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../crm-query/query.iml" filepath="$PROJECT_DIR$/../crm-query/query.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../schema-validation/schema-validation.iml" filepath="$PROJECT_DIR$/../schema-validation/schema-validation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../vaadincrm/vaadin_client.iml" filepath="$PROJECT_DIR$/../vaadincrm/vaadin_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web.iml" filepath="$PROJECT_DIR$/web.iml" />
+    </modules>
+  </component>
+</project>

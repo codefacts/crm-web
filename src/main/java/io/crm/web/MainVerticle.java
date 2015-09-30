@@ -88,7 +88,7 @@ public class MainVerticle extends AbstractVerticle {
     private void registerFilters(final Router router) {
         corsFilter(router);
         noCacheFilter(router);
-//        authFilter(router);
+        authFilter(router);
     }
 
     private void corsFilter(final Router router) {
@@ -160,7 +160,7 @@ public class MainVerticle extends AbstractVerticle {
 
         new HomeController(router).index();
 
-        new CallController(apiService, router);
+        new CallController(vertx, router);
 
         loginFormController(router);
         new LoginController(vertx, router).login();
@@ -200,7 +200,13 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     private void registerStaticFileHandlers(final Router router) {
-        router.route(Uris.staticResourcesPattern.value).handler(StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\static\\"));
-        router.route(Uris.publicResourcesPattern.value).handler(StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\public\\"));
+        router.route(Uris.staticResourcesPattern.value).handler(
+                StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\static\\")
+                        .setCachingEnabled(true)
+                        .setEnableFSTuning(true)
+                        .setMaxAgeSeconds(6 * 30 * 24 * 60 * 60)
+        );
+        router.route(Uris.publicResourcesPattern.value).handler(
+                StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\public\\"));
     }
 }

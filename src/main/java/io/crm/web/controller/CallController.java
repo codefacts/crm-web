@@ -2,18 +2,18 @@ package io.crm.web.controller;
 
 import io.crm.web.ST;
 import io.crm.web.Uris;
-import io.crm.web.service.callreview.ApiService;
 import io.crm.web.template.*;
+import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 
 /**
  * Created by someone on 23/09/2015.
  */
 final public class CallController {
-    private final ApiService apiService;
+    private final Vertx vertx;
 
-    public CallController(final ApiService apiService, final Router router) {
-        this.apiService = apiService;
+    public CallController(final Vertx vertx, final Router router) {
+        this.vertx = vertx;
         details(router);
     }
 
