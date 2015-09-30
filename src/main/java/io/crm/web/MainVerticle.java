@@ -62,7 +62,6 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     private void registerEvents() {
-        ApiService apiService = new ApiService(httpClient);
 
         vertx.eventBus().consumer(ApiEvents.LOGIN_API, (Message<JsonObject> m) -> {
 
@@ -204,7 +203,6 @@ public class MainVerticle extends AbstractVerticle {
                 StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\static\\")
                         .setCachingEnabled(true)
                         .setEnableFSTuning(true)
-                        .setMaxAgeSeconds(6 * 30 * 24 * 60 * 60)
         );
         router.route(Uris.publicResourcesPattern.value).handler(
                 StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\public\\"));
