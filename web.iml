@@ -12,7 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="crm-query" />
-    <orderEntry type="library" name="Maven: io.crm:common:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="common" />
     <orderEntry type="module" module-name="core" />
     <orderEntry type="module" module-name="schema-validation" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.2.1.Final" level="project" />

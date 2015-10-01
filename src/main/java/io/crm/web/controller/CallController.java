@@ -1,15 +1,27 @@
 package io.crm.web.controller;
 
+import com.google.common.collect.ImmutableList;
 import io.crm.web.ST;
 import io.crm.web.Uris;
+import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.*;
 import io.crm.web.template.form.InputBuilder;
 import io.crm.web.template.form.RangeInputBuilder;
+import io.crm.web.template.input.ButtonTemplateBuilder;
+import io.crm.web.template.model.Header;
+import io.crm.web.template.pagination.PaginationTemplate;
+import io.crm.web.template.pagination.PaginationTemplateBuilder;
+import io.crm.web.util.Pagination;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import org.watertemplate.Template;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+
+import static java.util.Collections.EMPTY_LIST;
 
 /**
  * Created by someone on 23/09/2015.
@@ -38,8 +50,7 @@ final public class CallController {
                                                                     filtersPanel()
                                                             )
                                                             .setDataPanel(
-                                                                    new DataPanelTemplateBuilder("Data")
-                                                                            .build()
+                                                                    dataPanel()
                                                             )
                                                             .build()
                                             )
@@ -49,15 +60,47 @@ final public class CallController {
         });
     }
 
+    private Template dataPanel() {
+        return
+                new DataPanelTemplateBuilder("Data")
+                        .setHeaders(((Function<Object, List<Header>>) o -> null).apply(null))
+                        .setData(EMPTY_LIST)
+                        .setPaginationTemplate(
+                                new PaginationTemplateBuilder()
+                                        .prev(c -> {
+                                            c.addClass(BootstrapCss.DISABLED.value);
+                                        })
+                                        .addItem(e -> {
+                                            e.setLabel("1");
+                                        })
+                                        .addItem(e -> {
+                                            e.setLabel("2");
+                                        })
+                                        .addItem(e -> {
+                                            e
+                                                    .setLabel("3")
+                                                    .addClass(BootstrapCss.ACTIVE.value)
+                                            ;
+                                        })
+                                        .next(c -> {
+                                            c.addClass(BootstrapCss.DISABLED.value);
+                                        })
+                                        .createPaginationTemplate()
+                        )
+                        .setHeaders(EMPTY_LIST)
+                        .build();
+    }
+
     private Template filtersPanel() {
         return
                 new FiltersPanelTemplateBuilder("Filters")
                         .configureForm(form -> {
                             form.addRow(builder -> {
-                                builder.addSelectInput(
-                                        new InputBuilder<>()
-                                                .setName("test")
-                                                .setColumnClasses("col-md-2"))
+                                builder
+                                        .addSelectInput(
+                                                new InputBuilder<>()
+                                                        .setName("test")
+                                                        .setColumnClasses("col-md-2"))
                                         .addTextInput(new InputBuilder<>()
                                                 .setPlaceholder("Plsc").setColumnClasses("col-md-2"))
                                         .addRangeInput(new RangeInputBuilder<Number>()
@@ -72,10 +115,11 @@ final public class CallController {
                                                 .setPlaceholderTo("To").setColumnClasses("col-md-2"))
                                 ;
                             }).addRow(builder -> {
-                                builder.addSelectInput(
-                                        new InputBuilder<>()
-                                                .setName("test")
-                                                .setColumnClasses("col-md-2"))
+                                builder
+                                        .addSelectInput(
+                                                new InputBuilder<>()
+                                                        .setName("test")
+                                                        .setColumnClasses("col-md-2"))
                                         .addTextInput(new InputBuilder<>()
                                                 .setPlaceholder("Plsc").setColumnClasses("col-md-2"))
                                         .addDateRangeInput(new RangeInputBuilder<>()
@@ -90,10 +134,11 @@ final public class CallController {
                                                 .setPlaceholderTo("To").setColumnClasses("col-md-2"))
                                 ;
                             }).addRow(builder -> {
-                                builder.addSelectInput(
-                                        new InputBuilder<>()
-                                                .setName("test")
-                                                .setColumnClasses("col-md-2"))
+                                builder
+                                        .addSelectInput(
+                                                new InputBuilder<>()
+                                                        .setName("test")
+                                                        .setColumnClasses("col-md-2"))
                                         .addTextInput(new InputBuilder<>()
                                                 .setPlaceholder("Plsc").setColumnClasses("col-md-2"))
                                         .addRangeInput(new RangeInputBuilder<Number>()
@@ -107,8 +152,7 @@ final public class CallController {
                                         .addNumberInput(new InputBuilder<>()
                                                 .setPlaceholder("Plsc").setColumnClasses("col-md-2"))
                                 ;
-                            })
-                            ;
+                            }).defaultFooter();
                         })
                         .build();
     }

@@ -4,6 +4,7 @@ package io.crm.web;
  * Created by someone on 21/09/2015.
  */
 public enum Uris {
+    fileUpload("/file-upload", "Upload File"),
     dashboard("/dashboard", "Dashboard"),
     login("/login", "Login"),
     register("/register", "Register"),

@@ -15,7 +15,7 @@ import static io.crm.util.Util.getOrDefault;
  */
 public class FormTemplate extends Template {
 
-    public FormTemplate(String id, String classes, final Collection<RowTemplate> rowTemplates) {
+    public FormTemplate(String id, String classes, final Collection<Template> rowTemplates) {
         add("id", getOrDefault(id, ""));
         add("class", classes);
         addCollection("rows", rowTemplates.stream().map(r -> r.render()).collect(Collectors.toList()), (row, m) -> {

@@ -1,6 +1,7 @@
 package io.crm.web.template;
 
-import io.vertx.core.json.JsonObject;
+import io.crm.web.template.model.Header;
+import io.crm.web.template.table.TableTemplate;
 import org.watertemplate.Template;
 
 import java.util.List;
@@ -9,15 +10,14 @@ import java.util.List;
  * Created by someone on 23/09/2015.
  */
 public class DataPanelTemplate extends Template {
-    private final List<JsonObject> data;
 
-    public DataPanelTemplate(final String title, List<JsonObject> data) {
+    public DataPanelTemplate(final String title, final TableTemplate tableTemplate, final List<Header> headers, final Template paginationTemplate) {
         add("title", title);
-        this.data = data;
+        add("table", tableTemplate.render());
+        add("pagination", paginationTemplate.render());
     }
 
     @Override
-
     protected String getFilePath() {
         return Page.templatePath("data-panel.html");
     }

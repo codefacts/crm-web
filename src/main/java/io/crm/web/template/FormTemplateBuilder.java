@@ -1,6 +1,7 @@
 package io.crm.web.template;
 
 import io.crm.intfs.ConsumerInterface;
+import io.crm.web.template.form.DefaultFooterBuilder;
 import io.crm.web.template.form.FormRowBuilder;
 import org.watertemplate.Template;
 
@@ -41,9 +42,38 @@ final public class FormTemplateBuilder {
         return this;
     }
 
-    public FormTemplateBuilder add(final Template template) {
+    public FormTemplateBuilder addTemplate(final Template template) {
         templates.add(template);
         return this;
+    }
+
+    public FormTemplateBuilder defaultFooter() {
+        templates.addAll(
+                new DefaultFooterBuilder()
+                        .search()
+                        .clear()
+                        .export()
+                        .build()
+        );
+        return this;
+    }
+
+    public FormTemplateBuilder defaultFooter(final ConsumerInterface<DefaultFooterBuilder> builderConsumer) {
+        final DefaultFooterBuilder defaultFooterBuilder = new DefaultFooterBuilder();
+        try {
+            builderConsumer.accept(defaultFooterBuilder);
+        } catch (Exception e) {
+            if (e instanceof RuntimeException) {
+                throw (RuntimeException) e;
+            }
+            throw new RuntimeException(e);
+        }
+        addTemplate(defaultFooterBuilder.build());
+        return this;
+    }
+
+    private void addTemplate(final List<Template> templates) {
+        templates.addAll(templates);
     }
 
     public FormTemplate build() {
