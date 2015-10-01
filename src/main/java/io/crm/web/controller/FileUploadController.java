@@ -49,38 +49,46 @@ public class FileUploadController {
     }
 
     public void doUpload(final Router router) {
+        router.post(Uris.fileUpload.value).handler(BodyHandler.create());
         router.post(Uris.fileUpload.value)
-                .handler(BodyHandler.create().setBodyLimit(Integer.MAX_VALUE).setUploadsDirectory(uploadDirectory))
                 .handler(ctx -> {
 
-                    ctx.request()
-                            .exceptionHandler(e -> {
-                                ctx.response()
-                                        .setStatusCode(HttpResponseStatus.BAD_REQUEST.code())
-                                        .end("File upload error.");
-                                return;
-                            })
-                            .endHandler(v -> {
-                                System.out.println("fileUploads: " + ctx.fileUploads().size());
-                                final Optional<FileUpload> fileUpload = ctx.fileUploads().stream().findFirst();
-                                if (!fileUpload.isPresent()) {
-                                    ctx.response()
-                                            .setStatusCode(HttpResponseStatus.BAD_REQUEST.code())
-                                            .end("No File");
-                                    return;
-                                }
-                                final FileUpload upload = fileUpload.get();
-                                vertx.fileSystem().copy(upload.uploadedFileName(), uploadDirectory + "/" + upload.fileName(), r -> {
-                                    if (r.failed()) {
-                                        ctx.fail(r.cause());
-                                        ctx.response().end();
-                                        return;
-                                    }
+                    ctx.request().exceptionHandler(ctx::fail);
 
-                                    ctx.response().end("ok");
-                                });
-                            });
+                    System.out.println("fileUploads: " + ctx.fileUploads().size());
+                    final Optional<FileUpload> fileUpload = ctx.fileUploads().stream().findFirst();
+                    if (!fileUpload.isPresent()) {
+                        ctx.response()
+                                .setStatusCode(HttpResponseStatus.BAD_REQUEST.code())
+                                .end("No File");
+                        return;
+                    }
+                    final FileUpload upload = fileUpload.get();
+                    vertx.fileSystem().exists(filepath(upload.fileName()), r -> {
+                        if (r.failed()) {
+                            ctx.fail(r.cause());
+                            return;
+                        }
+                        final Boolean exists = r.result();
+                        if (exists) {
+                            ctx.response().setStatusCode(HttpResponseStatus.BAD_REQUEST.code());
+                            ctx.response().end("File already exists.");
+                            return;
+                        }
+                        vertx.fileSystem().copy(upload.uploadedFileName(), filepath(upload.fileName()), r1 -> {
+                            if (r1.failed()) {
+                                ctx.fail(r1.cause());
+                                return;
+                            }
+
+                            ctx.response().end("ok");
+                        });
+                    });
                 });
+    }
+
+    private String filepath(String fileName) {
+        return uploadDirectory + "/" + fileName;
     }
 
     private Template form() {
