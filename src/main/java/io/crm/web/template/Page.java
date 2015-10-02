@@ -6,6 +6,8 @@ import org.watertemplate.TemplateMap;
 
 import java.nio.file.Paths;
 
+import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
+
 /**
  * Created by someone on 07/09/2015.
  */
@@ -22,7 +24,7 @@ public class Page extends Template {
 
     @Override
     protected void addSubTemplates(TemplateMap.SubTemplates subTemplates) {
-        subTemplates.add("body", Util.getOrDefault(body, TemplateUtil.EMPTY_TEMPLATE));
+        subTemplates.add("body", Util.getOrDefault(body, EMPTY_TEMPLATE));
     }
 
     @Override

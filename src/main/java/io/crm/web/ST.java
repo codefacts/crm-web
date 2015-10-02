@@ -17,4 +17,8 @@ final public class ST {
     public static final String uri = "uri";
     public static final String label = "label";
     public static final String active = "active";
+    public static final String error = "error";
+    public static final String body = "body";
+    public static final String success = "success";
+    public static final String statusCode = "statusCode";
 }

@@ -17,10 +17,6 @@ final public class AllModuleStarterVerticle extends AbstractVerticle {
 
         getVertx().deployVerticle(MainVerticle.class.getName(), taskCoordinator.add(v -> {
         }));
-        getVertx().deployVerticle(io.crm.core.MainVerticle.class.getName(), taskCoordinator.add(v -> {
-        }));
-        getVertx().deployVerticle(io.crm.query.MainVerticle.class.getName(), taskCoordinator.add(v -> {
-        }));
     }
 
     @Override
@@ -30,10 +26,6 @@ final public class AllModuleStarterVerticle extends AbstractVerticle {
                 .onError(e -> stopFuture.fail(e)).get();
 
         getVertx().undeploy(MainVerticle.class.getName(), taskCoordinator.add(v -> {
-        }));
-        getVertx().undeploy(io.crm.core.MainVerticle.class.getName(), taskCoordinator.add(v -> {
-        }));
-        getVertx().undeploy(io.crm.query.MainVerticle.class.getName(), taskCoordinator.add(v -> {
         }));
     }
 }

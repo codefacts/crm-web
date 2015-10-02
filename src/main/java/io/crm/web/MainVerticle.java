@@ -4,6 +4,7 @@ import io.crm.QC;
 import io.crm.model.User;
 import io.crm.web.controller.*;
 import io.crm.web.service.callreview.ApiService;
+import io.crm.web.service.callreview.FileUploadService;
 import io.crm.web.template.*;
 import io.crm.web.util.WebUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -41,8 +42,6 @@ public class MainVerticle extends AbstractVerticle {
         httpClient = vertx.createHttpClient();
         registerEvents();
 
-        System.setProperty("dev-mode", "true");
-
         //Configure Router
         final Router router = Router.router(vertx);
         router.route().handler(CookieHandler.create());
@@ -71,15 +70,10 @@ public class MainVerticle extends AbstractVerticle {
                             new JsonObject()
                                     .put(QC.id, 1)
                                     .put(QC.name, "Programmer")));
-
-//            apiService.loginApi(m.body().getString(ST.username),
-//                    m.body().getString(ST.password),
-//                    ExceptionUtil.withReply(user -> {
-//                        m.reply(user);
-//                    }, m));
         });
 
-
+        final FileUploadService fileUploadService = new FileUploadService();
+        vertx.eventBus().consumer(ApiEvents.UPLOAD_BR_CHECKER_DATA, fileUploadService::uploadBrCheckerData);
     }
 
     private void registerFilters(final Router router) {

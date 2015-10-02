@@ -1,25 +1,36 @@
 package io.crm.web.controller;
 
+import io.crm.FailureCode;
 import io.crm.web.ST;
 import io.crm.web.Uris;
+import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.template.*;
+import io.crm.web.template.table.*;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.eventbus.ReplyException;
+import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.watertemplate.Template;
 
+import java.io.File;
 import java.util.Optional;
 
+import static io.crm.web.ApiEvents.UPLOAD_BR_CHECKER_DATA;
 import static io.crm.web.Uris.fileUpload;
 
 /**
  * Created by someone on 01/10/2015.
  */
 public class FileUploadController {
+    private static final String FLASH_DO_UPLOAD = "FILE_UPLOAD_CONTROLLER.FLASH.DO_UPLOAD";
     private final Vertx vertx;
-    private final String uploadDirectory = "C:\\Users\\skpaul\\Desktop\\New folder";
 
     public FileUploadController(final Vertx vertx, final Router router) {
         this.vertx = vertx;
@@ -39,7 +50,7 @@ public class FileUploadController {
                                                     new SidebarTemplate(ctx.request().uri())
                                             )
                                             .setContentTemplate(
-                                                    form()
+                                                    form(ctx)
                                             )
                                             .build()
                             )
@@ -55,43 +66,121 @@ public class FileUploadController {
 
                     ctx.request().exceptionHandler(ctx::fail);
 
-                    System.out.println("fileUploads: " + ctx.fileUploads().size());
                     final Optional<FileUpload> fileUpload = ctx.fileUploads().stream().findFirst();
-                    if (!fileUpload.isPresent()) {
+                    FileUpload upload = fileUpload.get();
+                    if (!fileUpload.isPresent() || upload.size() <= 0 || upload.name().isEmpty()) {
+                        ctx.session().put(FLASH_DO_UPLOAD,
+                                new JsonObject()
+                                        .put(ST.statusCode, StatusCode.fileMissing.name()));
                         ctx.response()
                                 .setStatusCode(HttpResponseStatus.BAD_REQUEST.code())
-                                .end("No File");
+                                .end(new JavascriptRedirect(Uris.fileUpload.value).render());
                         return;
                     }
-                    final FileUpload upload = fileUpload.get();
-                    vertx.fileSystem().exists(filepath(upload.fileName()), r -> {
+                    vertx.eventBus().send(UPLOAD_BR_CHECKER_DATA, new File(upload.uploadedFileName()).getAbsolutePath(), (AsyncResult<Message<Integer>> r) -> {
                         if (r.failed()) {
-                            ctx.fail(r.cause());
-                            return;
-                        }
-                        final Boolean exists = r.result();
-                        if (exists) {
-                            ctx.response().setStatusCode(HttpResponseStatus.BAD_REQUEST.code());
-                            ctx.response().end("File already exists.");
-                            return;
-                        }
-                        vertx.fileSystem().copy(upload.uploadedFileName(), filepath(upload.fileName()), r1 -> {
-                            if (r1.failed()) {
-                                ctx.fail(r1.cause());
+                            if (!(r.cause() instanceof ReplyException)) {
+                                ctx.fail(r.cause());
                                 return;
                             }
-
-                            ctx.response().end("ok");
-                        });
+                            ReplyException ex = (ReplyException) r.cause();
+                            if (!(ex.failureCode() == FailureCode.BadRequest.code)) {
+                                ctx.fail(r.cause());
+                                return;
+                            }
+                            ctx.session().put(FLASH_DO_UPLOAD,
+                                    new JsonObject()
+                                            .put(ST.statusCode, StatusCode.error.name())
+                                            .put(ST.body, new JsonObject(ex.getMessage())));
+                            ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
+                            return;
+                        }
+                        ctx.session().put(FLASH_DO_UPLOAD,
+                                new JsonObject()
+                                        .put(ST.statusCode, StatusCode.success.name())
+                                        .put(ST.body, r.result().body()));
+                        ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                     });
                 });
     }
 
-    private String filepath(String fileName) {
-        return uploadDirectory + "/" + fileName;
+    private String renderUploadError(final JsonObject entries) {
+
+        return new TableTemplateBuilder()
+                .addClass(TableClasses.STRIPED.value)
+                .setHeader(
+                        new TableHeaderBuilder()
+                                .addTableRows(rows -> {
+                                    rows.add(
+                                            new TableRowBuilder()
+                                                    .addTableCells(cells -> {
+                                                        cells.add(
+                                                                new ThBuilder()
+                                                                        .setBody("Line Number")
+                                                                        .createTh()
+                                                        );
+                                                        cells.add(
+                                                                new ThBuilder()
+                                                                        .setBody("Error Details")
+                                                                        .createTh()
+                                                        );
+                                                    })
+                                                    .createTableRow()
+                                    );
+                                })
+                                .createTableHeader()
+                )
+                .setBody(
+                        new TableBodyBuilder()
+                                .addTableRows(rows -> {
+                                    entries.getMap().forEach((k, v) -> {
+                                        rows.add(
+                                                new TableRowBuilder()
+                                                        .addTableCells(cells -> {
+                                                            cells.add(
+                                                                    new TableCellBuilder()
+                                                                            .setBody(k)
+                                                                            .createTableCell()
+                                                            );
+                                                            cells.add(
+                                                                    new TableCellBuilder()
+                                                                            .setBody(v == null ? "" : v.toString())
+                                                                            .createTableCell()
+                                                            );
+                                                        })
+                                                        .createTableRow()
+                                        );
+                                    });
+                                })
+                                .createTableBody()
+                )
+                .createTableTemplate().render();
     }
 
-    private Template form() {
-        return new FileUploadTemplate();
+    private String renderUploadSuccess(final int insertCount) {
+        return insertCount + "";
+    }
+
+    private Template form(final RoutingContext ctx) {
+        Object o = ctx.session().get(FLASH_DO_UPLOAD);
+        if (o != null && o instanceof JsonObject) {
+            if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.success.name())) {
+                return new FileUploadTemplate(
+                        renderUploadSuccess(((JsonObject) o).getInteger(ST.body))
+                );
+            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.error.name())) {
+                return new FileUploadTemplate(
+                        renderUploadError(((JsonObject) o).getJsonObject(ST.body)));
+            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.fileMissing.name())) {
+                return new FileUploadTemplate("No file is uploaded.");
+            }
+        } else {
+            ctx.session().remove(FLASH_DO_UPLOAD);
+        }
+        return new FileUploadTemplate("");
+    }
+
+    private enum StatusCode {
+        success, error, fileMissing
     }
 }
