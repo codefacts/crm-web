@@ -9,10 +9,10 @@ import io.vertx.core.json.JsonObject;
  */
 public class FileUploadService {
     public void uploadBrCheckerData(Message<String> message) {
-//        message.reply(123);
-        message.fail(FailureCode.BadRequest.code,
-                new JsonObject()
-                        .put("Line 45", "Invalid Name")
-                        .encode());
+        message.reply(123);
+//        message.fail(FailureCode.BadRequest.code,
+//                new JsonObject()
+//                        .put("Line 45", "Invalid Name")
+//                        .encode());
     }
 }

@@ -158,7 +158,7 @@ public class FileUploadController {
     }
 
     private String renderUploadSuccess(final int insertCount) {
-        return insertCount + "";
+        return String.format("%d data uploaded successfully.", insertCount);
     }
 
     private Template form(final RoutingContext ctx) {

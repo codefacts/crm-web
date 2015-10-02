@@ -12,7 +12,7 @@ public enum Uris {
     publicResourcesPattern("/public/*", "Public Resources"),
     event_publish_form("/event-publish-form", "Publish And Send Event"),
     logout("/logout", "Logout"),
-    callDetails("/call/details", "Call Details");
+    callDetails("/call/details", "Call Details"), br_checker_details("/br-checker/details", "Br Checker Details");
 
 
     public final String value;

@@ -155,6 +155,8 @@ public class MainVerticle extends AbstractVerticle {
 
         new FileUploadController(vertx, router);
 
+        new BrCheckerController(router);
+
         loginFormController(router);
         new LoginController(vertx, router).login();
         logoutController(router);
