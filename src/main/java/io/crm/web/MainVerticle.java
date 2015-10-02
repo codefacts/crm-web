@@ -1,9 +1,11 @@
 package io.crm.web;
 
+import io.crm.Events;
 import io.crm.QC;
 import io.crm.model.User;
 import io.crm.web.controller.*;
 import io.crm.web.service.callreview.ApiService;
+import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.service.callreview.FileUploadService;
 import io.crm.web.template.*;
 import io.crm.web.util.WebUtils;
@@ -14,7 +16,6 @@ import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -74,6 +75,8 @@ public class MainVerticle extends AbstractVerticle {
 
         final FileUploadService fileUploadService = new FileUploadService();
         vertx.eventBus().consumer(ApiEvents.UPLOAD_BR_CHECKER_DATA, fileUploadService::uploadBrCheckerData);
+        BrCheckerDetailsService brCheckerDetailsService = new BrCheckerDetailsService(httpClient);
+        vertx.eventBus().consumer(ApiEvents.BR_CHECKER_DETAILS, brCheckerDetailsService::brCheckerData);
     }
 
     private void registerFilters(final Router router) {
@@ -155,7 +158,7 @@ public class MainVerticle extends AbstractVerticle {
 
         new FileUploadController(vertx, router);
 
-        new BrCheckerController(router);
+        new BrCheckerController(router, vertx);
 
         loginFormController(router);
         new LoginController(vertx, router).login();

@@ -21,4 +21,9 @@ final public class ST {
     public static final String body = "body";
     public static final String success = "success";
     public static final String statusCode = "statusCode";
+    public static final String page = "page";
+    public static final String size = "size";
+    public static final String data = "data";
+    public static final String pagination = "pagination";
+    public static final String total = "total";
 }

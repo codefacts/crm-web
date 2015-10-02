@@ -1,17 +1,29 @@
+<style>
+    .upload-form {
+        margin-bottom: 20px;
+    }
+</style>
+
 <div id="container" class="col-md-10">
     <div class="row">
 
-        <form id="upload-form" method="post" enctype="multipart/form-data" action="/file-upload">
+        <div class="panel panel-primary">
+            <div class="panel-heading">File Upload</div>
+            <div class="panel-body">
+                <form id="upload-form" class="upload-form" method="post" enctype="multipart/form-data"
+                      action="/file-upload">
 
-            <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile" name="file">
+                    <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" id="exampleInputFile" name="file">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+                ~statusContent~
             </div>
-
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-
-        ~statusContent~
+        </div>
 
     </div>
 </div>

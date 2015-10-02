@@ -1,23 +1,18 @@
 package io.crm.web.controller;
 
-import com.google.common.collect.ImmutableList;
 import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.*;
 import io.crm.web.template.form.InputBuilder;
 import io.crm.web.template.form.RangeInputBuilder;
-import io.crm.web.template.input.ButtonTemplateBuilder;
 import io.crm.web.template.model.Header;
-import io.crm.web.template.pagination.PaginationTemplate;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
-import io.crm.web.util.Pagination;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import org.watertemplate.Template;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -42,7 +37,9 @@ final public class CallController {
                                     new DashboardTemplateBuilder()
                                             .setUser(ctx.session().get(ST.currentUser))
                                             .setSidebarTemplate(
-                                                    new SidebarTemplate(ctx.request().uri())
+                                                    new SidebarTemplateBuilder()
+                                                            .setCurrentUri(ctx.request().uri())
+                                                            .createSidebarTemplate()
                                             )
                                             .setContentTemplate(
                                                     new CallDetailsTemplateBuilder()
@@ -63,7 +60,7 @@ final public class CallController {
     private Template dataPanel() {
         return
                 new DataPanelTemplateBuilder("Data")
-                        .setHeaders(((Function<Object, List<Header>>) o -> null).apply(null))
+                        .setHeader(new JsonObject())
                         .setData(EMPTY_LIST)
                         .setPaginationTemplate(
                                 new PaginationTemplateBuilder()
@@ -87,7 +84,7 @@ final public class CallController {
                                         })
                                         .createPaginationTemplate()
                         )
-                        .setHeaders(EMPTY_LIST)
+                        .setFooter(new JsonObject())
                         .build();
     }
 

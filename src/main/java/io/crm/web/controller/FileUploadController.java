@@ -47,7 +47,9 @@ public class FileUploadController {
                                     new DashboardTemplateBuilder()
                                             .setUser(ctx.session().get(ST.currentUser))
                                             .setSidebarTemplate(
-                                                    new SidebarTemplate(ctx.request().uri())
+                                                    new SidebarTemplateBuilder()
+                                                            .setCurrentUri(ctx.request().uri())
+                                                            .createSidebarTemplate()
                                             )
                                             .setContentTemplate(
                                                     form(ctx)
@@ -158,11 +160,16 @@ public class FileUploadController {
     }
 
     private String renderUploadSuccess(final int insertCount) {
-        return String.format("%d data uploaded successfully.", insertCount);
+        return
+                new AlertTemplateBuilder()
+                        .success(String.format("%d data uploaded successfully.", insertCount))
+                        .createAlertTemplate().render();
     }
 
     private Template form(final RoutingContext ctx) {
         Object o = ctx.session().get(FLASH_DO_UPLOAD);
+        ctx.session().remove(FLASH_DO_UPLOAD);
+
         if (o != null && o instanceof JsonObject) {
             if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.success.name())) {
                 return new FileUploadTemplate(
@@ -172,10 +179,11 @@ public class FileUploadController {
                 return new FileUploadTemplate(
                         renderUploadError(((JsonObject) o).getJsonObject(ST.body)));
             } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.fileMissing.name())) {
-                return new FileUploadTemplate("No file is uploaded.");
+                return new FileUploadTemplate(
+                        new AlertTemplateBuilder()
+                                .danger("No file is uploaded.")
+                                .createAlertTemplate().render());
             }
-        } else {
-            ctx.session().remove(FLASH_DO_UPLOAD);
         }
         return new FileUploadTemplate("");
     }

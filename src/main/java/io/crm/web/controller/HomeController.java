@@ -5,6 +5,7 @@ import io.crm.web.Uris;
 import io.crm.web.template.DashboardTemplateBuilder;
 import io.crm.web.template.PageBuilder;
 import io.crm.web.template.SidebarTemplate;
+import io.crm.web.template.SidebarTemplateBuilder;
 import io.vertx.ext.web.Router;
 
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
@@ -27,7 +28,10 @@ public class HomeController {
                             .body(
                                     new DashboardTemplateBuilder()
                                             .setUser(context.session().get(ST.currentUser))
-                                            .setSidebarTemplate(new SidebarTemplate(context.request().uri()))
+                                            .setSidebarTemplate(
+                                                    new SidebarTemplateBuilder()
+                                                            .setCurrentUri(context.request().uri())
+                                                            .createSidebarTemplate())
                                             .build())
                             .build().render());
         });

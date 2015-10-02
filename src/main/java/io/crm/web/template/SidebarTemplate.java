@@ -17,15 +17,15 @@ public class SidebarTemplate extends Template {
     {
         links = Arrays.asList(
                 new JsonObject()
-                        .put(ST.uri, Uris.dashboard.value)
-                        .put(ST.label, Uris.dashboard.label),
+                        .put(ST.uri, Uris.fileUpload.value)
+                        .put(ST.label, Uris.fileUpload.label),
                 new JsonObject()
-                        .put(ST.uri, Uris.callDetails.value)
-                        .put(ST.label, Uris.callDetails.label)
+                        .put(ST.uri, Uris.br_checker_details.value)
+                        .put(ST.label, Uris.br_checker_details.label)
         );
     }
 
-    public SidebarTemplate(final String currentUri) {
+    SidebarTemplate(final String currentUri) {
         links.forEach(link -> {
             if (currentUri.equals(link.getString(ST.uri))) {
                 link.put(ST.active, "active");
