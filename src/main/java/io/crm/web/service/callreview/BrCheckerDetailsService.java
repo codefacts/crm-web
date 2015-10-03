@@ -7,6 +7,8 @@ import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import static io.crm.util.ExceptionUtil.withReplyRun;
+
 /**
  * Created by sohan on 10/3/2015.
  */
@@ -21,23 +23,24 @@ public class BrCheckerDetailsService {
     }
 
     public void brCheckerData(final Message<JsonObject> message) {
-        Integer page = message.body().getInteger(ST.page, 0);
-        Integer size = message.body().getInteger(ST.size, 20);
-        message.reply(
-                new JsonObject()
-                        .put(ST.data,
-                                new JsonArray()
-                                        .add(
-                                                new JsonObject()
-                                                        .put("name", "kona")
-                                                        .put("designation", "accountant")
-                                        ))
-                        .put(ST.pagination,
-                                new JsonObject()
-                                        .put(ST.page, 1)
-                                        .put(ST.size, 20)
-                                        .put(ST.total, 2)
-                        ));
+        withReplyRun(() -> {
+            Integer page = message.body().getInteger(ST.page, 1);
+            Integer size = message.body().getInteger(ST.size, 20);
+            message.reply(
+                    new JsonObject()
+                            .put(ST.data,
+                                    new JsonArray()
+                                            .add(
+                                                    new JsonObject()
+                                                            .put("name", "kona")
+                                                            .put("designation", "accountant")
+                                            ))
+                            .put(ST.pagination,
+                                    new JsonObject()
+                                            .put(ST.page, page)
+                                            .put(ST.size, size)
+                                            .put(ST.total, 2000)
+                            ));
 //        httpClient
 //                .get(apiPort, apiHost, String.format("/br-checker/details?page=%d&size=%d", page, size))
 //                .exceptionHandler(e -> ExceptionUtil.fail(message, e))
@@ -50,5 +53,6 @@ public class BrCheckerDetailsService {
 //                    ;
 //                })
 //                .end();
+        }, message);
     }
 }

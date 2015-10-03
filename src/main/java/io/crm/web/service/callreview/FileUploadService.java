@@ -1,6 +1,7 @@
 package io.crm.web.service.callreview;
 
 import io.crm.FailureCode;
+import io.crm.util.ExceptionUtil;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 
@@ -9,10 +10,12 @@ import io.vertx.core.json.JsonObject;
  */
 public class FileUploadService {
     public void uploadBrCheckerData(Message<String> message) {
-//        message.reply(123);
-        message.fail(FailureCode.BadRequest.code,
-                new JsonObject()
-                        .put("Line 45", "Invalid Name")
-                        .encode());
+        ExceptionUtil.withReplyRun(() -> {
+            //        message.reply(123);
+            message.fail(FailureCode.BadRequest.code,
+                    new JsonObject()
+                            .put("Line 45", "Invalid Name")
+                            .encode());
+        }, message);
     }
 }

@@ -1,9 +1,16 @@
 package io.crm.web.util;
 
+import io.crm.intfs.ConsumerInterface;
 import io.crm.web.ST;
+import io.crm.web.css.bootstrap.BootstrapCss;
+import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
+import io.crm.web.template.pagination.PaginationTemplate;
+import io.crm.web.template.pagination.PaginationTemplateBuilder;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import io.vertx.core.Handler;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 
 /**
@@ -18,5 +25,50 @@ final public class WebUtils {
         response.setStatusCode(HttpResponseStatus.TEMPORARY_REDIRECT.code())
                 .headers().set(HttpHeaders.LOCATION, uri);
         response.end();
+    }
+
+    public static Handler<RoutingContext> webHandler(final ConsumerInterface<RoutingContext> consumer) {
+        return context -> {
+            try {
+                consumer.accept(context);
+            } catch (Exception e) {
+                if (e instanceof RuntimeException) {
+                    throw (RuntimeException) e;
+                }
+                throw new RuntimeException(e);
+            }
+        };
+    }
+
+    public static int parseInt(final String value, int defaultValue) {
+        try {
+            return value == null ? defaultValue : Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    public static PaginationTemplate createPaginationTemplate(final String uriPath, final Pagination pagination, final int paginationNavLength) {
+        int size = pagination.getSize();
+        return new PaginationTemplateBuilder()
+                .addClass(BootstrapCss.PULL_RIGHT.value)
+                .first(uriPath + pageQueryString(pagination.first(), size), pagination.isFirst())
+                .prev(uriPath + pageQueryString(pagination.prev(), size), pagination.hasPrev())
+                .addAllItems(items -> {
+                    pagination.nav(paginationNavLength).forEach(p -> items.add(
+                            new PaginationItemTemplateBuilder()
+                                    .setLabel("" + p)
+                                    .setHref(uriPath + pageQueryString(p, size))
+                                    .addClass(pagination.isCurrentPage(p) ? BootstrapCss.ACTIVE.value : "")
+                                    .createPaginationItemTemplate()
+                    ));
+                })
+                .next(uriPath + pageQueryString(pagination.next(), size), pagination.hasNext())
+                .last(uriPath + pageQueryString(pagination.last(), size), pagination.isLast())
+                .createPaginationTemplate();
+    }
+
+    private static String pageQueryString(int prev, int size) {
+        return String.format("?page=%d&size=%d", prev, size);
     }
 }

@@ -6,6 +6,7 @@ import io.crm.web.Uris;
 import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.template.*;
 import io.crm.web.template.table.*;
+import io.crm.web.util.WebUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
@@ -24,6 +25,7 @@ import java.util.Optional;
 
 import static io.crm.web.ApiEvents.UPLOAD_BR_CHECKER_DATA;
 import static io.crm.web.Uris.fileUpload;
+import static io.crm.web.util.WebUtils.webHandler;
 
 /**
  * Created by someone on 01/10/2015.
@@ -39,7 +41,7 @@ public class FileUploadController {
     }
 
     public void uploadForm(final Router router) {
-        router.get(fileUpload.value).handler(ctx -> {
+        router.get(fileUpload.value).handler(webHandler(ctx -> {
             System.out.println("upload form");
             ctx.response().end(
                     new PageBuilder(fileUpload.label)
@@ -58,13 +60,13 @@ public class FileUploadController {
                             )
                             .build().render()
             );
-        });
+        }));
     }
 
     public void doUpload(final Router router) {
         router.post(Uris.fileUpload.value).handler(BodyHandler.create());
         router.post(Uris.fileUpload.value)
-                .handler(ctx -> {
+                .handler(webHandler(ctx -> {
 
                     ctx.request().exceptionHandler(ctx::fail);
 
@@ -103,7 +105,7 @@ public class FileUploadController {
                                         .put(ST.body, r.result().body()));
                         ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                     });
-                });
+                }));
     }
 
     private String renderUploadError(final JsonObject entries) {

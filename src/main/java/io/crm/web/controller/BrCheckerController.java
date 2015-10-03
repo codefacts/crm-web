@@ -5,11 +5,11 @@ import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.*;
-import io.crm.web.template.pagination.PaginationItemTemplate;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
 import io.crm.web.template.pagination.PaginationTemplate;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
 import io.crm.web.util.Pagination;
+import io.crm.web.util.WebUtils;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -19,10 +19,15 @@ import io.vertx.ext.web.Router;
 
 import java.util.List;
 
+import static io.crm.web.controller.Controllers.DEFAULT_PAGE_SIZE;
+import static io.crm.web.util.WebUtils.parseInt;
+import static io.crm.web.util.WebUtils.webHandler;
+
 /**
  * Created by sohan on 10/2/2015.
  */
 public class BrCheckerController {
+    private static final int PAGINATION_NAV_LENGTH = 20;
     private final Vertx vertx;
     private final String title = "Br Checker Details";
 
@@ -32,9 +37,12 @@ public class BrCheckerController {
     }
 
     public void details(final Router router) {
-        router.get(Uris.br_checker_details.value).handler(ctx -> {
+        router.get(Uris.br_checker_details.value).handler(webHandler(ctx -> {
             vertx.eventBus().send(ApiEvents.BR_CHECKER_DETAILS,
-                    new JsonObject(), (AsyncResult<Message<JsonObject>> r) -> {
+                    new JsonObject()
+                            .put(ST.page, parseInt(ctx.request().params().get(ST.page), 1))
+                            .put(ST.size, parseInt(ctx.request().params().get(ST.size), DEFAULT_PAGE_SIZE)),
+                    (AsyncResult<Message<JsonObject>> r) -> {
                         if (r.failed()) {
                             ctx.fail(r.cause());
                             return;
@@ -51,7 +59,8 @@ public class BrCheckerController {
                                                         .setUser(ctx.session().get(ST.currentUser))
                                                         .setContentTemplate(
                                                                 new BrCheckerDetailsTemplateBuilder()
-                                                                        .setDataPanel(dataPanel(header(), data, null, pagination))
+                                                                        .setDataPanel(
+                                                                                dataPanel(header(), data, null, pagination, ctx.request().path()))
                                                                         .createBrCheckerDetailsTemplate()
                                                         )
                                                         .setSidebarTemplate(
@@ -64,7 +73,7 @@ public class BrCheckerController {
                                         .build().render()
                         );
                     });
-        });
+        }));
     }
 
     private JsonObject header() {
@@ -74,7 +83,7 @@ public class BrCheckerController {
                         .put("designation", "Designation");
     }
 
-    public DataPanelTemplate dataPanel(final JsonObject header, final List<JsonObject> data, final JsonObject footer, final JsonObject paginationObject) {
+    public DataPanelTemplate dataPanel(final JsonObject header, final List<JsonObject> data, final JsonObject footer, final JsonObject paginationObject, final String uriPath) {
         Pagination pagination = new Pagination(paginationObject.getInteger(ST.page, 1), paginationObject.getInteger(ST.size, 20), paginationObject.getLong(ST.total, 0L));
         return
                 new DataPanelTemplateBuilder(title)
@@ -82,18 +91,7 @@ public class BrCheckerController {
                         .setFooter(footer)
                         .setData(data)
                         .setPaginationTemplate(
-                                new PaginationTemplateBuilder()
-                                        .addClass(BootstrapCss.PULL_RIGHT.value)
-                                        .prev("")
-                                        .addAllItems(items -> {
-                                            pagination.nav(5).forEach(p -> items.add(
-                                                    new PaginationItemTemplateBuilder()
-                                                            .setLabel("" + p)
-                                                            .createPaginationItemTemplate()
-                                            ));
-                                        })
-                                        .next("")
-                                        .createPaginationTemplate()
+                                WebUtils.createPaginationTemplate(uriPath, pagination, PAGINATION_NAV_LENGTH)
                         )
                         .build();
     }

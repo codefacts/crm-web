@@ -20,10 +20,8 @@ public class PaginationTemplateBuilder {
         return this;
     }
 
-    public PaginationTemplateBuilder prev(String href) {
-        return prev(f -> {
-            f.setHref(href);
-        });
+    public PaginationTemplateBuilder prev(String href, final boolean hasPrev) {
+        return prev(f -> f.setHref(href).addClass(!hasPrev ? "disabled" : ""));
     }
 
     public PaginationTemplateBuilder prev(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
@@ -44,8 +42,8 @@ public class PaginationTemplateBuilder {
         return this;
     }
 
-    public PaginationTemplateBuilder next(String href) {
-        return next(n -> n.setHref(href));
+    public PaginationTemplateBuilder next(String href, final boolean hasNext) {
+        return next(n -> n.setHref(href).addClass(!hasNext ? "disabled" : ""));
     }
 
     public PaginationTemplateBuilder next(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
@@ -66,8 +64,8 @@ public class PaginationTemplateBuilder {
         return this;
     }
 
-    public PaginationTemplateBuilder first(String href) {
-        return first(f -> f.setHref(href));
+    public PaginationTemplateBuilder first(String href, boolean isFirst) {
+        return first(f -> f.setHref(href).addClass(isFirst ? "disabled" : ""));
     }
 
     public PaginationTemplateBuilder first(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
@@ -76,6 +74,7 @@ public class PaginationTemplateBuilder {
             first
                     .setArea_hidden(true)
                     .setArea_label("First")
+                    .setSymbol("First")
             ;
             paginationItemBuilderConsumer.accept(first);
             templates.add(first.createPaginationFirstLastButtonTemplate());
@@ -87,8 +86,8 @@ public class PaginationTemplateBuilder {
         return this;
     }
 
-    public PaginationTemplateBuilder last(String href) {
-        return last(l -> l.setHref(href));
+    public PaginationTemplateBuilder last(String href, final boolean isLast) {
+        return last(l -> l.setHref(href).addClass(isLast ? "disabled" : ""));
     }
 
     public PaginationTemplateBuilder last(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
@@ -97,6 +96,7 @@ public class PaginationTemplateBuilder {
             last
                     .setArea_hidden(true)
                     .setArea_label("Last")
+                    .setSymbol("Last")
             ;
             paginationItemBuilderConsumer.accept(last);
             templates.add(last.createPaginationFirstLastButtonTemplate());

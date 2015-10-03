@@ -27,6 +27,46 @@ final public class Pagination {
                 : page;
     }
 
+    public int getPage() {
+        return page;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean hasPrev() {
+        return hasPrev(page);
+    }
+
+    public boolean hasPrev(int p) {
+        return p > 1;
+    }
+
+    public boolean hasNext() {
+        return hasNext(page);
+    }
+
+    public boolean hasNext(int p) {
+        return p < pageCount;
+    }
+
+    public boolean isFirst() {
+        return isFirst(page);
+    }
+
+    public boolean isFirst(int p) {
+        return p == first();
+    }
+
+    public boolean isLast() {
+        return isLast(page);
+    }
+
+    public boolean isLast(int p) {
+        return p == last();
+    }
+
     public boolean isCurrentPage(final int aPage) {
         return page == aPage;
     }
@@ -44,7 +84,7 @@ final public class Pagination {
     }
 
     public int prev(int pageFrom) {
-        return pageFrom > 0 ? pageFrom - 1 : 1;
+        return pageFrom > 1 ? pageFrom - 1 : 1;
     }
 
     public int first() {
