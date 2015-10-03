@@ -25,6 +25,6 @@ public class FormTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "form.html";
+        return Page.templatePath("form.html");
     }
 }

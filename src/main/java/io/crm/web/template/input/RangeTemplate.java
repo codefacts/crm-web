@@ -1,5 +1,6 @@
 package io.crm.web.template.input;
 
+import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
 import java.util.Collections;
@@ -25,6 +26,6 @@ public class RangeTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "range.html";
+        return Page.templatePath("range.html");
     }
 }

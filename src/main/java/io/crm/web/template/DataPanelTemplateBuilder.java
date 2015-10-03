@@ -2,8 +2,6 @@ package io.crm.web.template;
 
 import com.google.common.collect.ImmutableList;
 import io.crm.web.css.bootstrap.TableClasses;
-import io.crm.web.template.model.Footer;
-import io.crm.web.template.model.Header;
 import io.crm.web.template.pagination.PaginationTemplate;
 import io.crm.web.template.table.*;
 import io.vertx.core.json.JsonObject;

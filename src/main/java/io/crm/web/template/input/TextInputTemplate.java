@@ -1,5 +1,6 @@
 package io.crm.web.template.input;
 
+import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
 import static io.crm.util.Util.getOrDefault;
@@ -19,6 +20,6 @@ public class TextInputTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "text-input.html";
+        return Page.templatePath("text-input.html");
     }
 }

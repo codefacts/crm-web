@@ -1,5 +1,6 @@
 package io.crm.web.template.input;
 
+import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
 import java.util.Date;
@@ -25,6 +26,6 @@ public class DateRangeTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "date-range.html";
+        return Page.templatePath("date-range.html");
     }
 }

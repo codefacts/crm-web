@@ -19,6 +19,6 @@ public class RowTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "row.html";
+        return Page.templatePath("row.html");
     }
 }

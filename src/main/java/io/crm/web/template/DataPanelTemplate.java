@@ -1,11 +1,7 @@
 package io.crm.web.template;
 
-import io.crm.util.Util;
-import io.crm.web.template.model.Header;
 import io.crm.web.template.table.TableTemplate;
 import org.watertemplate.Template;
-
-import java.util.List;
 
 import static io.crm.util.Util.getOrDefault;
 import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;

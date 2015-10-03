@@ -1,5 +1,6 @@
 package io.crm.web.template.pagination;
 
+import io.crm.web.template.Page;
 import io.crm.web.util.Pagination;
 import org.watertemplate.Template;
 
@@ -24,6 +25,6 @@ public class PaginationTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "pagination.html";
+        return Page.templatePath("pagination.html");
     }
 }

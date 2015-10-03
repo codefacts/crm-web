@@ -1,6 +1,7 @@
 package io.crm.web.template.table;
 
 import io.crm.util.Util;
+import io.crm.web.template.Page;
 import io.crm.web.template.TemplateUtil;
 import org.watertemplate.Template;
 
@@ -26,6 +27,6 @@ public class TableHeader extends Template {
 
     @Override
     protected String getFilePath() {
-        return "table-header.html";
+        return Page.templatePath("table-header.html");
     }
 }

@@ -27,6 +27,6 @@ public class BrCheckerDetailsTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "br-checker-details.html";
+        return Page.templatePath("br-checker-details.html");
     }
 }

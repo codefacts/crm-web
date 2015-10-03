@@ -16,6 +16,6 @@ public class AlertTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "alert.html";
+        return Page.templatePath("alert.html");
     }
 }

@@ -12,6 +12,6 @@ public class FileUploadTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "file-upload.html";
+        return Page.templatePath("file-upload.html");
     }
 }

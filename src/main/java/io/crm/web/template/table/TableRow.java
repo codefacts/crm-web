@@ -1,5 +1,6 @@
 package io.crm.web.template.table;
 
+import io.crm.web.template.Page;
 import io.crm.web.template.TemplateUtil;
 import org.watertemplate.Template;
 
@@ -23,6 +24,6 @@ public class TableRow extends Template {
 
     @Override
     protected String getFilePath() {
-        return "table-row.html";
+        return Page.templatePath("table-row.html");
     }
 }

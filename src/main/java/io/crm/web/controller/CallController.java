@@ -6,15 +6,11 @@ import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.*;
 import io.crm.web.template.form.InputBuilder;
 import io.crm.web.template.form.RangeInputBuilder;
-import io.crm.web.template.model.Header;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import org.watertemplate.Template;
-
-import java.util.List;
-import java.util.function.Function;
 
 import static java.util.Collections.EMPTY_LIST;
 

@@ -34,7 +34,6 @@ import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
  */
 public class MainVerticle extends AbstractVerticle {
     private final String templatesDir = "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\templates\\";
-    private ApiService apiService;
     private HttpClient httpClient;
 
     //

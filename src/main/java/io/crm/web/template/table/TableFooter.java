@@ -1,5 +1,6 @@
 package io.crm.web.template.table;
 
+import io.crm.web.template.Page;
 import io.crm.web.template.TemplateUtil;
 import org.watertemplate.Template;
 
@@ -24,6 +25,6 @@ public class TableFooter extends Template {
 
     @Override
     protected String getFilePath() {
-        return "table-footer.html";
+        return Page.templatePath("table-footer.html");
     }
 }

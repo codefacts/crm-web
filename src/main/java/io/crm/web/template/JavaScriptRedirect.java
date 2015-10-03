@@ -12,6 +12,6 @@ public class JavascriptRedirect extends Template {
 
     @Override
     protected String getFilePath() {
-        return "javascript-redirect.html";
+        return Page.templatePath("javascript-redirect.html");
     }
 }

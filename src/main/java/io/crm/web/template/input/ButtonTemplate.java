@@ -1,6 +1,7 @@
 package io.crm.web.template.input;
 
 import io.crm.util.Util;
+import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
 import static io.crm.util.Util.getOrDefault;
@@ -17,6 +18,6 @@ public class ButtonTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "button.html";
+        return Page.templatePath("button.html");
     }
 }

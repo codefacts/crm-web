@@ -20,6 +20,6 @@ public class ColumnTemplate extends Template {
 
     @Override
     protected String getFilePath() {
-        return "column.html";
+        return Page.templatePath("column.html");
     }
 }
