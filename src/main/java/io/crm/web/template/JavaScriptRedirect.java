@@ -3,7 +3,7 @@ package io.crm.web.template;
 import org.watertemplate.Template;
 
 /**
- * Created by sohan on 10/2/2015.
+ * Created by someone on 03/10/2015.
  */
 public class JavascriptRedirect extends Template {
     public JavascriptRedirect(String redirectUri) {
