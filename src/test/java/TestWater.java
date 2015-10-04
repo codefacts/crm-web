@@ -10,13 +10,57 @@ import java.util.Collections;
  */
 public class TestWater {
     public static void main(String... args) {
-        Watch watch = new Watch().start();
-        for (int i = 0; i < 1_00_000; i++) {
-            final EventPublisherForm eventPublisherForm = new EventPublisherForm(Collections.EMPTY_LIST, null, null, null, null);
-            final Page ttLL = new PageBuilder("TtLL").body(eventPublisherForm).build();
-            final String render = ttLL.render();
-//            System.out.println(render);
-        }
-        System.out.println(watch.end().elapsed());
+        String sql = "INSERT INTO br_checker_entrys " +
+                "(" +
+                "TRACKER_TABLE_ID, " +
+                "CALL_NO, " +
+                "CONSUMER_NAME, " +
+                "CONSUMER_MOBILE_NUMBER, " +
+                "NAME_MATCHED, " +
+                "CALL_STATUS, " +
+                "CONTACTED, " +
+                "BAND, " +
+                "TIME_OF_CHECK, " +
+                "DATE_AND_TIME, " +
+                "AUDITOR_NAME, " +
+                "AUDITOR_CODE, " +
+                "CLUSTER_NAME, " +
+                "TSR_CODE, " +
+                "TSR_NAME, " +
+                "TOTAL_VISITED, " +
+                "REMARK, " +
+                "PICTURE_NAME, " +
+                "PICTURE_URL, " +
+                "Latitude, " +
+                "Longitude, " +
+                "Accuracy" +
+                ") " +
+                "VALUES " +
+                "(" +
+                "@TRACKER_TABLE_ID, " +
+                "@CALL_NO, " +
+                "@CONSUMER_NAME, " +
+                "@CONSUMER_MOBILE_NUMBER, " +
+                "@NAME_MATCHED, " +
+                "@CALL_STATUS, " +
+                "@CONTACTED, " +
+                "@BAND, " +
+                "@TIME_OF_CHECK, " +
+                "@DATE_AND_TIME, " +
+                "@AUDITOR_NAME, " +
+                "@AUDITOR_CODE, " +
+                "@CLUSTER_NAME, " +
+                "@TSR_CODE, " +
+                "@TSR_NAME, " +
+                "@TOTAL_VISITED, " +
+                "@REMARK, " +
+                "@PICTURE_NAME, " +
+                "@PICTURE_URL, " +
+                "@Latitude, " +
+                "@Longitude, " +
+                "@Accuracy" +
+                ")";
+
+        System.out.println(sql);
     }
 }

@@ -58,6 +58,7 @@ public class FileUploadService {
                     }, message))
                     .setChunked(true)
                     .end();
+
             //        message.reply(123);
 //            message.fail(FailureCode.BadRequest.code,
 //                    new JsonObject()
