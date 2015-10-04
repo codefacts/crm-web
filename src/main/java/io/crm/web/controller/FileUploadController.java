@@ -25,6 +25,7 @@ import java.util.Optional;
 
 import static io.crm.web.ApiEvents.UPLOAD_BR_CHECKER_DATA;
 import static io.crm.web.Uris.fileUpload;
+import static io.crm.web.util.WebUtils.catchHandler;
 import static io.crm.web.util.WebUtils.webHandler;
 
 /**
@@ -72,6 +73,7 @@ public class FileUploadController {
 
                     final Optional<FileUpload> fileUpload = ctx.fileUploads().stream().findFirst();
                     FileUpload upload = fileUpload.get();
+
                     if (!fileUpload.isPresent() || upload.size() <= 0 || upload.name().isEmpty()) {
                         ctx.session().put(FLASH_DO_UPLOAD,
                                 new JsonObject()
@@ -81,30 +83,47 @@ public class FileUploadController {
                                 .end(new JavascriptRedirect(Uris.fileUpload.value).render());
                         return;
                     }
-                    vertx.eventBus().send(UPLOAD_BR_CHECKER_DATA, new File(upload.uploadedFileName()).getAbsolutePath(), (AsyncResult<Message<Integer>> r) -> {
-                        if (r.failed()) {
-                            if (!(r.cause() instanceof ReplyException)) {
-                                ctx.fail(r.cause());
-                                return;
-                            }
-                            ReplyException ex = (ReplyException) r.cause();
-                            if (!(ex.failureCode() == FailureCode.BadRequest.code)) {
-                                ctx.fail(r.cause());
-                                return;
-                            }
-                            ctx.session().put(FLASH_DO_UPLOAD,
-                                    new JsonObject()
-                                            .put(ST.statusCode, StatusCode.error.name())
-                                            .put(ST.body, new JsonObject(ex.getMessage())));
-                            ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
-                            return;
-                        }
-                        ctx.session().put(FLASH_DO_UPLOAD,
-                                new JsonObject()
-                                        .put(ST.statusCode, StatusCode.success.name())
-                                        .put(ST.body, r.result().body()));
-                        ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
-                    });
+
+                    vertx.eventBus().send(UPLOAD_BR_CHECKER_DATA,
+                            new JsonObject()
+                                    .put(ST.file, new File(upload.uploadedFileName()).getAbsolutePath())
+                                    .put(ST.extention, upload.fileName().substring(
+                                            upload.fileName().lastIndexOf('.') + 1
+                                    )),
+                            catchHandler((AsyncResult<Message<Integer>> r) -> {
+
+                                if (r.failed()) {
+                                    if (!(r.cause() instanceof ReplyException)) {
+                                        ctx.fail(r.cause());
+                                        return;
+                                    }
+                                    ReplyException ex = (ReplyException) r.cause();
+                                    if (!(ex.failureCode() == FailureCode.BadRequest.code)) {
+                                        ctx.fail(r.cause());
+                                        return;
+                                    }
+                                    ctx.session().put(FLASH_DO_UPLOAD,
+                                            new JsonObject()
+                                                    .put(ST.statusCode, StatusCode.error.name())
+                                                    .put(ST.body, new JsonObject(ex.getMessage())));
+                                    ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
+                                    return;
+                                }
+
+                                if (r.result().body() <= 0) {
+                                    ctx.session().put(FLASH_DO_UPLOAD,
+                                            new JsonObject()
+                                                    .put(ST.statusCode, StatusCode.invalidFile.name())
+                                                    .put(ST.body, "Invalid file."));
+                                    ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
+                                    return;
+                                }
+                                ctx.session().put(FLASH_DO_UPLOAD,
+                                        new JsonObject()
+                                                .put(ST.statusCode, StatusCode.success.name())
+                                                .put(ST.body, r.result().body()));
+                                ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
+                            }, ctx));
                 }));
     }
 
@@ -177,6 +196,12 @@ public class FileUploadController {
                 return new FileUploadTemplate(
                         renderUploadSuccess(((JsonObject) o).getInteger(ST.body))
                 );
+            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.invalidFile.name())) {
+                return new FileUploadTemplate(
+                        new AlertTemplateBuilder()
+                                .info("Invalid File")
+                                .createAlertTemplate().render()
+                );
             } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.error.name())) {
                 return new FileUploadTemplate(
                         renderUploadError(((JsonObject) o).getJsonObject(ST.body)));
@@ -191,6 +216,6 @@ public class FileUploadController {
     }
 
     private enum StatusCode {
-        success, error, fileMissing
+        success, error, fileMissing, invalidFile;
     }
 }

@@ -3,11 +3,13 @@ package io.crm.web.service.callreview;
 import io.crm.QC;
 import io.crm.model.User;
 import io.crm.util.AsyncUtil;
+import io.crm.util.ExceptionUtil;
 import io.crm.web.ST;
 import io.crm.web.excpt.ApiServiceException;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.AsyncResultHandler;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.JsonObject;
 
@@ -24,25 +26,26 @@ public class ApiService {
         this.httpClient = httpClient;
     }
 
-    public void loginApi(final String username, final String password, final io.vertx.core.Handler<AsyncResult<JsonObject>> handler) {
+    public void loginApi(Message<JsonObject> m) {
+
         httpClient
                 .post(apiPort, apiHost, apiBaseUri + "/login/apilogin")
-                .handler(event -> {
-                    event.bodyHandler(b -> {
-                        if (event.statusCode() == HttpResponseStatus.OK.code()) {
+                .handler(res -> {
+                    res.bodyHandler(b -> {
+                        if (res.statusCode() == HttpResponseStatus.OK.code()) {
                             final JsonObject jsonObject = new JsonObject(b.toString());
                             System.out.println("Logged in: " + jsonObject.encodePrettily());
-                            handler.handle(AsyncUtil.success(transformUser(jsonObject)));
+                            m.reply(transformUser(jsonObject));
                         } else {
-                            handler.handle(AsyncUtil.fail(new ApiServiceException(event.statusCode(), b.toString())));
+                            m.fail(res.statusCode(), b.toString());
                         }
-                    }).exceptionHandler(e -> handler.handle(AsyncUtil.fail(e)));
+                    }).exceptionHandler(e -> ExceptionUtil.fail(m, e));
                 })
-                .exceptionHandler(e -> handler.handle(AsyncUtil.fail(e)))
+                .exceptionHandler(e -> ExceptionUtil.fail(m, e))
                 .end(
                         new JsonObject()
-                                .put(ST.username, username)
-                                .put(ST.password, password)
+                                .put(ST.username, m.body().getString(ST.username))
+                                .put(ST.password, m.body().getString(ST.password))
                                 .encode());
     }
 

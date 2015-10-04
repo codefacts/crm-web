@@ -26,4 +26,7 @@ final public class ST {
     public static final String data = "data";
     public static final String pagination = "pagination";
     public static final String total = "total";
+    public static final String count = "count";
+    public static final String file = "file";
+    public static final String extention = "extention";
 }

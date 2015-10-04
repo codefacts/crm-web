@@ -7,7 +7,9 @@ import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
 import io.crm.web.template.pagination.PaginationTemplate;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
@@ -27,15 +29,22 @@ final public class WebUtils {
         response.end();
     }
 
+    public static <T> Handler<AsyncResult<Message<T>>> catchHandler(final ConsumerInterface<AsyncResult<Message<T>>> consumer, final RoutingContext context) {
+        return r -> {
+            try {
+                consumer.accept(r);
+            } catch (Exception e) {
+                context.fail(e);
+            }
+        };
+    }
+
     public static Handler<RoutingContext> webHandler(final ConsumerInterface<RoutingContext> consumer) {
         return context -> {
             try {
                 consumer.accept(context);
             } catch (Exception e) {
-                if (e instanceof RuntimeException) {
-                    throw (RuntimeException) e;
-                }
-                throw new RuntimeException(e);
+                context.fail(e);
             }
         };
     }

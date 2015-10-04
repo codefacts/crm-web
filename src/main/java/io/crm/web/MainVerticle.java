@@ -1,8 +1,8 @@
 package io.crm.web;
 
-import io.crm.Events;
 import io.crm.QC;
 import io.crm.model.User;
+import io.crm.util.ExceptionUtil;
 import io.crm.web.controller.*;
 import io.crm.web.service.callreview.ApiService;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
@@ -60,6 +60,7 @@ public class MainVerticle extends AbstractVerticle {
 
     private void registerEvents() {
 
+        final ApiService apiService = new ApiService(httpClient);
         vertx.eventBus().consumer(ApiEvents.LOGIN_API, (Message<JsonObject> m) -> {
 
             m.reply(new JsonObject()
@@ -72,8 +73,9 @@ public class MainVerticle extends AbstractVerticle {
                                     .put(QC.name, "Programmer")));
         });
 
-        final FileUploadService fileUploadService = new FileUploadService();
+        final FileUploadService fileUploadService = new FileUploadService(httpClient);
         vertx.eventBus().consumer(ApiEvents.UPLOAD_BR_CHECKER_DATA, fileUploadService::uploadBrCheckerData);
+
         BrCheckerDetailsService brCheckerDetailsService = new BrCheckerDetailsService(httpClient);
         vertx.eventBus().consumer(ApiEvents.BR_CHECKER_DETAILS, brCheckerDetailsService::brCheckerData);
     }

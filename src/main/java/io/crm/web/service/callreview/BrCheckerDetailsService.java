@@ -13,9 +13,9 @@ import static io.crm.util.ExceptionUtil.withReplyRun;
  * Created by sohan on 10/3/2015.
  */
 public class BrCheckerDetailsService {
-    private final String apiBaseUri = "";
-    private final int apiPort = 3276;
-    private final String apiHost = "localhost";
+    public static final String apiBaseUri = "";
+    public static final int apiPort = 45707;
+    public static final String apiHost = "localhost";
     private final HttpClient httpClient;
 
     public BrCheckerDetailsService(final HttpClient httpClient) {
