@@ -29,4 +29,5 @@ final public class ST {
     public static final String count = "count";
     public static final String file = "file";
     public static final String extention = "extention";
+    public static final String name = "name";
 }

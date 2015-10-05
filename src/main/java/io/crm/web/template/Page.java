@@ -12,7 +12,7 @@ import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
  * Created by someone on 07/09/2015.
  */
 public class Page extends Template {
-    private static final String templateDir = "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\templates\\en_US";
+    private static final String templateDir = "G:\\Cyclic_Auditor\\Templates\\en_US";
     private final String page_title;
     private final Template body;
 

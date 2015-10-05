@@ -4,6 +4,7 @@ import io.crm.web.ApiEvents;
 import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.css.bootstrap.BootstrapCss;
+import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.template.*;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
 import io.crm.web.template.pagination.PaginationTemplate;
@@ -16,8 +17,14 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
+import org.watertemplate.Template;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.crm.web.controller.Controllers.DEFAULT_PAGE_SIZE;
 import static io.crm.web.util.WebUtils.parseInt;
@@ -33,7 +40,48 @@ public class BrCheckerController {
 
     public BrCheckerController(final Router router, Vertx vertx) {
         this.vertx = vertx;
+        view(router);
         details(router);
+    }
+
+    public void view(final Router router) {
+        router.get(Uris.br_checker_view.value).handler(WebUtils.webHandler(ctx -> {
+            final int id = Integer.parseInt(ctx.request().params().get("id"));
+            vertx.eventBus().send(ApiEvents.FIND_ONE_BR_CHECKER_INFO, id, WebUtils.catchHandler((AsyncResult<Message<JsonObject>> r) -> {
+                if (r.failed()) {
+                    ctx.fail(r.cause());
+                    return;
+                }
+
+                final JsonObject data = r.result().body().getJsonObject(ST.data, new JsonObject());
+
+                renderSingleOne(ctx, data);
+            }, ctx));
+        }));
+    }
+
+    private void renderSingleOne(final RoutingContext ctx, final JsonObject data) {
+        ctx.response().end(
+                new PageBuilder(Uris.callDetails.label)
+                        .body(
+                                new DashboardTemplateBuilder()
+                                        .setUser(ctx.session().get(ST.currentUser))
+                                        .setSidebarTemplate(
+                                                new SidebarTemplateBuilder()
+                                                        .setCurrentUri(ctx.request().uri())
+                                                        .createSidebarTemplate()
+                                        )
+                                        .setContentTemplate(
+                                                renderSingle(ctx, data)
+                                        )
+                                        .build()
+                        )
+                        .build().render());
+    }
+
+    private Template renderSingle(final RoutingContext ctx, final JsonObject data) {
+        final BrCheckerInfoView brCheckerInfoView = new BrCheckerInfoView(data);
+        return brCheckerInfoView;
     }
 
     public void details(final Router router) {
@@ -77,19 +125,43 @@ public class BrCheckerController {
     }
 
     private JsonObject header() {
-        return
-                new JsonObject()
-                        .put("name", "Name")
-                        .put("jsdhjhksfghksdgklsjhgfkhskjghksljbfgksjhgksfgkljshfkgljhsklfgjhsklfgilshdgkljhsklfdghskjghksjhfgkljshfdklgjhsklgfbkslbfgklsjbgfklbskljfbgkslfbgksljbfgklsbgkf", "jsdhjhksfghksdgklsjhgfkhskjghksljbfgksjhgksfgkljshfkgljhsklfgjhsklfgilshdgkljhsklfdghskjghksjhfgkljshfdklgjhsklgfbkslbfgklsjbgfklbskljfbgkslfbgksljbfgklsbgkf");
+        final JsonObject jsonObject = new JsonObject();
+        Arrays.asList(BrCheckerModel.values()).forEach(v -> {
+            jsonObject.put("image", "Image");
+            if (v.visible) {
+                jsonObject.put(v.name(), v.label);
+            }
+        });
+        return jsonObject;
     }
 
     public DataPanelTemplate dataPanel(final JsonObject header, final List<JsonObject> data, final JsonObject footer, final JsonObject paginationObject, final String uriPath) {
         Pagination pagination = new Pagination(paginationObject.getInteger(ST.page, 1), paginationObject.getInteger(ST.size, 20), paginationObject.getLong(ST.total, 0L));
         return
-                new DataPanelTemplateBuilder(title)
+                new DataPanelTemplateBuilder(String.format(title + " [%d data found]", paginationObject.getLong(ST.total)))
                         .setHeader(header)
                         .setFooter(footer)
-                        .setData(data)
+                        .setData(
+                                data
+                                        .stream()
+                                        .map(j -> {
+                                            final JsonObject object = new JsonObject();
+                                            final String id = String.format("<a href=\"%s\">%s</a>", Uris.br_checker_view.value + "?id=" + j.getInteger("id"),
+                                                    String.format("<img src=\"/br-checker/images?name=%s\" style=\"max-height: 57px;\"/>", j.getString(BrCheckerModel.PICTURE_NAME.name())));
+                                            object.put("image", id);
+                                            j.getMap().forEach((k, v) -> {
+                                                if (k.equals(BrCheckerModel.BAND.name()))
+                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
+                                                else if (k.equals(BrCheckerModel.CONTACTED.name()))
+                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
+                                                else if (k.equals(BrCheckerModel.NAME_MATHCH.name()))
+                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
+                                                else object.put(k, v == null ? "" : v + "");
+                                            });
+                                            return object;
+                                        })
+                                        .collect(Collectors.toList())
+                        )
                         .setPaginationTemplate(
                                 WebUtils.createPaginationTemplate(uriPath, pagination, PAGINATION_NAV_LENGTH)
                         )

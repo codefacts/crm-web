@@ -36,6 +36,7 @@ public class FileUploadService {
                             URLEncoder.encode(message.body().getString(ST.file), StandardCharsets.UTF_8.name()),
                             URLEncoder.encode(message.body().getString(ST.extention), StandardCharsets.UTF_8.name())
                     ))
+                    .setTimeout(30 * 60 * 1000)
                     .exceptionHandler(e -> ExceptionUtil.fail(message, e))
                     .handler(withHandler(res -> {
                         res

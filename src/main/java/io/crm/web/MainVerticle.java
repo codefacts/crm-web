@@ -33,7 +33,6 @@ import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
  * Created by someone on 07/09/2015.
  */
 public class MainVerticle extends AbstractVerticle {
-    private final String templatesDir = "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\templates\\";
     private HttpClient httpClient;
 
     //
@@ -78,6 +77,7 @@ public class MainVerticle extends AbstractVerticle {
 
         BrCheckerDetailsService brCheckerDetailsService = new BrCheckerDetailsService(httpClient);
         vertx.eventBus().consumer(ApiEvents.BR_CHECKER_DETAILS, brCheckerDetailsService::brCheckerData);
+        vertx.eventBus().consumer(ApiEvents.FIND_ONE_BR_CHECKER_INFO, brCheckerDetailsService::findOne);
     }
 
     private void registerFilters(final Router router) {
@@ -161,6 +161,10 @@ public class MainVerticle extends AbstractVerticle {
 
         new BrCheckerController(router, vertx);
 
+        new ImageController(router);
+
+        new GoogleMapController(router);
+
         loginFormController(router);
         new LoginController(vertx, router).login();
         logoutController(router);
@@ -200,11 +204,11 @@ public class MainVerticle extends AbstractVerticle {
 
     private void registerStaticFileHandlers(final Router router) {
         router.route(Uris.staticResourcesPattern.value).handler(
-                StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\static\\")
+                StaticHandler.create("G:\\Cyclic_Auditor\\static")
                         .setCachingEnabled(true)
                         .setEnableFSTuning(true)
         );
         router.route(Uris.publicResourcesPattern.value).handler(
-                StaticHandler.create("D:\\IdeaProjects\\crm-web\\src\\main\\resources\\public\\"));
+                StaticHandler.create("G:\\Cyclic_Auditor\\public"));
     }
 }
