@@ -56,7 +56,7 @@ final public class Pagination {
     }
 
     public boolean isFirst(int p) {
-        return p == first();
+        return p <= first();
     }
 
     public boolean isLast() {
@@ -64,7 +64,7 @@ final public class Pagination {
     }
 
     public boolean isLast(int p) {
-        return p == last();
+        return p >= last();
     }
 
     public boolean isCurrentPage(final int aPage) {
