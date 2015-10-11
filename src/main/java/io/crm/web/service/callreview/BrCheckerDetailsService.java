@@ -1,6 +1,7 @@
 package io.crm.web.service.callreview;
 
 import io.crm.util.ExceptionUtil;
+import io.crm.web.App;
 import io.crm.web.ST;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
@@ -13,9 +14,8 @@ import static io.crm.util.ExceptionUtil.withReplyRun;
  * Created by sohan on 10/3/2015.
  */
 public class BrCheckerDetailsService {
-    public static final String apiBaseUri = "";
-    public static final int apiPort = 5645;
-    public static final String apiHost = "182.160.99.116";
+    public static final int apiPort = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName(), new JsonObject()).getInteger("apiPort");
+    public static final String apiHost = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("apiHost");
     private final HttpClient httpClient;
 
     public BrCheckerDetailsService(final HttpClient httpClient) {

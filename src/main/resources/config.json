@@ -1,0 +1,18 @@
+{
+  "IMAGE_DIRECTORY": "D:\\Others\\Images",
+  //  "IMAGE_DIRECTORY": "G:\\Cyclic_Auditor\\Images",
+  //  "templateDir": "G:\\Cyclic_Auditor\\Templates\\en_US",
+  "templateDir": "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\templates\\en_US",
+  "ApiService": {
+    "apiPort": 3276,
+    "apiHost": "localhost"
+  },
+  "BrCheckerDetailsService": {
+    "apiPort": 5645,
+    "apiHost": "182.160.99.116"
+  },
+  //  "STATIC_DIRECTORY": "G:\\Cyclic_Auditor\\static",
+  //  "PUBLIC_DIRECTORY": "G:\\Cyclic_Auditor\\public"
+  "STATIC_DIRECTORY": "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\static",
+  "PUBLIC_DIRECTORY": "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\public"
+}

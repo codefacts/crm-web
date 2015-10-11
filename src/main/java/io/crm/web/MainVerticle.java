@@ -204,11 +204,11 @@ public class MainVerticle extends AbstractVerticle {
 
     private void registerStaticFileHandlers(final Router router) {
         router.route(Uris.staticResourcesPattern.value).handler(
-                StaticHandler.create("G:\\Cyclic_Auditor\\static")
+                StaticHandler.create(App.STATIC_DIRECTORY)
                         .setCachingEnabled(true)
                         .setEnableFSTuning(true)
         );
         router.route(Uris.publicResourcesPattern.value).handler(
-                StaticHandler.create("G:\\Cyclic_Auditor\\public"));
+                StaticHandler.create(App.PUBLIC_DIRECTORY));
     }
 }

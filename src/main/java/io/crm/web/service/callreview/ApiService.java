@@ -4,6 +4,7 @@ import io.crm.QC;
 import io.crm.model.User;
 import io.crm.util.AsyncUtil;
 import io.crm.util.ExceptionUtil;
+import io.crm.web.App;
 import io.crm.web.ST;
 import io.crm.web.excpt.ApiServiceException;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -17,9 +18,8 @@ import io.vertx.core.json.JsonObject;
  * Created by someone on 22/09/2015.
  */
 public class ApiService {
-    private final String apiBaseUri = "";
-    private final int apiPort = 3276;
-    private final String apiHost = "localhost";
+    private final int apiPort = App.loadConfig().getJsonObject(ApiService.class.getSimpleName()).getInteger("apiPort");
+    private final String apiHost = App.loadConfig().getJsonObject(ApiService.class.getSimpleName()).getString("apiHost");
     private final HttpClient httpClient;
 
     public ApiService(HttpClient httpClient) {
@@ -29,7 +29,7 @@ public class ApiService {
     public void loginApi(Message<JsonObject> m) {
 
         httpClient
-                .post(apiPort, apiHost, apiBaseUri + "/login/apilogin")
+                .post(apiPort, apiHost, "/login/apilogin")
                 .handler(res -> {
                     res.bodyHandler(b -> {
                         if (res.statusCode() == HttpResponseStatus.OK.code()) {
