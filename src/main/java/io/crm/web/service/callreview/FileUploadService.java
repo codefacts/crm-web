@@ -1,11 +1,8 @@
 package io.crm.web.service.callreview;
 
 import io.crm.FailureCode;
-import io.crm.util.AsyncUtil;
 import io.crm.util.ExceptionUtil;
-import io.crm.util.Util;
-import io.crm.util.WrapMessage;
-import io.crm.web.ST;
+import io.crm.web.WebST;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
@@ -33,8 +30,8 @@ public class FileUploadService {
             httpClient
                     .post(BrCheckerDetailsService.apiPort, BrCheckerDetailsService.apiHost, String.format(
                             "/Import/importFile?file=%s&extention=%s",
-                            URLEncoder.encode(message.body().getString(ST.file), StandardCharsets.UTF_8.name()),
-                            URLEncoder.encode(message.body().getString(ST.extention), StandardCharsets.UTF_8.name())
+                            URLEncoder.encode(message.body().getString(WebST.file), StandardCharsets.UTF_8.name()),
+                            URLEncoder.encode(message.body().getString(WebST.extention), StandardCharsets.UTF_8.name())
                     ))
                     .setTimeout(30 * 60 * 1000)
                     .exceptionHandler(e -> ExceptionUtil.fail(message, e))
@@ -45,7 +42,7 @@ public class FileUploadService {
                                     if (res.statusCode() == HttpResponseStatus.OK.code()) {
                                         message.reply(
                                                 new JsonObject(b.toString())
-                                                        .getInteger(ST.count));
+                                                        .getInteger(WebST.count));
 
                                     } else if (res.statusCode() == HttpResponseStatus.BAD_REQUEST.code()) {
                                         message.fail(FailureCode.BadRequest.code, b.toString());

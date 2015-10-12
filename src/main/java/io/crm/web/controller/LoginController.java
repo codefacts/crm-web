@@ -1,10 +1,9 @@
 package io.crm.web.controller;
 
 import io.crm.web.ApiEvents;
-import io.crm.web.ST;
-import io.crm.web.Uris;
+import io.crm.web.WebST;
+import io.crm.web.WebUris;
 import io.crm.web.excpt.ApiServiceException;
-import io.crm.web.service.callreview.ApiService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -24,15 +23,15 @@ final public class LoginController {
     }
 
     public void login() {
-        router.post(Uris.login.value).handler(context -> {
+        router.post(WebUris.login.value).handler(context -> {
             context.request().setExpectMultipart(true);
             context.request().endHandler(b -> {
                 String username = context.request().formAttributes().get("username");
                 String password = context.request().formAttributes().get("password");
                 vertx.eventBus().send(ApiEvents.LOGIN_API,
                         new JsonObject()
-                                .put(ST.username, username)
-                                .put(ST.password, password),
+                                .put(WebST.username, username)
+                                .put(WebST.password, password),
                         (AsyncResult<Message<JsonObject>> r) -> {
                             if (r.failed()) {
                                 final Throwable cause = r.cause();
@@ -45,8 +44,8 @@ final public class LoginController {
                                 }
                                 return;
                             }
-                            context.session().put(ST.currentUser, r.result().body());
-                            context.response().end(ST.ok);
+                            context.session().put(WebST.currentUser, r.result().body());
+                            context.response().end(WebST.ok);
                         });
             });
         });

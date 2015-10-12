@@ -1,7 +1,7 @@
 package io.crm.web.util;
 
 import io.crm.intfs.ConsumerInterface;
-import io.crm.web.ST;
+import io.crm.web.WebST;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
 import io.crm.web.template.pagination.PaginationTemplate;
@@ -20,7 +20,7 @@ import io.vertx.ext.web.Session;
  */
 final public class WebUtils {
     public static boolean isLoggedIn(final Session session) {
-        return session.get(ST.currentUser) != null;
+        return session.get(WebST.currentUser) != null;
     }
 
     public static void redirect(final String uri, final HttpServerResponse response) {

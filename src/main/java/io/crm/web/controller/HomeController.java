@@ -1,10 +1,9 @@
 package io.crm.web.controller;
 
-import io.crm.web.ST;
-import io.crm.web.Uris;
+import io.crm.web.WebST;
+import io.crm.web.WebUris;
 import io.crm.web.template.DashboardTemplateBuilder;
 import io.crm.web.template.PageBuilder;
-import io.crm.web.template.SidebarTemplate;
 import io.crm.web.template.SidebarTemplateBuilder;
 import io.vertx.ext.web.Router;
 
@@ -21,13 +20,13 @@ public class HomeController {
     }
 
     public void index() {
-        router.get(Uris.dashboard.value).handler(context -> {
+        router.get(WebUris.dashboard.value).handler(context -> {
             context.response().headers().set(CONTENT_TYPE, "text/html");
             context.response().end(
                     new PageBuilder("Dashboard")
                             .body(
                                     new DashboardTemplateBuilder()
-                                            .setUser(context.session().get(ST.currentUser))
+                                            .setUser(context.session().get(WebST.currentUser))
                                             .setSidebarTemplate(
                                                     new SidebarTemplateBuilder()
                                                             .setCurrentUri(context.request().uri())

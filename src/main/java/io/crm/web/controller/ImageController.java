@@ -1,8 +1,8 @@
 package io.crm.web.controller;
 
 import io.crm.web.App;
-import io.crm.web.ST;
-import io.crm.web.Uris;
+import io.crm.web.WebST;
+import io.crm.web.WebUris;
 import io.vertx.ext.web.Router;
 
 import java.io.File;
@@ -22,9 +22,9 @@ public class ImageController {
     }
 
     public void renderImage(final Router router) {
-        router.get(Uris.BrCheckerImages.value).handler(ctx -> {
+        router.get(WebUris.BrCheckerImages.value).handler(ctx -> {
             try {
-                final String imageName = ctx.request().params().get(ST.name).replace(".PNG", "");
+                final String imageName = ctx.request().params().get(WebST.name).replace(".PNG", "");
                 final File dir = new File(IMAGE_DIRECTORY);
                 if (!dir.exists()) {
                     try {

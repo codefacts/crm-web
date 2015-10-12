@@ -2,10 +2,9 @@ package io.crm.web.service.callreview;
 
 import io.crm.util.ExceptionUtil;
 import io.crm.web.App;
-import io.crm.web.ST;
+import io.crm.web.WebST;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import static io.crm.util.ExceptionUtil.withReplyRun;
@@ -38,8 +37,8 @@ public class BrCheckerDetailsService {
 
     public void brCheckerData(final Message<JsonObject> message) {
         withReplyRun(() -> {
-            int page = message.body().getInteger(ST.page, 1);
-            int size = message.body().getInteger(ST.size, 20);
+            int page = message.body().getInteger(WebST.page, 1);
+            int size = message.body().getInteger(WebST.size, 20);
 
             httpClient
                     .get(apiPort, apiHost, String.format("/BrChecker/details?page=%d&size=%d", page, size))
