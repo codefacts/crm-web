@@ -3,7 +3,7 @@ package io.crm.web.service.callreview;
 import io.crm.QC;
 import io.crm.model.User;
 import io.crm.util.ExceptionUtil;
-import io.crm.web.App;
+import io.crm.web.WebApp;
 import io.crm.web.WebST;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.eventbus.Message;
@@ -14,8 +14,8 @@ import io.vertx.core.json.JsonObject;
  * Created by someone on 22/09/2015.
  */
 public class ApiService {
-    private final int apiPort = App.loadConfig().getJsonObject(ApiService.class.getSimpleName()).getInteger("apiPort");
-    private final String apiHost = App.loadConfig().getJsonObject(ApiService.class.getSimpleName()).getString("apiHost");
+    private final int apiPort = WebApp.loadConfig().getJsonObject(ApiService.class.getSimpleName()).getInteger("apiPort");
+    private final String apiHost = WebApp.loadConfig().getJsonObject(ApiService.class.getSimpleName()).getString("apiHost");
     private final HttpClient httpClient;
 
     public ApiService(HttpClient httpClient) {

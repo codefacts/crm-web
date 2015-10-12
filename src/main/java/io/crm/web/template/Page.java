@@ -1,7 +1,7 @@
 package io.crm.web.template;
 
 import io.crm.util.Util;
-import io.crm.web.App;
+import io.crm.web.WebApp;
 import org.watertemplate.Template;
 import org.watertemplate.TemplateMap;
 
@@ -13,7 +13,7 @@ import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
  * Created by someone on 07/09/2015.
  */
 public class Page extends Template {
-    private static final String templateDir = App.loadConfig().getString("templateDir");
+    private static final String templateDir = WebApp.loadConfig().getString("templateDir");
     private final String page_title;
     private final Template body;
 

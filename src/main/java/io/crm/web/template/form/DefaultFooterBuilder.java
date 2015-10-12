@@ -1,7 +1,6 @@
 package io.crm.web.template.form;
 
-import io.crm.web.css.MyButtonClasses;
-import io.crm.web.template.FormTemplateBuilder;
+import io.crm.web.css.WebButtonClasses;
 import io.crm.web.template.input.ButtonTemplateBuilder;
 import org.watertemplate.Template;
 
@@ -20,7 +19,7 @@ public final class DefaultFooterBuilder {
                         .primary()
                         .setBtnText("Search")
                         .pullRight()
-                        .addClass(MyButtonClasses.BTN_FOOTER.value)
+                        .addClass(WebButtonClasses.BTN_FOOTER.value)
                         .createButtonTemplate()
         );
         return this;
@@ -32,7 +31,7 @@ public final class DefaultFooterBuilder {
                         .danger()
                         .setBtnText("Clear")
                         .pullRight()
-                        .addClass(MyButtonClasses.BTN_FOOTER.value)
+                        .addClass(WebButtonClasses.BTN_FOOTER.value)
                         .createButtonTemplate()
         );
         return this;
@@ -44,7 +43,7 @@ public final class DefaultFooterBuilder {
                         .success()
                         .setBtnText("Export")
                         .pullRight()
-                        .addClass(MyButtonClasses.BTN_FOOTER.value)
+                        .addClass(WebButtonClasses.BTN_FOOTER.value)
                         .createButtonTemplate()
         );
         return this;

@@ -8,16 +8,15 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by someone on 07/09/2015.
  */
-public class App {
+final public class WebApp {
     private static final JsonObject config = loadConfig();
     private static final String CONFIG_FILE_NAME = "config.json";
-    public static final String STATIC_DIRECTORY = App.loadConfig().getString("STATIC_DIRECTORY");
-    public static final String PUBLIC_DIRECTORY = App.loadConfig().getString("PUBLIC_DIRECTORY");
+    public static final String STATIC_DIRECTORY = WebApp.loadConfig().getString("STATIC_DIRECTORY");
+    public static final String PUBLIC_DIRECTORY = WebApp.loadConfig().getString("PUBLIC_DIRECTORY");
 
     static {
         if (loadConfig().getBoolean("dev-mode")) {
@@ -32,7 +31,7 @@ public class App {
                 if (file.exists()) {
                     return new JsonObject(FileUtils.readFileToString(file));
                 }
-                final InputStream inputStream = App.class.getClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
+                final InputStream inputStream = WebApp.class.getClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
                 return new JsonObject(IOUtils.toString(inputStream));
             } else return config;
         } catch (IOException e) {
@@ -41,6 +40,6 @@ public class App {
     }
 
     public static void main(String... args) {
-        Vertx.vertx().deployVerticle(new MainVerticle());
+        Vertx.vertx().deployVerticle(new WebMainVerticle());
     }
 }

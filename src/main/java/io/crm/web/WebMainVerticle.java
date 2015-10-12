@@ -31,7 +31,7 @@ import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
 /**
  * Created by someone on 07/09/2015.
  */
-public class MainVerticle extends AbstractVerticle {
+final public class WebMainVerticle extends AbstractVerticle {
     private HttpClient httpClient;
 
     //
@@ -203,11 +203,11 @@ public class MainVerticle extends AbstractVerticle {
 
     private void registerStaticFileHandlers(final Router router) {
         router.route(WebUris.staticResourcesPattern.value).handler(
-                StaticHandler.create(App.STATIC_DIRECTORY)
+                StaticHandler.create(WebApp.STATIC_DIRECTORY)
                         .setCachingEnabled(true)
                         .setEnableFSTuning(true)
         );
         router.route(WebUris.publicResourcesPattern.value).handler(
-                StaticHandler.create(App.PUBLIC_DIRECTORY));
+                StaticHandler.create(WebApp.PUBLIC_DIRECTORY));
     }
 }

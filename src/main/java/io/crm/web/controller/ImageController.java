@@ -1,6 +1,6 @@
 package io.crm.web.controller;
 
-import io.crm.web.App;
+import io.crm.web.WebApp;
 import io.crm.web.WebST;
 import io.crm.web.WebUris;
 import io.vertx.ext.web.Router;
@@ -15,7 +15,7 @@ import java.nio.file.Paths;
  */
 public class ImageController {
     public static final String image_directory_prop = "IMAGE_DIRECTORY";
-    public static final String IMAGE_DIRECTORY = App.loadConfig().getString(image_directory_prop);
+    public static final String IMAGE_DIRECTORY = WebApp.loadConfig().getString(image_directory_prop);
 
     public ImageController(final Router router) {
         renderImage(router);
