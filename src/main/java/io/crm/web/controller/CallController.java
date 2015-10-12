@@ -7,6 +7,7 @@ import io.crm.web.template.*;
 import io.crm.web.template.form.InputBuilder;
 import io.crm.web.template.form.RangeInputBuilder;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
+import io.crm.web.util.Pagination;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
@@ -56,30 +57,9 @@ final public class CallController {
     private Template dataPanel() {
         return
                 new DataPanelTemplateBuilder("Data")
-                        .setHeader(new JsonObject())
+                        .setHeader(null)
                         .setData(EMPTY_LIST)
-                        .setPaginationTemplate(
-                                new PaginationTemplateBuilder()
-                                        .prev(c -> {
-                                            c.addClass(BootstrapCss.DISABLED.value);
-                                        })
-                                        .addItem(e -> {
-                                            e.setLabel("1");
-                                        })
-                                        .addItem(e -> {
-                                            e.setLabel("2");
-                                        })
-                                        .addItem(e -> {
-                                            e
-                                                    .setLabel("3")
-                                                    .addClass(BootstrapCss.ACTIVE.value)
-                                            ;
-                                        })
-                                        .next(c -> {
-                                            c.addClass(BootstrapCss.DISABLED.value);
-                                        })
-                                        .createPaginationTemplate()
-                        )
+                        .pagination(null, new Pagination(0, 20, 0), 10)
                         .setFooter(new JsonObject())
                         .build();
     }

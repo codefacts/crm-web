@@ -11,10 +11,11 @@ import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
  */
 public class DataPanelTemplate extends Template {
 
-    public DataPanelTemplate(final String title, final TableTemplate tableTemplate, final Template paginationTemplate) {
+    public DataPanelTemplate(final String title, final TableTemplate tableTemplate, final Template paginationTemplate, final String exportButton) {
         add("title", getOrDefault(title, ""));
         add("table", getOrDefault(tableTemplate, EMPTY_TEMPLATE).render());
         add("pagination", getOrDefault(paginationTemplate, EMPTY_TEMPLATE).render());
+        add("exportButton", getOrDefault(exportButton, ""));
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.util.List;
  * Created by someone on 01/10/2015.
  */
 public final class DefaultFooterBuilder {
+    public static final String __action__ = "__action__";
     private final List<Template> templates = new ArrayList<>();
 
     public DefaultFooterBuilder search() {
@@ -20,6 +21,8 @@ public final class DefaultFooterBuilder {
                         .setBtnText("Search")
                         .pullRight()
                         .addClass(WebButtonClasses.BTN_FOOTER.value)
+                        .setName(__action__)
+                        .setValue("search")
                         .createButtonTemplate()
         );
         return this;
@@ -32,6 +35,8 @@ public final class DefaultFooterBuilder {
                         .setBtnText("Clear")
                         .pullRight()
                         .addClass(WebButtonClasses.BTN_FOOTER.value)
+                        .setName(__action__)
+                        .setValue("clear")
                         .createButtonTemplate()
         );
         return this;
@@ -44,6 +49,8 @@ public final class DefaultFooterBuilder {
                         .setBtnText("Export")
                         .pullRight()
                         .addClass(WebButtonClasses.BTN_FOOTER.value)
+                        .setName(__action__)
+                        .setValue("export")
                         .createButtonTemplate()
         );
         return this;

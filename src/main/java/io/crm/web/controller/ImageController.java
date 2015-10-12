@@ -3,6 +3,7 @@ package io.crm.web.controller;
 import io.crm.web.WebApp;
 import io.crm.web.WebST;
 import io.crm.web.WebUris;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.ext.web.Router;
 
 import java.io.File;
@@ -33,7 +34,14 @@ public class ImageController {
                         ctx.fail(e);
                     }
                 }
-                final String imageFile = dir.listFiles((f, n) -> n.startsWith(imageName))[0].getAbsolutePath();
+
+                final File[] files = dir.listFiles((f, n) -> n.startsWith(imageName));
+                if (files.length <= 0) {
+                    ctx.response().setStatusCode(HttpResponseStatus.NOT_FOUND.code());
+                    ctx.response().end("Image file not found.");
+                    return;
+                }
+                final String imageFile = files[0].getAbsolutePath();
                 ctx.response().sendFile(imageFile);
 
             } catch (Exception e) {

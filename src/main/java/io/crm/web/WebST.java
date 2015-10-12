@@ -30,4 +30,5 @@ final public class WebST {
     public static final String file = "file";
     public static final String extention = "extention";
     public static final String name = "name";
+    public static final String headers = "headers";
 }

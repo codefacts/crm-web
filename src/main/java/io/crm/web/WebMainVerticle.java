@@ -77,6 +77,7 @@ final public class WebMainVerticle extends AbstractVerticle {
         BrCheckerDetailsService brCheckerDetailsService = new BrCheckerDetailsService(httpClient);
         vertx.eventBus().consumer(ApiEvents.BR_CHECKER_DETAILS, brCheckerDetailsService::brCheckerData);
         vertx.eventBus().consumer(ApiEvents.FIND_ONE_BR_CHECKER_INFO, brCheckerDetailsService::findOne);
+        vertx.eventBus().consumer(ApiEvents.INSERT_BR_CHECKER_INFO, brCheckerDetailsService::insert);
     }
 
     private void registerFilters(final Router router) {

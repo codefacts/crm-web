@@ -7,6 +7,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.JsonObject;
 
+import static io.crm.util.ExceptionUtil.withReply;
 import static io.crm.util.ExceptionUtil.withReplyRun;
 
 /**
@@ -19,6 +20,15 @@ public class BrCheckerDetailsService {
 
     public BrCheckerDetailsService(final HttpClient httpClient) {
         this.httpClient = httpClient;
+    }
+
+    public void insert(final Message<JsonObject> message) {
+        withReply((JsonObject js) -> {
+            message.reply(
+                    new JsonObject()
+                            .put(WebST.statusCode, WebST.success)
+            );
+        }, message);
     }
 
     public void findOne(final Message<Integer> message) {
@@ -53,5 +63,9 @@ public class BrCheckerDetailsService {
                     })
                     .end();
         }, message);
+    }
+
+    public static String baseUrl() {
+        return "http://" + apiHost + ":" + apiPort;
     }
 }

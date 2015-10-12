@@ -8,4 +8,5 @@ final public class ApiEvents {
     public static final String UPLOAD_BR_CHECKER_DATA = "UPLOAD_BR_CHECKER_DATA";
     public static final String BR_CHECKER_DETAILS = "BR_CHECKER_DETAILS";
     public static final String FIND_ONE_BR_CHECKER_INFO = "FIND_ONE_BR_CHECKER_INFO";
+    public static final String INSERT_BR_CHECKER_INFO = "INSERT_BR_CHECKER_INFO";
 }

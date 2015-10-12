@@ -3,6 +3,7 @@ package io.crm.web.controller;
 import io.crm.web.ApiEvents;
 import io.crm.web.WebST;
 import io.crm.web.WebUris;
+import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.template.*;
 import io.crm.web.util.Pagination;
@@ -132,7 +133,7 @@ public class BrCheckerController {
     public DataPanelTemplate dataPanel(final JsonObject header, final List<JsonObject> data, final JsonObject footer, final JsonObject paginationObject, final String uriPath) {
         Pagination pagination = new Pagination(paginationObject.getInteger(WebST.page, 1), paginationObject.getInteger(WebST.size, 20), paginationObject.getLong(WebST.total, 0L));
         return
-                new DataPanelTemplateBuilder(String.format(title + " [%d data found]", paginationObject.getLong(WebST.total)))
+                new DataPanelTemplateBuilder(WebUtils.titleWithTotal(title, paginationObject.getLong(WebST.total)))
                         .setHeader(header)
                         .setFooter(footer)
                         .setData(
@@ -156,8 +157,9 @@ public class BrCheckerController {
                                         })
                                         .collect(Collectors.toList())
                         )
+                        .exportButton(BrCheckerDetailsService.baseUrl() + "/BrChecker/export", "Export")
                         .setPaginationTemplate(
-                                WebUtils.createPaginationTemplate(uriPath, pagination, PAGINATION_NAV_LENGTH)
+                                WebUtils.createPaginationTemplateBuilder(uriPath, pagination, PAGINATION_NAV_LENGTH).createPaginationTemplate()
                         )
                         .build();
     }

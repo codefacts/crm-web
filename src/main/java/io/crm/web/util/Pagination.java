@@ -103,8 +103,9 @@ final public class Pagination {
             return builder.add(page).build();
         }
         final int mid = nvLen / 2;
-        final int trk = page - mid;
-        System.out.println("nvLen = " + nvLen);
+        int trk = page - mid;
+        trk = trk < 1 ? 1 : trk;
+
         for (int i = 0; i < nvLen; i++) {
             final int track = trk + i;
             if (track >= 1 && track <= pageCount) builder.add(track);

@@ -29,6 +29,10 @@ final public class WebUtils {
         response.end();
     }
 
+    public static String titleWithTotal(final String label, final long total) {
+        return String.format(label + " [%d data found]", total);
+    }
+
     public static <T> Handler<AsyncResult<Message<T>>> catchHandler(final ConsumerInterface<AsyncResult<Message<T>>> consumer, final RoutingContext context) {
         return r -> {
             try {
@@ -57,7 +61,7 @@ final public class WebUtils {
         }
     }
 
-    public static PaginationTemplate createPaginationTemplate(final String uriPath, final Pagination pagination, final int paginationNavLength) {
+    public static PaginationTemplateBuilder createPaginationTemplateBuilder(final String uriPath, final Pagination pagination, final int paginationNavLength) {
         int size = pagination.getSize();
         return new PaginationTemplateBuilder()
                 .addClass(BootstrapCss.PULL_RIGHT.value)
@@ -73,8 +77,7 @@ final public class WebUtils {
                     ));
                 })
                 .next(uriPath + pageQueryString(pagination.next(), size), pagination.hasNext())
-                .last(uriPath + pageQueryString(pagination.last(), size), pagination.isLast())
-                .createPaginationTemplate();
+                .last(uriPath + pageQueryString(pagination.last(), size), pagination.isLast());
     }
 
     private static String pageQueryString(int prev, int size) {

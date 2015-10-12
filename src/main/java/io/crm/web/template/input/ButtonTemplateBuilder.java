@@ -11,6 +11,8 @@ public class ButtonTemplateBuilder {
     private String id;
     private String btnText;
     private final Set<String> classSet = new HashSet<>();
+    private String name;
+    private String value;
 
     public ButtonTemplateBuilder setId(final String id) {
         this.id = id;
@@ -87,7 +89,17 @@ public class ButtonTemplateBuilder {
         return this;
     }
 
+    public ButtonTemplateBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ButtonTemplateBuilder setValue(String value) {
+        this.value = value;
+        return this;
+    }
+
     public ButtonTemplate createButtonTemplate() {
-        return new ButtonTemplate(id, String.join(" ", classSet), btnText);
+        return new ButtonTemplate(id, String.join(" ", classSet), btnText, name, value);
     }
 }

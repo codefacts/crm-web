@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableList;
 import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.template.pagination.PaginationTemplate;
 import io.crm.web.template.table.*;
+import io.crm.web.util.Pagination;
+import io.crm.web.util.WebUtils;
 import io.vertx.core.json.JsonObject;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class DataPanelTemplateBuilder {
     private JsonObject header;
     private JsonObject footer;
     private PaginationTemplate paginationTemplate;
+    private String exportButton;
     private final TableTemplateBuilder tableTemplateBuilder = new TableTemplateBuilder();
 
     public DataPanelTemplateBuilder(String title) {
@@ -42,6 +45,29 @@ public class DataPanelTemplateBuilder {
 
     public DataPanelTemplateBuilder setData(List<JsonObject> data) {
         this.data = data;
+        return this;
+    }
+
+    public DataPanelTemplateBuilder setExportButton(String exportButton) {
+        this.exportButton = exportButton;
+        return this;
+    }
+
+    public DataPanelTemplateBuilder exportButton(final String exportLink, final String label) {
+        setExportButton(
+                new ExportButtonBuilder()
+                        .setExportLink(exportLink)
+                        .setLabel(label)
+                        .createExportButton().render()
+        );
+        return this;
+    }
+
+    public DataPanelTemplateBuilder pagination(final String uriPath, final Pagination pagination, final int PAGINATION_NAV_LENGTH) {
+        setPaginationTemplate(
+                WebUtils.createPaginationTemplateBuilder(uriPath, pagination, PAGINATION_NAV_LENGTH)
+                        .createPaginationTemplate()
+        );
         return this;
     }
 
@@ -115,7 +141,7 @@ public class DataPanelTemplateBuilder {
                 )
         ;
 
-        return new DataPanelTemplate(title, tableTemplateBuilder.createTableTemplate(), paginationTemplate);
+        return new DataPanelTemplate(title, tableTemplateBuilder.createTableTemplate(), paginationTemplate, exportButton);
     }
 
 }
