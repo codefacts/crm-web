@@ -6,6 +6,7 @@ import io.crm.web.ApiEvents;
 import io.crm.web.WebST;
 import io.crm.web.WebUris;
 import io.crm.web.css.bootstrap.TableClasses;
+import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.template.*;
 import io.crm.web.template.table.*;
 import io.crm.web.util.Converters;
@@ -44,7 +45,7 @@ public class FileUploadController {
     private final CsvParser csvParser;
 
     {
-        final DateConverter dateConverter = new DateConverter("dd-MMM-yyyy hh:mm:ss 'PM'");
+        final DateConverter dateConverter = new DateConverter(BrCheckerDetailsService.DATE_FORMAT_STR);
 
         csvParser = new CsvParser(ImmutableList.of(
 

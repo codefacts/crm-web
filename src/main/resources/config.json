@@ -12,7 +12,8 @@
     //    "apiPort": 5645,
     //    "apiHost": "182.160.99.116"
     "apiPort": 45707,
-    "apiHost": "localhost"
+    "apiHost": "localhost",
+    "CONNECTION_URL": "jdbc:sqlserver://182.160.99.116\\SQLSERVER2008;databaseName=br_checker_db_test"
   },
   //  "STATIC_DIRECTORY": "G:\\Cyclic_Auditor\\static",
   //  "PUBLIC_DIRECTORY": "G:\\Cyclic_Auditor\\public"
