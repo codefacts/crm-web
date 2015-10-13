@@ -43,6 +43,7 @@ function HashParams() {
             handlers.push(_onChangeHandler);
         },
         removeHandler: function(_onChangeHandler) {
+            if(!_onChangeHandler) return;
             delete handlers[handlers.indexOf(_onChangeHandler)];
             var hndls = [];
             for(var x in handlers) {
