@@ -20,6 +20,9 @@ public class SidebarTemplate extends Template {
                         .put(WebST.uri, WebUris.fileUpload.value)
                         .put(WebST.label, WebUris.fileUpload.label),
                 new JsonObject()
+                        .put(WebST.uri, WebUris.imageUpload.value)
+                        .put(WebST.label, WebUris.imageUpload.label),
+                new JsonObject()
                         .put(WebST.uri, WebUris.br_checker_details.value)
                         .put(WebST.label, WebUris.br_checker_details.label)
         );

@@ -33,7 +33,7 @@ final public class WebUtils {
         return String.format(label + " [%d data found]", total);
     }
 
-    public static <T> Handler<AsyncResult<Message<T>>> catchHandler(final ConsumerInterface<AsyncResult<Message<T>>> consumer, final RoutingContext context) {
+    public static <T> Handler<AsyncResult<T>> catchHandler(final ConsumerInterface<AsyncResult<T>> consumer, final RoutingContext context) {
         return r -> {
             try {
                 consumer.accept(r);

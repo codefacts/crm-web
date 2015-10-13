@@ -5,6 +5,7 @@ package io.crm.web;
  */
 public enum WebUris {
     fileUpload("/file-upload", "Upload File"),
+    imageUpload("/image-upload", "Upload Images"),
     dashboard("/dashboard", "Dashboard"),
     login("/login", "Login"),
     register("/register", "Register"),
@@ -16,7 +17,6 @@ public enum WebUris {
     br_checker_details("/br-checker/details", "Br Checker Details"),
     br_checker_view("/br-details/view", "Br Checker Info"),
     BrCheckerImages("/br-checker/images", "Br Checker Images"), googleMap("/google-map", "Google Map");
-
 
     public final String value;
     public final String label;

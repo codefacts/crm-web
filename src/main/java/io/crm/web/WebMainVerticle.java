@@ -165,6 +165,8 @@ final public class WebMainVerticle extends AbstractVerticle {
 
         new GoogleMapController(router);
 
+        new ImageUploadController(vertx, router);
+
         loginFormController(router);
         new LoginController(vertx, router).login();
         logoutController(router);

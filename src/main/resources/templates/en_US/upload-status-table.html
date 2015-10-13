@@ -1,0 +1,20 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>File Name</th>
+        <th>Status</th>
+        <th>Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    ~for row in rows:
+    <tr class="~row.class~">
+        <th scope="row">~row.row_no~</th>
+        <td>~row.fileName~</td>
+        <td>~row.status~</td>
+        <td>~row.message~</td>
+    </tr>
+    :~
+    </tbody>
+</table>
