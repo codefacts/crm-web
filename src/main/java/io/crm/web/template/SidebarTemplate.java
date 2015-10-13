@@ -31,7 +31,7 @@ public class SidebarTemplate extends Template {
     SidebarTemplate(final String currentUri) {
         links.forEach(link -> {
             if (currentUri.equals(link.getString(WebST.uri))) {
-                link.put(WebST.active, "active");
+                link.put(WebST.active, "list-group-item-success");
             }
         });
 

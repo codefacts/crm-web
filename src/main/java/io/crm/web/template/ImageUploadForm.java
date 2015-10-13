@@ -3,6 +3,7 @@ package io.crm.web.template;
 import io.crm.util.Util;
 import io.crm.web.controller.ImageUploadController;
 import io.crm.web.css.bootstrap.TableClasses;
+import io.crm.web.template.bootstrap.BodyPanelDefaultBuilder;
 import io.crm.web.template.table.*;
 import org.watertemplate.Template;
 
@@ -21,9 +22,17 @@ final public class ImageUploadForm extends Template {
                 .filter(r -> r.getStatus() == ImageUploadController.Status.success)
                 .count();
         final int error = (int) (results.size() - success);
-        add("status", results.size() <= 0 ? "" : String.format("Success: %d, Fail: %d", success, error));
-        add("statusClass", results.size() <= 0 ? "" : (error <= 0 ? "bg-success" : "bg-warning"));
-        add("statusTable", results.size() <= 0 ? "" : new UploadStatusTable(results).render());
+
+        add("status", results.size() <= 0 ? ""
+                : new BodyPanelDefaultBuilder()
+                .addBodyClass(results.size() <= 0 ? "" : (error <= 0 ? "bg-success" : "bg-warning"))
+                .setBody(String.format("Success: %d, Fail: %d", success, error))
+                .createBodyPanelDefault().render());
+
+        add("statusTable", results.size() <= 0 ? ""
+                : new BodyPanelDefaultBuilder()
+                .setBody(new UploadStatusTable(results).render())
+                .createBodyPanelDefault().render());
     }
 
     @Override

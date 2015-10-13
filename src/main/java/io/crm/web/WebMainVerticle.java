@@ -7,6 +7,8 @@ import io.crm.web.service.callreview.ApiService;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.service.callreview.FileUploadService;
 import io.crm.web.template.*;
+import io.crm.web.template.bootstrap.ModalAlert;
+import io.crm.web.template.bootstrap.ModalAlertBuilder;
 import io.crm.web.util.WebUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
@@ -25,6 +27,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static io.crm.web.util.WebUtils.webHandler;
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
 import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
 
@@ -49,7 +52,7 @@ final public class WebMainVerticle extends AbstractVerticle {
 
         //Register Listeners
         registerFilters(router);
-        registerRequestHandlers(router);
+        registerControllers(router);
         int port = 8085;
         getVertx().createHttpServer().requestHandler(router::accept).listen(port);
         System.out.println("<----------------------------------WEB_SERVER_STARTED------------------------------------->");
@@ -146,7 +149,7 @@ final public class WebMainVerticle extends AbstractVerticle {
         });
     }
 
-    private void registerRequestHandlers(final Router router) {
+    private void registerControllers(final Router router) {
         registerStaticFileHandlers(router);
 
         otherwiseController(router);
@@ -170,6 +173,29 @@ final public class WebMainVerticle extends AbstractVerticle {
         loginFormController(router);
         new LoginController(vertx, router).login();
         logoutController(router);
+
+        testController(router);
+    }
+
+    private void testController(final Router router) {
+        router.get("/test").handler(webHandler(ctx -> {
+            ctx.response().end(
+                    new PageBuilder("Test")
+                            .body(
+                                    new DashboardTemplateBuilder()
+                                            .setUser(ctx.session().get(WebST.currentUser))
+                                            .setContentTemplate(
+                                                    new ModalAlertBuilder()
+                                                            .setTitle("Congrat")
+                                                            .setBody("Hi")
+                                                            .setShow(true)
+                                                            .createModalAlert()
+                                            )
+                                            .build()
+                            )
+                            .build().render()
+            );
+        }));
     }
 
     private void otherwiseController(final Router router) {

@@ -1,27 +1,45 @@
 <div class="col-md-10">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post" enctype="multipart/form-data" action="/image-upload">
-
-                <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <input type="file" id="exampleInputFile"
-                           name="images"
-                           required
-                           accept="image/png"
-                           multiple>
-                </div>
-
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Upload Images</h3>
         </div>
-    </div>
+        <div class="panel-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="~statusClass~" style="padding: 7px;">~status~</h3>
-            ~statusTable~
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form method="post" enctype="multipart/form-data" action="/image-upload">
+
+                                <div class="form-group">
+                                    <label for="exampleInputFile">File input</label>
+                                    <input type="file" id="exampleInputFile"
+                                           name="images"
+                                           required
+                                           accept="image/png"
+                                           multiple>
+                                </div>
+
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    ~status~
+
+                    ~statusTable~
+
+                </div>
+            </div>
+
         </div>
     </div>
 
