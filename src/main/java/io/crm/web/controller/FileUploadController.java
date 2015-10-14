@@ -142,19 +142,22 @@ public class FileUploadController {
                                         taskCoordinator.countdown();
                                         return;
                                     }
-                                    taskCoordinator.countdown();
+
                                     success.add(new Touple2<String, JsonObject>(fu.fileName(),
                                             r.result()));
+                                    taskCoordinator.countdown();
                                 } catch (Exception ex) {
-                                    ctx.fail(ex);
+                                    errors.add(new Touple2<String, Throwable>(fu.fileName(), ex));
+                                    taskCoordinator.countdown();
                                 }
                             });
                         } catch (Exception ex) {
-                            taskCoordinator.countdown();
                             errors.add(new Touple2<String, Throwable>(fu.fileName(), ex));
+                            taskCoordinator.countdown();
                         }
 
                     });
+
 
                 }));
     }
@@ -212,7 +215,7 @@ public class FileUploadController {
     private void parseCsvAndSendData(final String file, final Handler<AsyncResult<JsonObject>> handler) {
         final CsvParseResult parseResult = csvParser.parse(new File(file));
         if (parseResult.hasErrors()) {
-            SimpleCounter c = new SimpleCounter();
+
             handler.handle(AsyncUtil.fail(new HandlerException(
                     new JsonObject()
                             .put(ST.statusCode, StatusCode.error.name())
@@ -220,7 +223,7 @@ public class FileUploadController {
                                     parseResult.errors
                                             .stream()
                                             .collect(Collectors.toMap(
-                                                    v -> c.counter++ + "",
+                                                    v -> "Line " + v.getValue(CsvParseError.line) + "",
                                                     k -> k.getString(CsvParseError.message)))
                             ))
             )));
