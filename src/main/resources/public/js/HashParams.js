@@ -1,5 +1,3 @@
-$(window).on('hashchange', function() {});
-
 function HashParams() {
     var handlers = [];
 
