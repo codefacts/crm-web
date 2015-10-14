@@ -49,7 +49,7 @@ public class BrCheckerDetailsService {
                         "CONSUMER_MOBILE_NUMBER, " +
                         "CALL_STATUS, " +
 
-                        "NAME_MATHCH, " +
+                        "NAME_MATCH, " +
                         "CONTACTED, " +
                         "BAND, " +
 

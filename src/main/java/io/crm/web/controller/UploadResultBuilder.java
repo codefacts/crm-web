@@ -1,12 +1,28 @@
 package io.crm.web.controller;
 
+import io.crm.web.MessageCodes;
+import io.crm.web.util.Status;
+import io.crm.web.util.UploadResult;
+
 public class UploadResultBuilder {
-    private ImageUploadController.Status status;
+    private Status status;
     private String message;
     private String filename;
+    private String messageCode;
 
-    public UploadResultBuilder setStatus(ImageUploadController.Status status) {
+    public UploadResultBuilder setStatus(Status status) {
         this.status = status;
+        return this;
+    }
+
+    public UploadResultBuilder setMessageCode(MessageCodes messageCode) {
+        this.messageCode = messageCode.code;
+        this.message = messageCode.message;
+        return this;
+    }
+
+    public UploadResultBuilder setMessageCode(String messageCode) {
+        this.messageCode = messageCode;
         return this;
     }
 
@@ -20,7 +36,7 @@ public class UploadResultBuilder {
         return this;
     }
 
-    public ImageUploadController.UploadResult createUploadResult() {
-        return new ImageUploadController.UploadResult(status, message, filename);
+    public UploadResult createUploadResult() {
+        return new UploadResult(status, message, messageCode, filename);
     }
 }

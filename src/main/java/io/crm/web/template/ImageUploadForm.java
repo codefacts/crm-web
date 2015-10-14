@@ -1,10 +1,8 @@
 package io.crm.web.template;
 
-import io.crm.util.Util;
-import io.crm.web.controller.ImageUploadController;
-import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.template.bootstrap.BodyPanelDefaultBuilder;
-import io.crm.web.template.table.*;
+import io.crm.web.util.Status;
+import io.crm.web.util.UploadResult;
 import org.watertemplate.Template;
 
 import java.util.Collections;
@@ -16,10 +14,10 @@ import static io.crm.util.Util.getOrDefault;
  * Created by someone on 13/10/2015.
  */
 final public class ImageUploadForm extends Template {
-    public ImageUploadForm(List<ImageUploadController.UploadResult> results) {
+    public ImageUploadForm(List<UploadResult> results) {
         results = getOrDefault(results, Collections.EMPTY_LIST);
         final long success = results.stream()
-                .filter(r -> r.getStatus() == ImageUploadController.Status.success)
+                .filter(r -> r.getStatus() == Status.success)
                 .count();
         final int error = (int) (results.size() - success);
 
@@ -31,7 +29,7 @@ final public class ImageUploadForm extends Template {
 
         add("statusTable", results.size() <= 0 ? ""
                 : new BodyPanelDefaultBuilder()
-                .setBody(new UploadStatusTable(results).render())
+                .setBody(new FileUploadStatusTable(results).render())
                 .createBodyPanelDefault().render());
     }
 

@@ -6,6 +6,7 @@ import io.crm.web.Uris;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.template.*;
+import io.crm.web.template.page.BrCheckerExportSettings;
 import io.crm.web.util.Pagination;
 import io.crm.web.util.WebUtils;
 import io.vertx.core.AsyncResult;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static io.crm.web.Uris.br_checker_export_settings;
 import static io.crm.web.controller.Controllers.DEFAULT_PAGE_SIZE;
 import static io.crm.web.util.WebUtils.parseInt;
 import static io.crm.web.util.WebUtils.webHandler;
@@ -37,6 +39,20 @@ public class BrCheckerController {
         this.vertx = vertx;
         view(router);
         details(router);
+        exportSettings(router);
+    }
+
+    private void exportSettings(final Router router) {
+        router.get(br_checker_export_settings.value).handler(WebUtils.webHandler(
+                ctx -> {
+                    ctx.response().end(
+                            new PageBuilder(Uris.br_checker_export_settings.label)
+                                    .body(
+                                            new BrCheckerExportSettings(BrCheckerDetailsService.baseUrl() + "/brCHecker/export")
+                                    )
+                                    .build().render()
+                    );
+                }));
     }
 
     public void view(final Router router) {
@@ -104,6 +120,9 @@ public class BrCheckerController {
                                                                 new BrCheckerDetailsTemplateBuilder()
                                                                         .setDataPanel(
                                                                                 dataPanel(header(), data, null, pagination, ctx.request().path()))
+                                                                        .setPopup(
+                                                                                new BrCheckerExportSettings(BrCheckerDetailsService.baseUrl() + "/brCHecker/export").render()
+                                                                        )
                                                                         .createBrCheckerDetailsTemplate()
                                                         )
                                                         .setSidebarTemplate(
@@ -157,7 +176,10 @@ public class BrCheckerController {
                                         })
                                         .collect(Collectors.toList())
                         )
-                        .exportButton(BrCheckerDetailsService.baseUrl() + "/BrChecker/export", "Export")
+                        .setExportButton("<!-- Button trigger modal -->\n" +
+                                "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">\n" +
+                                "Export\n" +
+                                "</button>")
                         .setPaginationTemplate(
                                 WebUtils.createPaginationTemplateBuilder(uriPath, pagination, PAGINATION_NAV_LENGTH).createPaginationTemplate()
                         )

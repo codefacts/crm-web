@@ -14,9 +14,10 @@ public class BrCheckerDetailsTemplate extends Template {
     final Template filtersPanel;
     final Template dataPanel;
 
-    BrCheckerDetailsTemplate(Template filtersPanel, Template dataPanel) {
+    BrCheckerDetailsTemplate(Template filtersPanel, Template dataPanel, final String popup) {
         this.filtersPanel = filtersPanel;
         this.dataPanel = dataPanel;
+        add("popup", getOrDefault(popup, ""));
     }
 
     @Override

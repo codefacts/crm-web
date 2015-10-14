@@ -20,11 +20,26 @@
 
     <!--StyleSheet-->
     <link rel="stylesheet" href="/public/css/app.css">
+
+    ~for href in styles:
+    <link rel="stylesheet" href="~href~">
+    :~
+
+    ~for sc in headerScripts:
+    <script src="~sc~"></script>
+    :~
+
 </head>
 <body>
 
 ~body~
 
 <script src="/public/js/app.js"></script>
+<script src="/public/js/HashParams.js"></script>
+
+~for sc in footerScripts:
+<script src="~sc~"></script>
+:~
+
 </body>
 </html>

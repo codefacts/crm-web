@@ -2,12 +2,19 @@ package io.crm.web.template;
 
 import org.watertemplate.Template;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by someone on 07/09/2015.
  */
-public class PageBuilder {
+final public class PageBuilder {
     private String page_title = "";
     private Template body;
+    private final Map<String, String> headerScripts = new HashMap<>();
+    private final Map<String, String> footerScripts = new HashMap<>();
+
+    private final Map<String, String> styles = new HashMap<>();
 
     public PageBuilder(String page_title) {
         this.page_title = page_title;
@@ -23,7 +30,22 @@ public class PageBuilder {
         return this;
     }
 
+    public PageBuilder addStyle(final String name, final String href) {
+        styles.put(name, href);
+        return this;
+    }
+
+    public PageBuilder addHeaderScript(final String name, final String src) {
+        headerScripts.put(name, src);
+        return this;
+    }
+
+    public PageBuilder addFooterScript(final String name, final String src) {
+        footerScripts.put(name, src);
+        return this;
+    }
+
     public Page build() {
-        return new Page(page_title, body);
+        return new Page(page_title, body, headerScripts.values(), footerScripts.values(), styles.values());
     }
 }

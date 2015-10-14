@@ -5,9 +5,15 @@ import org.watertemplate.Template;
 public class BrCheckerDetailsTemplateBuilder {
     private Template filtersPanel;
     private Template dataPanel;
+    private String popup;
 
     public BrCheckerDetailsTemplateBuilder setFiltersPanel(Template filtersPanel) {
         this.filtersPanel = filtersPanel;
+        return this;
+    }
+
+    public BrCheckerDetailsTemplateBuilder setPopup(String popup) {
+        this.popup = popup;
         return this;
     }
 
@@ -17,6 +23,6 @@ public class BrCheckerDetailsTemplateBuilder {
     }
 
     public BrCheckerDetailsTemplate createBrCheckerDetailsTemplate() {
-        return new BrCheckerDetailsTemplate(filtersPanel, dataPanel);
+        return new BrCheckerDetailsTemplate(filtersPanel, dataPanel, popup);
     }
 }

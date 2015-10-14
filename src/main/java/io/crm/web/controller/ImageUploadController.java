@@ -3,15 +3,22 @@ package io.crm.web.controller;
 import com.google.common.collect.ImmutableList;
 import io.crm.util.TaskCoordinator;
 import io.crm.util.TaskCoordinatorBuilder;
+import io.crm.web.MessageCodes;
 import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.template.*;
+import io.crm.web.util.Status;
+import io.crm.web.util.UploadResult;
 import io.vertx.core.Vertx;
+import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 
 import static io.crm.web.util.WebUtils.catchHandler;
 import static io.crm.web.util.WebUtils.webHandler;
@@ -60,6 +67,23 @@ final public class ImageUploadController {
                     ctx.request().exceptionHandler(ctx::fail);
                     final ImmutableList.Builder<UploadResult> builder = ImmutableList.builder();
 
+
+                    final Iterator<FileUpload> iterator = ctx.fileUploads().iterator();
+                    while (iterator.hasNext()) {
+                        final String fileName = iterator.next().fileName();
+                        if (!validImageName(fileName)) {
+                            builder.add(
+                                    new UploadResultBuilder()
+                                            .setStatus(Status.error)
+                                            .setFilename(fileName)
+                                            .setMessageCode(MessageCodes.filename_invalid)
+                                            .createUploadResult()
+                            );
+                            iterator.remove();
+                        }
+                    }
+
+
                     final TaskCoordinator taskCoordinator = new TaskCoordinatorBuilder()
                             .count(ctx.fileUploads().size())
                             .onError(ctx::fail)
@@ -68,6 +92,8 @@ final public class ImageUploadController {
                                 ctx.response().end(new JavascriptRedirect(Uris.imageUpload.value).render());
                             })
                             .get();
+
+
                     ctx.fileUploads().forEach(fu -> {
                         vertx.fileSystem()
                                 .copy(fu.uploadedFileName(),
@@ -78,9 +104,10 @@ final public class ImageUploadController {
                                                         new UploadResultBuilder()
                                                                 .setFilename(fu.fileName())
                                                                 .setStatus(Status.error)
-                                                                .setMessage(
+                                                                .setMessageCode(
                                                                         r.cause().getCause() instanceof FileAlreadyExistsException
-                                                                                ? "File already exists." : r.getClass().getSimpleName() + ": " + r.cause().getMessage()
+                                                                                ? MessageCodes.file_already_exists
+                                                                                : MessageCodes.unknownError
                                                                 )
                                                                 .createUploadResult()
                                                 );
@@ -91,7 +118,7 @@ final public class ImageUploadController {
                                                     new UploadResultBuilder()
                                                             .setFilename(fu.fileName())
                                                             .setStatus(Status.success)
-                                                            .setMessage("File upload successfull.")
+                                                            .setMessageCode(MessageCodes.fileuploadSuccess)
                                                             .createUploadResult()
                                             );
                                             taskCoordinator.countdown();
@@ -100,31 +127,24 @@ final public class ImageUploadController {
                 }));
     }
 
-    public static class UploadResult {
-        private final Status status;
-        private final String message;
-        private final String filename;
-
-        public UploadResult(Status status, String message, String filename) {
-            this.status = status;
-            this.message = message;
-            this.filename = filename;
-        }
-
-        public Status getStatus() {
-            return status;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public String getFilename() {
-            return filename;
-        }
+    private static boolean validImageName(String imageName) {
+        final String[] split = imageName.split("!");
+        if (split.length < 5) return false;
+        final boolean matches = split[0].matches("\\d{1,10}");
+        final boolean matches1 = split[2].matches("\\d{1,10}");
+        final boolean matches2 = split[3].matches("\\d{2}-[a-zA-Z]{3}-\\d{4}");
+        final int indexOf = imageName.lastIndexOf('.');
+        final boolean png = indexOf > 0
+                && (indexOf + 1) < imageName.length()
+                ? imageName.substring(indexOf + 1).equalsIgnoreCase("png") : false;
+        return matches & matches1 & matches2 & png;
     }
 
-    public enum Status {
-        error, success
+    public static void main(String[] args) throws java.lang.Exception {
+        System.out.println(new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a").format(new Date()));
+        String imageName = "58!stongi!1!04-Oasdfct-2015!-688539836 - Copy - Copy (2).png";
+
+        System.out.println(validImageName(imageName));
+        return;
     }
 }

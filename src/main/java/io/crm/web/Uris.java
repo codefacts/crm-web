@@ -16,6 +16,7 @@ public enum Uris {
     callDetails("/call/details", "Call Details"),
     br_checker_details("/br-checker/details", "Br Checker Details"),
     br_checker_view("/br-details/view", "Br Checker Info"),
+    br_checker_export_settings("/br-details/export-settings", "Export Settings"),
     BrCheckerImages("/br-checker/images", "Br Checker Images"), googleMap("/google-map", "Google Map");
 
     public final String value;

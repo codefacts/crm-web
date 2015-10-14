@@ -2,19 +2,23 @@ package io.crm.web.controller;
 
 import com.google.common.collect.ImmutableList;
 import io.crm.FailureCode;
+import io.crm.util.*;
 import io.crm.web.ApiEvents;
 import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.template.*;
+import io.crm.web.template.bootstrap.BodyPanelDefaultBuilder;
 import io.crm.web.template.table.*;
 import io.crm.web.util.Converters;
 import io.crm.web.util.DateConverter;
+import io.crm.web.util.parsers.CsvParseError;
 import io.crm.web.util.parsers.CsvParseResult;
 import io.crm.web.util.parsers.CsvParser;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
@@ -27,11 +31,13 @@ import io.vertx.ext.web.handler.BodyHandler;
 import org.watertemplate.Template;
 
 import java.io.File;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static io.crm.web.ApiEvents.UPLOAD_BR_CHECKER_DATA;
 import static io.crm.web.Uris.fileUpload;
-import static io.crm.web.util.WebUtils.catchHandler;
 import static io.crm.web.util.WebUtils.webHandler;
 
 /**
@@ -97,30 +103,74 @@ public class FileUploadController {
 
                     ctx.request().exceptionHandler(ctx::fail);
 
-                    final Optional<FileUpload> fileUpload = ctx.fileUploads().stream().findFirst();
-                    FileUpload upload = fileUpload.get();
+                    final ImmutableList.Builder<Touple2<String, JsonObject>> success = ImmutableList.builder();
+                    final ImmutableList.Builder<Touple2<String, Throwable>> errors = ImmutableList.builder();
 
-                    if (!fileUpload.isPresent() || upload.size() <= 0 || upload.name().isEmpty()) {
-                        ctx.session().put(FLASH_DO_UPLOAD,
-                                new JsonObject()
-                                        .put(ST.statusCode, StatusCode.fileMissing.name()));
-                        ctx.response()
-                                .setStatusCode(HttpResponseStatus.BAD_REQUEST.code())
-                                .end(new JavascriptRedirect(Uris.fileUpload.value).render());
-                        return;
-                    }
+                    final TaskCoordinator taskCoordinator = new TaskCoordinatorBuilder()
+                            .onError(ctx::fail)
+                            .onSuccess(() -> {
+                                ctx.session().put(FLASH_DO_UPLOAD,
+                                        new JsonObject()
+                                                .put("success", success.build())
+                                                .put("error", errors.build()));
+                                ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
+                            })
+                            .count(ctx.fileUploads().size())
+                            .get();
 
-                    final String file = upload.uploadedFileName();
-                    final String extention = upload.fileName().substring(
-                            upload.fileName().lastIndexOf('.') + 1
-                    );
+                    ctx.fileUploads().forEach(fu -> {
 
-                    if (extention.equalsIgnoreCase("CSV")) {
-                        parseCsvAndSendData(file, ctx);
-                    } else {
-                        sendExcelFile(file, extention, ctx);
-                    }
+                        try {
+                            if (fu == null || fu.size() <= 0) {
+
+                                success.add(new Touple2<String, JsonObject>(fu.fileName(),
+                                        new JsonObject()
+                                                .put(ST.statusCode, StatusCode.fileMissing.name())));
+                                taskCoordinator.countdown();
+                                return;
+                            }
+
+                            handleFileUpload(fu, r -> {
+                                try {
+                                    if (r.failed()) {
+                                        if (r.cause() instanceof HandlerException) {
+                                            success.add(new Touple2<String, JsonObject>(fu.fileName(),
+                                                    ((HandlerException) r.cause()).value));
+                                        } else {
+                                            errors.add(new Touple2(fu.fileName(), r.cause()));
+                                        }
+                                        taskCoordinator.countdown();
+                                        return;
+                                    }
+                                    taskCoordinator.countdown();
+                                    success.add(new Touple2<String, JsonObject>(fu.fileName(),
+                                            r.result()));
+                                } catch (Exception ex) {
+                                    ctx.fail(ex);
+                                }
+                            });
+                        } catch (Exception ex) {
+                            taskCoordinator.countdown();
+                            errors.add(new Touple2<String, Throwable>(fu.fileName(), ex));
+                        }
+
+                    });
+
                 }));
+    }
+
+    private void handleFileUpload(FileUpload upload, Handler<AsyncResult<JsonObject>> handler) {
+
+        final String file = upload.uploadedFileName();
+        final String extention = upload.fileName().substring(
+                upload.fileName().lastIndexOf('.') + 1
+        );
+
+        if (extention.equalsIgnoreCase("CSV")) {
+            parseCsvAndSendData(file, handler);
+        } else {
+            sendExcelFile(file, extention, handler);
+        }
     }
 
     public void uploadForm(final Router router) {
@@ -140,7 +190,7 @@ public class FileUploadController {
                                                                             .createSidebarTemplate()
                                                             )
                                                             .setContentTemplate(
-                                                                    form(ctx)
+                                                                    _multiform(ctx)
                                                             )
                                                             .build()
                                             )
@@ -159,74 +209,100 @@ public class FileUploadController {
         }));
     }
 
-    private void parseCsvAndSendData(final String file, final RoutingContext ctx) {
+    private void parseCsvAndSendData(final String file, final Handler<AsyncResult<JsonObject>> handler) {
         final CsvParseResult parseResult = csvParser.parse(new File(file));
         if (parseResult.hasErrors()) {
-
+            SimpleCounter c = new SimpleCounter();
+            handler.handle(AsyncUtil.fail(new HandlerException(
+                    new JsonObject()
+                            .put(ST.statusCode, StatusCode.error.name())
+                            .put(ST.body, new JsonObject(
+                                    parseResult.errors
+                                            .stream()
+                                            .collect(Collectors.toMap(
+                                                    v -> c.counter++ + "",
+                                                    k -> k.getString(CsvParseError.message)))
+                            ))
+            )));
             return;
         }
         vertx.eventBus().send(ApiEvents.INSERT_BR_CHECKER_INFO,
                 new JsonObject()
                         .put(ST.headers, parseResult.headers)
                         .put(ST.body, parseResult.body),
-                catchHandler(r -> {
-                    if (r.failed()) {
-                        ctx.fail(r.cause());
-                        return;
-                    }
+                r -> {
+                    try {
+                        if (r.failed()) {
+                            handler.handle(AsyncUtil.fail(r.cause()));
+                            return;
+                        }
 
-                    ctx.session().put(FLASH_DO_UPLOAD,
-                            new JsonObject()
-                                    .put(ST.statusCode, StatusCode.success.name())
-                                    .put(ST.body, r.result().body()));
-                    ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
-                }, ctx));
+                        handler.handle(AsyncUtil.success(
+                                new JsonObject()
+                                        .put(ST.statusCode, StatusCode.success.name())
+                                        .put(ST.body, r.result().body())
+                        ));
+
+                    } catch (Exception ex) {
+                        handler.handle(AsyncUtil.fail(ex));
+                    }
+                });
     }
 
-    private void sendExcelFile(final String file, final String extention, final RoutingContext ctx) {
+    private void sendExcelFile(final String file, final String extention, final Handler<AsyncResult<JsonObject>> handler) {
         vertx.eventBus().send(UPLOAD_BR_CHECKER_DATA,
                 new JsonObject()
                         .put(ST.file, new File(file).getAbsolutePath())
                         .put(ST.extention, extention),
                 new DeliveryOptions()
                         .setSendTimeout(30 * 60 * 1000),
-                catchHandler((AsyncResult<Message<Integer>> r) -> {
+                (AsyncResult<Message<Integer>> r) -> {
 
                     if (r.failed()) {
                         if (!(r.cause() instanceof ReplyException)) {
-                            ctx.fail(r.cause());
+                            handler.handle(AsyncUtil.fail(r.cause()));
                             return;
                         }
                         ReplyException ex = (ReplyException) r.cause();
                         if (!(ex.failureCode() == FailureCode.BadRequest.code)) {
-                            ctx.fail(r.cause());
+                            handler.handle(AsyncUtil.fail(r.cause()));
                             return;
                         }
-                        ctx.session().put(FLASH_DO_UPLOAD,
+                        handler.handle(AsyncUtil.success(
                                 new JsonObject()
                                         .put(ST.statusCode, StatusCode.error.name())
-                                        .put(ST.body, new JsonObject(ex.getMessage())));
-                        ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
+                                        .put(ST.body, new JsonObject(ex.getMessage()))
+                        ));
                         return;
                     }
 
                     if (r.result().body() <= 0) {
-                        ctx.session().put(FLASH_DO_UPLOAD,
+
+                        handler.handle(AsyncUtil.success(
                                 new JsonObject()
                                         .put(ST.statusCode, StatusCode.invalidFile.name())
-                                        .put(ST.body, "Invalid file."));
-                        ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
+                                        .put(ST.body, "Invalid file.")
+                        ));
+
                         return;
                     }
-                    ctx.session().put(FLASH_DO_UPLOAD,
+                    handler.handle(AsyncUtil.success(
                             new JsonObject()
                                     .put(ST.statusCode, StatusCode.success.name())
-                                    .put(ST.body, r.result().body()));
-                    ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
-                }, ctx));
+                                    .put(ST.body, r.result().body())
+                    ));
+                });
     }
 
-    private String renderUploadError(final JsonObject entries) {
+    public static class HandlerException extends Exception {
+        public final JsonObject value;
+
+        public HandlerException(JsonObject value) {
+            this.value = value;
+        }
+    }
+
+    private Template renderUploadError(final JsonObject body) {
 
         return new TableTemplateBuilder()
                 .addClass(TableClasses.STRIPED.value)
@@ -255,7 +331,7 @@ public class FileUploadController {
                 .setBody(
                         new TableBodyBuilder()
                                 .addTableRows(rows -> {
-                                    entries.getMap().forEach((k, v) -> {
+                                    body.getMap().forEach((k, v) -> {
                                         rows.add(
                                                 new TableRowBuilder()
                                                         .addTableCells(cells -> {
@@ -276,42 +352,61 @@ public class FileUploadController {
                                 })
                                 .createTableBody()
                 )
-                .createTableTemplate().render();
+                .createTableTemplate();
     }
 
-    private String renderUploadSuccess(final int insertCount) {
+    private Template renderUploadSuccess(final int insertCount) {
         return
                 new AlertTemplateBuilder()
                         .success(String.format("%d data uploaded successfully.", insertCount))
-                        .createAlertTemplate().render();
+                        .createAlertTemplate();
     }
 
-    private Template form(final RoutingContext ctx) {
+    private Template _multiform(RoutingContext ctx) {
         Object o = ctx.session().get(FLASH_DO_UPLOAD);
         ctx.session().remove(FLASH_DO_UPLOAD);
 
+        final ImmutableList.Builder<String> builder = ImmutableList.builder();
         if (o != null && o instanceof JsonObject) {
-            if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.success.name())) {
-                return new FileUploadTemplate(
-                        renderUploadSuccess(((JsonObject) o).getInteger(ST.body))
-                );
-            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.invalidFile.name())) {
-                return new FileUploadTemplate(
+            final List<Touple2<String, Throwable>> errors = ((JsonObject) o).getJsonArray("error").getList();
+            final List<Touple2<String, JsonObject>> success = ((JsonObject) o).getJsonArray("success").getList();
+
+            errors.forEach(t2 -> {
+                builder.add(
                         new AlertTemplateBuilder()
-                                .info("Invalid File")
+                                .info("Error: filename: " + t2.getT1() + ". Error uploading this file.")
                                 .createAlertTemplate().render()
                 );
-            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.error.name())) {
-                return new FileUploadTemplate(
-                        renderUploadError(((JsonObject) o).getJsonObject(ST.body)));
-            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.fileMissing.name())) {
-                return new FileUploadTemplate(
-                        new AlertTemplateBuilder()
-                                .danger("No file is uploaded.")
-                                .createAlertTemplate().render());
-            }
+            });
+
+            success.forEach(t2 -> {
+                builder.add(
+                        "<h4>FileName: " + t2.t1 + "</h4>" + form(t2.t2).render()
+                );
+            });
         }
-        return new FileUploadTemplate("");
+
+        return new FileUploadTemplate(String.join("", builder.build()));
+    }
+
+    private Template form(final JsonObject o) {
+
+        final String statusCode = ((JsonObject) o).getString(ST.statusCode, "");
+        if (statusCode.equals(StatusCode.success.name())) {
+            return renderUploadSuccess(((JsonObject) o).getInteger(ST.body));
+        } else if (statusCode.equals(StatusCode.invalidFile.name())) {
+            return new AlertTemplateBuilder()
+                    .info("Invalid File")
+                    .createAlertTemplate();
+        } else if (statusCode.equals(StatusCode.error.name())) {
+            return renderUploadError(((JsonObject) o).getJsonObject(ST.body));
+        } else if (statusCode.equals(StatusCode.fileMissing.name())) {
+            return new AlertTemplateBuilder()
+                    .danger("No file is uploaded.")
+                    .createAlertTemplate();
+        }
+
+        return new EmptyTemplate();
     }
 
     private enum StatusCode {
