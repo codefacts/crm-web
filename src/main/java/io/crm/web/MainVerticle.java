@@ -7,7 +7,6 @@ import io.crm.web.service.callreview.ApiService;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.service.callreview.FileUploadService;
 import io.crm.web.template.*;
-import io.crm.web.template.bootstrap.ModalAlert;
 import io.crm.web.template.bootstrap.ModalAlertBuilder;
 import io.crm.web.util.WebUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -34,7 +33,7 @@ import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
 /**
  * Created by someone on 07/09/2015.
  */
-final public class WebMainVerticle extends AbstractVerticle {
+final public class MainVerticle extends AbstractVerticle {
     private HttpClient httpClient;
 
     //
@@ -114,11 +113,11 @@ final public class WebMainVerticle extends AbstractVerticle {
 
     private void authFilter(final Router router) {
         Set<String> publicUris = Arrays.asList(
-                WebUris.staticResourcesPattern.value,
-                WebUris.publicResourcesPattern.value,
-                WebUris.login.value,
-                WebUris.register.value,
-                WebUris.event_publish_form.value
+                Uris.staticResourcesPattern.value,
+                Uris.publicResourcesPattern.value,
+                Uris.login.value,
+                Uris.register.value,
+                Uris.event_publish_form.value
         )
                 .stream()
                 .map(uri -> {
@@ -132,7 +131,7 @@ final public class WebMainVerticle extends AbstractVerticle {
         System.out.println("publicUris: " + publicUris);
 
         router.route().handler(context -> {
-            if (context.session().get(WebST.currentUser) != null) {
+            if (context.session().get(ST.currentUser) != null) {
                 context.next();
                 return;
             }
@@ -144,7 +143,7 @@ final public class WebMainVerticle extends AbstractVerticle {
             }
             System.out.println("Redirecting : " + uri);
             context.response().setStatusCode(HttpResponseStatus.TEMPORARY_REDIRECT.code());
-            context.response().headers().set(HttpHeaders.LOCATION, WebUris.login.value);
+            context.response().headers().set(HttpHeaders.LOCATION, Uris.login.value);
             context.response().end();
         });
     }
@@ -183,7 +182,7 @@ final public class WebMainVerticle extends AbstractVerticle {
                     new PageBuilder("Test")
                             .body(
                                     new DashboardTemplateBuilder()
-                                            .setUser(ctx.session().get(WebST.currentUser))
+                                            .setUser(ctx.session().get(ST.currentUser))
                                             .setContentTemplate(
                                                     new ModalAlertBuilder()
                                                             .setTitle("Congrat")
@@ -201,17 +200,17 @@ final public class WebMainVerticle extends AbstractVerticle {
     private void otherwiseController(final Router router) {
         router.get("/").handler(context -> {
             if (WebUtils.isLoggedIn(context.session())) {
-                WebUtils.redirect(WebUris.dashboard.value, context.response());
+                WebUtils.redirect(Uris.dashboard.value, context.response());
             } else {
-                WebUtils.redirect(WebUris.login.value, context.response());
+                WebUtils.redirect(Uris.login.value, context.response());
             }
         });
     }
 
     private void loginFormController(final Router router) {
-        router.get(WebUris.login.value).handler(context -> {
+        router.get(Uris.login.value).handler(context -> {
             if (WebUtils.isLoggedIn(context.session())) {
-                WebUtils.redirect(WebUris.dashboard.value, context.response());
+                WebUtils.redirect(Uris.dashboard.value, context.response());
                 return;
             }
             context.response().headers().set(CONTENT_TYPE, TEXT_HTML);
@@ -224,19 +223,19 @@ final public class WebMainVerticle extends AbstractVerticle {
     }
 
     private void logoutController(final Router router) {
-        router.get(WebUris.logout.value).handler(context -> {
+        router.get(Uris.logout.value).handler(context -> {
             context.session().destroy();
-            WebUtils.redirect(WebUris.login.value, context.response());
+            WebUtils.redirect(Uris.login.value, context.response());
         });
     }
 
     private void registerStaticFileHandlers(final Router router) {
-        router.route(WebUris.staticResourcesPattern.value).handler(
-                StaticHandler.create(WebApp.STATIC_DIRECTORY)
+        router.route(Uris.staticResourcesPattern.value).handler(
+                StaticHandler.create(App.STATIC_DIRECTORY)
                         .setCachingEnabled(true)
                         .setEnableFSTuning(true)
         );
-        router.route(WebUris.publicResourcesPattern.value).handler(
-                StaticHandler.create(WebApp.PUBLIC_DIRECTORY));
+        router.route(Uris.publicResourcesPattern.value).handler(
+                StaticHandler.create(App.PUBLIC_DIRECTORY));
     }
 }

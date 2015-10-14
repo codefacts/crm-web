@@ -1,8 +1,8 @@
 package io.crm.web.controller;
 
-import io.crm.web.WebApp;
-import io.crm.web.WebST;
-import io.crm.web.WebUris;
+import io.crm.web.App;
+import io.crm.web.ST;
+import io.crm.web.Uris;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.ext.web.Router;
 
@@ -16,16 +16,16 @@ import java.nio.file.Paths;
  */
 public class ImageController {
     public static final String image_directory_prop = "IMAGE_DIRECTORY";
-    public static final String IMAGE_DIRECTORY = WebApp.loadConfig().getString(image_directory_prop);
+    public static final String IMAGE_DIRECTORY = App.loadConfig().getString(image_directory_prop);
 
     public ImageController(final Router router) {
         renderImage(router);
     }
 
     public void renderImage(final Router router) {
-        router.get(WebUris.BrCheckerImages.value).handler(ctx -> {
+        router.get(Uris.BrCheckerImages.value).handler(ctx -> {
             try {
-                final String imageName = ctx.request().params().get(WebST.name).replace(".PNG", "");
+                final String imageName = ctx.request().params().get(ST.name).replace(".PNG", "");
                 final File dir = new File(IMAGE_DIRECTORY);
                 if (!dir.exists()) {
                     try {

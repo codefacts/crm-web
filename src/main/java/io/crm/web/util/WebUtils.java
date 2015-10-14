@@ -1,15 +1,13 @@
 package io.crm.web.util;
 
 import io.crm.intfs.ConsumerInterface;
-import io.crm.web.WebST;
+import io.crm.web.ST;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
-import io.crm.web.template.pagination.PaginationTemplate;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
@@ -20,7 +18,7 @@ import io.vertx.ext.web.Session;
  */
 final public class WebUtils {
     public static boolean isLoggedIn(final Session session) {
-        return session.get(WebST.currentUser) != null;
+        return session.get(ST.currentUser) != null;
     }
 
     public static void redirect(final String uri, final HttpServerResponse response) {

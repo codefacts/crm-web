@@ -3,7 +3,7 @@ package io.crm.web;
 /**
  * Created by someone on 21/09/2015.
  */
-public enum WebUris {
+public enum Uris {
     fileUpload("/file-upload", "Upload File"),
     imageUpload("/image-upload", "Upload Images"),
     dashboard("/dashboard", "Dashboard"),
@@ -21,7 +21,7 @@ public enum WebUris {
     public final String value;
     public final String label;
 
-    WebUris(final String value, String label) {
+    Uris(final String value, String label) {
         this.value = value;
         this.label = label;
     }

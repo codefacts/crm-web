@@ -2,9 +2,8 @@ package io.crm.web.service.callreview;
 
 import io.crm.FailureCode;
 import io.crm.util.ExceptionUtil;
-import io.crm.util.Util;
-import io.crm.web.WebApp;
-import io.crm.web.WebST;
+import io.crm.web.App;
+import io.crm.web.ST;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.JsonArray;
@@ -13,20 +12,18 @@ import io.vertx.core.json.JsonObject;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Properties;
 
 import static io.crm.util.ExceptionUtil.toRuntime;
-import static io.crm.util.ExceptionUtil.withReply;
 import static io.crm.util.ExceptionUtil.withReplyRun;
 
 /**
  * Created by sohan on 10/3/2015.
  */
 public class BrCheckerDetailsService {
-    public static final int apiPort = WebApp.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName(), new JsonObject()).getInteger("apiPort");
-    public static final String apiHost = WebApp.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("apiHost");
-    private static final String CONNECTION_URL = WebApp.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("CONNECTION_URL");
+    public static final int apiPort = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName(), new JsonObject()).getInteger("apiPort");
+    public static final String apiHost = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("apiHost");
+    private static final String CONNECTION_URL = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("CONNECTION_URL");
     public static final String DATE_FORMAT_STR = "dd-MMM-yyyy hh:mm:ss 'PM'";
     private final HttpClient httpClient;
     private final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_STR);
@@ -36,7 +33,7 @@ public class BrCheckerDetailsService {
     }
 
     public void insert(final Message<JsonObject> message) {
-        final JsonArray list = message.body().getJsonArray(WebST.body);
+        final JsonArray list = message.body().getJsonArray(ST.body);
         withReplyRun(() -> {
             final Properties properties = new Properties();
             properties.setProperty("user", "sa");
@@ -192,8 +189,8 @@ public class BrCheckerDetailsService {
 
     public void brCheckerData(final Message<JsonObject> message) {
         withReplyRun(() -> {
-            int page = message.body().getInteger(WebST.page, 1);
-            int size = message.body().getInteger(WebST.size, 20);
+            int page = message.body().getInteger(ST.page, 1);
+            int size = message.body().getInteger(ST.size, 20);
 
             httpClient
                     .get(apiPort, apiHost, String.format("/BrChecker/details?page=%d&size=%d", page, size))

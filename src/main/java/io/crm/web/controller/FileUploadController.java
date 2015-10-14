@@ -3,15 +3,14 @@ package io.crm.web.controller;
 import com.google.common.collect.ImmutableList;
 import io.crm.FailureCode;
 import io.crm.web.ApiEvents;
-import io.crm.web.WebST;
-import io.crm.web.WebUris;
+import io.crm.web.ST;
+import io.crm.web.Uris;
 import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.template.*;
 import io.crm.web.template.table.*;
 import io.crm.web.util.Converters;
 import io.crm.web.util.DateConverter;
-import io.crm.web.util.WebUtils;
 import io.crm.web.util.parsers.CsvParseResult;
 import io.crm.web.util.parsers.CsvParser;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -29,10 +28,9 @@ import org.watertemplate.Template;
 
 import java.io.File;
 import java.util.Optional;
-import java.util.function.Function;
 
 import static io.crm.web.ApiEvents.UPLOAD_BR_CHECKER_DATA;
-import static io.crm.web.WebUris.fileUpload;
+import static io.crm.web.Uris.fileUpload;
 import static io.crm.web.util.WebUtils.catchHandler;
 import static io.crm.web.util.WebUtils.webHandler;
 
@@ -93,8 +91,8 @@ public class FileUploadController {
     }
 
     public void doUpload(final Router router) {
-        router.post(WebUris.fileUpload.value).handler(BodyHandler.create());
-        router.post(WebUris.fileUpload.value)
+        router.post(Uris.fileUpload.value).handler(BodyHandler.create());
+        router.post(Uris.fileUpload.value)
                 .handler(webHandler(ctx -> {
 
                     ctx.request().exceptionHandler(ctx::fail);
@@ -105,10 +103,10 @@ public class FileUploadController {
                     if (!fileUpload.isPresent() || upload.size() <= 0 || upload.name().isEmpty()) {
                         ctx.session().put(FLASH_DO_UPLOAD,
                                 new JsonObject()
-                                        .put(WebST.statusCode, StatusCode.fileMissing.name()));
+                                        .put(ST.statusCode, StatusCode.fileMissing.name()));
                         ctx.response()
                                 .setStatusCode(HttpResponseStatus.BAD_REQUEST.code())
-                                .end(new JavascriptRedirect(WebUris.fileUpload.value).render());
+                                .end(new JavascriptRedirect(Uris.fileUpload.value).render());
                         return;
                     }
 
@@ -135,7 +133,7 @@ public class FileUploadController {
                                     new PageBuilder(fileUpload.label)
                                             .body(
                                                     new DashboardTemplateBuilder()
-                                                            .setUser(ctx.session().get(WebST.currentUser))
+                                                            .setUser(ctx.session().get(ST.currentUser))
                                                             .setSidebarTemplate(
                                                                     new SidebarTemplateBuilder()
                                                                             .setCurrentUri(ctx.request().uri())
@@ -169,8 +167,8 @@ public class FileUploadController {
         }
         vertx.eventBus().send(ApiEvents.INSERT_BR_CHECKER_INFO,
                 new JsonObject()
-                        .put(WebST.headers, parseResult.headers)
-                        .put(WebST.body, parseResult.body),
+                        .put(ST.headers, parseResult.headers)
+                        .put(ST.body, parseResult.body),
                 catchHandler(r -> {
                     if (r.failed()) {
                         ctx.fail(r.cause());
@@ -179,17 +177,17 @@ public class FileUploadController {
 
                     ctx.session().put(FLASH_DO_UPLOAD,
                             new JsonObject()
-                                    .put(WebST.statusCode, StatusCode.success.name())
-                                    .put(WebST.body, r.result().body()));
-                    ctx.response().end(new JavascriptRedirect(WebUris.fileUpload.value).render());
+                                    .put(ST.statusCode, StatusCode.success.name())
+                                    .put(ST.body, r.result().body()));
+                    ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                 }, ctx));
     }
 
     private void sendExcelFile(final String file, final String extention, final RoutingContext ctx) {
         vertx.eventBus().send(UPLOAD_BR_CHECKER_DATA,
                 new JsonObject()
-                        .put(WebST.file, new File(file).getAbsolutePath())
-                        .put(WebST.extention, extention),
+                        .put(ST.file, new File(file).getAbsolutePath())
+                        .put(ST.extention, extention),
                 new DeliveryOptions()
                         .setSendTimeout(30 * 60 * 1000),
                 catchHandler((AsyncResult<Message<Integer>> r) -> {
@@ -206,25 +204,25 @@ public class FileUploadController {
                         }
                         ctx.session().put(FLASH_DO_UPLOAD,
                                 new JsonObject()
-                                        .put(WebST.statusCode, StatusCode.error.name())
-                                        .put(WebST.body, new JsonObject(ex.getMessage())));
-                        ctx.response().end(new JavascriptRedirect(WebUris.fileUpload.value).render());
+                                        .put(ST.statusCode, StatusCode.error.name())
+                                        .put(ST.body, new JsonObject(ex.getMessage())));
+                        ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                         return;
                     }
 
                     if (r.result().body() <= 0) {
                         ctx.session().put(FLASH_DO_UPLOAD,
                                 new JsonObject()
-                                        .put(WebST.statusCode, StatusCode.invalidFile.name())
-                                        .put(WebST.body, "Invalid file."));
-                        ctx.response().end(new JavascriptRedirect(WebUris.fileUpload.value).render());
+                                        .put(ST.statusCode, StatusCode.invalidFile.name())
+                                        .put(ST.body, "Invalid file."));
+                        ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                         return;
                     }
                     ctx.session().put(FLASH_DO_UPLOAD,
                             new JsonObject()
-                                    .put(WebST.statusCode, StatusCode.success.name())
-                                    .put(WebST.body, r.result().body()));
-                    ctx.response().end(new JavascriptRedirect(WebUris.fileUpload.value).render());
+                                    .put(ST.statusCode, StatusCode.success.name())
+                                    .put(ST.body, r.result().body()));
+                    ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                 }, ctx));
     }
 
@@ -293,20 +291,20 @@ public class FileUploadController {
         ctx.session().remove(FLASH_DO_UPLOAD);
 
         if (o != null && o instanceof JsonObject) {
-            if (((JsonObject) o).getString(WebST.statusCode, "").equals(StatusCode.success.name())) {
+            if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.success.name())) {
                 return new FileUploadTemplate(
-                        renderUploadSuccess(((JsonObject) o).getInteger(WebST.body))
+                        renderUploadSuccess(((JsonObject) o).getInteger(ST.body))
                 );
-            } else if (((JsonObject) o).getString(WebST.statusCode, "").equals(StatusCode.invalidFile.name())) {
+            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.invalidFile.name())) {
                 return new FileUploadTemplate(
                         new AlertTemplateBuilder()
                                 .info("Invalid File")
                                 .createAlertTemplate().render()
                 );
-            } else if (((JsonObject) o).getString(WebST.statusCode, "").equals(StatusCode.error.name())) {
+            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.error.name())) {
                 return new FileUploadTemplate(
-                        renderUploadError(((JsonObject) o).getJsonObject(WebST.body)));
-            } else if (((JsonObject) o).getString(WebST.statusCode, "").equals(StatusCode.fileMissing.name())) {
+                        renderUploadError(((JsonObject) o).getJsonObject(ST.body)));
+            } else if (((JsonObject) o).getString(ST.statusCode, "").equals(StatusCode.fileMissing.name())) {
                 return new FileUploadTemplate(
                         new AlertTemplateBuilder()
                                 .danger("No file is uploaded.")

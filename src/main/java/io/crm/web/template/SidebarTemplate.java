@@ -1,7 +1,7 @@
 package io.crm.web.template;
 
-import io.crm.web.WebST;
-import io.crm.web.WebUris;
+import io.crm.web.ST;
+import io.crm.web.Uris;
 import io.vertx.core.json.JsonObject;
 import org.watertemplate.Template;
 
@@ -17,28 +17,28 @@ public class SidebarTemplate extends Template {
     {
         links = Arrays.asList(
                 new JsonObject()
-                        .put(WebST.uri, WebUris.fileUpload.value)
-                        .put(WebST.label, WebUris.fileUpload.label),
+                        .put(ST.uri, Uris.fileUpload.value)
+                        .put(ST.label, Uris.fileUpload.label),
                 new JsonObject()
-                        .put(WebST.uri, WebUris.imageUpload.value)
-                        .put(WebST.label, WebUris.imageUpload.label),
+                        .put(ST.uri, Uris.imageUpload.value)
+                        .put(ST.label, Uris.imageUpload.label),
                 new JsonObject()
-                        .put(WebST.uri, WebUris.br_checker_details.value)
-                        .put(WebST.label, WebUris.br_checker_details.label)
+                        .put(ST.uri, Uris.br_checker_details.value)
+                        .put(ST.label, Uris.br_checker_details.label)
         );
     }
 
     SidebarTemplate(final String currentUri) {
         links.forEach(link -> {
-            if (currentUri.equals(link.getString(WebST.uri))) {
-                link.put(WebST.active, "list-group-item-success");
+            if (currentUri.equals(link.getString(ST.uri))) {
+                link.put(ST.active, "list-group-item-success");
             }
         });
 
         addCollection("links", links, (link, m) -> {
-            m.add(WebST.uri, link.getString(WebST.uri));
-            m.add(WebST.label, link.getString(WebST.label));
-            m.add(WebST.active, link.getString(WebST.active));
+            m.add(ST.uri, link.getString(ST.uri));
+            m.add(ST.label, link.getString(ST.label));
+            m.add(ST.active, link.getString(ST.active));
         });
     }
 

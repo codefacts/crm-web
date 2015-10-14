@@ -12,8 +12,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <main.verticle>io.crm.web.WebMainVerticle</main.verticle>
-        <start-class>io.crm.web.WebApp</start-class>
+        <main.verticle>io.crm.web.MainVerticle</main.verticle>
+        <start-class>io.crm.web.App</start-class>
         <vertx.version>3.0.0</vertx.version>
     </properties>
 
@@ -146,7 +146,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.crm.web.WebApp</mainClass>
+                            <mainClass>io.crm.web.App</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

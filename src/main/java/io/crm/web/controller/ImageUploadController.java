@@ -3,18 +3,15 @@ package io.crm.web.controller;
 import com.google.common.collect.ImmutableList;
 import io.crm.util.TaskCoordinator;
 import io.crm.util.TaskCoordinatorBuilder;
-import io.crm.web.WebApp;
-import io.crm.web.WebST;
-import io.crm.web.WebUris;
+import io.crm.web.ST;
+import io.crm.web.Uris;
 import io.crm.web.template.*;
-import io.crm.web.util.WebUtils;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
 
 import static io.crm.web.util.WebUtils.catchHandler;
 import static io.crm.web.util.WebUtils.webHandler;
@@ -33,10 +30,10 @@ final public class ImageUploadController {
     }
 
     public void uploadForm(final Router router) {
-        router.get(WebUris.imageUpload.value).handler(webHandler(
+        router.get(Uris.imageUpload.value).handler(webHandler(
                 ctx -> {
                     ctx.response().end(
-                            new PageBuilder(WebUris.imageUpload.label)
+                            new PageBuilder(Uris.imageUpload.label)
                                     .body(
                                             new DashboardTemplateBuilder()
                                                     .setSidebarTemplate(
@@ -47,7 +44,7 @@ final public class ImageUploadController {
                                                     .setContentTemplate(
                                                             new ImageUploadForm(ctx.session().get(FLASH_DO_UPLOAD))
                                                     )
-                                                    .setUser(ctx.session().get(WebST.currentUser))
+                                                    .setUser(ctx.session().get(ST.currentUser))
                                                     .build()
                                     )
                                     .build().render()
@@ -57,8 +54,8 @@ final public class ImageUploadController {
     }
 
     public void doUpload(final Router router) {
-        router.post(WebUris.imageUpload.value).handler(BodyHandler.create());
-        router.post(WebUris.imageUpload.value).handler(webHandler(
+        router.post(Uris.imageUpload.value).handler(BodyHandler.create());
+        router.post(Uris.imageUpload.value).handler(webHandler(
                 ctx -> {
                     ctx.request().exceptionHandler(ctx::fail);
                     final ImmutableList.Builder<UploadResult> builder = ImmutableList.builder();
@@ -68,7 +65,7 @@ final public class ImageUploadController {
                             .onError(ctx::fail)
                             .onSuccess(() -> {
                                 ctx.session().put(FLASH_DO_UPLOAD, builder.build());
-                                ctx.response().end(new JavascriptRedirect(WebUris.imageUpload.value).render());
+                                ctx.response().end(new JavascriptRedirect(Uris.imageUpload.value).render());
                             })
                             .get();
                     ctx.fileUploads().forEach(fu -> {

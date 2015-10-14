@@ -1,6 +1,6 @@
 package io.crm.web.controller;
 
-import io.crm.web.WebUris;
+import io.crm.web.Uris;
 import io.crm.web.template.EventPublisherForm;
 import io.crm.web.template.Page;
 import io.crm.web.template.PageBuilder;
@@ -26,7 +26,7 @@ public class EventPublisherController {
     }
 
     public void eventPublishForm(final Router router) {
-        router.get(WebUris.event_publish_form.value).handler(context -> {
+        router.get(Uris.event_publish_form.value).handler(context -> {
             if (context.failed()) {
                 return;
             }
