@@ -71,7 +71,7 @@ final public class ImageUploadController {
                     final Iterator<FileUpload> iterator = ctx.fileUploads().iterator();
                     while (iterator.hasNext()) {
                         final String fileName = iterator.next().fileName();
-                        if (!validImageName(fileName)) {
+                        if (!validateImageNameOldVersion(fileName)) {
                             builder.add(
                                     new UploadResultBuilder()
                                             .setStatus(Status.error)
@@ -127,7 +127,7 @@ final public class ImageUploadController {
                 }));
     }
 
-    private static boolean validImageName(String imageName) {
+    private static boolean validateImageName(String imageName) {
         final String[] split = imageName.split("!");
         if (split.length < 5) return false;
         final boolean matches = split[0].matches("\\d{1,10}");
@@ -140,11 +140,16 @@ final public class ImageUploadController {
         return matches & matches1 & matches2 & png;
     }
 
+    private static boolean validateImageNameOldVersion(final String imageName) {
+        imageName.matches("TSR_Name_.{1,100}-TSR Code_.{1,20}-Time_ \\d{2}-\\d{2}-\\d{4}_\\d{2}_\\d{2}_\\d{2}_[PA]M-Cluster_Name_.{1,500}-Auditor_Name_.{1,500}-Auditor_Code_\\d{1,20}-\\d*.PNG");
+        return true;
+    }
+
     public static void main(String[] args) throws java.lang.Exception {
         System.out.println(new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a").format(new Date()));
-        String imageName = "58!stongi!1!04-Oasdfct-2015!-688539836 - Copy - Copy (2).png";
+        String imageName = "TSR_Name_ Al Amin-TSR Code_ 07-Time_ 14-10-2015_16_48_12_PM-Cluster_Name_ Mojidpur road-Auditor_Name_ Al Mamun-Auditor_Code_ 101-1246810219.PNG";
 
-        System.out.println(validImageName(imageName));
+        System.out.println(validateImageName(imageName));
         return;
     }
 }

@@ -1,5 +1,6 @@
 package io.crm.web.template.bootstrap;
 
+import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
 /**
@@ -13,6 +14,6 @@ public class BodyPanelDefault extends Template {
 
     @Override
     protected String getFilePath() {
-        return "body-panel-default.html";
+        return Page.templatePath("body-panel-default.html");
     }
 }

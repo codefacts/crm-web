@@ -1,0 +1,60 @@
+<div class="row" style="margin-top: 12%;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">Please login with your username and password.</div>
+
+            <div class="panel-body">
+
+                <form method="post" enctype="application/x-www-form-urlencoded"
+                      id="loginForm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Username"
+                               name="username" value="admin">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                               name="password" value="admin123">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<script>
+
+    $("#loginForm").submit(handleSubmit);
+    function handleSubmit(e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/login',
+            method: 'post',
+            data: $("#loginForm").serialize(),
+            success: function(rsp) {
+                location.href = "/dashboard";
+            },
+            error: function(e) {
+                if (e.status >= 400) {
+                    alert(e.responseText);
+                    return;
+                } else {
+                    alert("Server error. Please try again.");
+                }
+                console.log("Server error. Please try again.");
+            }
+        });
+        return false;
+    }
+
+
+</script>
