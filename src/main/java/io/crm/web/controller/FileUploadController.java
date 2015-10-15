@@ -1,6 +1,7 @@
 package io.crm.web.controller;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import io.crm.FailureCode;
 import io.crm.util.*;
 import io.crm.web.ApiEvents;
@@ -101,6 +102,16 @@ public class FileUploadController {
 
                     ctx.request().exceptionHandler(ctx::fail);
 
+                    final LinkedHashMap<String, FileUpload> fileUploadMap = new LinkedHashMap<>();
+                    Collection<FileUpload> fus = ctx.fileUploads();
+
+                    fus.forEach(f -> {
+                        if (!fileUploadMap.containsKey(f.fileName())) {
+                            fileUploadMap.put(f.fileName(), f);
+                        }
+                    });
+                    final Collection<FileUpload> fileUploads = fileUploadMap.values();
+
                     final ImmutableList.Builder<Touple2<String, JsonObject>> success = ImmutableList.builder();
                     final ImmutableList.Builder<Touple2<String, Throwable>> errors = ImmutableList.builder();
 
@@ -115,8 +126,9 @@ public class FileUploadController {
                                     statusBuilder.add(
                                             new JsonObject()
                                                     .put(FileUploads.status, FileUploads.Statuses.error)
-                                                    .put(FileUploads.errorDetails, e.getT2())
+                                                    .put(FileUploads.errorDetails, printError(e.t2))
                                                     .put(FileUploads.filename, e.t1)
+                                                    .put(FileUploads.uploaded_filename, fileUploadMap.get(e.t1).uploadedFileName())
                                     );
                                 });
 
@@ -125,10 +137,11 @@ public class FileUploadController {
                                             new JsonObject()
                                                     .put(FileUploads.status, interpreteResult(s.t2))
                                                     .put(FileUploads.filename, s.t1)
+                                                    .put(FileUploads.uploaded_filename, fileUploadMap.get(s.t1).uploadedFileName())
                                     );
                                 });
 
-                                updateUploadHistory(ctx.fileUploads(), statusBuilder.build(), r -> {
+                                updateUploadHistory(fileUploads, statusBuilder.build(), r -> {
                                 });
 
                                 ctx.session().put(FLASH_DO_UPLOAD,
@@ -137,58 +150,85 @@ public class FileUploadController {
                                                 .put("error", errorList));
                                 ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                             })
-                            .count(ctx.fileUploads().size())
+                            .count(fileUploads.size())
                             .get();
 
-                    addToUploadHistory(ctx.fileUploads(), rr -> {
+                    addToUploadHistory(fileUploads, rr -> {
                         if (rr.failed()) {
                             errors.add(new Touple2<>("", rr.cause()));
                             taskCoordinator.finish();
                             return;
                         }
 
-                        ctx.fileUploads().forEach(fu -> {
+                        fileUploads.forEach(fu -> {
 
-                            try {
-                                if (fu == null || fu.size() <= 0) {
+                            checkIfAlreadyUploadedSuccessfully(fu, r1 -> {
 
-                                    success.add(new Touple2<>(fu.fileName(),
-                                            new JsonObject()
-                                                    .put(ST.statusCode, StatusCode.fileMissing.name())));
+                                if (r1.failed()) {
+                                    errors.add(new Touple2<>(fu.fileName(), r1.cause()));
                                     taskCoordinator.countdown();
                                     return;
                                 }
 
-                                handleFileUpload(fu, r -> {
-                                    try {
-                                        if (r.failed()) {
-                                            if (r.cause() instanceof HandlerException) {
-                                                success.add(new Touple2<>(fu.fileName(),
-                                                        ((HandlerException) r.cause()).value));
-                                            } else {
-                                                errors.add(new Touple2(fu.fileName(), r.cause()));
-                                            }
-                                            taskCoordinator.countdown();
-                                            return;
-                                        }
+                                if (r1.result()) {
+                                    success.add(new Touple2<>(fu.fileName(),
+                                            new JsonObject()
+                                                    .put(ST.statusCode, StatusCode.fileAlreadyExists.name())));
+                                    taskCoordinator.countdown();
+                                    return;
+                                }
+
+                                try {
+                                    if (fu == null || fu.size() <= 0) {
 
                                         success.add(new Touple2<>(fu.fileName(),
-                                                r.result()));
+                                                new JsonObject()
+                                                        .put(ST.statusCode, StatusCode.fileMissing.name())));
                                         taskCoordinator.countdown();
-                                    } catch (Exception ex) {
-                                        errors.add(new Touple2<>(fu.fileName(), ex));
-                                        taskCoordinator.countdown();
+                                        return;
                                     }
-                                });
-                            } catch (Exception ex) {
-                                errors.add(new Touple2<>(fu.fileName(), ex));
-                                taskCoordinator.countdown();
-                            }
 
+                                    handleFileUpload(fu, r -> {
+                                        try {
+                                            if (r.failed()) {
+                                                if (r.cause() instanceof HandlerException) {
+                                                    success.add(new Touple2<>(fu.fileName(),
+                                                            ((HandlerException) r.cause()).value));
+                                                } else {
+                                                    errors.add(new Touple2(fu.fileName(), r.cause()));
+                                                }
+                                                taskCoordinator.countdown();
+                                                return;
+                                            }
+
+                                            success.add(new Touple2<>(fu.fileName(),
+                                                    r.result()));
+                                            taskCoordinator.countdown();
+                                        } catch (Exception ex) {
+                                            errors.add(new Touple2<>(fu.fileName(), ex));
+                                            taskCoordinator.countdown();
+                                        }
+                                    });
+                                } catch (Exception ex) {
+                                    errors.add(new Touple2<>(fu.fileName(), ex));
+                                    taskCoordinator.countdown();
+                                }
+
+                            });
                         });
                     });
 
                 }));
+    }
+
+    private void checkIfAlreadyUploadedSuccessfully(FileUpload fu, Handler<AsyncResult<Boolean>> handler) {
+        vertx.eventBus().send(ApiEvents.CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY, fu.fileName(), (AsyncResult<Message<Boolean>> r) -> {
+            if (r.failed()) {
+                handler.handle(AsyncUtil.fail(r.cause()));
+                return;
+            }
+            handler.handle(AsyncUtil.success(r.result().body()));
+        });
     }
 
     private String interpreteResult(JsonObject t2) {
@@ -203,7 +243,7 @@ public class FileUploadController {
         return string.equals(StatusCode.success.name()) ? FileUploads.Statuses.complete.name() : FileUploads.Statuses.error.name();
     }
 
-    private void addToUploadHistory(final Set<FileUpload> fileUploads, Handler<AsyncResult<Message<Void>>> handler) {
+    private void addToUploadHistory(final Collection<FileUpload> fileUploads, Handler<AsyncResult<Message<Void>>> handler) {
         final JsonArray array = new JsonArray(
                 fileUploads.stream()
                         .map(u -> new JsonObject()
@@ -215,7 +255,7 @@ public class FileUploadController {
         vertx.eventBus().send(ApiEvents.INSERT_FILE_UPLOADS_HISTORY, array, handler);
     }
 
-    private void updateUploadHistory(final Set<FileUpload> fileUploads, final List<JsonObject> statuses, Handler<AsyncResult<Message<Void>>> handler) {
+    private void updateUploadHistory(final Collection<FileUpload> fileUploads, final List<JsonObject> statuses, Handler<AsyncResult<Message<Void>>> handler) {
         vertx.eventBus().send(ApiEvents.UPDATE_FILE_UPLOADS_HISTORY, new JsonArray(statuses), handler);
     }
 
@@ -473,13 +513,17 @@ public class FileUploadController {
             return new AlertTemplateBuilder()
                     .danger("No file is uploaded.")
                     .createAlertTemplate();
+        } else if (statusCode.equals(StatusCode.fileAlreadyExists.name())) {
+            return new AlertTemplateBuilder()
+                    .danger("File Already Exists.")
+                    .createAlertTemplate();
         }
 
         return new EmptyTemplate();
     }
 
     private enum StatusCode {
-        success, parseError, error, fileMissing, invalidFile;
+        success, parseError, error, fileMissing, invalidFile, fileAlreadyExists;
     }
 
     private static String ensureDateFormat(final Object s) {

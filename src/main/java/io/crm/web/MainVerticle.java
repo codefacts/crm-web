@@ -83,6 +83,7 @@ final public class MainVerticle extends AbstractVerticle {
         vertx.eventBus().consumer(ApiEvents.INSERT_BR_CHECKER_INFO, brCheckerDetailsService::insert);
         vertx.eventBus().consumer(ApiEvents.INSERT_FILE_UPLOADS_HISTORY, new FileUploadHistoryService()::insert);
         vertx.eventBus().consumer(ApiEvents.UPDATE_FILE_UPLOADS_HISTORY, new FileUploadHistoryService()::update);
+        vertx.eventBus().consumer(ApiEvents.CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY, new FileUploadHistoryService()::checkIfAlreadyUploadedSuccessfully);
     }
 
     private void registerFilters(final Router router) {
