@@ -16,7 +16,7 @@ public enum BrCheckerModel {
 
     BAND("Brand", true),
     CONTACTED("Contacted", true),
-    NAME_MATHCH("Name Match", true),
+    NAME_MATCH("Name Match", true),
 
     PICTURE_NAME("Picture Name", false),
     TIME_OF_CHECK("Time Of Check", true),

@@ -8,15 +8,6 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
-    <!--JQuery-->
-    <script src="/static/js/jquery-2.1.4.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="/static/js/bootstrap.min.js"></script>
-
-    <!--DatePicker-->
-    <link rel="stylesheet" href="/static/components/bootstrap-datepicker-1.4.1/css/bootstrap-datepicker.min.css">
-    <!--DatePicker-->
-    <script src="/static/components/bootstrap-datepicker-1.4.1/js/bootstrap-datepicker.min.js"></script>
 
     <!--StyleSheet-->
     <link rel="stylesheet" href="/public/css/app.css">
@@ -24,6 +15,15 @@
     ~for href in styles:
     <link rel="stylesheet" href="~href~">
     :~
+
+
+    <!--JQuery-->
+    <script src="/static/js/jquery-2.1.4.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <script src="/public/js/app.js"></script>
+    <script src="/public/js/HashParams.js"></script>
 
     ~for sc in headerScripts:
     <script src="~sc~"></script>
@@ -33,9 +33,6 @@
 <body>
 
 ~body~
-
-<script src="/public/js/app.js"></script>
-<script src="/public/js/HashParams.js"></script>
 
 ~for sc in footerScripts:
 <script src="~sc~"></script>

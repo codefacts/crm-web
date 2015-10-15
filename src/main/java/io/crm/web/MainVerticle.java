@@ -5,6 +5,7 @@ import io.crm.model.User;
 import io.crm.web.controller.*;
 import io.crm.web.service.callreview.ApiService;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
+import io.crm.web.service.callreview.FileUploadHistoryService;
 import io.crm.web.service.callreview.FileUploadService;
 import io.crm.web.template.*;
 import io.crm.web.template.bootstrap.ModalAlertBuilder;
@@ -80,6 +81,8 @@ final public class MainVerticle extends AbstractVerticle {
         vertx.eventBus().consumer(ApiEvents.BR_CHECKER_DETAILS, brCheckerDetailsService::brCheckerData);
         vertx.eventBus().consumer(ApiEvents.FIND_ONE_BR_CHECKER_INFO, brCheckerDetailsService::findOne);
         vertx.eventBus().consumer(ApiEvents.INSERT_BR_CHECKER_INFO, brCheckerDetailsService::insert);
+        vertx.eventBus().consumer(ApiEvents.INSERT_FILE_UPLOADS_HISTORY, new FileUploadHistoryService()::insert);
+        vertx.eventBus().consumer(ApiEvents.UPDATE_FILE_UPLOADS_HISTORY, new FileUploadHistoryService()::update);
     }
 
     private void registerFilters(final Router router) {

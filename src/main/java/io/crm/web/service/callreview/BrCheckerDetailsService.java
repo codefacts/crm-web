@@ -23,10 +23,10 @@ import static io.crm.util.ExceptionUtil.withReplyRun;
 public class BrCheckerDetailsService {
     public static final int apiPort = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName(), new JsonObject()).getInteger("apiPort");
     public static final String apiHost = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("apiHost");
-    private static final String CONNECTION_URL = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("CONNECTION_URL");
-    public static final String DATE_FORMAT_STR = "dd-MMM-yyyy hh:mm:ss 'PM'";
+    public static final String CONNECTION_URL = App.loadConfig().getJsonObject(BrCheckerDetailsService.class.getSimpleName()).getString("CONNECTION_URL");
+    public static final String DATE_FORMAT_STR = "dd-MMM-yyyy hh:mm:ss";
     private final HttpClient httpClient;
-    private final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_STR);
+    private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_STR);
 
     public BrCheckerDetailsService(final HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -127,7 +127,7 @@ public class BrCheckerDetailsService {
                         statement.setString(p++, array.getString(idx++));
 
                         final String dateStr = array.getString(idx++);
-                        statement.setTimestamp(p++, new Timestamp(dateFormat.parse(dateStr).getTime()));
+                        statement.setTimestamp(p++, new Timestamp(dateFormat.parse(removeAMPM(dateStr)).getTime()));
 
                         idx++;
 //                        p++;
@@ -173,6 +173,12 @@ public class BrCheckerDetailsService {
         }, message);
     }
 
+    private String removeAMPM(String dateStr) {
+        return dateStr.replace("AM", "")
+                .replace("PM", "")
+                .trim();
+    }
+
     public void findOne(final Message<Integer> message) {
         httpClient.get(apiPort, apiHost, "/BrChecker/findOne?id=" + message.body())
                 .exceptionHandler(e -> ExceptionUtil.fail(message, e))
@@ -209,5 +215,9 @@ public class BrCheckerDetailsService {
 
     public static String baseUrl() {
         return "http://" + apiHost + ":" + apiPort;
+    }
+
+    public static void main(String... args) throws Exception {
+        System.out.println(dateFormat.parse("04-Oct-2015 15:50:18 PM"));
     }
 }

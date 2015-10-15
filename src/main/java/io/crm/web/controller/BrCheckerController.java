@@ -31,7 +31,7 @@ import static io.crm.web.util.WebUtils.webHandler;
  * Created by sohan on 10/2/2015.
  */
 public class BrCheckerController {
-    private static final int PAGINATION_NAV_LENGTH = 20;
+    private static final int PAGINATION_NAV_LENGTH = 15;
     private final Vertx vertx;
     private final String title = "Br Checker Details";
 
@@ -168,7 +168,7 @@ public class BrCheckerController {
                                                     object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
                                                 else if (k.equals(BrCheckerModel.CONTACTED.name()))
                                                     object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
-                                                else if (k.equals(BrCheckerModel.NAME_MATHCH.name()))
+                                                else if (k.equals(BrCheckerModel.NAME_MATCH.name()))
                                                     object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
                                                 else object.put(k, v == null ? "" : v + "");
                                             });

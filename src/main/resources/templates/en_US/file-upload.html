@@ -14,6 +14,50 @@
                     <form id="upload-form" class="upload-form" method="post" enctype="multipart/form-data"
                           action="/file-upload">
 
+                        <div class="row">
+                            <div class='col-md-2'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker'>
+                                        <select name="year" class="form-control">
+                                            <option value="">Select Year</option>
+                                            <option>2015</option>
+                                            <option>2016</option>
+                                            <option>2017</option>
+                                            <option>2018</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-md-2'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='month'>
+                                        <select name="month" class="form-control">
+                                            <option value="">Select Month</option>
+
+                                            ~for month in months:
+                                            <option value="~month.value~">~month.label~</option>
+                                            :~
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-md-2'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='day'>
+                                        <select name="day" class="form-control">
+                                            <option value="">Select Day</option>
+
+                                            ~for day in days:
+                                            <option value="~day~">~day~</option>
+                                            :~
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="exampleInputFile">File input</label>
                             <input type="file" id="exampleInputFile" name="file" multiple>

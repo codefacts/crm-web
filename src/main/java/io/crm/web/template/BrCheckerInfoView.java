@@ -1,7 +1,6 @@
 package io.crm.web.template;
 
 import io.crm.util.Touple1;
-import io.crm.util.Util;
 import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.template.table.*;
@@ -42,7 +41,7 @@ public class BrCheckerInfoView extends Template {
                                             val = ((Integer) v) > 0 ? "Yes" : "No";
                                         } else if (k.equals(BrCheckerModel.CONTACTED.name())) {
                                             val = ((Integer) v) > 0 ? "Yes" : "No";
-                                        } else if (k.equals(BrCheckerModel.NAME_MATHCH.name())) {
+                                        } else if (k.equals(BrCheckerModel.NAME_MATCH.name())) {
                                             val = ((Integer) v) > 0 ? "Yes" : "No";
                                         } else {
                                             val = v == null ? "" : v + "";

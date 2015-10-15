@@ -52,25 +52,25 @@ final public class CsvParser {
 
         iterator.forEachRemaining(csvRecord -> {
 
-            if (csvRecord.size() != converters.size()) {
+            if (csvRecord.size() < converters.size()) {
                 addErrorForLine(errors, csvRecord);
                 return; //Continue
             }
 
             final SimpleCounter counter = new SimpleCounter(0);
-            final ImmutableList.Builder<Object> objectBuilder = ImmutableList.builder();
+            final ImmutableList.Builder<Object> listBuilder = ImmutableList.builder();
             converters.forEach(converter -> {
                 String str = null;
                 try {
                     str = csvRecord.get(counter.counter++);
                     final Object val = converter.apply(str);
-                    objectBuilder.add(val);
+                    listBuilder.add(val);
                 } catch (Exception ex) {
                     final long recordNumber = csvRecord.getRecordNumber();
                     addError(errors, recordNumber, counter, str, ex, converter);
                 }
             });
-            builder.add(objectBuilder.build());
+            builder.add(listBuilder.build());
         });
         return builder.build();
     }
@@ -81,7 +81,7 @@ final public class CsvParser {
                         .setLine(csvRecord.getRecordNumber())
                         .setValue(csvRecord.toString())
                         .setMessageCode("field.missing")
-                        .setMessage(String.format("Line: %d: Some field is missing.", csvRecord.getRecordNumber()))
+                        .setMessage(String.format("Line: %d: Some field is missing.[%s]", csvRecord.getRecordNumber(), csvRecord.toString()))
                         .createCsvParseError()
         );
     }
@@ -93,7 +93,7 @@ final public class CsvParser {
                         .setCol(counter.counter)
                         .setValue(str)
                         .setMessageCode("field.invalid")
-                        .setMessage(String.format("Line: %d, Col: %d: Invalid field value.", recordNumber, counter.counter))
+                        .setMessage(String.format("Line: %d, Col: %d: Invalid field value.[%s]", recordNumber, counter.counter, str))
                         .setException(ex)
                         .setConverter(converter.getClass().getName())
                         .createCsvParseError()

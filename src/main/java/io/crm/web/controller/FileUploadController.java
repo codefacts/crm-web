@@ -7,22 +7,20 @@ import io.crm.web.ApiEvents;
 import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.css.bootstrap.TableClasses;
-import io.crm.web.service.callreview.BrCheckerDetailsService;
+import io.crm.web.service.callreview.model.FileUploads;
 import io.crm.web.template.*;
-import io.crm.web.template.bootstrap.BodyPanelDefaultBuilder;
 import io.crm.web.template.table.*;
 import io.crm.web.util.Converters;
-import io.crm.web.util.DateConverter;
 import io.crm.web.util.parsers.CsvParseError;
 import io.crm.web.util.parsers.CsvParseResult;
 import io.crm.web.util.parsers.CsvParser;
-import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.eventbus.ReplyException;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.Router;
@@ -31,9 +29,9 @@ import io.vertx.ext.web.handler.BodyHandler;
 import org.watertemplate.Template;
 
 import java.io.File;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.crm.web.ApiEvents.UPLOAD_BR_CHECKER_DATA;
@@ -45,12 +43,12 @@ import static io.crm.web.util.WebUtils.webHandler;
  */
 public class FileUploadController {
     private static final String FLASH_DO_UPLOAD = "FILE_UPLOAD_CONTROLLER.FLASH.DO_UPLOAD";
+    private static final String DATE_INVALID = "DATE.INVALID";
     private final Vertx vertx;
     private final CsvParser csvParser;
+    public static final DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
 
     {
-        final DateConverter dateConverter = new DateConverter(BrCheckerDetailsService.DATE_FORMAT_STR);
-
         csvParser = new CsvParser(ImmutableList.of(
 
                 s -> s,
@@ -66,7 +64,7 @@ public class FileUploadController {
                 Converters::yesNoToBoolean,
                 Converters::yesNoToBoolean,
 
-                s -> s,
+                FileUploadController::ensureDateFormat,
 
                 s -> s,
 
@@ -109,57 +107,116 @@ public class FileUploadController {
                     final TaskCoordinator taskCoordinator = new TaskCoordinatorBuilder()
                             .onError(ctx::fail)
                             .onSuccess(() -> {
+                                final ImmutableList<Touple2<String, Throwable>> errorList = errors.build();
+                                final ImmutableList<Touple2<String, JsonObject>> successList = success.build();
+
+                                final ImmutableList.Builder<JsonObject> statusBuilder = ImmutableList.builder();
+                                errorList.forEach(e -> {
+                                    statusBuilder.add(
+                                            new JsonObject()
+                                                    .put(FileUploads.status, FileUploads.Statuses.error)
+                                                    .put(FileUploads.errorDetails, e.getT2())
+                                                    .put(FileUploads.filename, e.t1)
+                                    );
+                                });
+
+                                successList.forEach(s -> {
+                                    statusBuilder.add(
+                                            new JsonObject()
+                                                    .put(FileUploads.status, interpreteResult(s.t2))
+                                                    .put(FileUploads.filename, s.t1)
+                                    );
+                                });
+
+                                updateUploadHistory(ctx.fileUploads(), statusBuilder.build(), r -> {
+                                });
+
                                 ctx.session().put(FLASH_DO_UPLOAD,
                                         new JsonObject()
-                                                .put("success", success.build())
-                                                .put("error", errors.build()));
+                                                .put("success", successList)
+                                                .put("error", errorList));
                                 ctx.response().end(new JavascriptRedirect(Uris.fileUpload.value).render());
                             })
                             .count(ctx.fileUploads().size())
                             .get();
 
-                    ctx.fileUploads().forEach(fu -> {
-
-                        try {
-                            if (fu == null || fu.size() <= 0) {
-
-                                success.add(new Touple2<String, JsonObject>(fu.fileName(),
-                                        new JsonObject()
-                                                .put(ST.statusCode, StatusCode.fileMissing.name())));
-                                taskCoordinator.countdown();
-                                return;
-                            }
-
-                            handleFileUpload(fu, r -> {
-                                try {
-                                    if (r.failed()) {
-                                        if (r.cause() instanceof HandlerException) {
-                                            success.add(new Touple2<String, JsonObject>(fu.fileName(),
-                                                    ((HandlerException) r.cause()).value));
-                                        } else {
-                                            errors.add(new Touple2(fu.fileName(), r.cause()));
-                                        }
-                                        taskCoordinator.countdown();
-                                        return;
-                                    }
-
-                                    success.add(new Touple2<String, JsonObject>(fu.fileName(),
-                                            r.result()));
-                                    taskCoordinator.countdown();
-                                } catch (Exception ex) {
-                                    errors.add(new Touple2<String, Throwable>(fu.fileName(), ex));
-                                    taskCoordinator.countdown();
-                                }
-                            });
-                        } catch (Exception ex) {
-                            errors.add(new Touple2<String, Throwable>(fu.fileName(), ex));
-                            taskCoordinator.countdown();
+                    addToUploadHistory(ctx.fileUploads(), rr -> {
+                        if (rr.failed()) {
+                            errors.add(new Touple2<>("", rr.cause()));
+                            taskCoordinator.finish();
+                            return;
                         }
 
+                        ctx.fileUploads().forEach(fu -> {
+
+                            try {
+                                if (fu == null || fu.size() <= 0) {
+
+                                    success.add(new Touple2<>(fu.fileName(),
+                                            new JsonObject()
+                                                    .put(ST.statusCode, StatusCode.fileMissing.name())));
+                                    taskCoordinator.countdown();
+                                    return;
+                                }
+
+                                handleFileUpload(fu, r -> {
+                                    try {
+                                        if (r.failed()) {
+                                            if (r.cause() instanceof HandlerException) {
+                                                success.add(new Touple2<>(fu.fileName(),
+                                                        ((HandlerException) r.cause()).value));
+                                            } else {
+                                                errors.add(new Touple2(fu.fileName(), r.cause()));
+                                            }
+                                            taskCoordinator.countdown();
+                                            return;
+                                        }
+
+                                        success.add(new Touple2<>(fu.fileName(),
+                                                r.result()));
+                                        taskCoordinator.countdown();
+                                    } catch (Exception ex) {
+                                        errors.add(new Touple2<>(fu.fileName(), ex));
+                                        taskCoordinator.countdown();
+                                    }
+                                });
+                            } catch (Exception ex) {
+                                errors.add(new Touple2<>(fu.fileName(), ex));
+                                taskCoordinator.countdown();
+                            }
+
+                        });
                     });
 
-
                 }));
+    }
+
+    private String interpreteResult(JsonObject t2) {
+        final String string = t2.getString(ST.statusCode, "");
+        final boolean error = string
+                .equals(StatusCode.error.name());
+
+        if (error) {
+            return t2.getJsonObject(ST.body).getMap().keySet().stream().allMatch(v -> v.startsWith(DATE_INVALID)) ? FileUploads.Statuses.dateformatError.name() : FileUploads.Statuses.error.name();
+        }
+
+        return string.equals(StatusCode.success.name()) ? FileUploads.Statuses.complete.name() : FileUploads.Statuses.error.name();
+    }
+
+    private void addToUploadHistory(final Set<FileUpload> fileUploads, Handler<AsyncResult<Message<Void>>> handler) {
+        final JsonArray array = new JsonArray(
+                fileUploads.stream()
+                        .map(u -> new JsonObject()
+                                .put(FileUploads.filename, u.fileName())
+                                .put(FileUploads.uploaded_filename, u.uploadedFileName())
+                                .put(FileUploads.status, FileUploads.Statuses.initial.name())
+                                .put(FileUploads.upload_date, dateFormat.format(new Date())))
+                        .collect(Collectors.toList()));
+        vertx.eventBus().send(ApiEvents.INSERT_FILE_UPLOADS_HISTORY, array, handler);
+    }
+
+    private void updateUploadHistory(final Set<FileUpload> fileUploads, final List<JsonObject> statuses, Handler<AsyncResult<Message<Void>>> handler) {
+        vertx.eventBus().send(ApiEvents.UPDATE_FILE_UPLOADS_HISTORY, new JsonArray(statuses), handler);
     }
 
     private void handleFileUpload(FileUpload upload, Handler<AsyncResult<JsonObject>> handler) {
@@ -223,7 +280,10 @@ public class FileUploadController {
                                     parseResult.errors
                                             .stream()
                                             .collect(Collectors.toMap(
-                                                    v -> "Line " + v.getValue(CsvParseError.line) + "",
+                                                    v -> v.getJsonObject(
+                                                            CsvParseError.exception, new JsonObject())
+                                                            .getString(CsvParseError.message) + " Line "
+                                                            + v.getValue(CsvParseError.line) + "",
                                                     k -> k.getString(CsvParseError.message)))
                             ))
             )));
@@ -377,7 +437,9 @@ public class FileUploadController {
             errors.forEach(t2 -> {
                 builder.add(
                         new AlertTemplateBuilder()
-                                .info("Error: filename: " + t2.getT1() + ". Error uploading this file.")
+                                .info("Error: filename: " + t2.getT1() + ". Error uploading this file."
+                                        + printError(t2.t2) +
+                                        " CAUSE: " + printError(t2.t2.getCause()))
                                 .createAlertTemplate().render()
                 );
             });
@@ -390,6 +452,10 @@ public class FileUploadController {
         }
 
         return new FileUploadTemplate(String.join("", builder.build()));
+    }
+
+    private String printError(Throwable t2) {
+        return t2 == null ? "" : "[" + t2.getClass().getSimpleName() + " : " + t2.getMessage() + "]";
     }
 
     private Template form(final JsonObject o) {
@@ -414,5 +480,17 @@ public class FileUploadController {
 
     private enum StatusCode {
         success, parseError, error, fileMissing, invalidFile;
+    }
+
+    private static String ensureDateFormat(final Object s) {
+        final String val = ((String) s).replace("PM", "").replace("AM", "").trim();
+        if ((val).matches("\\d{1,2}-[a-zA-Z]{3}-\\d{4}( \\d{1,2}:\\d{1,2}(:\\d{1,2})*){0,1}")) {
+            return val;
+        }
+        throw new RuntimeException(DATE_INVALID);
+    }
+
+    public static void main(String... args) {
+        System.out.println(ensureDateFormat("15-May-2015 78:12:"));
     }
 }
