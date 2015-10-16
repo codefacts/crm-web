@@ -1,7 +1,6 @@
 package io.crm.web.template.pagination;
 
-import io.crm.intfs.ConsumerInterface;
-import io.crm.web.util.Pagination;
+import io.crm.intfs.ConsumerUnchecked;
 import org.watertemplate.Template;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class PaginationTemplateBuilder {
         return prev(f -> f.setHref(href).addClass(!hasPrev ? "disabled" : ""));
     }
 
-    public PaginationTemplateBuilder prev(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
+    public PaginationTemplateBuilder prev(ConsumerUnchecked<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
         final PaginationFirstLastButtonTemplateBuilder prev = new PaginationFirstLastButtonTemplateBuilder();
         try {
             prev
@@ -46,7 +45,7 @@ public class PaginationTemplateBuilder {
         return next(n -> n.setHref(href).addClass(!hasNext ? "disabled" : ""));
     }
 
-    public PaginationTemplateBuilder next(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
+    public PaginationTemplateBuilder next(ConsumerUnchecked<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
         final PaginationFirstLastButtonTemplateBuilder next = new PaginationFirstLastButtonTemplateBuilder();
         try {
             next
@@ -68,7 +67,7 @@ public class PaginationTemplateBuilder {
         return first(f -> f.setHref(href).addClass(isFirst ? "disabled" : ""));
     }
 
-    public PaginationTemplateBuilder first(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
+    public PaginationTemplateBuilder first(ConsumerUnchecked<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
         final PaginationFirstLastButtonTemplateBuilder first = new PaginationFirstLastButtonTemplateBuilder();
         try {
             first
@@ -90,7 +89,7 @@ public class PaginationTemplateBuilder {
         return last(l -> l.setHref(href).addClass(isLast ? "disabled" : ""));
     }
 
-    public PaginationTemplateBuilder last(ConsumerInterface<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
+    public PaginationTemplateBuilder last(ConsumerUnchecked<PaginationFirstLastButtonTemplateBuilder> paginationItemBuilderConsumer) {
         final PaginationFirstLastButtonTemplateBuilder last = new PaginationFirstLastButtonTemplateBuilder();
         try {
             last
@@ -108,7 +107,7 @@ public class PaginationTemplateBuilder {
         return this;
     }
 
-    public PaginationTemplateBuilder addItem(ConsumerInterface<PaginationItemTemplateBuilder> paginationItemBuilderConsumer) {
+    public PaginationTemplateBuilder addItem(ConsumerUnchecked<PaginationItemTemplateBuilder> paginationItemBuilderConsumer) {
         final PaginationItemTemplateBuilder prev = new PaginationItemTemplateBuilder();
         try {
             paginationItemBuilderConsumer.accept(prev);

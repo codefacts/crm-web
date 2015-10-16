@@ -1,6 +1,6 @@
 package io.crm.web.template;
 
-import io.crm.intfs.ConsumerInterface;
+import io.crm.intfs.ConsumerUnchecked;
 
 final public class FiltersPanelTemplateBuilder {
     private final String title;
@@ -10,7 +10,7 @@ final public class FiltersPanelTemplateBuilder {
         this.title = title;
     }
 
-    public FiltersPanelTemplateBuilder configureForm(final ConsumerInterface<FormTemplateBuilder> formBuilder) {
+    public FiltersPanelTemplateBuilder configureForm(final ConsumerUnchecked<FormTemplateBuilder> formBuilder) {
         try {
             formBuilder.accept(formTemplateBuilder);
         } catch (Exception e) {

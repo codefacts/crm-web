@@ -1,6 +1,6 @@
 package io.crm.web.util;
 
-import io.crm.intfs.ConsumerInterface;
+import io.crm.intfs.ConsumerUnchecked;
 import io.crm.web.ST;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
@@ -31,7 +31,7 @@ final public class WebUtils {
         return String.format(label + " [%d data found]", total);
     }
 
-    public static <T> Handler<AsyncResult<T>> catchHandler(final ConsumerInterface<AsyncResult<T>> consumer, final RoutingContext context) {
+    public static <T> Handler<AsyncResult<T>> catchHandler(final ConsumerUnchecked<AsyncResult<T>> consumer, final RoutingContext context) {
         return r -> {
             try {
                 consumer.accept(r);
@@ -41,7 +41,7 @@ final public class WebUtils {
         };
     }
 
-    public static Handler<RoutingContext> webHandler(final ConsumerInterface<RoutingContext> consumer) {
+    public static Handler<RoutingContext> webHandler(final ConsumerUnchecked<RoutingContext> consumer) {
         return context -> {
             try {
                 consumer.accept(context);

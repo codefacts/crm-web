@@ -1,6 +1,6 @@
 package io.crm.web.template;
 
-import io.crm.intfs.ConsumerInterface;
+import io.crm.intfs.ConsumerUnchecked;
 import io.crm.web.template.form.DefaultFooterBuilder;
 import io.crm.web.template.form.FormRowBuilder;
 import org.watertemplate.Template;
@@ -31,7 +31,7 @@ final public class FormTemplateBuilder {
         return this;
     }
 
-    public FormTemplateBuilder addRow(final ConsumerInterface<FormRowBuilder> consumer) {
+    public FormTemplateBuilder addRow(final ConsumerUnchecked<FormRowBuilder> consumer) {
         final FormRowBuilder rowBuilder = new FormRowBuilder();
         try {
             consumer.accept(rowBuilder);
@@ -58,7 +58,7 @@ final public class FormTemplateBuilder {
         return this;
     }
 
-    public FormTemplateBuilder defaultFooter(final ConsumerInterface<DefaultFooterBuilder> builderConsumer) {
+    public FormTemplateBuilder defaultFooter(final ConsumerUnchecked<DefaultFooterBuilder> builderConsumer) {
         final DefaultFooterBuilder defaultFooterBuilder = new DefaultFooterBuilder();
         try {
             builderConsumer.accept(defaultFooterBuilder);

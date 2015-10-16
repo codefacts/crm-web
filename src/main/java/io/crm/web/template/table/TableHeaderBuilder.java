@@ -1,7 +1,5 @@
 package io.crm.web.template.table;
 
-import io.crm.intfs.ConsumerInterface;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
