@@ -11,7 +11,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="common" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-csv:1.2" level="project" />
+    <orderEntry type="module" module-name="common-crm" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-lang-js:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-common:4.0.28.Final" level="project" />

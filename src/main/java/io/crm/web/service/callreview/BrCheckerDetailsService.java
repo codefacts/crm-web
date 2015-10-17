@@ -218,6 +218,6 @@ public class BrCheckerDetailsService {
     }
 
     public static void main(String... args) throws Exception {
-        System.out.println(dateFormat.parse("04-Oct-2015 15:50:18 PM"));
+        System.out.println(dateFormat.parse("04-Oct-2015 11:11"));
     }
 }
