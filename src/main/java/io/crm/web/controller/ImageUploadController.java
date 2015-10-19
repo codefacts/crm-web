@@ -19,6 +19,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import static io.crm.web.util.WebUtils.catchHandler;
 import static io.crm.web.util.WebUtils.webHandler;
@@ -141,15 +142,19 @@ final public class ImageUploadController {
     }
 
     private static boolean validateImageNameOldVersion(final String imageName) {
-        imageName.matches("TSR_Name_.{1,100}-TSR Code_.{1,20}-Time_ \\d{2}-\\d{2}-\\d{4}_\\d{2}_\\d{2}_\\d{2}_[PA]M-Cluster_Name_.{1,500}-Auditor_Name_.{1,500}-Auditor_Code_\\d{1,20}-\\d*.PNG");
-        return true;
+        return imageNamePattern.matcher(imageName).matches();
     }
 
     public static void main(String[] args) throws java.lang.Exception {
-        System.out.println(new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a").format(new Date()));
-        String imageName = "TSR_Name_ Al Amin-TSR Code_ 07-Time_ 14-10-2015_16_48_12_PM-Cluster_Name_ Mojidpur road-Auditor_Name_ Al Mamun-Auditor_Code_ 101-1246810219.PNG";
 
-        System.out.println(validateImageName(imageName));
+        String img2 = "TSR_Name Rofiqul ss-TSR Code 40-Time 05-10-2015_16_09_57_PM-Cluster_Name Mugrapara-Auditor_Name sabibur-Auditor_Code 1051808385865.PNG";
+
+        System.out.println(img2.matches(pattern));
+        System.out.println(imageNamePattern.matcher(img2).matches());
         return;
     }
+
+    private static final String timeGroup = "((\\d{2}_\\d{2}_\\d{2})|(\\d{6}))";
+    private static final String pattern = "^TSR_Name_? .{1,500}-TSR Code_? .{1,20}-Time_? \\d{2}-\\d{2}-\\d{4}_" + timeGroup + "_[PA]M-Cluster_Name_? .{1,500}-Auditor_Name_? .{1,500}-Auditor_Code_? \\d{1,20}-?\\d*\\.PNG$";
+    private static final Pattern imageNamePattern = Pattern.compile(pattern);
 }
