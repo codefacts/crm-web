@@ -9,6 +9,10 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/static/components/select2-3.5.4/select2.css">
+    <link rel="stylesheet" href="/static/components/select2-3.5.4/select2-bootstrap.css">
+
     <!--StyleSheet-->
     <link rel="stylesheet" href="/public/css/app.css">
 
@@ -21,22 +25,26 @@
     <script src="/static/js/jquery-2.1.4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="/static/js/bootstrap.min.js"></script>
+    <!--Select2-->
+    <script src="/static/components/select2-3.5.4/select2.js"></script>
 
-    <script src="/public/js/app.js"></script>
     <script src="/public/js/HashParams.js"></script>
-
-    ~for sc in headerScripts:
-    <script src="~sc~"></script>
-    :~
 
 </head>
 <body>
 
 ~body~
 
-~for sc in footerScripts:
-<script src="~sc~"></script>
-:~
+<div style="display: none">
+    ~for hidden in hiddens:
+    ~hidden~
+    :~
 
+    <script src="/public/js/app.js"></script>
+
+    ~for sc in scripts:
+    <script src="~sc~"></script>
+    :~
+</div>
 </body>
 </html>

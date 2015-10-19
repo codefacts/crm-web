@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 
+import static io.crm.util.Util.getOrDefault;
 import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
 
 /**
@@ -19,18 +20,18 @@ public class Page extends Template {
     private final String page_title;
     private final Template body;
 
-    Page(final String page_title, final Template body, final Collection<String> headerScripts, final Collection<String> footerScripts, final Collection<String> styles) {
+    Page(final String page_title, final Template body, final Collection<String> scripts, final Collection<String> styles, final List<String> hiddens) {
         this.page_title = page_title;
         this.body = body;
         add("page_title", page_title);
-        addCollection("headerScripts", headerScripts);
-        addCollection("footerScripts", footerScripts);
+        addCollection("scripts", scripts);
         addCollection("styles", styles);
+        addCollection("hiddens", hiddens);
     }
 
     @Override
     protected void addSubTemplates(TemplateMap.SubTemplates subTemplates) {
-        subTemplates.add("body", Util.getOrDefault(body, EMPTY_TEMPLATE));
+        subTemplates.add("body", getOrDefault(body, EMPTY_TEMPLATE));
     }
 
     @Override

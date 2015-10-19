@@ -9,10 +9,13 @@ import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import static io.crm.util.ExceptionUtil.toRuntime;
 import static io.crm.util.ExceptionUtil.withReplyRun;
@@ -198,8 +201,12 @@ public class BrCheckerDetailsService {
             int page = message.body().getInteger(ST.page, 1);
             int size = message.body().getInteger(ST.size, 20);
 
+            final JsonObject params = message.body().getJsonObject(ST.params, new JsonObject());
+            final String queryString = String.join("&", params.getMap().entrySet().stream().map(e -> e.getKey() + "=" +
+                    ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode((String) e.getValue(), StandardCharsets.UTF_8.name())))
+                    .collect(Collectors.toList()));
             httpClient
-                    .get(apiPort, apiHost, String.format("/BrChecker/details?page=%d&size=%d", page, size))
+                    .get(apiPort, apiHost, "/BrChecker/details?" + queryString)
                     .exceptionHandler(e -> ExceptionUtil.fail(message, e))
                     .handler(res -> {
                         res
