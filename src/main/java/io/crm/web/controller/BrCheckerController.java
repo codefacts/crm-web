@@ -1,12 +1,17 @@
 package io.crm.web.controller;
 
+import com.google.common.collect.ImmutableMap;
 import io.crm.web.ApiEvents;
 import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.template.*;
+import io.crm.web.template.form.DefaultFooterBuilder;
+import io.crm.web.template.page.BrCheckerDetailsTemplateBuilder;
 import io.crm.web.template.page.BrCheckerExportSettings;
+import io.crm.web.template.page.BrCheckerInfoView;
+import io.crm.web.template.page.DashboardTemplateBuilder;
 import io.crm.web.util.Pagination;
 import io.crm.web.util.WebUtils;
 import io.vertx.core.AsyncResult;
@@ -118,6 +123,55 @@ public class BrCheckerController {
                                                         .setUser(ctx.session().get(ST.currentUser))
                                                         .setContentTemplate(
                                                                 new BrCheckerDetailsTemplateBuilder()
+                                                                        .setFiltersPanel(
+                                                                                new FiltersPanelTemplateBuilder("Filters")
+                                                                                        .configureForm(form -> {
+                                                                                            form
+                                                                                                    .addRow(row -> {
+                                                                                                        row
+                                                                                                                .addSelectInput("cluster", "", "cluster", ImmutableMap.of("", "Cluster"), "col-md-3")
+                                                                                                                .addSelectInput("tsr_code", "", "tsr_code", ImmutableMap.of("", "TST Code"), "col-md-2")
+                                                                                                                .addSelectInput("auditor_code", "", "auditor_code", ImmutableMap.of("", "Auditor Code"), "col-md-2")
+                                                                                                                .addSelectInput("consumer_name", "", "consumer_name", ImmutableMap.of("", "Consumer Name"), "col-md-3")
+                                                                                                                .addSelectInput("consumer_mobile", "", "consumer_mobile", ImmutableMap.of("", "Consumer Mobile"), "col-md-2")
+                                                                                                        ;
+                                                                                                    })
+                                                                                                    .addRow(row -> {
+                                                                                                        row
+                                                                                                                .addTextInput("call_range", "range", "call_range", "", "col-md-2", "Call No. Between")
+                                                                                                                .addTextInput("visit_range", "range", "visit_range", "", "col-md-2", "Visit Between")
+                                                                                                                .addSelectInput("brand", "", "brand", ImmutableMap.of("", "Brand Match"), "col-md-2")
+                                                                                                                .addSelectInput("contacted", "", "contacted", ImmutableMap.of("", "Contacted"), "col-md-2")
+                                                                                                                .addSelectInput("name_match", "", "name_match", ImmutableMap.of("", "Name Match"), "col-md-2")
+                                                                                                                .addSelectInput("call_status", "", "call_status", ImmutableMap.of("", "Call Status"), "col-md-2")
+                                                                                                        ;
+                                                                                                    })
+                                                                                                    .addRow(row -> {
+                                                                                                        row
+                                                                                                                .addTextInput("date_range", "date_range", "date_range", "", "col-md-4", "Date Between")
+                                                                                                                .addTemplate(
+                                                                                                                        new ColumnTemplateBuilder()
+                                                                                                                                .setClasses("col-md-8")
+                                                                                                                                .setContent(
+                                                                                                                                        new TemplateListBuilder()
+                                                                                                                                                .setTemplates(
+                                                                                                                                                        new DefaultFooterBuilder()
+                                                                                                                                                                .clear()
+                                                                                                                                                                .export()
+                                                                                                                                                                .search()
+                                                                                                                                                                .build()
+                                                                                                                                                )
+                                                                                                                                                .createTemplateList()
+                                                                                                                                )
+                                                                                                                                .createColumnTemplate()
+                                                                                                                )
+                                                                                                        ;
+                                                                                                    })
+                                                                                            ;
+
+                                                                                        })
+                                                                                        .build()
+                                                                        )
                                                                         .setDataPanel(
                                                                                 dataPanel(header(), data, null, pagination, ctx.request().path()))
                                                                         .setPopup(

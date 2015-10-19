@@ -2,7 +2,7 @@ package io.crm.web.controller;
 
 import io.crm.web.ST;
 import io.crm.web.Uris;
-import io.crm.web.template.DashboardTemplateBuilder;
+import io.crm.web.template.page.DashboardTemplateBuilder;
 import io.crm.web.template.PageBuilder;
 import io.crm.web.template.SidebarTemplateBuilder;
 import io.vertx.ext.web.Router;

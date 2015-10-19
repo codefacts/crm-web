@@ -5,6 +5,8 @@ import io.crm.web.Uris;
 import io.crm.web.template.*;
 import io.crm.web.template.form.InputBuilder;
 import io.crm.web.template.form.RangeInputBuilder;
+import io.crm.web.template.page.CallDetailsTemplateBuilder;
+import io.crm.web.template.page.DashboardTemplateBuilder;
 import io.crm.web.util.Pagination;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;

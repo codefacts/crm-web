@@ -16,8 +16,7 @@ import java.util.regex.Pattern;
  * Created by someone on 04/10/2015.
  */
 public class ImageController {
-    private static final Pattern imageNamePattern = Pattern.compile(
-            "TSR_Name .{1,100}-TSR Code .{1,20}-Time \\d{2}-\\d{2}-\\d{4}_\\d{2}_\\d{2}_\\d{2}_[PA]M-Cluster_Name .{1,500}-Auditor_Name .{1,500}-Auditor_Code \\d{1,20}-\\d*.PNG");
+
     public static final String image_directory_prop = "IMAGE_DIRECTORY";
     public static final String IMAGE_DIRECTORY = App.loadConfig().getString(image_directory_prop);
 
@@ -29,7 +28,8 @@ public class ImageController {
         router.get(Uris.BrCheckerImages.value).handler(ctx -> {
             try {
                 String imgName = ctx.request().params().get(ST.name).replace(".PNG", "");
-                final String imageName = imgName.replace(":", "");
+                final String imageName1 = imgName.replace(":", "");
+                final String imageName2 = imgName.replace(":", "_");
                 final File dir = new File(IMAGE_DIRECTORY);
                 if (!dir.exists()) {
                     try {
@@ -39,7 +39,7 @@ public class ImageController {
                     }
                 }
 
-                final File[] files = dir.listFiles((f, n) -> n.startsWith(imageName));
+                final File[] files = dir.listFiles((f, n) -> n.startsWith(imageName1) | n.startsWith(imageName2));
                 if (files.length <= 0) {
                     ctx.response().setStatusCode(HttpResponseStatus.NOT_FOUND.code());
                     ctx.response().end("Image file not found.");

@@ -1,7 +1,7 @@
 package io.crm.web.controller;
 
 import io.crm.web.Uris;
-import io.crm.web.template.EventPublisherForm;
+import io.crm.web.template.page.EventPublisherForm;
 import io.crm.web.template.Page;
 import io.crm.web.template.PageBuilder;
 import io.vertx.core.AsyncResult;
