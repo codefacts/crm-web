@@ -2,92 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/react/AjaxSelect.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/entity/BrCheckerData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/repository/BrCheckerDataRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/repository/BrCheckerDataRepositoryCustom.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/repository/BrCheckerDataRepositoryImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/BrCheckerJsonController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/BrCheckerJsonService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Modal.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Pagination.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Range.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/Script.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/Services.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/TestController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates-s/en_US/ajax-select.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/browser.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/my-classes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/my-functions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/react-components.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/react-dom.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/react-dom.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/react.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/react.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sona.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ApiEvents.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ApiEvents.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/ApiService.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/ApiService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/App.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/App.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/BrCheckerController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/BrCheckerController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/BrCheckerDetailsService.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/BrCheckerDetailsService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/CallController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/CallController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/Controllers.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/Controllers.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/EventPublisherController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/EventPublisherController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/FileUploadController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/FileUploadController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/FileUploadHistoryService.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/FileUploadHistoryService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/FileUploadService.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/service/callreview/FileUploadService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/form/FormRowBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/form/FormRowBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FormTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FormTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/HomeController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/HomeController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/ImageController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/ImageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/ImageUploadController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/ImageUploadController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/LoginController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/LoginController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/MainVerticle.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/MainVerticle.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/PageBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/PageBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Pagination.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Pagination.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplateBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplateBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ST.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ST.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableRow.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableRow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/Uris.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/Uris.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/ApiEvents.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/ApiEvents.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/App.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/controller/BrCheckerController.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/BrCheckerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/page/renderer/BrDetailsRenderer.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/renderer/BrDetailsRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/MainVerticle.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/MainVerticle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/Page.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/Page.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/PageBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/PageBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/ST.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/ST.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/Uris.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/Uris.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/js/app.js" afterPath="$PROJECT_DIR$/../../../target/classes/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Modal.js" afterPath="$PROJECT_DIR$/public/js/Modal.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/page.html" afterPath="$PROJECT_DIR$/templates-s/en_US/page.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../pom.xml" afterPath="$PROJECT_DIR$/../../../pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../web.iml" afterPath="$PROJECT_DIR$/../../../web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/react-components.js" afterPath="$PROJECT_DIR$/public/js/react-components.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="html_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -109,21 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="react-components.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="react-components.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/react-components.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="16" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.4526515">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Modal.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Modal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06439394">
-              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -132,8 +50,18 @@
       <file leaf-file-name="Range.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/Range.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3076923">
-              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+            <state vertical-scroll-proportion="-3.2692308">
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates-s/en_US/page.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.384615">
+              <caret line="39" column="65" selection-start-line="39" selection-start-column="65" selection-end-line="39" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -206,12 +134,12 @@
       <list>
         <option value="$PROJECT_DIR$/templates-s/en_US/ajax-select.html" />
         <option value="$PROJECT_DIR$/public/js/my-functions.js" />
-        <option value="$PROJECT_DIR$/templates-s/en_US/page.html" />
         <option value="$PROJECT_DIR$/public/js/my-classes.js" />
-        <option value="$PROJECT_DIR$/public/js/react-components.js" />
         <option value="$PROJECT_DIR$/public/js/Pagination.js" />
         <option value="$PROJECT_DIR$/public/js/Range.js" />
+        <option value="$PROJECT_DIR$/templates-s/en_US/page.html" />
         <option value="$PROJECT_DIR$/public/js/Modal.js" />
+        <option value="$PROJECT_DIR$/public/js/react-components.js" />
       </list>
     </option>
   </component>
@@ -401,6 +329,13 @@
       <option name="number" value="Default" />
       <updated>1445408732549</updated>
     </task>
+    <task id="LOCAL-00001" summary="Modal.js">
+      <created>1445510050406</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1445510050406</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -409,6 +344,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2539326" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976827" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -442,6 +378,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modal.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modal.js" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -459,14 +399,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.6833334">
           <caret line="126" column="24" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates-s/en_US/page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8466135">
-          <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -497,24 +429,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Range.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        <state vertical-scroll-proportion="-3.2692308">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/react-components.js">
+    <entry file="file://$PROJECT_DIR$/templates-s/en_US/page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="16" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
+        <state vertical-scroll-proportion="-15.384615">
+          <caret line="39" column="65" selection-start-line="39" selection-start-column="65" selection-end-line="39" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06439394">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/react-components.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4526515">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>

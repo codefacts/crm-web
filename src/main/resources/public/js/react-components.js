@@ -1,4 +1,9 @@
 window.AjaxSelect = React.createClass({
+    getDefaultProps: function () {
+        return {
+            defaultValue: ""
+        };
+    },
     getInitialState: function () {
         var _self = this;
         $("body").on("value-selected", function (e, data) {
@@ -13,6 +18,7 @@ window.AjaxSelect = React.createClass({
     render: function () {
         return (
             <input id="ajax-select" className="form-control ajax-select" onClick={this.handleClick}
+                   defaultValue={this.props.defaultValue}
                    value={this.state.value}></input>
         );
     }
@@ -26,25 +32,26 @@ window.AjaxSelectBox = React.createClass({
         };
     },
     getInitialState: function () {
-        return {data: [], pagination: {page: 1, size: 20, total: 0}};
+        return {value: "", data: [], pagination: {page: 1, size: 20, total: 0}};
     },
 
     componentDidMount: function () {
-        this.requestData();
+        this.requestData(this.state.value);
     },
 
-    onComplete: function (e, data) {
+    onComplete: function (data) {
         $('.modal').modal('hide');
         $("body").trigger("value-selected", data);
     },
 
     handleClick: function (e) {
-        this.onComplete(e, $(e.target).attr("data-key"));
+        this.setState({value: $(e.target).attr("data-key")});
+        this.onComplete($(e.target).attr("data-key"));
     },
 
     handleSubmit: function (e) {
         e.preventDefault();
-        this.onComplete(e, $("#ajax-145415").val());
+        this.onComplete($("#ajax-145415").val());
     },
 
     handleKeyEvent: function (e) {
@@ -52,7 +59,7 @@ window.AjaxSelectBox = React.createClass({
 
         setTimeout(function () {
 
-            this.requestData();
+            this.requestData(e.target.value);
 
         }.bind(this), 100);
 
@@ -61,7 +68,7 @@ window.AjaxSelectBox = React.createClass({
     clear: function () {
         console.log("clearing....");
         this.setState({value: ""}, function () {
-            this.requestData(1);
+            this.requestData("", 1);
         }.bind(this));
     },
 
@@ -70,11 +77,11 @@ window.AjaxSelectBox = React.createClass({
     },
 
     handleOkClick: function (e) {
-        this.onComplete(e, $("#ajax-145415").val());
+        this.onComplete($("#ajax-145415").val());
     },
 
     onPageRequest: function (page, size) {
-        this.requestData(page, size);
+        this.requestData(this.state.value, page, size);
     },
 
     render: function () {
@@ -89,80 +96,54 @@ window.AjaxSelectBox = React.createClass({
             );
         });
 
-        return (
-
-            <div>
-
-                <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                                <h4 className="modal-title" id="myModalLabel">Modal title</h4>
-                            </div>
-                            <div className="modal-body">
+        var modalBody = (
+            <div id="ajax-select-box" className="ajax-select-box">
 
 
-                                <div id="ajax-select-box" className="ajax-select-box">
-
-
-                                    <form onSubmit={this.handleSubmit}>
-                                        <div id="search-input" className="form-group">
-                                            <input id="ajax-145415" type="text" className="form-control"
-                                                   placeholder="Search" onKeyUp={this.handleKeyEvent}
-                                                   onChange={this.handleValueChange}
-                                                   value={this.state.value}/>
-                                        </div>
-                                    </form>
-
-                                    <div className="table-responsive" style={{maxHeight: '350px'}}>
-                                        <table className="table table-bordered table-striped table-hover">
-
-                                            <colgroup>
-                                                <col className="col-xs-8"/>
-                                            </colgroup>
-
-                                            <tbody>
-
-                                            {rows}
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-
-                                    <Pagination page={this.state.pagination.page}
-                                                size={this.state.pagination.size}
-                                                total={this.state.pagination.total}
-                                                navLength={this.props.navLength}
-                                                defaultSize={this.props.defaultSize}
-                                                onPageRequest={this.onPageRequest}/>
-
-                                </div>
-
-
-                            </div>
-
-                            <div className="modal-footer">
-                                <span type="button" className="btn btn-danger" data-dismiss="modal">Cancel</span>
-                                <span type="button" className="btn btn-info"
-                                      onClick={this.clear}>Clear</span>
-                                <span type="button" className="btn btn-primary" data-dismiss="modal"
-                                      onClick={this.handleOkClick}>Ok</span>
-                            </div>
-                        </div>
+                <form onSubmit={this.handleSubmit}>
+                    <div id="search-input" className="form-group">
+                        <input id="ajax-145415" type="text" className="form-control"
+                               placeholder="Search" onKeyUp={this.handleKeyEvent}
+                               onChange={this.handleValueChange}
+                               value={this.state.value}/>
                     </div>
+                </form>
+
+                <div className="table-responsive" style={{maxHeight: '350px'}}>
+                    <table className="table table-bordered table-striped table-hover">
+
+                        <colgroup>
+                            <col className="col-xs-8"/>
+                        </colgroup>
+
+                        <tbody>
+
+                        {rows}
+
+                        </tbody>
+                    </table>
                 </div>
+
+
+                <Pagination page={this.state.pagination.page}
+                            size={this.state.pagination.size}
+                            total={this.state.pagination.total}
+                            navLength={this.props.navLength}
+                            defaultSize={this.props.defaultSize}
+                            onPageRequest={this.onPageRequest}/>
 
             </div>
         );
+
+        return (
+            <Modal body={modalBody} onClear={this.clear} okClick={this.handleOkClick}/>
+        );
     },
 
-    requestData: function (page, size) {
+    requestData: function (name, page, size) {
         ajax({
             url: "/search-cluster",
-            data: {name: $("#ajax-145415").val(), page: page, size: size},
+            data: {name: name, page: page || 1, size: size || this.props.defaultSize},
             dataType: 'json',
             cache: false,
             success: function (json) {
