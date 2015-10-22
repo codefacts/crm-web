@@ -3,8 +3,10 @@ window.Modal = React.createClass({
         return {
             body: "Bodal Body",
             onClear: function () {
+
             },
-            okClick: function () {}
+            okClick: function () {
+            }
         };
     },
     render: function () {

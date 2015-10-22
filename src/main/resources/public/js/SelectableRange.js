@@ -1,4 +1,4 @@
-window.Range = React.createClass({
+window.SelectableRange = React.createClass({
 
     getDefaultProps: function () {
         return {

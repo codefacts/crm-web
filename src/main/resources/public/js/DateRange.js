@@ -1,4 +1,4 @@
-window.Range = React.createClass({
+window.DateRange = React.createClass({
 
     getDefaultProps: function () {
         return {
@@ -16,6 +16,21 @@ window.Range = React.createClass({
         };
     }
     ,
+
+    componentDidMount: function () {
+        console.log("Component");
+        $('.date-range-from').datepicker(global_date_picker_config)
+            .on("changeDate", function (e) {
+                console.log(e);
+                this.setState({from: formatDate(e.date)});
+            }.bind(this));
+
+        $('.date-range-to').datepicker(global_date_picker_config)
+            .on("changeDate", function (e) {
+                console.log(e);
+                this.setState({to: formatDate(e.date)});
+            }.bind(this));
+    },
 
     onFromChange: function (e) {
         this.setState({from: e.target.value});
@@ -60,7 +75,8 @@ window.Range = React.createClass({
                 <div className="col-md-6">
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">From</label>
-                        <input type="number" className="form-control" id="exampleInputEmail1" placeholder="From"
+                        <input type="text" className="form-control date-range-from" id="exampleInputEmail1"
+                               placeholder="From"
                                value={this.state.from}
                                onChange={this.onFromChange}/>
                     </div>
@@ -69,7 +85,8 @@ window.Range = React.createClass({
                 <div className="col-md-6">
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">To</label>
-                        <input type="number" className="form-control" id="exampleInputEmail1" placeholder="To"
+                        <input type="text" className="form-control date-range-to" id="exampleInputEmail1"
+                               placeholder="To"
                                value={this.state.to}
                                onChange={this.onToChange}/>
                     </div>

@@ -4,7 +4,6 @@ window.Pagination = React.createClass({
             page: 1,
             size: 100,
             total: 0,
-            defaultSize: 100,
             navLength: 5,
             onPageRequest: function (e) {
                 console.log(e)
