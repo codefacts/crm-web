@@ -2,6 +2,7 @@ package io.crm.web.template;
 
 import io.crm.util.Util;
 import io.crm.web.App;
+import io.crm.web.util.Script;
 import org.watertemplate.Template;
 import org.watertemplate.TemplateMap;
 
@@ -20,11 +21,14 @@ public class Page extends Template {
     private final String page_title;
     private final Template body;
 
-    Page(final String page_title, final Template body, final Collection<String> scripts, final Collection<String> styles, final List<String> hiddens) {
+    Page(final String page_title, final Template body, final Collection<Script> scripts, final Collection<String> styles, final List<String> hiddens) {
         this.page_title = page_title;
         this.body = body;
         add("page_title", page_title);
-        addCollection("scripts", scripts);
+        addCollection("scripts", scripts, ((script, arguments) -> {
+            arguments.add("src", script.src);
+            arguments.add("type", script.type.value);
+        }));
         addCollection("styles", styles);
         addCollection("hiddens", hiddens);
     }

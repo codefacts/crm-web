@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
 
     <!-- Select2 -->
-    <link rel="stylesheet" href="/static/components/select2-3.5.4/select2.css">
-    <link rel="stylesheet" href="/static/components/select2-3.5.4/select2-bootstrap.css">
+    <!--<link rel="stylesheet" href="/static/components/select2-3.5.4/select2.css">-->
+    <!--<link rel="stylesheet" href="/static/components/select2-3.5.4/select2-bootstrap.css">-->
 
     <!--StyleSheet-->
     <link rel="stylesheet" href="/public/css/app.css">
@@ -25,10 +25,20 @@
     <script src="/static/js/jquery-2.1.4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="/static/js/bootstrap.min.js"></script>
+
+    <script src="/static/js/react.js"></script>
+    <script src="/static/js/react-dom.js"></script>
+    <script src="/static/js/browser.min.js"></script>
+
     <!--Select2-->
-    <script src="/static/components/select2-3.5.4/select2.js"></script>
+    <!--<script src="/static/components/select2-3.5.4/select2.js"></script>-->
 
     <script src="/public/js/HashParams.js"></script>
+    <script src="/public/js/my-classes.js"></script>
+    <script src="/public/js/my-functions.js"></script>
+
+    <script src="/public/js/react-components.js" type="text/babel"></script>
+    <script src="/public/js/Pagination.js" type="text/babel"></script>
 
 </head>
 <body>
@@ -40,10 +50,10 @@
     ~hidden~
     :~
 
-    <script src="/public/js/app.js"></script>
+    <script src="/public/js/app.js" type="text/babel"></script>
 
-    ~for sc in scripts:
-    <script src="~sc~"></script>
+    ~for s in scripts:
+    <script src="~s.src~" type="~s.type~"></script>
     :~
 </div>
 </body>

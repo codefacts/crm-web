@@ -12,4 +12,5 @@ final public class ApiEvents {
     public static final String INSERT_FILE_UPLOADS_HISTORY = "INSERT_FILE_UPLOADS_HISTORY";
     public static final String UPDATE_FILE_UPLOADS_HISTORY = "UPDATE_FILE_UPLOADS_HISTORY";
     public static final String CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY = "CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY";
+    public static final String SEARCH_CLUSTER = "SEARCH_CLUSTER";
 }

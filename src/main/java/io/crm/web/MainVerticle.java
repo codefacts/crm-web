@@ -2,18 +2,17 @@ package io.crm.web;
 
 import io.crm.QC;
 import io.crm.model.User;
+import io.crm.promise.Promises;
+import io.crm.promise.intfs.Defer;
+import io.crm.util.Util;
 import io.crm.web.controller.*;
-import io.crm.web.service.callreview.ApiService;
-import io.crm.web.service.callreview.BrCheckerDetailsService;
-import io.crm.web.service.callreview.FileUploadHistoryService;
-import io.crm.web.service.callreview.FileUploadService;
+import io.crm.web.service.callreview.*;
 import io.crm.web.template.*;
-import io.crm.web.template.bootstrap.ModalAlertBuilder;
-import io.crm.web.template.page.DashboardTemplateBuilder;
 import io.crm.web.template.page.LoginTemplate;
 import io.crm.web.util.WebUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpHeaders;
@@ -24,12 +23,14 @@ import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static io.crm.web.util.WebUtils.webHandler;
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
 import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
 
@@ -38,6 +39,7 @@ import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
  */
 final public class MainVerticle extends AbstractVerticle {
     private HttpClient httpClient;
+    private final Set<String> publicUris = publicUris();
 
     //
     @Override
@@ -86,6 +88,22 @@ final public class MainVerticle extends AbstractVerticle {
         vertx.eventBus().consumer(ApiEvents.INSERT_FILE_UPLOADS_HISTORY, new FileUploadHistoryService()::insert);
         vertx.eventBus().consumer(ApiEvents.UPDATE_FILE_UPLOADS_HISTORY, new FileUploadHistoryService()::update);
         vertx.eventBus().consumer(ApiEvents.CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY, new FileUploadHistoryService()::checkIfAlreadyUploadedSuccessfully);
+
+
+        final Defer<ConfigurableApplicationContext> defer = Promises.defer();
+        vertx.executeBlocking((Future<ConfigurableApplicationContext> f) -> {
+            final ConfigurableApplicationContext applicationContext = SpringApplication.run(Services.class, new String[]{});
+            f.complete(applicationContext);
+        }, Util.makeDeferred(defer));
+
+        defer.promise()
+                .success(ctx -> {
+                    final BrCheckerJsonService brCheckerJsonService = ctx.getBean(BrCheckerJsonService.class);
+                    brCheckerJsonService.initialize(vertx);
+                    vertx.eventBus().consumer(ApiEvents.SEARCH_CLUSTER, brCheckerJsonService::searchCluster);
+                })
+                .success(ctx -> System.out.println("++++++++++++++++++ APPLICATION READY +++++++++++++++++"))
+        ;
     }
 
     private void registerFilters(final Router router) {
@@ -118,25 +136,19 @@ final public class MainVerticle extends AbstractVerticle {
     }
 
     private void authFilter(final Router router) {
-        Set<String> publicUris = Arrays.asList(
-                Uris.staticResourcesPattern.value,
-                Uris.publicResourcesPattern.value,
-                Uris.login.value,
-                Uris.register.value,
-                Uris.event_publish_form.value
-        )
-                .stream()
-                .map(uri -> {
-                    final int index = uri.lastIndexOf('/');
-                    if (index > 0) {
-                        return uri.substring(0, index);
-                    }
-                    return uri;
-                })
-                .collect(Collectors.toSet());
-        System.out.println("publicUris: " + publicUris);
 
         router.route().handler(context -> {
+            if (System.getProperty("dev-mode") != null) {
+                context.session().put(ST.currentUser,
+                        new JsonObject()
+                                .put(QC.username, "Sohan")
+                                .put(QC.userId, "br-124")
+                                .put(User.mobile, "01553661069")
+                                .put(QC.userType,
+                                        new JsonObject()
+                                                .put(QC.id, 1)
+                                                .put(QC.name, "Programmer")));
+            }
             if (context.session().get(ST.currentUser) != null) {
                 context.next();
                 return;
@@ -147,7 +159,12 @@ final public class MainVerticle extends AbstractVerticle {
                 context.next();
                 return;
             }
-            System.out.println("Redirecting : " + uri);
+            //Auth Failed
+            if ("XMLHttpRequest".equalsIgnoreCase(context.request().headers().get("X-Requested-With"))) {
+                context.response().setStatusCode(HttpResponseStatus.FORBIDDEN.code())
+                        .end("Please login to authorize your request.");
+                return;
+            }
             context.response().setStatusCode(HttpResponseStatus.TEMPORARY_REDIRECT.code());
             context.response().headers().set(HttpHeaders.LOCATION, Uris.login.value);
             context.response().end();
@@ -175,32 +192,13 @@ final public class MainVerticle extends AbstractVerticle {
 
         new ImageUploadController(vertx, router);
 
+        new BrCheckerJsonController(vertx, router);
+
         loginFormController(router);
         new LoginController(vertx, router).login();
         logoutController(router);
 
-        testController(router);
-    }
-
-    private void testController(final Router router) {
-        router.get("/test").handler(webHandler(ctx -> {
-            ctx.response().end(
-                    new PageBuilder("Test")
-                            .body(
-                                    new DashboardTemplateBuilder()
-                                            .setUser(ctx.session().get(ST.currentUser))
-                                            .setContentTemplate(
-                                                    new ModalAlertBuilder()
-                                                            .setTitle("Congrat")
-                                                            .setBody("Hi")
-                                                            .setShow(true)
-                                                            .createModalAlert()
-                                            )
-                                            .build()
-                            )
-                            .build().render()
-            );
-        }));
+        new TestController().testController(router);
     }
 
     private void otherwiseController(final Router router) {
@@ -239,9 +237,36 @@ final public class MainVerticle extends AbstractVerticle {
         router.route(Uris.staticResourcesPattern.value).handler(
                 StaticHandler.create(App.STATIC_DIRECTORY)
                         .setCachingEnabled(true)
+                        .setFilesReadOnly(true)
+                        .setMaxAgeSeconds(3 * 30 * 24 * 60 * 60)
+                        .setIncludeHidden(false)
                         .setEnableFSTuning(true)
         );
         router.route(Uris.publicResourcesPattern.value).handler(
-                StaticHandler.create(App.PUBLIC_DIRECTORY));
+                StaticHandler.create(App.PUBLIC_DIRECTORY)
+                        .setFilesReadOnly(true)
+                        .setMaxAgeSeconds(0)
+                        .setIncludeHidden(false)
+                        .setEnableFSTuning(true)
+        );
+    }
+
+    private Set<String> publicUris() {
+        return Arrays.asList(
+                Uris.staticResourcesPattern.value,
+                Uris.publicResourcesPattern.value,
+                Uris.login.value,
+                Uris.register.value,
+                Uris.event_publish_form.value
+        )
+                .stream()
+                .map(uri -> {
+                    final int index = uri.lastIndexOf('/');
+                    if (index > 0) {
+                        return uri.substring(0, index);
+                    }
+                    return uri;
+                })
+                .collect(Collectors.toSet());
     }
 }

@@ -1,0 +1,131 @@
+<form id="" class="">
+
+    <div id="" class="row ">
+        <div id="" class="col-md-3">
+            <div class="form-group">
+                <div id="ajax-select">
+
+                </div>
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <select id="tsr_code" class="form-control ajax-select" name="tsr_code">
+
+                    <option value="" selected="">TST Code</option>
+
+                </select>
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <select id="auditor_code" class="form-control ajax-select" name="auditor_code">
+
+                    <option value="" selected="">Auditor Code</option>
+
+                </select>
+            </div>
+        </div>
+        <div id="" class="col-md-3">
+            <div class="form-group">
+                <select id="consumer_name" class="form-control ajax-select" name="consumer_name">
+
+                    <option value="" selected="">Consumer Name</option>
+
+                </select>
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <select id="consumer_mobile" class="form-control ajax-select" name="consumer_mobile">
+
+                    <option value="" selected="">Consumer Mobile</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="" class="row ">
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <input id="call_range" type="text" class="form-control range" placeholder="Call No. Between"
+                       name="call_range" value="">
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <input id="visit_range" type="text" class="form-control range" placeholder="Visit Between"
+                       name="visit_range" value="">
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <select id="brand" class="form-control " name="brand">
+
+                    <option value="" selected="">Brand Match</option>
+
+                </select>
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <select id="contacted" class="form-control " name="contacted">
+
+                    <option value="" selected="">Contacted</option>
+
+                </select>
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <select id="name_match" class="form-control " name="name_match">
+
+                    <option value="" selected="">Name Match</option>
+
+                </select>
+            </div>
+        </div>
+        <div id="" class="col-md-2">
+            <div class="form-group">
+                <select id="call_status" class="form-control " name="call_status">
+
+                    <option value="" selected="">Call Status</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="" class="row ">
+        <div id="" class="col-md-4">
+            <div class="form-group">
+                <input id="date_range" type="text" class="form-control date_range" placeholder="Date Between"
+                       name="date_range" value="">
+            </div>
+        </div>
+        <div id="" class="col-md-8">
+
+            <button id="" type="submit" class="btn btn-primary pull-right btn-form-footer" name="__action__"
+                    value="search">Search
+            </button>
+
+            <button id="" type="submit" class="btn btn-success pull-right btn-form-footer" name="__action__"
+                    value="export">Export
+            </button>
+
+            <button id="" type="submit" class="btn btn-danger pull-right btn-form-footer" name="__action__"
+                    value="clear">Clear
+            </button>
+
+        </div>
+    </div>
+
+
+</form>
+
+<div id="ajax-select-box"></div>
+
+
+<script type="text/babel">ReactDOM.render( < AjaxSelect / >, document.getElementById('ajax-select'));</script>
+<script type="text/babel">ReactDOM.render( < AjaxSelectBox / >, document.getElementById('ajax-select-box'));</script>

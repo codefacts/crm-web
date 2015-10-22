@@ -1,5 +1,6 @@
 package io.crm.web.template;
 
+import io.crm.web.util.Script;
 import org.watertemplate.Template;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Map;
 final public class PageBuilder {
     private String page_title = "";
     private Template body;
-    private final Map<String, String> scripts = new HashMap<>();
+    private final Map<String, Script> scripts = new HashMap<>();
 
     private final Map<String, String> styles = new HashMap<>();
 
@@ -38,8 +39,13 @@ final public class PageBuilder {
         return this;
     }
 
+    public PageBuilder addBabelScript(final String name, final String src) {
+        scripts.put(name, new Script(name, src, Script.Type.Babel));
+        return this;
+    }
+
     public PageBuilder addScript(final String name, final String src) {
-        scripts.put(name, src);
+        scripts.put(name, new Script(name, src, Script.Type.JavaScript));
         return this;
     }
 

@@ -67,11 +67,11 @@ public class BrDetailsRenderer {
                                             object.put("image", id);
                                             j.getMap().forEach((k, v) -> {
                                                 if (k.equals(BrCheckerModel.BAND.name()))
-                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
+                                                    object.put(k, ((Boolean) v) ? "Yes" : "No");
                                                 else if (k.equals(BrCheckerModel.CONTACTED.name()))
-                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
+                                                    object.put(k, ((Boolean) v) ? "Yes" : "No");
                                                 else if (k.equals(BrCheckerModel.NAME_MATCH.name()))
-                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
+                                                    object.put(k, ((Boolean) v) ? "Yes" : "No");
                                                 else object.put(k, v == null ? "" : v + "");
                                             });
                                             return object;

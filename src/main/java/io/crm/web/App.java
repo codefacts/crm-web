@@ -2,6 +2,7 @@ package io.crm.web;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.jdbc.JDBCClient;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 

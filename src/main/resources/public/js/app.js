@@ -1,1 +1,2 @@
-$('.ajax-select').select2()
+
+

@@ -1,5 +1,6 @@
 package io.crm.web.controller;
 
+import io.crm.util.Util;
 import io.crm.web.ApiEvents;
 import io.crm.web.ST;
 import io.crm.web.Uris;
@@ -107,20 +108,15 @@ public class BrCheckerController {
                         .put(name, params.getAll(name).size() > 1 ? params.getAll(name) : params.get(name));
             });
 
-            vertx.eventBus().send(ApiEvents.BR_CHECKER_DETAILS,
+            Util.<JsonObject>send(vertx.eventBus(), ApiEvents.BR_CHECKER_DETAILS,
                     new JsonObject()
                             .put(ST.page, parseInt(params.get(ST.page), 1))
                             .put(ST.size, parseInt(params.get(ST.size), DEFAULT_PAGE_SIZE))
-                            .put(ST.params, paramsJson)
-                    ,
-                    (AsyncResult<Message<JsonObject>> r) -> {
-                        if (r.failed()) {
-                            ctx.fail(r.cause());
-                            return;
-                        }
-
-                        final JsonObject pagination = r.result().body().getJsonObject(ST.pagination, new JsonObject());
-                        final List<JsonObject> data = r.result().body().getJsonArray(ST.data, new JsonArray()).getList();
+                            .put(ST.params, paramsJson))
+                    .error(ctx::fail)
+                    .success((Message<JsonObject> v) -> {
+                        final JsonObject pagination = v.body().getJsonObject(ST.pagination, new JsonObject());
+                        final List<JsonObject> data = v.body().getJsonArray(ST.data, new JsonArray()).getList();
 
                         ctx.response().end(
                                 new BrDetailsRendererBuilder()
@@ -131,7 +127,9 @@ public class BrCheckerController {
                                         .createBrDetailsRenderer()
                                         .render()
                         );
-                    });
+                    })
+            ;
         }));
     }
+
 }
