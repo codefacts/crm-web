@@ -34,6 +34,8 @@ final public class ST {
     public static final String params = "params";
     public static final String totalPages = "totalPages";
     public static final String numberOfElements = "numberOfElements";
+    public static final String search = "search";
+    public static final String clear = "clear";
 
     public static final class Form {
         public static final String __action__ = "__action__";

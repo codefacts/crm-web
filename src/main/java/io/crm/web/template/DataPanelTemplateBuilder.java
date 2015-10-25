@@ -63,9 +63,9 @@ public class DataPanelTemplateBuilder {
         return this;
     }
 
-    public DataPanelTemplateBuilder pagination(final String uriPath, final Pagination pagination, final int PAGINATION_NAV_LENGTH) {
+    public DataPanelTemplateBuilder pagination(final String uriPath, String queryString, final Pagination pagination, final int PAGINATION_NAV_LENGTH) {
         setPaginationTemplate(
-                WebUtils.createPaginationTemplateBuilder(uriPath, pagination, PAGINATION_NAV_LENGTH)
+                WebUtils.createPaginationTemplateBuilder(uriPath, queryString, pagination, PAGINATION_NAV_LENGTH)
                         .createPaginationTemplate()
         );
         return this;

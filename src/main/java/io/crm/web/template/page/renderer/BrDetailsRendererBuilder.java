@@ -10,6 +10,7 @@ public class BrDetailsRendererBuilder {
     private String title;
     private JsonObject pagination;
     private List<JsonObject> data;
+    private List<String> callStatuses;
 
     public BrDetailsRendererBuilder setCtx(RoutingContext ctx) {
         this.ctx = ctx;
@@ -32,6 +33,11 @@ public class BrDetailsRendererBuilder {
     }
 
     public BrDetailsRenderer createBrDetailsRenderer() {
-        return new BrDetailsRenderer(ctx, title, pagination, data);
+        return new BrDetailsRenderer(ctx, callStatuses, title, pagination, data);
+    }
+
+    public BrDetailsRendererBuilder setCallStatuses(final List<String> list) {
+        this.callStatuses = list;
+        return this;
     }
 }

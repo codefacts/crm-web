@@ -59,26 +59,26 @@ final public class WebUtils {
         }
     }
 
-    public static PaginationTemplateBuilder createPaginationTemplateBuilder(final String uriPath, final Pagination pagination, final int paginationNavLength) {
+    public static PaginationTemplateBuilder createPaginationTemplateBuilder(final String uriPath, final String queryString, final Pagination pagination, final int paginationNavLength) {
         int size = pagination.getSize();
         return new PaginationTemplateBuilder()
                 .addClass(BootstrapCss.PULL_RIGHT.value)
-                .first(uriPath + pageQueryString(pagination.first(), size), pagination.isFirst())
-                .prev(uriPath + pageQueryString(pagination.prev(), size), pagination.hasPrev())
+                .first(uriPath + pageQueryString(pagination.first(), size, queryString), pagination.isFirst())
+                .prev(uriPath + pageQueryString(pagination.prev(), size, queryString), pagination.hasPrev())
                 .addAllItems(items -> {
                     pagination.nav(paginationNavLength).forEach(p -> items.add(
                             new PaginationItemTemplateBuilder()
                                     .setLabel("" + p)
-                                    .setHref(uriPath + pageQueryString(p, size))
+                                    .setHref(uriPath + pageQueryString(p, size, queryString))
                                     .addClass(pagination.isCurrentPage(p) ? BootstrapCss.ACTIVE.value : "")
                                     .createPaginationItemTemplate()
                     ));
                 })
-                .next(uriPath + pageQueryString(pagination.next(), size), pagination.hasNext())
-                .last(uriPath + pageQueryString(pagination.last(), size), pagination.isLast());
+                .next(uriPath + pageQueryString(pagination.next(), size, queryString), pagination.hasNext())
+                .last(uriPath + pageQueryString(pagination.last(), size, queryString), pagination.isLast());
     }
 
-    private static String pageQueryString(int prev, int size) {
-        return String.format("?page=%d&size=%d", prev, size);
+    private static String pageQueryString(final int prev, final int size, final String queryString) {
+        return String.format("?page=%d&size=%d&%s", prev, size, queryString);
     }
 }

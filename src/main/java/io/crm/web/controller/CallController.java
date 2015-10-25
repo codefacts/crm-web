@@ -59,7 +59,7 @@ final public class CallController {
                 new DataPanelTemplateBuilder("Data")
                         .setHeader(null)
                         .setData(EMPTY_LIST)
-                        .pagination(null, new Pagination(0, 20, 0), 10)
+                        .pagination(null, "", new Pagination(0, 20, 0), 10)
                         .setFooter(new JsonObject())
                         .build();
     }

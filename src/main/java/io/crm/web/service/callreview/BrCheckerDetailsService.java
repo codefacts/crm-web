@@ -203,7 +203,7 @@ public class BrCheckerDetailsService {
 
             final JsonObject params = message.body().getJsonObject(ST.params, new JsonObject());
             final String queryString = String.join("&", params.getMap().entrySet().stream().map(e -> e.getKey() + "=" +
-                    ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode((String) e.getValue(), StandardCharsets.UTF_8.name())))
+                    ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode(e.getValue() instanceof JsonArray ? ((JsonArray) e.getValue()).getString(0) : e.getValue().toString(), StandardCharsets.UTF_8.name())))
                     .collect(Collectors.toList()));
             httpClient
                     .get(apiPort, apiHost, "/BrChecker/details?" + queryString)
