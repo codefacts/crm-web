@@ -13,4 +13,10 @@ final public class ApiEvents {
     public static final String UPDATE_FILE_UPLOADS_HISTORY = "UPDATE_FILE_UPLOADS_HISTORY";
     public static final String CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY = "CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY";
     public static final String SEARCH_CLUSTER = "SEARCH_CLUSTER";
+    public static final String SEARCH_TSR_CODE = "SEARCH_TSR_CODE";
+    public static final String SEARCH_AUDITOR_CODE = "SEARCH_AUDITOR_CODE";
+
+    public static final String SEARCH_CONSUMER_NAME = "SEARCH_CONSUMER_NAME";
+    public static final String SEARCH_CONSUMER_MOBILE = "SEARCH_CONSUMER_MOBILE";
+    public static final String FIND_ALL_CALL_STATUSES = "FIND_ALL_CALL_STATUSES";
 }

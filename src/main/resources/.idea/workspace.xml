@@ -1,7 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="" />
+    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/BrCheckerDetailsFilter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/js/BrCheckerDetailsFilterJS.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.js" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker.min.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker.standalone.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker.standalone.min.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker3.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker3.min.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker3.standalone.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\css\bootstrap-datepicker3.standalone.min.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\js\bootstrap-datepicker.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\js\bootstrap-datepicker.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.ar.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.az.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.bg.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.bs.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.ca.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.cs.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.cy.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.da.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.de.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.el.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.en-GB.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.es.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.et.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.eu.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.fa.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.fi.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.fo.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.fr-CH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.fr.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.gl.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.he.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.hr.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.hu.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.hy.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.id.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.is.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.it-CH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.it.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.ja.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.ka.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.kh.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.kk.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.kr.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.lt.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.lv.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.me.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.mk.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.ms.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.nb.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.nl-BE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.nl.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.no.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.pl.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.pt-BR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.pt.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.ro.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.rs-latin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.rs.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.ru.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.sk.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.sl.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.sq.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.sr-latin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.sr.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.sv.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.sw.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.th.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.tr.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.uk.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.vi.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.zh-CN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\IdeaProjects\crm-web\target\classes\static\components\bootstrap-datepicker-1.4.1\locales\bootstrap-datepicker.zh-TW.min.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ApiEvents.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ApiEvents.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/MainVerticle.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/MainVerticle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/Uris.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/Uris.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/AjaxSelectBox.js" afterPath="$PROJECT_DIR$/public/js/AjaxSelectBox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/ApiEvents.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/ApiEvents.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/repository/BrCheckerDataRepositoryCustom.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/repository/BrCheckerDataRepositoryCustom.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/repository/BrCheckerDataRepositoryImpl.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/repository/BrCheckerDataRepositoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/page/BrCheckerInfoView.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/BrCheckerInfoView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/controller/BrCheckerJsonController.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/BrCheckerJsonController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/BrCheckerJsonService.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/service/callreview/BrCheckerJsonService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/page/renderer/BrDetailsRenderer.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/renderer/BrDetailsRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/DateRange.js" afterPath="$PROJECT_DIR$/public/js/DateRange.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/MainVerticle.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/MainVerticle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Modal.js" afterPath="$PROJECT_DIR$/public/js/Modal.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Pagination.js" afterPath="$PROJECT_DIR$/public/js/Pagination.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Range.js" afterPath="$PROJECT_DIR$/public/js/Range.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/Uris.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/Uris.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/js/app.js" afterPath="$PROJECT_DIR$/../../../target/classes/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="html_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,7 +117,68 @@
     <favorites_list name="html_app" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="AjaxSelectBox.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="br-checker-details-filter.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7405303">
+              <caret line="158" column="30" selection-start-line="158" selection-start-column="30" selection-end-line="158" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pagination.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/Pagination.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="br-checker-details-filter.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.576923">
+              <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DateRange.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Range.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/Range.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,19 +204,22 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/public/js/my-classes.js" />
-        <option value="$PROJECT_DIR$/public/js/Modal.js" />
-        <option value="$PROJECT_DIR$/public/js/Range.js" />
         <option value="$PROJECT_DIR$/public/js/config.js" />
-        <option value="$PROJECT_DIR$/public/js/DateRange.js" />
         <option value="$PROJECT_DIR$/public/js/my-functions.js" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/public/js/DatePicker.js" />
         <option value="$PROJECT_DIR$/templates-s/en_US/page.html" />
         <option value="$PROJECT_DIR$/public/js/SelectableRange.js" />
-        <option value="$PROJECT_DIR$/public/js/Pagination.js" />
         <option value="$PROJECT_DIR$/public/js/react-components.js" />
         <option value="$PROJECT_DIR$/templates-s/en_US/ajax-select.html" />
+        <option value="$PROJECT_DIR$/public/js/Modal.js" />
+        <option value="$PROJECT_DIR$/public/js/br-checker-details-filter.js" />
+        <option value="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.html" />
+        <option value="$PROJECT_DIR$/public/js/Pagination.js" />
         <option value="$PROJECT_DIR$/public/js/AjaxSelectBox.js" />
+        <option value="$PROJECT_DIR$/public/js/DateRange.js" />
+        <option value="$PROJECT_DIR$/public/js/Range.js" />
+        <option value="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.js" />
       </list>
     </option>
   </component>
@@ -133,6 +293,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="en_US" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html_app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates-s" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="en_US" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -233,9 +415,14 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates-s/en_US/pages" />
     <property name="JavaScriptLanguageLevel" value="JSX" />
     <property name="recentsLimit" value="5" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\crm-web\src\main\resources\templates-s\en_US\pages" />
+    </key>
   </component>
   <component name="RunManager" selected="Node.js.react-components.js">
     <configuration default="false" name="react-components.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="$PROJECT_DIR$/public/js/AjaxSelectBox.js" working-dir="$PROJECT_DIR$/public/js">
@@ -309,8 +496,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1378" height="738" extended-state="1" />
-    <editor active="false" />
+    <frame x="-9" y="-9" width="1378" height="738" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2539326" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -336,6 +523,31 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976827" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2539326" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976827" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -373,14 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -413,22 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19507575">
-          <caret line="25" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="110" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Range.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
-          <caret line="7" column="5" selection-start-line="0" selection-start-column="0" selection-end-line="93" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/SelectableRange.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -445,14 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Pagination.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates-s/en_US/ajax-select.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3446215">
@@ -461,10 +641,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Range.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Pagination.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57954544">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7405303">
+          <caret line="158" column="30" selection-start-line="158" selection-start-column="30" selection-end-line="158" selection-end-column="30" />
           <folding />
         </state>
       </provider>

@@ -101,6 +101,11 @@ final public class MainVerticle extends AbstractVerticle {
                     final BrCheckerJsonService brCheckerJsonService = ctx.getBean(BrCheckerJsonService.class);
                     brCheckerJsonService.initialize(vertx);
                     vertx.eventBus().consumer(ApiEvents.SEARCH_CLUSTER, brCheckerJsonService::searchCluster);
+                    vertx.eventBus().consumer(ApiEvents.SEARCH_TSR_CODE, brCheckerJsonService::searchTSRCode);
+                    vertx.eventBus().consumer(ApiEvents.SEARCH_AUDITOR_CODE, brCheckerJsonService::searchAuditorCode);
+                    vertx.eventBus().consumer(ApiEvents.SEARCH_CONSUMER_NAME, brCheckerJsonService::searchConsumerName);
+                    vertx.eventBus().consumer(ApiEvents.SEARCH_CONSUMER_MOBILE, brCheckerJsonService::searchConsumerMobile);
+                    vertx.eventBus().consumer(ApiEvents.FIND_ALL_CALL_STATUSES, brCheckerJsonService::findAllCallStatuses);
                 })
                 .success(ctx -> System.out.println("++++++++++++++++++ APPLICATION READY +++++++++++++++++"))
         ;
@@ -269,4 +274,5 @@ final public class MainVerticle extends AbstractVerticle {
                 })
                 .collect(Collectors.toSet());
     }
+    
 }

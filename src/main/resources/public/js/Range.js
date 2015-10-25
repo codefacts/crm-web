@@ -2,53 +2,63 @@ window.Range = React.createClass({
 
     getDefaultProps: function () {
         return {
-            from: "from",
-            to: "to"
+            from: "",
+            to: "",
+            value: "",
+            modalId: "",
+            modalTitle: "",
+            placeholder: "",
+            name: ""
         };
     }
     ,
 
     getInitialState: function () {
+        if (!!this.props.value) {
+            var splits = this.props.value.split("-", 2)
+            splits = splits.length < 2 ? ["", ""] : splits;
+            return {
+                from: splits[0].trim(),
+                to: splits[1].trim(),
+                value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " - " + this.props.to) : "")
+            };
+        }
         return {
             from: this.props.from,
             to: this.props.to,
-            value: (this.props.from + " - " + this.props.to)
+            value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " - " + this.props.to) : "")
         };
     }
     ,
 
     onFromChange: function (e) {
-        this.setState({from: e.target.value});
+        this.setState({
+            from: e.target.value,
+        });
     }
     ,
 
     onToChange: function (e) {
-        this.setState({to: e.target.value});
+        this.setState({
+            to: e.target.value,
+        });
     }
     ,
 
     onClear: function (e) {
-        this.setState({from: "", to: ""});
+        this.setState({
+            from: "",
+            to: "",
+        });
     }
     ,
 
     okClick: function (e) {
-        console.log(this.state.from + " - " + this.state.to)
-        this.setState({
-            value: (this.state.from + " - " + this.state.to)
-        });
     }
     ,
 
     onClick: function (e) {
-        $('.modal').modal('show');
-    },
-
-    onChange: function (e) {
-        console.log(e.target.value);
-        this.setState({
-            value: e.target.value
-        });
+        $('#' + this.props.modalId).modal('show');
     },
 
     render: function () {
@@ -79,14 +89,17 @@ window.Range = React.createClass({
 
         );
 
+        var value = (((this.state.from != "") || (this.state.to != "")) ? (this.state.from + " - " + this.state.to) : "");
+
         return (
             <div className="form-group">
-                <input id="call_range" type="text" className="form-control range" placeholder="Call No. Between"
-                       name="call_range"
-                       value={this.state.value}
+                <input id="call_range" type="text" className="form-control range" placeholder={this.props.placeholder}
+                       name={this.props.name}
+                       value={value}
                        onChange={this.onChange}
                        onClick={this.onClick}/>
-                <Modal body={modalBody} onClear={this.onClear} okClick={this.okClick}/>
+                <Modal body={modalBody} onClear={this.onClear} okClick={this.okClick} id={this.props.modalId}
+                       title={this.props.modalTitle}/>
             </div>
         );
     }

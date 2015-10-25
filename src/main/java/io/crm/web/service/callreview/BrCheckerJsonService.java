@@ -6,7 +6,6 @@ import io.crm.promise.intfs.Defer;
 import io.crm.util.ExceptionUtil;
 import io.crm.util.Util;
 import io.crm.web.ST;
-import io.crm.web.service.callreview.entity.BrCheckerData;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.service.callreview.repository.BrCheckerDataRepository;
 import io.vertx.core.Future;
@@ -86,7 +85,150 @@ public class BrCheckerJsonService {
         }, message);
     }
 
+    public void searchTSRCode(final Message<JsonObject> message) {
+        ExceptionUtil.withReplyRun(() -> {
+            final Defer<JsonObject> defer = Promises.defer();
+
+            vertx.executeBlocking((Future<JsonObject> f) -> {
+                final JsonObject criteria = message.body();
+                final Page<Object[]> page = repository.searchTSRCode(criteria);
+                final List<Object[]> list = page.getContent();
+                final List<JsonObject> objectList = list
+                        .stream()
+                        .map(v -> new JsonObject().put(BrCheckerModel.TSR_CODE.name(), v[0]).put(BrCheckerModel.TSR_NAME.name(), v[1]))
+                        .collect(Collectors.toList());
+
+                f.complete(
+                        new JsonObject()
+                                .put(ST.data, objectList)
+                                .put(ST.pagination, new JsonObject()
+                                        .put(ST.page, page.getNumber() + 1)
+                                        .put(ST.numberOfElements, page.getNumberOfElements())
+                                        .put(ST.size, page.getSize())
+                                        .put(ST.totalPages, page.getTotalPages())
+                                        .put(ST.total, page.getTotalElements()))
+                );
+            }, Util.makeDeferred(defer));
+
+            defer.promise()
+                    .success(page ->
+                            message.reply(page))
+                    .error(e ->
+                            ExceptionUtil.fail(message, e));
+
+        }, message);
+    }
+
+    public void searchAuditorCode(final Message<JsonObject> message) {
+        ExceptionUtil.withReplyRun(() -> {
+            final Defer<JsonObject> defer = Promises.defer();
+
+            vertx.executeBlocking((Future<JsonObject> f) -> {
+                final JsonObject criteria = message.body();
+                final Page<Object[]> page = repository.searchAuditorCode(criteria);
+                final List<Object[]> list = page.getContent();
+                final List<JsonObject> objectList = list
+                        .stream()
+                        .map(v -> new JsonObject().put(BrCheckerModel.AUDITOR_CODE.name(), v[0]).put(BrCheckerModel.AUDITOR_NAME.name(), v[1]))
+                        .collect(Collectors.toList());
+
+                f.complete(
+                        new JsonObject()
+                                .put(ST.data, objectList)
+                                .put(ST.pagination, new JsonObject()
+                                        .put(ST.page, page.getNumber() + 1)
+                                        .put(ST.numberOfElements, page.getNumberOfElements())
+                                        .put(ST.size, page.getSize())
+                                        .put(ST.totalPages, page.getTotalPages())
+                                        .put(ST.total, page.getTotalElements()))
+                );
+            }, Util.makeDeferred(defer));
+
+            defer.promise()
+                    .success(page ->
+                            message.reply(page))
+                    .error(e ->
+                            ExceptionUtil.fail(message, e));
+
+        }, message);
+    }
+
+    public void searchConsumerName(final Message<JsonObject> message) {
+        ExceptionUtil.withReplyRun(() -> {
+            final Defer<JsonObject> defer = Promises.defer();
+
+            vertx.executeBlocking((Future<JsonObject> f) -> {
+                final JsonObject criteria = message.body();
+                final Page<String> page = repository.searchConsumerName(criteria);
+                final List<String> list = page.getContent();
+                final List<JsonObject> objectList = list
+                        .stream()
+                        .map(v -> new JsonObject().put(BrCheckerModel.CONSUMER_NAME.name(), v))
+                        .collect(Collectors.toList());
+
+                f.complete(
+                        new JsonObject()
+                                .put(ST.data, objectList)
+                                .put(ST.pagination, new JsonObject()
+                                        .put(ST.page, page.getNumber() + 1)
+                                        .put(ST.numberOfElements, page.getNumberOfElements())
+                                        .put(ST.size, page.getSize())
+                                        .put(ST.totalPages, page.getTotalPages())
+                                        .put(ST.total, page.getTotalElements()))
+                );
+            }, Util.makeDeferred(defer));
+
+            defer.promise()
+                    .success(page ->
+                            message.reply(page))
+                    .error(e ->
+                            ExceptionUtil.fail(message, e));
+
+        }, message);
+    }
+
+    public void searchConsumerMobile(final Message<JsonObject> message) {
+        ExceptionUtil.withReplyRun(() -> {
+            final Defer<JsonObject> defer = Promises.defer();
+
+            vertx.executeBlocking((Future<JsonObject> f) -> {
+                final JsonObject criteria = message.body();
+                final Page<String> page = repository.searchConsumerMobile(criteria);
+                final List<String> list = page.getContent();
+                final List<JsonObject> objectList = list
+                        .stream()
+                        .map(v -> new JsonObject().put(BrCheckerModel.CONSUMER_MOBILE_NUMBER.name(), v))
+                        .collect(Collectors.toList());
+
+                f.complete(
+                        new JsonObject()
+                                .put(ST.data, objectList)
+                                .put(ST.pagination, new JsonObject()
+                                        .put(ST.page, page.getNumber() + 1)
+                                        .put(ST.numberOfElements, page.getNumberOfElements())
+                                        .put(ST.size, page.getSize())
+                                        .put(ST.totalPages, page.getTotalPages())
+                                        .put(ST.total, page.getTotalElements()))
+                );
+            }, Util.makeDeferred(defer));
+
+            defer.promise()
+                    .success(page ->
+                            message.reply(page))
+                    .error(e ->
+                            ExceptionUtil.fail(message, e));
+
+        }, message);
+    }
+
     public static void main(String... args) {
 
+    }
+
+    public void findAllCallStatuses(final Message<JsonObject> message) {
+        ExceptionUtil.withReplyRun(() -> {
+            final List<String> callStatuses = repository.findAllCallStatuses();
+            message.reply(new JsonArray(callStatuses));
+        }, message);
     }
 }

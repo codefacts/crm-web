@@ -11,4 +11,14 @@ import java.util.List;
  */
 public interface BrCheckerDataRepositoryCustom {
     public Page<String> searchClusterName(final JsonObject criteria);
+
+    Page<Object[]> searchTSRCode(JsonObject criteria);
+
+    Page<Object[]> searchAuditorCode(JsonObject criteria);
+
+    Page<String> searchConsumerName(JsonObject criteria);
+
+    Page<String> searchConsumerMobile(JsonObject criteria);
+
+    List<String> findAllCallStatuses();
 }

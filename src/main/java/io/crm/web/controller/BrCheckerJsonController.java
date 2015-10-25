@@ -25,6 +25,10 @@ final public class BrCheckerJsonController {
         this.vertx = vertx;
         this.router = router;
         searchClusterAjax(router);
+        searchTsrCodeAjax(router);
+        searchAuditorCodeAjax(router);
+        searchConsumerNameAjax(router);
+        searchConsumerMobileAjax(router);
     }
 
     public void searchClusterAjax(final Router router) {
@@ -38,12 +42,96 @@ final public class BrCheckerJsonController {
             if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
 
             Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_CLUSTER, criteria)
-                    .error(ctx::fail)
                     .success(message -> {
                         ctx.response().end(
                                 message.body().encodePrettily()
                         );
                     })
+                    .error(ctx::fail)
+            ;
+        }));
+    }
+
+    public void searchTsrCodeAjax(final Router router) {
+        router.get(Uris.searchTsrCode.value).handler(WebUtils.webHandler(ctx -> {
+
+            final JsonObject criteria = new JsonObject();
+            final MultiMap params = ctx.request().params();
+
+            criteria.put(ST.page, Converters.toInt(params.get(ST.page)));
+            criteria.put(ST.size, Converters.toInt(params.get(ST.size)));
+            if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
+
+            Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_TSR_CODE, criteria)
+                    .success(message -> {
+                        ctx.response().end(
+                                message.body().encodePrettily()
+                        );
+                    })
+                    .error(ctx::fail)
+            ;
+        }));
+    }
+
+    public void searchAuditorCodeAjax(final Router router) {
+        router.get(Uris.searchAuditorCode.value).handler(WebUtils.webHandler(ctx -> {
+
+            final JsonObject criteria = new JsonObject();
+            final MultiMap params = ctx.request().params();
+
+            criteria.put(ST.page, Converters.toInt(params.get(ST.page)));
+            criteria.put(ST.size, Converters.toInt(params.get(ST.size)));
+            if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
+
+            Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_AUDITOR_CODE, criteria)
+                    .success(message -> {
+                        ctx.response().end(
+                                message.body().encodePrettily()
+                        );
+                    })
+                    .error(ctx::fail)
+            ;
+        }));
+    }
+
+    public void searchConsumerNameAjax(final Router router) {
+        router.get(Uris.searchConsumerName.value).handler(WebUtils.webHandler(ctx -> {
+
+            final JsonObject criteria = new JsonObject();
+            final MultiMap params = ctx.request().params();
+
+            criteria.put(ST.page, Converters.toInt(params.get(ST.page)));
+            criteria.put(ST.size, Converters.toInt(params.get(ST.size)));
+            if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
+
+            Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_CONSUMER_NAME, criteria)
+                    .success(message -> {
+                        ctx.response().end(
+                                message.body().encodePrettily()
+                        );
+                    })
+                    .error(ctx::fail)
+            ;
+        }));
+    }
+
+    public void searchConsumerMobileAjax(final Router router) {
+        router.get(Uris.searchConsumerMobile.value).handler(WebUtils.webHandler(ctx -> {
+
+            final JsonObject criteria = new JsonObject();
+            final MultiMap params = ctx.request().params();
+
+            criteria.put(ST.page, Converters.toInt(params.get(ST.page)));
+            criteria.put(ST.size, Converters.toInt(params.get(ST.size)));
+            if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
+
+            Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_CONSUMER_MOBILE, criteria)
+                    .success(message -> {
+                        ctx.response().end(
+                                message.body().encodePrettily()
+                        );
+                    })
+                    .error(ctx::fail)
             ;
         }));
     }

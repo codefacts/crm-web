@@ -19,7 +19,7 @@ window.Pagination = React.createClass({
         this.handleRequest(e);
     },
 
-    onPreviousClick: function (e) {
+    onPrevClick: function (e) {
         this.handleRequest(e);
     },
 
@@ -57,7 +57,7 @@ window.Pagination = React.createClass({
             <nav>
                 <ul className="pagination pagination-sm" style={{marginBottom: '0'}}>
                     <li className={!pu.hasPrev() ? "disabled" : ""}>
-                        <a href="#" aria-label="Prev" data-page={pu.prev()} onClick={this.onPreviousClick}>
+                        <a href="#" aria-label="Prev" data-page={pu.prev()} onClick={this.onPrevClick}>
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>

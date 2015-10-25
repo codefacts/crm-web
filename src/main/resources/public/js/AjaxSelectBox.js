@@ -3,13 +3,22 @@ window.AjaxSelectBox = React.createClass({
         return {
             page: 1,
             total: 0,
+            name: "",
+            value: "",
             size: 100,
-            navLength: 5
+            navLength: 5,
+            modalId: "",
+            modalTitle: "",
+            url: "",
+            placeholder: "",
+            keyValueParser: function (obj) {
+                return {key: "", value: ""};
+            }
         };
     },
     getInitialState: function () {
         return {
-            value: "",
+            value: this.props.value,
             data: [],
             pagination: {page: this.props.page, size: this.props.size, total: this.props.total}
         };
@@ -20,17 +29,17 @@ window.AjaxSelectBox = React.createClass({
     },
 
     onComplete: function (data) {
-        $('.modal').modal('hide');
+        $('#' + this.props.modalId).modal('hide');
         $("body").trigger("value-selected", data);
     },
 
     onInputClick: function (e) {
-        $('.modal').modal('show');
+        $('#' + this.props.modalId).modal('show');
     },
 
     handleClick: function (e) {
-        this.setState({value: $(e.target).attr("data-key")});
-        this.onComplete($(e.target).attr("data-key"));
+        this.setState({value: $(e.target).attr("data-obj_key")});
+        this.onComplete($(e.target).attr("data-obj_key"));
     },
 
     handleSubmit: function (e) {
@@ -52,7 +61,7 @@ window.AjaxSelectBox = React.createClass({
     clear: function () {
         console.log("clearing....");
         this.setState({value: ""}, function () {
-            this.requestData("", 1);
+            this.requestData("");
         }.bind(this));
     },
 
@@ -72,10 +81,10 @@ window.AjaxSelectBox = React.createClass({
         var _self = this;
 
         var rows = this.state.data.map(function (d) {
-            d = {key: d.CLUSTER_NAME, value: d.CLUSTER_NAME}
+            d = _self.props.keyValueParser(d);
             return (
-                <tr key={'row-' + d.key} onClick={_self.handleClick}>
-                    <td data-key={d.key}>{d.value}</td>
+                <tr key={Math.random()} obj_key={'row-' + d.key} onClick={_self.handleClick}>
+                    <td data-obj_key={d.key}>{d.value}</td>
                 </tr>
             );
         });
@@ -119,16 +128,19 @@ window.AjaxSelectBox = React.createClass({
         return (
             <div className="form-group">
                 <input id="ajax-select" className="form-control ajax-select" onClick={this.onInputClick}
+                       placeholder={this.props.placeholder}
                        defaultValue={this.props.defaultValue}
+                       name={this.props.name}
                        value={this.state.value}></input>
-                <Modal body={modalBody} onClear={this.clear} okClick={this.handleOkClick}/>
+                <Modal id={this.props.modalId} title={this.props.modalTitle}
+                       body={modalBody} onClear={this.clear} okClick={this.handleOkClick}/>
             </div>
         );
     },
 
     requestData: function (name, page, size) {
         ajax({
-            url: "/search-cluster",
+            url: this.props.url,
             data: {name: name, page: page || 1, size: size || this.props.size},
             dataType: 'json',
             cache: false,

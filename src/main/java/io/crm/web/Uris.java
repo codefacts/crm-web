@@ -18,7 +18,12 @@ public enum Uris {
     br_checker_view("/br-details/view", "Br Checker Info"),
     br_checker_export_settings("/br-details/export-settings", "Export Settings"),
     searchCluster("/search-cluster", "Search Cluster"),
-    BrCheckerImages("/br-checker/images", "Br Checker Images"), googleMap("/google-map", "Google Map");
+    BrCheckerImages("/br-checker/images", "Br Checker Images"),
+    googleMap("/google-map", "Google Map"),
+    searchConsumerMobile("/search-consumer-mobile", "Search Consumer Mobile"),
+    searchConsumerName("/search-consumer-name", "Search Consumer Name"),
+    searchAuditorCode("/search-auditor-code", "Search Auditor Code"),
+    searchTsrCode("/search-tsr-code", "Search TSR Code");
 
     public final String value;
     public final String label;

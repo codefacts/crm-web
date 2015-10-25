@@ -1,23 +1,25 @@
 package io.crm.web.template.page.renderer;
 
 import com.google.common.collect.ImmutableMap;
+import io.crm.util.ExceptionUtil;
 import io.crm.web.ST;
 import io.crm.web.Uris;
 import io.crm.web.service.callreview.BrCheckerDetailsService;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.template.*;
 import io.crm.web.template.form.DefaultFooterBuilder;
+import io.crm.web.template.page.BrCheckerDetailsFilter;
 import io.crm.web.template.page.BrCheckerDetailsTemplateBuilder;
 import io.crm.web.template.page.BrCheckerExportSettings;
 import io.crm.web.template.page.DashboardTemplateBuilder;
 import io.crm.web.util.Pagination;
 import io.crm.web.util.WebUtils;
-import io.vertx.core.buffer.Buffer;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import org.watertemplate.Template;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,19 +27,32 @@ import java.util.stream.Collectors;
 /**
  * Created by someone on 19/10/2015.
  */
-public class BrDetailsRenderer {
+final public class BrDetailsRenderer {
     private static final int PAGINATION_NAV_LENGTH = 15;
     final RoutingContext ctx;
     private final String title;
     final JsonObject pagination;
     final List<JsonObject> data;
+    private final String queryString;
+    private final List<String> callStatuses;
 
-    BrDetailsRenderer(RoutingContext ctx, String title, JsonObject pagination, List<JsonObject> data) {
+    BrDetailsRenderer(final RoutingContext ctx, final List<String> callStatuses, final String title,
+                      final JsonObject pagination, final List<JsonObject> data) {
 
         this.ctx = ctx;
         this.title = title;
         this.pagination = pagination;
         this.data = data;
+        this.callStatuses = callStatuses;
+
+        final StringBuilder builder = new StringBuilder();
+        ctx.request().params().remove(ST.page).remove(ST.size);
+        ctx.request().params().forEach(e -> builder
+                .append(e.getKey())
+                .append("=")
+                .append(ExceptionUtil.sallowCall(() -> URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8.name())))
+                .append("&"));
+        queryString = builder.length() > 0 ? builder.deleteCharAt(builder.length() - 1).toString() : "";
     }
 
     private JsonObject header() {
@@ -62,7 +77,7 @@ public class BrDetailsRenderer {
                                         .stream()
                                         .map(j -> {
                                             final JsonObject object = new JsonObject();
-                                            final String id = String.format("<a href=\"%s\">%s</a>", Uris.br_checker_view.value + "?id=" + j.getInteger("id"),
+                                            final String id = String.format("<a href=\"%s\">%s</a>", imageUrl(j),
                                                     String.format("<img src=\"/br-checker/images?name=%s\" style=\"max-height: 57px;\"/>", j.getString(BrCheckerModel.PICTURE_NAME.name())));
                                             object.put("image", id);
                                             j.getMap().forEach((k, v) -> {
@@ -83,9 +98,13 @@ public class BrDetailsRenderer {
                                 "Export\n" +
                                 "</button>")
                         .setPaginationTemplate(
-                                WebUtils.createPaginationTemplateBuilder(uriPath, pagination, PAGINATION_NAV_LENGTH).createPaginationTemplate()
+                                WebUtils.createPaginationTemplateBuilder(uriPath, queryString, pagination, PAGINATION_NAV_LENGTH).createPaginationTemplate()
                         )
                         .build();
+    }
+
+    private String imageUrl(JsonObject j) {
+        return Uris.br_checker_view.value + "?id=" + j.getInteger("id");
     }
 
     public String render() {
@@ -96,7 +115,7 @@ public class BrDetailsRenderer {
                                 .setContentTemplate(
                                         new BrCheckerDetailsTemplateBuilder()
                                                 .setFiltersPanel(
-                                                        filtersPanel()
+                                                        filtersPanel2()
                                                 )
                                                 .setDataPanel(
                                                         dataPanel(header(), data, null, pagination, ctx.request().path()))
@@ -115,6 +134,10 @@ public class BrDetailsRenderer {
                 .build().render();
     }
 
+    private Template filtersPanel2() {
+        return new BrCheckerDetailsFilter(ctx.request().params(), callStatuses);
+    }
+
     private Template filtersPanel() {
         return new FiltersPanelTemplateBuilder("Filters")
                 .configureForm(form -> {
@@ -122,7 +145,7 @@ public class BrDetailsRenderer {
                             .addRow(row -> {
                                 row
                                         .addSelectInput("cluster", "ajax-select", "cluster", ImmutableMap.of("", "Cluster", "1", "1", "2", "1", "3", "1"), "col-md-3")
-                                        .addSelectInput("tsr_code", "ajax-select", "tsr_code", ImmutableMap.of("", "TST Code"), "col-md-2")
+                                        .addSelectInput("tsr_code", "ajax-select", "tsr_code", ImmutableMap.of("", "TSR Code"), "col-md-2")
                                         .addSelectInput("auditor_code", "ajax-select", "auditor_code", ImmutableMap.of("", "Auditor Code"), "col-md-2")
                                         .addSelectInput("consumer_name", "ajax-select", "consumer_name", ImmutableMap.of("", "Consumer Name"), "col-md-3")
                                         .addSelectInput("consumer_mobile", "ajax-select", "consumer_mobile", ImmutableMap.of("", "Consumer Mobile"), "col-md-2")

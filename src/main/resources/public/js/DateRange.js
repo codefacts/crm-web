@@ -2,17 +2,29 @@ window.DateRange = React.createClass({
 
     getDefaultProps: function () {
         return {
-            from: "from",
-            to: "to"
+            from: "",
+            to: "",
+            modalId: "",
+            modalTitle: "",
+            name: ""
         };
     }
     ,
 
     getInitialState: function () {
+        if (!!this.props.value) {
+            var splits = this.props.value.split(":", 2)
+            splits = splits.length < 2 ? ["", ""] : splits;
+            return {
+                from: splits[0].trim(),
+                to: splits[1].trim(),
+                value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " : " + this.props.to) : "")
+            };
+        }
         return {
             from: this.props.from,
             to: this.props.to,
-            value: (this.props.from + " - " + this.props.to)
+            value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " : " + this.props.to) : "")
         };
     }
     ,
@@ -48,22 +60,14 @@ window.DateRange = React.createClass({
     ,
 
     okClick: function (e) {
-        console.log(this.state.from + " - " + this.state.to)
         this.setState({
-            value: (this.state.from + " - " + this.state.to)
+            value: (this.state.from + " : " + this.state.to)
         });
     }
     ,
 
     onClick: function (e) {
-        $('.modal').modal('show');
-    },
-
-    onChange: function (e) {
-        console.log(e.target.value);
-        this.setState({
-            value: e.target.value
-        });
+        $('#' + this.props.modalId).modal('show');
     },
 
     render: function () {
@@ -96,14 +100,16 @@ window.DateRange = React.createClass({
 
         );
 
+        var value = (((this.state.from != "") || (this.state.to != "")) ? (this.state.from + " : " + this.state.to) : "");
+
         return (
             <div className="form-group">
                 <input id="call_range" type="text" className="form-control range" placeholder="Call No. Between"
-                       name="call_range"
-                       value={this.state.value}
-                       onChange={this.onChange}
+                       name={this.props.name}
+                       value={value}
                        onClick={this.onClick}/>
-                <Modal body={modalBody} onClear={this.onClear} okClick={this.okClick}/>
+                <Modal body={modalBody} onClear={this.onClear} okClick={this.okClick} id={this.props.modalId}
+                       title={this.props.modalTitle}/>
             </div>
         );
     }
