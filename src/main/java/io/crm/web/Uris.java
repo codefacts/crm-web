@@ -23,7 +23,7 @@ public enum Uris {
     searchConsumerMobile("/search-consumer-mobile", "Search Consumer Mobile"),
     searchConsumerName("/search-consumer-name", "Search Consumer Name"),
     searchAuditorCode("/search-auditor-code", "Search Auditor Code"),
-    searchTsrCode("/search-tsr-code", "Search TSR Code");
+    searchTsrCode("/search-tsr-code", "Search TSR Code"), workDayDetails("/call/work-day-details", "Work Day Details");
 
     public final String value;
     public final String label;

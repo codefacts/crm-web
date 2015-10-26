@@ -2,6 +2,9 @@ window.DateRange = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "",
+            placeholder: "",
+            title: "",
             from: "",
             to: "",
             modalId: "",
@@ -104,7 +107,8 @@ window.DateRange = React.createClass({
 
         return (
             <div className="form-group">
-                <input id="call_range" type="text" className="form-control range" placeholder="Call No. Between"
+                <input id={this.props.id} type="text" className="form-control range" placeholder={this.props.placeholder}
+                       title={this.props.title}
                        name={this.props.name}
                        value={value}
                        onClick={this.onClick}/>

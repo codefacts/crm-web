@@ -2,11 +2,13 @@ window.Range = React.createClass({
 
     getDefaultProps: function () {
         return {
+            id: "",
             from: "",
             to: "",
             value: "",
             modalId: "",
             modalTitle: "",
+            title: "",
             placeholder: "",
             name: ""
         };
@@ -93,7 +95,8 @@ window.Range = React.createClass({
 
         return (
             <div className="form-group">
-                <input id="call_range" type="text" className="form-control range" placeholder={this.props.placeholder}
+                <input id={this.props.id} type="text" className="form-control range" placeholder={this.props.placeholder}
+                       title={this.props.title}
                        name={this.props.name}
                        value={value}
                        onChange={this.onChange}
