@@ -23,8 +23,6 @@ import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -90,22 +88,16 @@ final public class MainVerticle extends AbstractVerticle {
         vertx.eventBus().consumer(ApiEvents.CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY, new FileUploadHistoryService()::checkIfAlreadyUploadedSuccessfully);
 
 
-        final Defer<ConfigurableApplicationContext> defer = Promises.defer();
-        vertx.executeBlocking((Future<ConfigurableApplicationContext> f) -> {
-            final ConfigurableApplicationContext applicationContext = SpringApplication.run(Services.class, new String[]{});
-            f.complete(applicationContext);
-        }, Util.makeDeferred(defer));
-
-        defer.promise()
+        Promises.success()
                 .success(ctx -> {
-                    final BrCheckerJsonService brCheckerJsonService = ctx.getBean(BrCheckerJsonService.class);
-                    brCheckerJsonService.initialize(vertx);
-                    vertx.eventBus().consumer(ApiEvents.SEARCH_CLUSTER, brCheckerJsonService::searchCluster);
-                    vertx.eventBus().consumer(ApiEvents.SEARCH_TSR_CODE, brCheckerJsonService::searchTSRCode);
-                    vertx.eventBus().consumer(ApiEvents.SEARCH_AUDITOR_CODE, brCheckerJsonService::searchAuditorCode);
-                    vertx.eventBus().consumer(ApiEvents.SEARCH_CONSUMER_NAME, brCheckerJsonService::searchConsumerName);
-                    vertx.eventBus().consumer(ApiEvents.SEARCH_CONSUMER_MOBILE, brCheckerJsonService::searchConsumerMobile);
-                    vertx.eventBus().consumer(ApiEvents.FIND_ALL_CALL_STATUSES, brCheckerJsonService::findAllCallStatuses);
+
+//                    brCheckerJsonService.initialize(vertx);
+//                    vertx.eventBus().consumer(ApiEvents.SEARCH_CLUSTER, brCheckerJsonService::searchCluster);
+//                    vertx.eventBus().consumer(ApiEvents.SEARCH_TSR_CODE, brCheckerJsonService::searchTSRCode);
+//                    vertx.eventBus().consumer(ApiEvents.SEARCH_AUDITOR_CODE, brCheckerJsonService::searchAuditorCode);
+//                    vertx.eventBus().consumer(ApiEvents.SEARCH_CONSUMER_NAME, brCheckerJsonService::searchConsumerName);
+//                    vertx.eventBus().consumer(ApiEvents.SEARCH_CONSUMER_MOBILE, brCheckerJsonService::searchConsumerMobile);
+//                    vertx.eventBus().consumer(ApiEvents.FIND_ALL_CALL_STATUSES, brCheckerJsonService::findAllCallStatuses);
                 })
                 .success(ctx -> System.out.println("++++++++++++++++++ APPLICATION READY +++++++++++++++++"))
         ;
