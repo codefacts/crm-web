@@ -24,7 +24,6 @@ import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.Arrays;
@@ -40,6 +39,8 @@ import static io.vertx.core.http.HttpHeaders.TEXT_HTML;
 final public class MainVerticle extends AbstractVerticle {
     private HttpClient httpClient;
     private final Set<String> publicUris = publicUris();
+    public static final String PORT_PROPERTY = "PORT";
+    public static final int PORT = App.loadConfig().getInteger(PORT_PROPERTY);
 
     //
     @Override
@@ -57,10 +58,9 @@ final public class MainVerticle extends AbstractVerticle {
         //Register Listeners
         registerFilters(router);
         registerControllers(router);
-        int port = 8085;
-        getVertx().createHttpServer().requestHandler(router::accept).listen(port);
+        getVertx().createHttpServer().requestHandler(router::accept).listen(PORT);
         System.out.println("<----------------------------------WEB_SERVER_STARTED------------------------------------->");
-        System.out.println("PORT: " + port);
+        System.out.println("PORT: " + PORT);
     }
 
     private void registerEvents() {
@@ -274,5 +274,5 @@ final public class MainVerticle extends AbstractVerticle {
                 })
                 .collect(Collectors.toSet());
     }
-    
+
 }

@@ -2,6 +2,7 @@
   "CURRENT_PROFILE": "dev",
   "PROFILES": {
     "dev": {
+      "PORT": 8085,
       "dev-mode": true,
       "IMAGE_DIRECTORY": "D:\\Others\\Images",
       "templateDir": "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\templates-s\\en_US",
@@ -18,6 +19,7 @@
       "PUBLIC_DIRECTORY": "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\public"
     },
     "dev2": {
+      "PORT": 8085,
       "dev-mode": true,
       "IMAGE_DIRECTORY": "D:\\Others\\Images",
       "templateDir": "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\templates\\en_US",
@@ -34,6 +36,7 @@
       "PUBLIC_DIRECTORY": "D:\\IdeaProjects\\crm-web\\src\\main\\resources\\public"
     },
     "production": {
+      "PORT": 4325,
       "dev-mode": false,
       "IMAGE_DIRECTORY": "G:\\Cyclic_Auditor\\Images",
       "templateDir": "G:\\Cyclic_Auditor\\Templates\\en_US",

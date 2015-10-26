@@ -8,25 +8,19 @@ import io.crm.util.Util;
 import io.crm.web.ST;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.service.callreview.repository.BrCheckerDataRepository;
+import io.crm.web.util.Page;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by someone on 20/10/2015.
- */
-@Service
 public class BrCheckerJsonService {
     private final ObjectMapper objectMapper;
     private JDBCClient jdbcClient;
@@ -34,7 +28,6 @@ public class BrCheckerJsonService {
     private final BrCheckerDataRepository repository;
     private final DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
 
-    @Autowired
     public BrCheckerJsonService(final BrCheckerDataRepository repository) {
         this.repository = repository;
         objectMapper = new ObjectMapper();
