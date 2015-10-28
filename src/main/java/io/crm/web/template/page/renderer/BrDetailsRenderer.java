@@ -82,11 +82,11 @@ final public class BrDetailsRenderer {
                                             object.put("image", id);
                                             j.getMap().forEach((k, v) -> {
                                                 if (k.equals(BrCheckerModel.BAND.name()))
-                                                    object.put(k, ((Boolean) v) ? "Yes" : "No");
+                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
                                                 else if (k.equals(BrCheckerModel.CONTACTED.name()))
-                                                    object.put(k, ((Boolean) v) ? "Yes" : "No");
+                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
                                                 else if (k.equals(BrCheckerModel.NAME_MATCH.name()))
-                                                    object.put(k, ((Boolean) v) ? "Yes" : "No");
+                                                    object.put(k, ((Integer) v) > 0 ? "Yes" : "No");
                                                 else object.put(k, v == null ? "" : v + "");
                                             });
                                             return object;
@@ -115,7 +115,7 @@ final public class BrDetailsRenderer {
                                 .setContentTemplate(
                                         new BrCheckerDetailsTemplateBuilder()
                                                 .setFiltersPanel(
-                                                        filtersPanel2()
+                                                        TemplateUtil.EMPTY_TEMPLATE
                                                 )
                                                 .setDataPanel(
                                                         dataPanel(header(), data, null, pagination, ctx.request().path()))
@@ -132,10 +132,6 @@ final public class BrDetailsRenderer {
                                 .build()
                 )
                 .build().render();
-    }
-
-    private Template filtersPanel2() {
-        return new BrCheckerDetailsFilter(ctx.request().params(), callStatuses);
     }
 
     private Template filtersPanel() {

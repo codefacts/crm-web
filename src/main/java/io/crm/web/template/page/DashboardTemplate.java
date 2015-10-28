@@ -14,7 +14,7 @@ public class DashboardTemplate extends Template {
     private final Template sidebarTemplate;
     private final Template contentTemplate;
 
-    public DashboardTemplate(JsonObject user, Template sidebarTemplate, Template contentTemplate) {
+    DashboardTemplate(JsonObject user, Template sidebarTemplate, Template contentTemplate) {
         this.user = user;
         this.sidebarTemplate = sidebarTemplate;
         this.contentTemplate = contentTemplate;

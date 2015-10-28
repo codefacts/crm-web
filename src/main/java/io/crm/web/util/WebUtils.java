@@ -10,6 +10,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 
@@ -80,5 +81,9 @@ final public class WebUtils {
 
     private static String pageQueryString(final int prev, final int size, final String queryString) {
         return String.format("?page=%d&size=%d&%s", prev, size, queryString);
+    }
+
+    public static int rangify(final int val, final int min, final int max) {
+        return val < min ? min : val > max ? max : val;
     }
 }

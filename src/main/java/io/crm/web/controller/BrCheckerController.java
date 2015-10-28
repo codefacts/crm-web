@@ -24,6 +24,7 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import org.watertemplate.Template;
 
+import java.util.Collections;
 import java.util.List;
 
 import static io.crm.web.Uris.br_checker_export_settings;
@@ -117,23 +118,20 @@ public class BrCheckerController {
                         .put(name, params.getAll(name).size() > 1 ? params.getAll(name) : params.get(name));
             });
 
-            final Promise<Message<JsonArray>> promise1 = Util.<JsonArray>send(vertx.eventBus(), ApiEvents.FIND_ALL_CALL_STATUSES, null);
-
             final Promise<Message<JsonObject>> promise2 = Util.<JsonObject>send(vertx.eventBus(), ApiEvents.BR_CHECKER_DETAILS,
                     new JsonObject()
                             .put(ST.page, parseInt(params.get(ST.page), 1))
                             .put(ST.size, parseInt(params.get(ST.size), DEFAULT_PAGE_SIZE))
-                            .put(ST.params, paramsJson));
+                            .put(ST.params, paramsJson))
 
-            Promises.all(promise1, promise2)
-                    .success((Touple2<Message<JsonArray>, Message<JsonObject>> tp) -> {
-                        Message<JsonObject> v = tp.t2;
+                    .success(v -> {
+
                         final JsonObject pagination = v.body().getJsonObject(ST.pagination, new JsonObject());
                         final List<JsonObject> data = v.body().getJsonArray(ST.data, new JsonArray()).getList();
 
                         ctx.response().end(
                                 new BrDetailsRendererBuilder()
-                                        .setCallStatuses(tp.t1.body().getList())
+                                        .setCallStatuses(Collections.<String>emptyList())
                                         .setCtx(ctx)
                                         .setTitle(title)
                                         .setPagination(pagination)
@@ -142,8 +140,7 @@ public class BrCheckerController {
                                         .render()
                         );
                     })
-                    .error(ctx::fail)
-            ;
+                    .error(ctx::fail);
         }));
     }
 

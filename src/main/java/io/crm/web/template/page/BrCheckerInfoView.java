@@ -39,11 +39,11 @@ public class BrCheckerInfoView extends Template {
 
                                         String val = "";
                                         if (k.equals(BrCheckerModel.BAND.name())) {
-                                            val = ((Boolean) v) ? "Yes" : "No";
+                                            val = ((Integer) v) > 0 ? "Yes" : "No";
                                         } else if (k.equals(BrCheckerModel.CONTACTED.name())) {
-                                            val = ((Boolean) v) ? "Yes" : "No";
+                                            val = ((Integer) v) > 0 ? "Yes" : "No";
                                         } else if (k.equals(BrCheckerModel.NAME_MATCH.name())) {
-                                            val = ((Boolean) v) ? "Yes" : "No";
+                                            val = ((Integer) v) > 0 ? "Yes" : "No";
                                         } else {
                                             val = v == null ? "" : v + "";
                                         }
