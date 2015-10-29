@@ -35,6 +35,14 @@ final public class Pagination {
         return size;
     }
 
+    public long getTotal() {
+        return total;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
     public boolean hasPrev() {
         return hasPrev(page);
     }
