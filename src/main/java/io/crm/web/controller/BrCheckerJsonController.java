@@ -8,11 +8,8 @@ import io.crm.web.util.Converters;
 import io.crm.web.util.WebUtils;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
-
-import java.util.List;
 
 /**
  * Created by someone on 20/10/2015.
@@ -42,7 +39,7 @@ final public class BrCheckerJsonController {
             if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
 
             Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_CLUSTER, criteria)
-                    .success(message -> {
+                    .then(message -> {
                         ctx.response().end(
                                 message.body().encodePrettily()
                         );
@@ -63,7 +60,7 @@ final public class BrCheckerJsonController {
             if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
 
             Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_TSR_CODE, criteria)
-                    .success(message -> {
+                    .then(message -> {
                         ctx.response().end(
                                 message.body().encodePrettily()
                         );
@@ -84,7 +81,7 @@ final public class BrCheckerJsonController {
             if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
 
             Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_AUDITOR_CODE, criteria)
-                    .success(message -> {
+                    .then(message -> {
                         ctx.response().end(
                                 message.body().encodePrettily()
                         );
@@ -105,7 +102,7 @@ final public class BrCheckerJsonController {
             if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
 
             Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_CONSUMER_NAME, criteria)
-                    .success(message -> {
+                    .then(message -> {
                         ctx.response().end(
                                 message.body().encodePrettily()
                         );
@@ -126,7 +123,7 @@ final public class BrCheckerJsonController {
             if (params.contains(ST.name)) criteria.put(ST.name, params.get(ST.name));
 
             Util.<JsonObject>send(vertx.eventBus(), ApiEvents.SEARCH_CONSUMER_MOBILE, criteria)
-                    .success(message -> {
+                    .then(message -> {
                         ctx.response().end(
                                 message.body().encodePrettily()
                         );

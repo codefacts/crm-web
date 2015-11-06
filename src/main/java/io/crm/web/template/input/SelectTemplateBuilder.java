@@ -7,6 +7,7 @@ public class SelectTemplateBuilder {
     private String classes;
     private String name;
     private Map<String, String> valuesMap;
+    private String selected;
 
     public SelectTemplateBuilder setId(String id) {
         this.id = id;
@@ -15,6 +16,15 @@ public class SelectTemplateBuilder {
 
     public SelectTemplateBuilder setClasses(String classes) {
         this.classes = classes;
+        return this;
+    }
+
+    public String getSelected() {
+        return selected;
+    }
+
+    public SelectTemplateBuilder setSelected(String selected) {
+        this.selected = selected;
         return this;
     }
 
@@ -29,6 +39,6 @@ public class SelectTemplateBuilder {
     }
 
     public SelectTemplate createSelectTemplate() {
-        return new SelectTemplate(id, classes, name, valuesMap);
+        return new SelectTemplate(id, classes, name, valuesMap, selected);
     }
 }

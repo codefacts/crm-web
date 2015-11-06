@@ -3,8 +3,6 @@ package io.crm.web;
 import io.crm.QC;
 import io.crm.model.User;
 import io.crm.promise.Promises;
-import io.crm.promise.intfs.Defer;
-import io.crm.util.Util;
 import io.crm.web.controller.*;
 import io.crm.web.service.callreview.*;
 import io.crm.web.template.*;
@@ -12,7 +10,6 @@ import io.crm.web.template.page.LoginTemplate;
 import io.crm.web.util.WebUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpHeaders;
@@ -88,8 +85,8 @@ final public class MainVerticle extends AbstractVerticle {
         vertx.eventBus().consumer(ApiEvents.CHECK_IF_ALREADY_UPLOADED_SUCCESSFULLY, new FileUploadHistoryService()::checkIfAlreadyUploadedSuccessfully);
 
 
-        Promises.success()
-                .success(ctx -> {
+        Promises.from()
+                .then(ctx -> {
 
 //                    brCheckerJsonService.initialize(vertx);
 //                    vertx.eventBus().consumer(ApiEvents.SEARCH_CLUSTER, brCheckerJsonService::searchCluster);
@@ -99,7 +96,7 @@ final public class MainVerticle extends AbstractVerticle {
 //                    vertx.eventBus().consumer(ApiEvents.SEARCH_CONSUMER_MOBILE, brCheckerJsonService::searchConsumerMobile);
 //                    vertx.eventBus().consumer(ApiEvents.FIND_ALL_CALL_STATUSES, brCheckerJsonService::findAllCallStatuses);
                 })
-                .success(ctx -> System.out.println("++++++++++++++++++ APPLICATION READY +++++++++++++++++"))
+                .then(ctx -> System.out.println("++++++++++++++++++ APPLICATION READY +++++++++++++++++"))
         ;
     }
 

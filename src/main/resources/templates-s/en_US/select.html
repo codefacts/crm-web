@@ -2,7 +2,7 @@
     <select id="~id~" class="form-control ~class~"
             name="~name~">
         ~for option in options:
-        <option value="~option.id~" selected="">~option.value~</option>
+        <option value="~option.id~" ~option.selected~>~option.value~</option>
         :~
     </select>
 </div>

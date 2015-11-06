@@ -1,8 +1,6 @@
 package io.crm.web.controller;
 
-import io.crm.promise.Promises;
 import io.crm.promise.intfs.Promise;
-import io.crm.util.Touple2;
 import io.crm.util.Util;
 import io.crm.web.ApiEvents;
 import io.crm.web.ST;
@@ -124,7 +122,7 @@ public class BrCheckerController {
                             .put(ST.size, parseInt(params.get(ST.size), DEFAULT_PAGE_SIZE))
                             .put(ST.params, paramsJson))
 
-                    .success(v -> {
+                    .then(v -> {
 
                         final JsonObject pagination = v.body().getJsonObject(ST.pagination, new JsonObject());
                         final List<JsonObject> data = v.body().getJsonArray(ST.data, new JsonArray()).getList();

@@ -27,7 +27,7 @@ public class RspListToRspListCodec implements MessageCodec<RspList, RspList> {
 
     @Override
     public RspList transform(RspList rspList) {
-        return rspList;
+        return rspList.copy();
     }
 
     @Override

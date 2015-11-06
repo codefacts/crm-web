@@ -1,7 +1,12 @@
 package io.crm.web.util;
 
 import io.crm.util.Util;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
+import java.util.function.Function;
+
+import static io.crm.util.Util.getOrDefault;
 import static io.crm.util.Util.isEmptyOrNullOrSpaces;
 
 /**
@@ -38,5 +43,21 @@ final public class Converters {
     public static boolean toBoolean(final String val) {
         if (val == null) return false;
         return Boolean.parseBoolean(val);
+    }
+
+    public static String trim(final String val) {
+        return getOrDefault(val, "").trim();
+    }
+
+    public static final String identity(String t) {
+        return t;
+    }
+
+    public static JsonArray toJsonArray(final String jsonStrng) {
+        return new JsonArray(jsonStrng);
+    }
+
+    public static JsonObject toJsonObject(final String jsonStrng) {
+        return new JsonObject(jsonStrng);
     }
 }

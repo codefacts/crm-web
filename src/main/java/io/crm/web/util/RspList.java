@@ -1,5 +1,6 @@
 package io.crm.web.util;
 
+import io.crm.util.Util;
 import io.crm.web.util.Pagination;
 
 import java.util.List;
@@ -14,6 +15,10 @@ final public class RspList<T> {
     public RspList(List<T> data, Pagination pagination) {
         this.data = data;
         this.pagination = pagination;
+    }
+
+    RspList() {
+
     }
 
     public void setData(List<T> data) {
@@ -35,5 +40,12 @@ final public class RspList<T> {
     public static class Props {
         public static final String data = "data";
         public static final String pagination = "pagination";
+    }
+
+    public RspList<T> copy() {
+        return Util.accept(new RspList<>(), tRspList -> {
+            tRspList.data = data;
+            tRspList.pagination = pagination;
+        });
     }
 }

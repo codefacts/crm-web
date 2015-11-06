@@ -70,7 +70,7 @@ public class BrCheckerJsonService {
             }, Util.makeDeferred(defer));
 
             defer.promise()
-                    .success(page ->
+                    .then(page ->
                             message.reply(page))
                     .error(e ->
                             ExceptionUtil.fail(message, e));
@@ -104,7 +104,7 @@ public class BrCheckerJsonService {
             }, Util.makeDeferred(defer));
 
             defer.promise()
-                    .success(page ->
+                    .then(page ->
                             message.reply(page))
                     .error(e ->
                             ExceptionUtil.fail(message, e));
@@ -138,7 +138,7 @@ public class BrCheckerJsonService {
             }, Util.makeDeferred(defer));
 
             defer.promise()
-                    .success(page ->
+                    .then(page ->
                             message.reply(page))
                     .error(e ->
                             ExceptionUtil.fail(message, e));
@@ -172,7 +172,7 @@ public class BrCheckerJsonService {
             }, Util.makeDeferred(defer));
 
             defer.promise()
-                    .success(page ->
+                    .then(page ->
                             message.reply(page))
                     .error(e ->
                             ExceptionUtil.fail(message, e));
@@ -206,7 +206,7 @@ public class BrCheckerJsonService {
             }, Util.makeDeferred(defer));
 
             defer.promise()
-                    .success(page ->
+                    .then(page ->
                             message.reply(page))
                     .error(e ->
                             ExceptionUtil.fail(message, e));
