@@ -1,6 +1,6 @@
 package io.crm.web.template.page;
 
-import io.crm.util.Touple1;
+import io.crm.util.touple.MutableTpl1;
 import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.service.callreview.model.BrCheckerModel;
 import io.crm.web.template.Page;
@@ -48,22 +48,22 @@ public class BrCheckerInfoView extends Template {
                                             val = v == null ? "" : v + "";
                                         }
 
-                                        final Touple1<String> stringTouple1 = new Touple1<>();
-                                        final Touple1<BrCheckerModel> touple1 = new Touple1<>();
-                                        touple1.t1 = model;
-                                        stringTouple1.t1 = val;
+                                        final MutableTpl1<String> stringMutableTpl1 = new MutableTpl1<>();
+                                        final MutableTpl1<BrCheckerModel> mutableTpl1 = new MutableTpl1<>();
+                                        mutableTpl1.t1 = model;
+                                        stringMutableTpl1.t1 = val;
                                         rows.add(
                                                 new TableRowBuilder()
                                                         .addTableCells(cells -> {
                                                             cells.add(
                                                                     new ThBuilder()
-                                                                            .setBody(touple1.t1 == null ? "" : touple1.t1.label)
+                                                                            .setBody(mutableTpl1.t1 == null ? "" : mutableTpl1.t1.label)
                                                                             .createTh()
                                                             );
                                                             cells.add(
                                                                     new TableCellBuilder()
                                                                             .setBody(
-                                                                                    stringTouple1.t1 == null ? "" : stringTouple1.t1
+                                                                                    stringMutableTpl1.t1 == null ? "" : stringMutableTpl1.t1
                                                                             )
                                                                             .createTableCell()
                                                             );

@@ -3,6 +3,7 @@ package io.crm.web.controller;
 import com.google.common.collect.ImmutableList;
 import io.crm.FailureCode;
 import io.crm.util.*;
+import io.crm.util.touple.MutableTpl2;
 import io.crm.web.ApiEvents;
 import io.crm.web.ST;
 import io.crm.web.Uris;
@@ -112,14 +113,14 @@ public class FileUploadController {
                     });
                     final Collection<FileUpload> fileUploads = fileUploadMap.values();
 
-                    final ImmutableList.Builder<Touple2<String, JsonObject>> success = ImmutableList.builder();
-                    final ImmutableList.Builder<Touple2<String, Throwable>> errors = ImmutableList.builder();
+                    final ImmutableList.Builder<MutableTpl2<String, JsonObject>> success = ImmutableList.builder();
+                    final ImmutableList.Builder<MutableTpl2<String, Throwable>> errors = ImmutableList.builder();
 
                     final TaskCoordinator taskCoordinator = new TaskCoordinatorBuilder()
                             .onError(ctx::fail)
                             .onSuccess(() -> {
-                                final ImmutableList<Touple2<String, Throwable>> errorList = errors.build();
-                                final ImmutableList<Touple2<String, JsonObject>> successList = success.build();
+                                final ImmutableList<MutableTpl2<String, Throwable>> errorList = errors.build();
+                                final ImmutableList<MutableTpl2<String, JsonObject>> successList = success.build();
 
                                 final ImmutableList.Builder<JsonObject> statusBuilder = ImmutableList.builder();
                                 errorList.forEach(e -> {
@@ -155,7 +156,7 @@ public class FileUploadController {
 
                     addToUploadHistory(fileUploads, rr -> {
                         if (rr.failed()) {
-                            errors.add(new Touple2<>("", rr.cause()));
+                            errors.add(new MutableTpl2<>("", rr.cause()));
                             taskCoordinator.finish();
                             return;
                         }
@@ -165,13 +166,13 @@ public class FileUploadController {
                             checkIfAlreadyUploadedSuccessfully(fu, r1 -> {
 
                                 if (r1.failed()) {
-                                    errors.add(new Touple2<>(fu.fileName(), r1.cause()));
+                                    errors.add(new MutableTpl2<>(fu.fileName(), r1.cause()));
                                     taskCoordinator.countdown();
                                     return;
                                 }
 
                                 if (r1.result()) {
-                                    success.add(new Touple2<>(fu.fileName(),
+                                    success.add(new MutableTpl2<>(fu.fileName(),
                                             new JsonObject()
                                                     .put(ST.statusCode, StatusCode.fileAlreadyExists.name())));
                                     taskCoordinator.countdown();
@@ -181,7 +182,7 @@ public class FileUploadController {
                                 try {
                                     if (fu == null || fu.size() <= 0) {
 
-                                        success.add(new Touple2<>(fu.fileName(),
+                                        success.add(new MutableTpl2<>(fu.fileName(),
                                                 new JsonObject()
                                                         .put(ST.statusCode, StatusCode.fileMissing.name())));
                                         taskCoordinator.countdown();
@@ -192,25 +193,25 @@ public class FileUploadController {
                                         try {
                                             if (r.failed()) {
                                                 if (r.cause() instanceof HandlerException) {
-                                                    success.add(new Touple2<>(fu.fileName(),
+                                                    success.add(new MutableTpl2<>(fu.fileName(),
                                                             ((HandlerException) r.cause()).value));
                                                 } else {
-                                                    errors.add(new Touple2(fu.fileName(), r.cause()));
+                                                    errors.add(new MutableTpl2(fu.fileName(), r.cause()));
                                                 }
                                                 taskCoordinator.countdown();
                                                 return;
                                             }
 
-                                            success.add(new Touple2<>(fu.fileName(),
+                                            success.add(new MutableTpl2<>(fu.fileName(),
                                                     r.result()));
                                             taskCoordinator.countdown();
                                         } catch (Exception ex) {
-                                            errors.add(new Touple2<>(fu.fileName(), ex));
+                                            errors.add(new MutableTpl2<>(fu.fileName(), ex));
                                             taskCoordinator.countdown();
                                         }
                                     });
                                 } catch (Exception ex) {
-                                    errors.add(new Touple2<>(fu.fileName(), ex));
+                                    errors.add(new MutableTpl2<>(fu.fileName(), ex));
                                     taskCoordinator.countdown();
                                 }
 
@@ -471,8 +472,8 @@ public class FileUploadController {
 
         final ImmutableList.Builder<String> builder = ImmutableList.builder();
         if (o != null && o instanceof JsonObject) {
-            final List<Touple2<String, Throwable>> errors = ((JsonObject) o).getJsonArray("error").getList();
-            final List<Touple2<String, JsonObject>> success = ((JsonObject) o).getJsonArray("success").getList();
+            final List<MutableTpl2<String, Throwable>> errors = ((JsonObject) o).getJsonArray("error").getList();
+            final List<MutableTpl2<String, JsonObject>> success = ((JsonObject) o).getJsonArray("success").getList();
 
             errors.forEach(t2 -> {
                 builder.add(
