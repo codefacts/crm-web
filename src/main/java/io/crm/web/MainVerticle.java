@@ -189,7 +189,7 @@ final public class MainVerticle extends AbstractVerticle {
         new BrCheckerJsonController(vertx, router);
 
         loginFormController(router);
-        new LoginController(vertx, router).login();
+        new AuthController(vertx, router);
         logoutController(router);
 
         new TestController().testController(router);

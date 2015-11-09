@@ -4,6 +4,7 @@ package io.crm.web;
  * Created by someone on 21/09/2015.
  */
 public enum Uris {
+    sessionCount("/session-count", "Session Count"),
     fileUpload("/file-upload", "Upload File"),
     imageUpload("/image-upload", "Upload Images"),
     dashboard("/dashboard", "Dashboard"),
