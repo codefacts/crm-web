@@ -11,7 +11,10 @@ function HashParams() {
     }
 
     function setParams(params) {
-        setHash($.param(params || {}));
+        var hs = getHash();
+        var idx = hs.indexOf("?");
+        hs = idx < 0 ? hs: hs.slice(0, idx);
+        setHash(hs + "?" + $.param(params || {}));
     }
 
     function getParams(hash) {
@@ -86,8 +89,14 @@ function HashParams() {
         removeAll: function(params) {
             if(!params) return;
             var pms = getParams();
-            for(var x in params) {
-                delete pms[x];
+            if(params.constructor === Array) {
+                for(var x in params) {
+                    delete pms[params[x]];
+                }
+            } else {
+                for(var x in params) {
+                    delete pms[x];
+                }
             }
             setParams(pms);
         },
@@ -110,7 +119,7 @@ function HashParams() {
             rs.removeAll(rs.getParams(parts));
         },
         clear: function() {
-            setHash("");
+            rs.setParams({});
         },
         setParams: setParams,
         getParams: getParams,
