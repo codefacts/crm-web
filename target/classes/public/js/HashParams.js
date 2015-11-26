@@ -11,7 +11,10 @@ function HashParams() {
     }
 
     function setParams(params) {
-        setHash($.param(params || {}));
+        var hs = getHash();
+        var idx = hs.indexOf("?");
+        hs = idx < 0 ? hs: hs.slice(0, idx);
+        setHash(hs + "?" + $.param(params || {}));
     }
 
     function getParams(hash) {
@@ -22,13 +25,13 @@ function HashParams() {
         }
         if(hash.lastIndexOf("?") >= 0) {
             hash = hash.substr(hash.lastIndexOf("?") + 1);
-        }
-        hash = decodeURIComponent(hash || "").trim();
+        } else return _params;
+
         if(hash == "") return _params;
         var splits = hash.split("&");
         for(var x in splits) {
             var part = splits[x] || "";
-            var keyValuPair = part.split("=");
+            var keyValuPair = part.split("=", 2);
             if(keyValuPair.length > 0) {
                 _params[keyValuPair[0]] = keyValuPair[1];
             }
@@ -56,11 +59,17 @@ function HashParams() {
         routs.push(template);
     }
 
-    function stringStartsWith (string, prefix) {
-        return string.slice(0, prefix.length) == prefix;
-    }
-
     var rs = {
+
+        on: on,
+
+        goto: function (uri, params) {
+            uri = uri.startsWith("/") ? uri : "/" + uri;
+            setHash(uri + "?" + $.param(params || {}));
+        },
+        reload: function () {
+            
+        },
 
         addHandler: function(_onChangeHandler) {
             if(!_onChangeHandler) return;
@@ -88,8 +97,14 @@ function HashParams() {
         removeAll: function(params) {
             if(!params) return;
             var pms = getParams();
-            for(var x in params) {
-                delete pms[x];
+            if(params.constructor === Array) {
+                for(var x in params) {
+                    delete pms[params[x]];
+                }
+            } else {
+                for(var x in params) {
+                    delete pms[x];
+                }
             }
             setParams(pms);
         },
@@ -112,7 +127,7 @@ function HashParams() {
             rs.removeAll(rs.getParams(parts));
         },
         clear: function() {
-            setHash("");
+            rs.setParams({});
         },
         setParams: setParams,
         getParams: getParams,
@@ -134,22 +149,29 @@ function HashParams() {
         var hs = hash.getHash();
         var idx = hs.indexOf("?");
         hs = hs.length <= 1 ? hs : hs.slice(1, (idx < 0 ? hs.length : idx));
-        console.log(hs);
-        var parts = hs.split("/").map(function (part) {
+
+        var parts = hs.split("/").filter(function(part) {
+            return !!part;
+        }).map(function (part) {
             return decodeURIComponent(part);
         });
-        console.log(parts);
 
         var maxScore = -1;
         var maxIndex = -1;
         var indx = 0;
         var templates = routs.filter(function (template) {
-            indx++;
-            return template.parts.length === parts.length;
+            return (template.parts.length == parts.length);
+        }).filter(function(template) {
+            for(var x in parts) {
+                if ((template.parts[x].isVariable == false) && (template.parts[x].value != parts[x])) {
+                    return false;
+                }
+            }
+            return true;
         }).map(function (template) {
             template.score = 0;
             for(var x in parts) {
-                if (template.parts[x].isVariable === false && template.parts[x].value === parts[x]) {
+                if (template.parts[x].isVariable == false && template.parts[x].value == parts[x]) {
                     var n = (parts.length - x);
                     template.score += ((n * n * n) + 3 * (n * n) + 2 * n) / 6;
                     if(template.score > maxScore) {
@@ -158,31 +180,28 @@ function HashParams() {
                     }
                 }
             }
+            indx++;
             return template;
         });
 
-        var template = routs[maxIndex] || templates[0];
+        var template = templates[maxIndex] || templates[0];
 
         if(!!template) {
-            template.handler(rs);
+            try {
+                var params = {};
+                for(var x in template.parts) {
+                    var part = template.parts[x];
+                    if(part.isVariable) {
+                        params[part.value] = parts[x];
+                    }
+                }
+                template.handler(hash, params);
+            } catch (e) {
+                console.warn(e);
+            }
         }
-
         console.log(templates);
     });
 
-    on("1/as/:2/3/:5/7", function() {
-        console.log("1/as/:2/3/:5/7");
-    });
-    on("1/as/:2/3/:5", function () {
-        console.log("1/as/:2/3/:5/7");
-    });
-    on("1/as/:2/:5/7", function () {
-        console.log("1/as/:2/3/:5/7");
-    });
-    on("a/3/:5/7", function () {
-        console.log("a/3/:5/7");
-    });
     return rs;
 }
-
-window.HashParams = HashParams();

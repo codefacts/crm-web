@@ -47,7 +47,7 @@ function HashParams() {
             var part = parts[x];
             if(part.trim() == "") continue;
             var p = {};
-            if(stringStartsWith(part, ":")) {
+            if(part.startsWith(":")) {
                 p.isVariable = true;
                 p.value = part.slice(1, part.length);
             } else {
@@ -59,9 +59,22 @@ function HashParams() {
         routs.push(template);
     }
 
+    function triggerHashChange() {
+        $(window).trigger('hashchange');
+    }
+
     var rs = {
 
         on: on,
+
+        goto: function (uri, params) {
+            uri = uri.startsWith("/") ? uri : "/" + uri;
+            uri = uri + "?" + $.param(params || {});
+            setHash(uri.endsWith("?") ? uri.slice(0, uri.length - 1) : uri);
+        },
+        reload: function () {
+            triggerHashChange();
+        },
 
         addHandler: function(_onChangeHandler) {
             if(!_onChangeHandler) return;
@@ -174,11 +187,9 @@ function HashParams() {
             }
             indx++;
             return template;
-        });
-
-        var template = templates[maxIndex] || templates[0];
-
-        if(!!template) {
+        }).filter(function (template) {
+            return (template.score >= maxScore);
+        }).forEach(function (template) {
             try {
                 var params = {};
                 for(var x in template.parts) {
@@ -191,8 +202,7 @@ function HashParams() {
             } catch (e) {
                 console.warn(e);
             }
-        }
-        console.log(templates);
+        });
     });
 
     return rs;
