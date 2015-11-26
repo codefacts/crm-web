@@ -22,13 +22,13 @@ function HashParams() {
         }
         if(hash.lastIndexOf("?") >= 0) {
             hash = hash.substr(hash.lastIndexOf("?") + 1);
-        }
-        hash = decodeURIComponent(hash || "").trim();
+        } else return _params;
+
         if(hash == "") return _params;
         var splits = hash.split("&");
         for(var x in splits) {
             var part = splits[x] || "";
-            var keyValuPair = part.split("=");
+            var keyValuPair = part.split("=", 2);
             if(keyValuPair.length > 0) {
                 _params[keyValuPair[0]] = keyValuPair[1];
             }
@@ -54,10 +54,6 @@ function HashParams() {
             template.parts.push(p);
         }
         routs.push(template);
-    }
-
-    function stringStartsWith (string, prefix) {
-        return string.slice(0, prefix.length) == prefix;
     }
 
     var rs = {
@@ -192,5 +188,3 @@ function HashParams() {
 
     return rs;
 }
-
-window.HashParams = HashParams();

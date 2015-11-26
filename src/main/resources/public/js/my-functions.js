@@ -28,3 +28,4 @@ function formatDate(date) {
     console.log(day, monthNames[monthIndex], year);
     return day + "-" + monthNames[monthIndex] + "-" + year;
 }
+
