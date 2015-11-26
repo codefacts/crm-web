@@ -2,7 +2,8 @@ package io.crm.web.controller;
 
 import io.crm.util.Util;
 import io.crm.web.Uris;
-import io.crm.web.template.GoogleMapTemplate;
+import io.crm.web.template.page.GoogleMapTemplate;
+import io.crm.web.util.Converters;
 import io.vertx.ext.web.Router;
 
 /**
@@ -14,12 +15,12 @@ public class GoogleMapController {
     }
 
     public void view(final Router router) {
-        router.get(Uris.googleMap.value).handler(ctx -> {
+        router.get(Uris.GOOGLE_MAP.value).handler(ctx -> {
             ctx.response().end(
                     new GoogleMapTemplate(
                             Util.getOrDefault(ctx.request().params().get("marker_title"), ""),
-                            Double.parseDouble(ctx.request().params().get("lat")),
-                            Double.parseDouble(ctx.request().params().get("lng"))).render()
+                            Converters.toDouble(ctx.request().params().get("lat")),
+                            Converters.toDouble(ctx.request().params().get("lng"))).render()
             );
         });
     }

@@ -2,24 +2,22 @@ package io.crm.web.util;
 
 import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
  * Created by someone on 01/10/2015.
  */
 final public class Pagination {
-    public static final int defaultSize = 20;
+    public static final int DEFAULT_SIZE = 20;
     private final int page;
     private final int size;
     private final long total;
     private final int pageCount;
 
     public Pagination(int page, int size, long total) {
-        this.size = size < 1 ? defaultSize : size;
+        this.size = size < 1 ? DEFAULT_SIZE : size;
         this.total = total < 0 ? 0 : total;
         pageCount = (int) ((total % size == 0) ? (total / size) : (total / size) + 1);
         this.page = page < 1 ? 1
@@ -29,6 +27,10 @@ final public class Pagination {
 
     public int getPage() {
         return page;
+    }
+
+    public int offset() {
+        return (page - 1) * size;
     }
 
     public int getSize() {

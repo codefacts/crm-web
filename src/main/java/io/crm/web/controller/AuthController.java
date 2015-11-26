@@ -5,12 +5,11 @@ import io.crm.util.Util;
 import io.crm.web.ApiEvents;
 import io.crm.web.ST;
 import io.crm.web.Uris;
-import io.crm.web.excpt.ApiServiceException;
 import io.crm.web.util.WebUtils;
 import io.vertx.core.Vertx;
-import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.Session;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -31,7 +30,7 @@ final public class AuthController {
     }
 
     public void login(final Router router) {
-        router.post(Uris.login.value).handler(ctx -> {
+        router.post(Uris.LOGIN.value).handler(ctx -> {
             ctx.request().setExpectMultipart(true);
             ctx.request().endHandler(b -> {
                 Promises.from()
@@ -50,16 +49,7 @@ final public class AuthController {
                                     .then(val -> {
                                         LOGIN_COUNT.incrementAndGet();
                                         CURRENT_USER_COUNT.incrementAndGet();
-                                        vertx.setTimer(ctx.session().timeout(), event -> CURRENT_USER_COUNT.decrementAndGet());
-                                    })
-                                    .error(cause -> {
-                                        if (cause instanceof ApiServiceException) {
-                                            ApiServiceException cs = (ApiServiceException) cause;
-                                            ctx.response().setStatusCode(cs.getCode());
-                                            ctx.response().end(cs.getMessage());
-                                        } else {
-                                            ctx.fail(cause);
-                                        }
+                                        setSessionMonitorTimer(ctx.session());
                                     })
                                     .error(ctx::fail)
                             ;
@@ -69,15 +59,22 @@ final public class AuthController {
         });
     }
 
+    private void setSessionMonitorTimer(final Session session) {
+        vertx.setTimer(5 * 60_000, event -> {
+            if (!session.isDestroyed()) CURRENT_USER_COUNT.decrementAndGet();
+            else setSessionMonitorTimer(session);
+        });
+    }
+
     private void logout(final Router router) {
-        router.get(Uris.logout.value).handler(context -> {
+        router.get(Uris.LOGOUT.value).handler(context -> {
             Promises.from()
                     .then(v -> {
                         context.session().destroy();
-                        WebUtils.redirect(Uris.login.value, context.response());
+                        WebUtils.redirect(Uris.LOGIN.value, context.response());
                     })
                     .then(v -> {
-                        LOGOUT_COUNT.decrementAndGet();
+                        LOGOUT_COUNT.incrementAndGet();
                         CURRENT_USER_COUNT.decrementAndGet();
                     })
                     .error(context::fail)
@@ -86,7 +83,7 @@ final public class AuthController {
     }
 
     private void sessionCount(final Router router) {
-        router.get(Uris.sessionCount.value).handler(ctx -> {
+        router.get(Uris.SESSION_COUNT.value).handler(ctx -> {
             ctx.response().end(
                     new JsonObject()
                             .put("session-count", Util.toString(CURRENT_USER_COUNT.get()))

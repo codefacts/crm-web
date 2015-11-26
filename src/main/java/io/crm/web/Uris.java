@@ -1,30 +1,21 @@
 package io.crm.web;
 
+import io.crm.web.controller.ReactJSController;
+
 /**
  * Created by someone on 21/09/2015.
  */
 public enum Uris {
-    sessionCount("/session-count", "Session Count"),
-    fileUpload("/file-upload", "Upload File"),
-    imageUpload("/image-upload", "Upload Images"),
-    dashboard("/dashboard", "Dashboard"),
-    login("/login", "Login"),
-    register("/register", "Register"),
-    staticResourcesPattern("/static/*", "Static Resources"),
-    publicResourcesPattern("/public/*", "Public Resources"),
-    event_publish_form("/event-publish-form", "Publish And Send Event"),
-    logout("/logout", "Logout"),
-    callDetails("/call/details", "Call Details"),
-    br_checker_details("/br-checker/details", "Br Checker Details"),
-    br_checker_view("/br-details/view", "Br Checker Info"),
-    br_checker_export_settings("/br-details/export-settings", "Export Settings"),
-    searchCluster("/search-cluster", "Search Cluster"),
-    BrCheckerImages("/br-checker/images", "Br Checker Images"),
-    googleMap("/google-map", "Google Map"),
-    searchConsumerMobile("/search-consumer-mobile", "Search Consumer Mobile"),
-    searchConsumerName("/search-consumer-name", "Search Consumer Name"),
-    searchAuditorCode("/search-auditor-code", "Search Auditor Code"),
-    searchTsrCode("/search-tsr-code", "Search TSR Code"), workDayDetails("/call/work-day-details", "Work Day Details");
+    SESSION_COUNT("/session-count", "Session Count"),
+    DASHBOARD("/dashboard", "Dashboard"),
+    LOGIN("/login", "Login"),
+    REGISTER("/register", "Register"),
+    STATIC_RESOURCES_PATTERN("/static/*", "Static Resources"),
+    PUBLIC_RESOURCES_PATTERN("/public/*", "Public Resources"),
+    EVENT_PUBLISH_FORM("/event-publish-form", "Publish And Send Event"),
+    LOGOUT("/logout", "Logout"),
+    REACT_JS_TEMPLATE("/reactjs/:" + ReactJSController.TEMPLATE_NAME, "ReactJsTemplate"),
+    GOOGLE_MAP("/google-map", "Google Map");
 
     public final String value;
     public final String label;

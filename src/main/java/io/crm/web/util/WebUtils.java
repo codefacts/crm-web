@@ -1,6 +1,8 @@
 package io.crm.web.util;
 
 import io.crm.intfs.ConsumerUnchecked;
+import io.crm.util.ExceptionUtil;
+import io.crm.util.Util;
 import io.crm.web.ST;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
@@ -8,11 +10,17 @@ import io.crm.web.template.pagination.PaginationTemplateBuilder;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
+import static io.crm.util.Util.apply;
 
 /**
  * Created by someone on 22/09/2015.
@@ -58,6 +66,22 @@ final public class WebUtils {
         } catch (NumberFormatException e) {
             return defaultValue;
         }
+    }
+
+    public static String toQueryString(MultiMap multiMap) {
+        final StringBuilder builder = new StringBuilder();
+        multiMap.forEach(e -> {
+            builder
+                    .append(ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8.name())))
+                    .append("=")
+                    .append(ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8.name())))
+                    .append("&")
+            ;
+        });
+        if (builder.length() > 0) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        return builder.toString();
     }
 
     public static PaginationTemplateBuilder createPaginationTemplateBuilder(final String uriPath, final String queryString, final Pagination pagination, final int paginationNavLength) {

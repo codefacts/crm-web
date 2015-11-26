@@ -1,5 +1,6 @@
-package io.crm.web.template;
+package io.crm.web.template.page;
 
+import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
 //API KEY NAME imsl

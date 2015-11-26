@@ -16,15 +16,6 @@ public class SidebarTemplate extends Template {
 
     {
         links = Arrays.asList(
-                new JsonObject()
-                        .put(ST.uri, Uris.fileUpload.value)
-                        .put(ST.label, Uris.fileUpload.label),
-                new JsonObject()
-                        .put(ST.uri, Uris.imageUpload.value)
-                        .put(ST.label, Uris.imageUpload.label),
-                new JsonObject()
-                        .put(ST.uri, Uris.br_checker_details.value)
-                        .put(ST.label, Uris.br_checker_details.label)
         );
     }
 

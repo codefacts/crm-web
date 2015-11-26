@@ -1,5 +1,6 @@
 function HashParams() {
     var handlers = [];
+    var routs = [];
 
     function setHash(hash) {
         location.hash = hash;
@@ -35,7 +36,34 @@ function HashParams() {
         return _params;
     }
 
+    function on(uri, handler) {
+        var parts = uri.split("/");
+        var template = {originString: uri, parts: [], handler: handler};
+
+        for(var x in parts) {
+            var part = parts[x];
+            if(part.trim() == "") continue;
+            var p = {};
+            if(stringStartsWith(part, ":")) {
+                p.isVariable = true;
+                p.value = part.slice(1, part.length);
+            } else {
+                p.isVariable = false;
+                p.value = part;
+            }
+            template.parts.push(p);
+        }
+        routs.push(template);
+    }
+
+    function stringStartsWith (string, prefix) {
+        return string.slice(0, prefix.length) == prefix;
+    }
+
     var rs = {
+
+        on: on,
+
         addHandler: function(_onChangeHandler) {
             if(!_onChangeHandler) return;
             handlers.push(_onChangeHandler);
@@ -92,6 +120,7 @@ function HashParams() {
         getParams: getParams,
         getHash: getHash,
         setHash: setHash,
+
     };
 
     $(window).on('hashchange', function() {
@@ -102,5 +131,66 @@ function HashParams() {
         }
       }
     });
+
+    rs.addHandler(function(hash) {
+        var hs = hash.getHash();
+        var idx = hs.indexOf("?");
+        hs = hs.length <= 1 ? hs : hs.slice(1, (idx < 0 ? hs.length : idx));
+
+        var parts = hs.split("/").filter(function(part) {
+            return !!part;
+        }).map(function (part) {
+            return decodeURIComponent(part);
+        });
+
+        var maxScore = -1;
+        var maxIndex = -1;
+        var indx = 0;
+        var templates = routs.filter(function (template) {
+            return (template.parts.length == parts.length);
+        }).filter(function(template) {
+            for(var x in parts) {
+                if ((template.parts[x].isVariable == false) && (template.parts[x].value != parts[x])) {
+                    return false;
+                }
+            }
+            return true;
+        }).map(function (template) {
+            template.score = 0;
+            for(var x in parts) {
+                if (template.parts[x].isVariable == false && template.parts[x].value == parts[x]) {
+                    var n = (parts.length - x);
+                    template.score += ((n * n * n) + 3 * (n * n) + 2 * n) / 6;
+                    if(template.score > maxScore) {
+                        maxScore = template.score;
+                        maxIndex = indx;
+                    }
+                }
+            }
+            indx++;
+            return template;
+        });
+
+        var template = templates[maxIndex] || templates[0];
+
+        if(!!template) {
+            try {
+                var params = {};
+                for(var x in template.parts) {
+                    var part = template.parts[x];
+                    if(part.isVariable) {
+                        params[part.value] = parts[x];
+                    }
+                }
+                template.handler(hash, params);
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+        console.log(templates);
+    });
+
     return rs;
 }
+
+window.HashParams = HashParams();
