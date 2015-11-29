@@ -40,7 +40,7 @@ function HashParams() {
     }
 
     function on(uri, handler) {
-		var $this = this;
+        var $this = this;
         var parts = uri.split("/");
         var template = {originString: uri, parts: [], handler: handler};
 
@@ -58,32 +58,24 @@ function HashParams() {
             template.parts.push(p);
         }
         routs.push(template);
-		console.log($this);
-		console.log(routs);
-		return $this;
+        return $this;
     }
 
     function triggerHashChange() {
         $(window).trigger('hashchange');
     }
 
+    function path() {
+        var hs = getHash();
+        var idx = hs.indexOf("#");
+        var idxHs = hs.indexOf("?");
+        var s = hs.slice(idx < 0 ? 0 : (idx + 1), idxHs < 0 ? hs.length : idxHs);
+        return s == "" ? "/" : s;
+    }
+
     var rs = {
 
-        start: function (onStartCallback) {
-            try {
-                onStartCallback(rs);
-            } catch (e) {
-                console.log(e);
-            }
-            triggerHashChange();
-        },
-
-        path: function () {
-            var hs = getHash();
-            var idx = hs.indexOf("#");
-            var s = hs.slice(idx < 0 ? 0 : (idx + 1), hs.indexOf("?"));
-            return s == "" ? "/" : s;
-        },
+        path: path,
 
         on: on,
 
@@ -94,6 +86,60 @@ function HashParams() {
         },
         reload: function () {
             triggerHashChange();
+        },
+
+        execute: function (uri, hash) {
+            hash = !!hash ? hash : rs;
+            uri = !!uri ? uri : hash.path();
+
+            var parts = uri.split("/").filter(function (part) {
+                return !!part;
+            }).map(function (part) {
+                return decodeURIComponent(part);
+            });
+
+            var maxScore = -1;
+            var maxIndex = -1;
+            var indx = 0;
+            var templates = routs.filter(function (template) {
+                return (template.parts.length == parts.length);
+            }).filter(function (template) {
+                for (var x in parts) {
+                    if ((template.parts[x].isVariable == false) && (template.parts[x].value != parts[x])) {
+                        return false;
+                    }
+                }
+                return true;
+            }).map(function (template) {
+                template.score = 0;
+                for (var x in parts) {
+                    if (template.parts[x].isVariable == false && template.parts[x].value == parts[x]) {
+                        var n = (parts.length - x);
+                        template.score += ((n * n * n) + 3 * (n * n) + 2 * n) / 6;
+                        if (template.score > maxScore) {
+                            maxScore = template.score;
+                            maxIndex = indx;
+                        }
+                    }
+                }
+                indx++;
+                return template;
+            }).filter(function (template) {
+                return (template.score >= maxScore);
+            }).forEach(function (template) {
+                try {
+                    var params = {};
+                    for (var x in template.parts) {
+                        var part = template.parts[x];
+                        if (part.isVariable) {
+                            params[part.value] = parts[x];
+                        }
+                    }
+                    template.handler(hash, params);
+                } catch (e) {
+                    console.warn(e);
+                }
+            });
         },
 
         addHandler: function (_onChangeHandler) {
@@ -160,10 +206,10 @@ function HashParams() {
                 return getHash(hash);
             }
         },
-		getHash: getHash,
-		setHash: setHash,
-		getParams: getParams,
-		setParams: setParams
+        getHash: getHash,
+        setHash: setHash,
+        getParams: getParams,
+        setParams: setParams
     };
 
     $(window).on('hashchange', function () {
@@ -171,65 +217,13 @@ function HashParams() {
             try {
                 handlers[x](rs);
             } catch (e) {
-				console.log(e);
+                console.warn(e);
             }
         }
     });
 
     rs.addHandler(function (hash) {
-		console.log("SEE IT");
-        var hs = hash.getHash();
-        var idx = hs.indexOf("?");
-        hs = hs.length <= 1 ? hs : hs.slice(1, (idx < 0 ? hs.length : idx));
-
-        var parts = hs.split("/").filter(function (part) {
-            return !!part;
-        }).map(function (part) {
-            return decodeURIComponent(part);
-        });
-
-        var maxScore = -1;
-        var maxIndex = -1;
-        var indx = 0;
-        var templates = routs.filter(function (template) {
-            return (template.parts.length == parts.length);
-        }).filter(function (template) {
-            for (var x in parts) {
-                if ((template.parts[x].isVariable == false) && (template.parts[x].value != parts[x])) {
-                    return false;
-                }
-            }
-            return true;
-        }).map(function (template) {
-            template.score = 0;
-            for (var x in parts) {
-                if (template.parts[x].isVariable == false && template.parts[x].value == parts[x]) {
-                    var n = (parts.length - x);
-                    template.score += ((n * n * n) + 3 * (n * n) + 2 * n) / 6;
-                    if (template.score > maxScore) {
-                        maxScore = template.score;
-                        maxIndex = indx;
-                    }
-                }
-            }
-            indx++;
-            return template;
-        }).filter(function (template) {
-            return (template.score >= maxScore);
-        }).forEach(function (template) {
-            try {
-                var params = {};
-                for (var x in template.parts) {
-                    var part = template.parts[x];
-                    if (part.isVariable) {
-                        params[part.value] = parts[x];
-                    }
-                }
-                template.handler(hash, params);
-            } catch (e) {
-                console.warn(e);
-            }
-        });
+        hash.execute(hash.path(), hash);
     });
 
     return rs;
