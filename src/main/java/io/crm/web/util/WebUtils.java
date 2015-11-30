@@ -12,6 +12,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpHeaders;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -101,6 +102,13 @@ final public class WebUtils {
                 })
                 .next(uriPath + pageQueryString(pagination.next(), size, queryString), pagination.hasNext())
                 .last(uriPath + pageQueryString(pagination.last(), size, queryString), pagination.isLast());
+    }
+
+    public static JsonObject pageSize(HttpServerRequest request) {
+        final JsonObject requestJson = new JsonObject()
+                .put(ST.page, Converters.toInt(request.params().get(ST.page)))
+                .put(ST.size, Converters.toInt(request.params().get(ST.size)));
+        return requestJson;
     }
 
     private static String pageQueryString(final int prev, final int size, final String queryString) {
