@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="" />
+    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" />
+    </list>
     <ignored path="html_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
