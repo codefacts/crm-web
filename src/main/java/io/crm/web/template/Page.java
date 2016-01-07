@@ -17,7 +17,6 @@ import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
  * Created by someone on 07/09/2015.
  */
 public class Page extends Template {
-    private static final String templateDir = App.loadConfig().getString("templateDir");
     private final String page_title;
     private final Template body;
 
@@ -45,6 +44,7 @@ public class Page extends Template {
 
     public static String templatePath(String filename) {
 
-        return "file:" + Paths.get(templateDir, filename);
+        return "file:" + Paths.get(App.loadConfig().getString("templateDir"), filename);
+//        return Paths.get(App.loadConfig().getString("templateDir"), filename).toString();
     }
 }

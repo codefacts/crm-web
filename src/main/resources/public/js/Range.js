@@ -5,66 +5,54 @@ window.Range = React.createClass({
             id: "",
             from: "",
             to: "",
-            value: "",
-            modalId: "",
-            modalTitle: "",
+            name: "",
             title: "",
             placeholder: "",
-            name: ""
+            modalId: "",
+            modalTitle: "",
+            onChange: function () {
+            }
         };
-    }
-    ,
+    },
 
     getInitialState: function () {
-        if (!!this.props.value) {
-            var splits = this.props.value.split("-", 2)
-            splits = splits.length < 2 ? ["", ""] : splits;
-            return {
-                from: splits[0].trim(),
-                to: splits[1].trim(),
-                value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " - " + this.props.to) : "")
-            };
-        }
         return {
-            from: this.props.from,
-            to: this.props.to,
-            value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " - " + this.props.to) : "")
+            isModalVisible: false
         };
-    }
-    ,
+    },
 
     onFromChange: function (e) {
-        this.setState({
+        this.props.onChange({
             from: e.target.value,
+            to: this.props.to
         });
-    }
-    ,
+    },
 
     onToChange: function (e) {
-        this.setState({
+        this.props.onChange({
+            from: this.props.from,
             to: e.target.value,
         });
-    }
-    ,
+    },
 
     onClear: function (e) {
-        this.setState({
-            from: "",
-            to: "",
-        });
-    }
-    ,
-
-    okClick: function (e) {
-    }
-    ,
+        this.props.onChange({from: "", to: ""});
+    },
 
     onClick: function (e) {
-        $('#' + this.props.modalId).modal('show');
+        this.setState({isModalVisible: true});
+    },
+
+    onModalClose: function () {
+        this.setState({isModalVisible: false});
+    },
+
+    onChange: function (e) {
+        this.setState({value: e.target.value});
     },
 
     render: function () {
-
+        var $this = this;
         var modalBody = (
 
             <div className="row">
@@ -73,7 +61,7 @@ window.Range = React.createClass({
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">From</label>
                         <input type="number" className="form-control" id="exampleInputEmail1" placeholder="From"
-                               value={this.state.from}
+                               value={this.props.from}
                                onChange={this.onFromChange}/>
                     </div>
                 </div>
@@ -82,7 +70,7 @@ window.Range = React.createClass({
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">To</label>
                         <input type="number" className="form-control" id="exampleInputEmail1" placeholder="To"
-                               value={this.state.to}
+                               value={this.props.to}
                                onChange={this.onToChange}/>
                     </div>
                 </div>
@@ -91,18 +79,28 @@ window.Range = React.createClass({
 
         );
 
-        var value = (((this.state.from != "") || (this.state.to != "")) ? (this.state.from + " - " + this.state.to) : "");
+        var modalFooter = (<div>
+            <span className="btn btn-danger" onClick={$this.onClear}>Clear</span>
+            <span className="btn btn-primary" style={{width: '100px'}} onClick={$this.onModalClose}>Ok</span>
+        </div>);
+
+        var value = (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " - " + this.props.to) : "");
 
         return (
-            <div className="form-group">
-                <input id={this.props.id} type="text" className="form-control range" placeholder={this.props.placeholder}
+            <div>
+                <input id={this.props.id} type="text" className="form-control range"
+                       placeholder={this.props.placeholder}
                        title={this.props.title}
                        name={this.props.name}
                        value={value}
                        onChange={this.onChange}
                        onClick={this.onClick}/>
-                <Modal body={modalBody} onClear={this.onClear} okClick={this.okClick} id={this.props.modalId}
-                       title={this.props.modalTitle}/>
+
+                {!!$this.state.isModalVisible ? (<Modal id={$this.props.modalId} title={$this.props.modalTitle}
+                                                        onClose={$this.onModalClose}
+                                                        isOpen={$this.state.isModalVisible}
+                                                        body={modalBody}
+                                                        footer={modalFooter}/>) : ""}
             </div>
         );
     }

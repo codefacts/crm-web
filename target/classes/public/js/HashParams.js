@@ -10,11 +10,26 @@ function HashParams() {
         return location.hash || "";
     }
 
-    function setParams(params) {
+    function path() {
         var hs = getHash();
-        var idx = hs.indexOf("?");
-        hs = idx < 0 ? hs : hs.slice(0, idx);
-        setHash(hs + "?" + $.param(params || {}));
+        var idx = hs.indexOf("#");
+        var idxHs = hs.indexOf("?");
+        var s = hs.slice(idx < 0 ? 0 : (idx + 1), idxHs < 0 ? hs.length : idxHs);
+        return s == "" ? "/" : s;
+    }
+
+    function setParams(params) {
+        var strings = [];
+        if (Array.isArray(params)) {
+            params.forEach(function (p) {
+                strings.push(encodeURIComponent(p.name) + "=" + encodeURIComponent(p.value));
+            })
+        } else {
+            for (var x in params) {
+                strings.push(encodeURIComponent(x) + "=" + encodeURIComponent(params[x]));
+            }
+        }
+        setHash(path() + "?" + strings.join("&"));
     }
 
     function getParams(hash) {
@@ -25,15 +40,15 @@ function HashParams() {
         }
         if (hash.lastIndexOf("?") >= 0) {
             hash = hash.substr(hash.lastIndexOf("?") + 1);
-        } else return _params;
+        }
 
-        if (hash == "") return _params;
+        if (hash.trim() == "") return _params;
         var splits = hash.split("&");
         for (var x in splits) {
             var part = splits[x] || "";
             var keyValuPair = part.split("=", 2);
             if (keyValuPair.length > 0) {
-                _params[keyValuPair[0]] = keyValuPair[1];
+                _params[decodeURIComponent(keyValuPair[0])] = decodeURIComponent(keyValuPair[1]);
             }
         }
         return _params;
@@ -63,14 +78,6 @@ function HashParams() {
 
     function triggerHashChange() {
         $(window).trigger('hashchange');
-    }
-
-    function path() {
-        var hs = getHash();
-        var idx = hs.indexOf("#");
-        var idxHs = hs.indexOf("?");
-        var s = hs.slice(idx < 0 ? 0 : (idx + 1), idxHs < 0 ? hs.length : idxHs);
-        return s == "" ? "/" : s;
     }
 
     var rs = {
@@ -160,15 +167,21 @@ function HashParams() {
         addAll: function (params) {
             if (!params) return;
             var pms = getParams();
-            for (var x in params) {
-                pms[x] = params[x]
+            if (Array.isArray(params)) {
+                params.forEach(function (e) {
+                    pms[e.name] = pms.value;
+                });
+            } else {
+                for (var x in params) {
+                    pms[x] = params[x]
+                }
             }
             setParams(pms);
         },
         removeAll: function (params) {
             if (!params) return;
             var pms = getParams();
-            if (params.constructor === Array) {
+            if (Array.isArray(params)) {
                 for (var x in params) {
                     delete pms[params[x]];
                 }

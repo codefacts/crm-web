@@ -7,73 +7,50 @@ window.DateRange = React.createClass({
             title: "",
             from: "",
             to: "",
+            onChange: function () {
+            },
             modalId: "",
             modalTitle: "",
-            name: ""
+            name: "",
+            minDate: null,
+            maxDate: null,
+            formatDate: !!window.formatDate ? window.formatDate : null
         };
-    }
-    ,
-
-    getInitialState: function () {
-        if (!!this.props.value) {
-            var splits = this.props.value.split(":", 2)
-            splits = splits.length < 2 ? ["", ""] : splits;
-            return {
-                from: splits[0].trim(),
-                to: splits[1].trim(),
-                value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " : " + this.props.to) : "")
-            };
-        }
-        return {
-            from: this.props.from,
-            to: this.props.to,
-            value: (((this.props.from != "") || (this.props.to != "")) ? (this.props.from + " : " + this.props.to) : "")
-        };
-    }
-    ,
-
-    componentDidMount: function () {
-        console.log("Component");
-        $('.date-range-from').datepicker(global_date_picker_config)
-            .on("changeDate", function (e) {
-                console.log(e);
-                this.setState({from: formatDate(e.date)});
-            }.bind(this));
-
-        $('.date-range-to').datepicker(global_date_picker_config)
-            .on("changeDate", function (e) {
-                console.log(e);
-                this.setState({to: formatDate(e.date)});
-            }.bind(this));
     },
 
-    onFromChange: function (e) {
-        this.setState({from: e.target.value});
-    }
-    ,
+    getInitialState: function () {
+        return {
+            isModalVisible: false
+        };
+    },
 
-    onToChange: function (e) {
-        this.setState({to: e.target.value});
-    }
-    ,
+    componentDidMount: function () {
+    },
+
+    onFromChange: function (from) {
+        var $this = this;
+        this.props.onChange({from: from, to: $this.props.to});
+    },
+
+    onToChange: function (to) {
+        var $this = this;
+        this.props.onChange({from: $this.props.from, to: to});
+    },
 
     onClear: function (e) {
-        this.setState({from: "", to: ""});
-    }
-    ,
-
-    okClick: function (e) {
-        this.setState({
-            value: (this.state.from + " : " + this.state.to)
-        });
-    }
-    ,
+        this.props.onChange({from: "", to: ""});
+    },
 
     onClick: function (e) {
-        $('#' + this.props.modalId).modal('show');
+        this.setState({isModalVisible: true});
+    },
+
+    onModalClose: function () {
+        this.setState({isModalVisible: false});
     },
 
     render: function () {
+        var $this = this;
 
         var modalBody = (
 
@@ -82,20 +59,21 @@ window.DateRange = React.createClass({
                 <div className="col-md-6">
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">From</label>
-                        <input type="text" className="form-control date-range-from" id="exampleInputEmail1"
-                               placeholder="From"
-                               value={this.state.from}
-                               onChange={this.onFromChange}/>
+                        <DatePicker
+                            minDate={$this.props.minDate}
+                            date={this.props.from}
+                            onChange={this.onFromChange}
+                            />
                     </div>
                 </div>
 
                 <div className="col-md-6">
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">To</label>
-                        <input type="text" className="form-control date-range-to" id="exampleInputEmail1"
-                               placeholder="To"
-                               value={this.state.to}
-                               onChange={this.onToChange}/>
+                        <DatePicker
+                            maxDate={$this.props.maxDate}
+                            date={this.props.to}
+                            onChange={this.onToChange}/>
                     </div>
                 </div>
 
@@ -103,19 +81,37 @@ window.DateRange = React.createClass({
 
         );
 
-        var value = (((this.state.from != "") || (this.state.to != "")) ? (this.state.from + " : " + this.state.to) : "");
+        var modalFooter = (<div>
+            <span className="btn btn-danger" onClick={$this.onClear}>Clear</span>
+            <span className="btn btn-primary" style={{width: '100px'}} onClick={$this.onModalClose}>Ok</span>
+        </div>);
+
+        var value = ((!!this.props.from || !!this.props.to) ? (this.formatDate(this.props.from) + " : " + this.formatDate(this.props.to)) : "");
 
         return (
-            <div className="form-group">
-                <input id={this.props.id} type="text" className="form-control range" placeholder={this.props.placeholder}
+
+            <div>
+                <input id={this.props.id} type="text" className="form-control range"
+                       placeholder={this.props.placeholder}
                        title={this.props.title}
                        name={this.props.name}
                        value={value}
+                       onChange={function (e) {}}
                        onClick={this.onClick}/>
-                <Modal body={modalBody} onClear={this.onClear} okClick={this.okClick} id={this.props.modalId}
-                       title={this.props.modalTitle}/>
+                {!!$this.state.isModalVisible ? (<Modal id={$this.props.modalId} title={$this.props.modalTitle}
+                                                        onClose={$this.onModalClose}
+                                                        isOpen={$this.state.isModalVisible} body={modalBody}
+                                                        footer={modalFooter}/>) : ""}
             </div>
+
         );
+    },
+    formatDate: function (date) {
+        var $this = this;
+        console.log(date)
+        if (!date) return "";
+        if (!!$this.props.formatDate && !!date) return $this.props.formatDate(new Date(date));
+        else return moment(date, "YYYY-MM-DD").format("DD-MMM-YYYY");
     }
 })
 ;

@@ -3,6 +3,8 @@ package io.crm.web.util;
 import io.crm.intfs.ConsumerUnchecked;
 import io.crm.util.ExceptionUtil;
 import io.crm.util.Util;
+import io.crm.util.touple.immutable.Tpl2;
+import io.crm.util.touple.immutable.Tpls;
 import io.crm.web.ST;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
@@ -14,6 +16,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
@@ -117,5 +120,30 @@ final public class WebUtils {
 
     public static int rangify(final int val, final int min, final int max) {
         return val < min ? min : val > max ? max : val;
+    }
+
+    public static JsonObject toJson(final MultiMap params) {
+        final JsonObject criteria = new JsonObject();
+        params.names().forEach(name -> {
+            if (params.getAll(name).size() <= 1) {
+                criteria.put(name, params.get(name));
+            } else {
+                criteria.put(name, new JsonArray(params.getAll(name)));
+            }
+        });
+        return criteria;
+    }
+
+    public static Tpl2<String, String> splitRange(String string, String regex) {
+        final String[] split = string.split(regex, 2);
+        if (split.length > 1) {
+            return Tpls.of(split[0], split[1]);
+        } else {
+            return Tpls.of(split[0], "");
+        }
+    }
+
+    public static void main(String... args) {
+
     }
 }

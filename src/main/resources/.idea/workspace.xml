@@ -1,7 +1,715 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="" />
+    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/.editorconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/.jscs.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/.jshintrc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/.spmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/.travis.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/.travis.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/CHANGELOG.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/CHANGELOG.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/CONTRIBUTING.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/CONTRIBUTING.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/DatePickerPopup.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/DbUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/statichandler/Fluent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/Gruntfile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/lib/components/Modal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/specs/Modal.spec.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/lib/components/ModalPortal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/Moment.js.nuspec" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/meteor/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/statichandler/StaticHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/statichandler/StaticHandlerImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/UPGRADE_GUIDE.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/statichandler/VertxGen.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/abs-ceil.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/abs-floor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/abs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/add-subtract.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/add-subtract.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/add_subtract.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/af.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/af.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/af.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/aliases.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/templates/amd-named.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/templates/amd.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/examples/basic/app.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/examples/bootstrap/app.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/examples/basic/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/examples/bootstrap/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ar-ma.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ar-ma.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ar-ma.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ar-sa.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ar-sa.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ar-sa.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ar-tn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ar-tn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ar-tn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/lib/helpers/ariaAppHider.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/as.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/az.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/az.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/az.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/be.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/be.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/be.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/bg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/bg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/bg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/bn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/bn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/bn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/bo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/bo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/bo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/bower.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/bower.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/br.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/br.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/br.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/bs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/bs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/bs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/bubble.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/scripts/build" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/bump_version.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/calendar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/calendar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/check-overflow.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/check_sauce_creds.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/benchmarks/clone.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/clone.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/compare-arrays.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/compare.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/component.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/composer.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/constants.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/constructor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/constructor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/constructor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/create.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/create.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/cs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/cs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/cs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/cv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/cv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/cv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/cy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/cy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/cy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/da.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/da.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/da.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/date-from-array.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/day-of-month.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/day-of-week.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/day-of-year.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/days_in_month.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/de-at.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/de-at.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/de-at.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/de.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/de.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/de.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/defaults.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/deprecate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/scripts/dev-examples" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/diff.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/diff.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/duration.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/duration.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/duration_from_moments.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/helpers/each.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/el.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/el.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/el.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/embed_locales.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/en-au.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/en-au.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/en-au.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/en-ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/en-ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/en-ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/en-gb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/en-gb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/en-gb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/en.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/en.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/ender.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/eo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/eo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/eo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/es.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/es.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/es.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/eslint.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/et.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/et.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/et.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/eu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/eu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/eu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/meteor/export.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/extend.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/fa.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/fa.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/fa.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/fi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/fi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/fi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/fo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/fo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/fo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/lib/helpers/focusManager.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/format/format.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/format.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/format.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/formats.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/fr-ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/fr-ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/fr-ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/fr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/fr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/fr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/from-anything.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/from-array.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/from-object.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/from-string-and-array.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/from-string-and-format.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/from-string.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/from.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/benchmarks/fromDate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/benchmarks/fromDateUtc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/from_to.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/fy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/fy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/fy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/get-set.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/get.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/getters_setters.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/gl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/gl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/gl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/templates/globals.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/has-own-prop.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/he.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/he.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/he.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/specs/helper.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/hi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/hi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/hi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/history.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/hooks.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/hour.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/hr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/hr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/hr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/hu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/hu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/hu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/humanize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/hy-am.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/hy-am.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/hy-am.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/id.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/id.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/id.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/index.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/examples/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/examples/basic/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/examples/bootstrap/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/lib/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/invalid.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/invalid.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/is-array.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/is-date.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/is.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/is.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/is.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/is_after.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/is_before.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/is_between.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/is_date.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/is_moment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/is_same.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/is_valid.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/iso-string.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/it.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/it.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/it.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ja.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ja.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ja.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/jv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/jv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/jv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ka.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ka.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ka.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/karma.conf.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/km.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/km.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/km.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ko.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ko.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ko.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/lb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/lb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/lb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/leapyear.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/listers.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/lists.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/local.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/templates/locale-header.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/locale.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/locale.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/locale.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/min/locales.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/locales.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/min/locales.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/lt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/lt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/lt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/lv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/lv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/lv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/specs/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/benchmarks/makeDuration.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/map.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/me.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/me.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/me.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/millisecond.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/min-max.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/min_max.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/minute.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/mk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/mk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/mk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ml.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ml.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ml.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/min/moment-with-locales.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/min/moment-with-locales.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/moment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/moment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/moment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/min/moment.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/month.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/mr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/mr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/mr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ms-my.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ms-my.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ms-my.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ms.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ms.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ms.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/mutable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/my.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/my.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/my.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/nb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/nb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/nb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ne.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ne.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ne.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/nl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/nl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/nl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/nn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/nn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/nn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/normalize_units.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/scripts/npm_prepublish.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/nuget.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/offset.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/ordinal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/package.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/meteor/package.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/parsing-flags.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/parsing_flags.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/pl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/pl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/pl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/pre-post-format.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/preparse_postformat.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/scripts/preview-release" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/duration/prototype.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/prototype.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/prototype.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/pt-br.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/pt-br.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/pt-br.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/pt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/pt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/pt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/qtest.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/quarter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/quarter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/qunit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/react-date-picker.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/dist/react-modal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/dist/react-modal.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/parse/regex.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/relative.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/relative_time.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/scripts/release" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ro.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ro.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ro.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ru.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ru.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ru.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/lib/helpers/scopeTab.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/second.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/locale/set.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/si.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/si.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/si.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/size.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/sk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/sk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/sk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/sl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/sl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/sl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/sq.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/sq.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/sq.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/sr-cyrl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/sr-cyrl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/sr-cyrl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/sr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/sr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/sr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/start-end-of.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/start_end_of.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/string_prototype.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/sv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/sv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/sv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/ta.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/ta.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/ta.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/lib/helpers/tabbable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/templates/test-header.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/meteor/test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/scripts/test" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/min/tests.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/th.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/th.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/th.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/timestamp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/timezone.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/tl-ph.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/tl-ph.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/tl-ph.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/to-int.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/to-type.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/to.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/to_type.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/parse/token.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/tr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/tr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/tr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/transpile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/tzl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/tzl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/tzl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/tzm-latn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/tzm-latn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/tzm-latn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/tzm.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/tzm.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/tzm.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/uk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/uk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/uk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/units.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/update_index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/utc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/utc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/utc_offset.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/uz.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/uz.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/uz.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/create/valid.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/moment/valid.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/vi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/vi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/vi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/react-modal-0.6.1/webpack.config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/week-year.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/week.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/week_year.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/weekday.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/weeks.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/weeks_in_year.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/units/year.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/lib/utils/zero-fill.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/benchmarks/zeroFill.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/zh-cn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/zh-cn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/zh-cn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/locale/zh-tw.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/locale/zh-tw.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/locale/zh-tw.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/zone_switching.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/src/test/moment/zones.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/components/moment-2.10.6/tasks/zones.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/converters.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/DatePicker.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Converters.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Converters.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/form/FormRowBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/form/FormRowBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FormTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FormTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplateBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplateBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ST.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/ST.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableRow.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableRow.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/react/AjaxSelect.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/react/AjaxSelect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/AjaxSelectBox.js" afterPath="$PROJECT_DIR$/public/js/AjaxSelectBox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/AlertTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/AlertTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/AlertTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/AlertTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/ApiEvents.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/ApiEvents.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/App.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/App.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/controller/AuthController.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/AuthController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/BodyPanelDefault.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/BodyPanelDefault.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/BodyPanelDefaultBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/BodyPanelDefaultBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/css/bootstrap/BootstrapCss.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/css/bootstrap/BootstrapCss.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/css/bootstrap/ButtonClasses.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/css/bootstrap/ButtonClasses.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/ButtonTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/ButtonTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/ButtonTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/ButtonTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/codec/CodecUtil.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/codec/CodecUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/ColumnTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/ColumnTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/ColumnTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/ColumnTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/controller/Controllers.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/Controllers.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/css/CssClass.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/css/CssClass.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParseError.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParseError.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParseErrorBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParseErrorBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParseResult.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParseResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParser.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/parsers/CsvParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/DataPanelTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/DataPanelTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/DataPanelTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/DataPanelTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/DateConverter.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/DateConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateInputTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateInputTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateInputTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateInputTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/DateRange.js" afterPath="$PROJECT_DIR$/public/js/DateRange.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateRangeTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateRangeTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateRangeTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/DateRangeTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/form/DefaultFooterBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/form/DefaultFooterBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/EmptyTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/EmptyTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/ExportButton.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/ExportButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/ExportButtonBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/ExportButtonBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/FileUploadStatusTable.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/FileUploadStatusTable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/FileUploadTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/FileUploadTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/FiltersPanelTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/FiltersPanelTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/FiltersPanelTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/FiltersPanelTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/form/FormRowBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/form/FormRowBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/FormTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/FormTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/FormTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/FormTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/controller/GoogleMapController.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/GoogleMapController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/page/GoogleMapTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/GoogleMapTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/HashParams.js" afterPath="$PROJECT_DIR$/public/js/HashParams.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/js/HashParams.js" afterPath="$PROJECT_DIR$/../../../target/classes/public/js/HashParams.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/ImageUploadForm.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/ImageUploadForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/form/InputBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/form/InputBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/JavascriptRedirect.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/JavascriptRedirect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/JsRsp.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/JsRsp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/codec/ListToListCodec.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/codec/ListToListCodec.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/page/LoginTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/LoginTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/MessageCodes.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/MessageCodes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Modal.js" afterPath="$PROJECT_DIR$/public/js/Modal.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/ModalAlert.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/ModalAlert.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/ModalAlertBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/ModalAlertBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/NumberTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/NumberTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/NumberTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/NumberTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/Page.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/Page.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/Page.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/Page.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/PageBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/PageBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/Pagination.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/Pagination.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Pagination.js" afterPath="$PROJECT_DIR$/public/js/Pagination.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationFirstLastButtonTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationFirstLastButtonTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationFirstLastButtonTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationFirstLastButtonTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationItemTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationItemTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationItemTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationItemTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/pagination/PaginationTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/Panel.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/bootstrap/Panel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Range.js" afterPath="$PROJECT_DIR$/public/js/Range.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/form/RangeInputBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/form/RangeInputBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/RangeTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/RangeTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/RangeTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/RangeTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/page/ReactDOMBinder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/page/ReactDOMBinder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/controller/ReactJSController.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/ReactJSController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/ResponseUtil.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/ResponseUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/RowTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/RowTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/RowTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/RowTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/RspList.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/RspList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/codec/RspListToRspListCodec.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/codec/RspListToRspListCodec.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/ST.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/ST.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/Script.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/Script.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/Scripts.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/Scripts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/SelectTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/SelectTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/SelectTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/SelectTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/SelectableRange.js" afterPath="$PROJECT_DIR$/public/js/SelectableRange.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/SidebarTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/SidebarTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/SidebarTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/SidebarTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/Status.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/Status.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/Styles.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/Styles.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableBody.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableBody.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableBodyBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableBodyBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableCell.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableCell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableCellBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableCellBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/css/bootstrap/TableClasses.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/css/bootstrap/TableClasses.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableFooter.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableFooter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableFooterBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableFooterBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableHeader.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableHeader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableHeaderBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableHeaderBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableRow.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableRow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableRowBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableRowBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/TableTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/TemplateList.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/TemplateList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/TemplateListBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/TemplateListBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/TemplateUtil.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/TemplateUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../test/java/TestWater.java" afterPath="$PROJECT_DIR$/../../test/java/TestWater.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/TextInputTemplate.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/TextInputTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/input/TextInputTemplateBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/input/TextInputTemplateBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/Th.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/Th.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/template/table/ThBuilder.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/template/table/ThBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/UploadResult.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/UploadResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/Uris.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/Uris.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/css/WebButtonClasses.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/css/WebButtonClasses.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/WebUtils.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/WebUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/ajax-select.html" afterPath="$PROJECT_DIR$/templates-s/en_US/ajax-select.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/app.css" afterPath="$PROJECT_DIR$/public/css/app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/css/app.css" afterPath="$PROJECT_DIR$/../../../target/classes/public/css/app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/js/app.js" afterPath="$PROJECT_DIR$/../../../target/classes/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/body-panel-default.html" afterPath="$PROJECT_DIR$/templates-s/en_US/body-panel-default.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/static/css/bootstrap-theme.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/static/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/../../../target/classes/static/css/bootstrap-theme.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/static/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/../../../target/classes/static/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/static/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/static/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/../../../target/classes/static/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.html" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.js" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/br-checker-details.html" afterPath="$PROJECT_DIR$/templates-s/en_US/br-checker-details.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-export-settings.html" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-export-settings.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/br-checker-info-view.html" afterPath="$PROJECT_DIR$/templates-s/en_US/br-checker-info-view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/button.html" afterPath="$PROJECT_DIR$/templates-s/en_US/button.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pages/call-details-summary-view.js" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/call-details-summary-view.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pages/call-details.js" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/call-details.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/column.html" afterPath="$PROJECT_DIR$/templates-s/en_US/column.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../.idea/compiler.xml" afterPath="$PROJECT_DIR$/../../../.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/config.js" afterPath="$PROJECT_DIR$/public/js/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.json" afterPath="$PROJECT_DIR$/config.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/config.json" afterPath="$PROJECT_DIR$/../../../target/classes/config.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../crm-web.iml" afterPath="$PROJECT_DIR$/../../../crm-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/dashboard.html" afterPath="$PROJECT_DIR$/templates-s/en_US/dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/dashboard.js" afterPath="$PROJECT_DIR$/public/js/dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/js/dashboard.js" afterPath="$PROJECT_DIR$/../../../target/classes/public/js/dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/data-panel.html" afterPath="$PROJECT_DIR$/templates-s/en_US/data-panel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/date-range.html" afterPath="$PROJECT_DIR$/templates-s/en_US/date-range.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/date.html" afterPath="$PROJECT_DIR$/templates-s/en_US/date.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../.idea/encodings.xml" afterPath="$PROJECT_DIR$/../../../.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/event-publish-form.html" afterPath="$PROJECT_DIR$/templates-s/en_US/event-publish-form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/export-button.html" afterPath="$PROJECT_DIR$/templates-s/en_US/export-button.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/file-upload-status-table.html" afterPath="$PROJECT_DIR$/templates-s/en_US/file-upload-status-table.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/file-upload.html" afterPath="$PROJECT_DIR$/templates-s/en_US/file-upload.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/filters-panel.html" afterPath="$PROJECT_DIR$/templates-s/en_US/filters-panel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/form.html" afterPath="$PROJECT_DIR$/templates-s/en_US/form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/static/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/../../../target/classes/static/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/google-map.html" afterPath="$PROJECT_DIR$/templates-s/en_US/google-map.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/image-upload-form.html" afterPath="$PROJECT_DIR$/templates-s/en_US/image-upload-form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/javascript-redirect.html" afterPath="$PROJECT_DIR$/templates-s/en_US/javascript-redirect.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/jquery-2.1.4.min.js" afterPath="$PROJECT_DIR$/static/js/jquery-2.1.4.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/static/js/jquery-2.1.4.min.js" afterPath="$PROJECT_DIR$/../../../target/classes/static/js/jquery-2.1.4.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/login-form.html" afterPath="$PROJECT_DIR$/templates-s/en_US/login-form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../.idea/misc.xml" afterPath="$PROJECT_DIR$/../../../.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/model-alert.html" afterPath="$PROJECT_DIR$/templates-s/en_US/model-alert.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../.idea/modules.xml" afterPath="$PROJECT_DIR$/../../../.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/my-classes.js" afterPath="$PROJECT_DIR$/public/js/my-classes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/my-functions.js" afterPath="$PROJECT_DIR$/public/js/my-functions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/number.html" afterPath="$PROJECT_DIR$/templates-s/en_US/number.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/page.html" afterPath="$PROJECT_DIR$/templates-s/en_US/page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pagination-first-last-button.html" afterPath="$PROJECT_DIR$/templates-s/en_US/pagination-first-last-button.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pagination.html" afterPath="$PROJECT_DIR$/templates-s/en_US/pagination.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/panel.html" afterPath="$PROJECT_DIR$/templates-s/en_US/panel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../pom.xml" afterPath="$PROJECT_DIR$/../../../pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../../../.idea/copyright/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/range.html" afterPath="$PROJECT_DIR$/templates-s/en_US/range.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/reac-dom-binder.html" afterPath="$PROJECT_DIR$/templates-s/en_US/reac-dom-binder.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/row.html" afterPath="$PROJECT_DIR$/templates-s/en_US/row.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/select.html" afterPath="$PROJECT_DIR$/templates-s/en_US/select.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/sidebar.html" afterPath="$PROJECT_DIR$/templates-s/en_US/sidebar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sona.json" afterPath="$PROJECT_DIR$/sona.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../ss.gitignore" afterPath="$PROJECT_DIR$/../../../ss.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/table-body.html" afterPath="$PROJECT_DIR$/templates-s/en_US/table-body.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/table-cell.html" afterPath="$PROJECT_DIR$/templates-s/en_US/table-cell.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/table-footer.html" afterPath="$PROJECT_DIR$/templates-s/en_US/table-footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/table-header.html" afterPath="$PROJECT_DIR$/templates-s/en_US/table-header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/table-row.html" afterPath="$PROJECT_DIR$/templates-s/en_US/table-row.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/table.html" afterPath="$PROJECT_DIR$/templates-s/en_US/table.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/table.sql" afterPath="$PROJECT_DIR$/table.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/table.sql" afterPath="$PROJECT_DIR$/../../../target/classes/table.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/template-list.html" afterPath="$PROJECT_DIR$/templates-s/en_US/template-list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/html/test.html" afterPath="$PROJECT_DIR$/public/html/test.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/html/test.html" afterPath="$PROJECT_DIR$/../../../target/classes/public/html/test.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/text-input.html" afterPath="$PROJECT_DIR$/templates-s/en_US/text-input.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/th.html" afterPath="$PROJECT_DIR$/templates-s/en_US/th.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../.idea/vcs.xml" afterPath="$PROJECT_DIR$/../../../.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../web.iml" afterPath="$PROJECT_DIR$/../../../web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates-s/en_US/pages/work-day-details.js" afterPath="$PROJECT_DIR$/templates-s/en_US/pages/work-day-details.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="html_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,11 +730,90 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HashParams.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HashParams.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/HashParams.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09222423">
-              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="166" column="35" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Modal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="41" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="41" />
+              <folding>
+                <marker date="1450970284985" expanded="true" signature="637:1897" placeholder="&lt;xml/&gt;" />
+                <marker date="1450970284985" expanded="true" signature="659:1768" placeholder="&lt;xml/&gt;" />
+                <marker date="1450970284985" expanded="true" signature="810:1745" placeholder="&lt;xml/&gt;" />
+                <marker date="1450970284985" expanded="true" signature="901:1718" placeholder="&lt;xml/&gt;" />
+                <marker date="1450970284985" expanded="true" signature="961:1397" placeholder="&lt;xml/&gt;" />
+                <marker date="1450970284985" expanded="true" signature="1024:1259" placeholder="&lt;xml/&gt;" />
+                <marker date="1450970284985" expanded="true" signature="1426:1540" placeholder="&lt;xml/&gt;" />
+                <marker date="1450970284985" expanded="true" signature="1569:1687" placeholder="&lt;xml/&gt;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/app.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatePickerPopup.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/DatePickerPopup.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AjaxSelectBox.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="my-functions.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.675507">
+              <caret line="56" column="34" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DateRange.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Range.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/Range.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="16" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -59,22 +846,24 @@
       <list>
         <option value="$PROJECT_DIR$/public/js/my-classes.js" />
         <option value="$PROJECT_DIR$/public/js/config.js" />
-        <option value="$PROJECT_DIR$/public/js/my-functions.js" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
-        <option value="$PROJECT_DIR$/public/js/DatePicker.js" />
         <option value="$PROJECT_DIR$/templates-s/en_US/page.html" />
         <option value="$PROJECT_DIR$/public/js/SelectableRange.js" />
         <option value="$PROJECT_DIR$/public/js/react-components.js" />
         <option value="$PROJECT_DIR$/templates-s/en_US/ajax-select.html" />
-        <option value="$PROJECT_DIR$/public/js/Modal.js" />
         <option value="$PROJECT_DIR$/public/js/br-checker-details-filter.js" />
         <option value="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.html" />
         <option value="$PROJECT_DIR$/public/js/Pagination.js" />
         <option value="$PROJECT_DIR$/public/js/AjaxSelectBox.js" />
-        <option value="$PROJECT_DIR$/public/js/DateRange.js" />
-        <option value="$PROJECT_DIR$/public/js/Range.js" />
         <option value="$PROJECT_DIR$/templates-s/en_US/pages/br-checker-details-filter.js" />
+        <option value="$PROJECT_DIR$/public/css/app.css" />
+        <option value="$PROJECT_DIR$/public/js/DatePicker.js" />
+        <option value="$PROJECT_DIR$/public/js/Range.js" />
         <option value="$PROJECT_DIR$/public/js/HashParams.js" />
+        <option value="$PROJECT_DIR$/public/js/DateRange.js" />
+        <option value="$PROJECT_DIR$/public/js/Modal.js" />
+        <option value="$PROJECT_DIR$/public/js/DatePickerPopup.js" />
+        <option value="$PROJECT_DIR$/public/js/my-functions.js" />
       </list>
     </option>
   </component>
@@ -86,10 +875,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1378" />
-    <option name="height" value="738" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="959" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -114,8 +903,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -147,10 +934,6 @@
               <option name="myItemId" value="templates-s" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="en_US" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -162,15 +945,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates-s" />
+              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="en_US" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -202,7 +981,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -262,6 +1041,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -370,10 +1151,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1378" height="738" extended-state="1" />
+    <frame x="65" y="24" width="959" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25367647" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25130343" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -393,35 +1174,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976827" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7866894" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976827" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2539326" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976827" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -439,10 +1195,190 @@
     <option name="LAST_COMMIT_MESSAGE" value="Modal.js" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/public/js/DatePickerPopup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Range.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/HashParams.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="166" column="35" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="41" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="41" />
+          <folding>
+            <marker date="1450970284985" expanded="true" signature="637:1897" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="659:1768" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="810:1745" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="901:1718" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="961:1397" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1024:1259" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1426:1540" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1569:1687" placeholder="&lt;xml/&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DatePickerPopup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Range.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/HashParams.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="166" column="35" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="37" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="37" />
+          <folding>
+            <marker date="1450970284985" expanded="true" signature="637:1897" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="659:1768" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="810:1745" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="901:1718" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="961:1397" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1024:1259" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1426:1540" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1569:1687" placeholder="&lt;xml/&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DatePickerPopup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Range.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -506,20 +1442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38825756">
-          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03219697">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/SelectableRange.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -534,20 +1456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Pagination.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -559,20 +1467,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21480145">
           <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/DatePicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61551726">
-          <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -611,13 +1505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Range.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates-s/en_US/pages/call-details.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -632,10 +1519,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03074141">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/components/moment-2.10.6/min/moment.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/react.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="927" column="41" selection-start-line="927" selection-start-column="41" selection-end-line="927" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DateRange.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/HashParams.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09222423">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="166" column="35" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/AjaxSelectBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Modal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="41" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="41" />
+          <folding>
+            <marker date="1450970284985" expanded="true" signature="637:1897" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="659:1768" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="810:1745" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="901:1718" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="961:1397" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1024:1259" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1426:1540" placeholder="&lt;xml/&gt;" />
+            <marker date="1450970284985" expanded="true" signature="1569:1687" placeholder="&lt;xml/&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Range.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DatePickerPopup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.675507">
+          <caret line="56" column="34" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
           <folding />
         </state>
       </provider>
