@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/Converters.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sona.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/table.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../../target/classes/config.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../../target/classes/table.sql" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Converters.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Converters.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/form/FormRowBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/form/FormRowBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/controller/AuthController.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/controller/AuthController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/DateRange.js" afterPath="$PROJECT_DIR$/public/js/DateRange.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/HashParams.js" afterPath="$PROJECT_DIR$/public/js/HashParams.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/public/js/HashParams.js" afterPath="$PROJECT_DIR$/../../../target/classes/public/js/HashParams.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Pagination.js" afterPath="$PROJECT_DIR$/public/js/Pagination.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/io/crm/web/util/WebUtils.java" afterPath="$PROJECT_DIR$/../java/io/crm/web/util/WebUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/my-classes.js" afterPath="$PROJECT_DIR$/public/js/my-classes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/my-functions.js" afterPath="$PROJECT_DIR$/public/js/my-functions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="html_app.iws" />
@@ -57,8 +28,8 @@
       <file leaf-file-name="HashParams.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/HashParams.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51140064">
-              <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.4397394">
+              <caret line="99" column="75" selection-start-line="99" selection-start-column="75" selection-end-line="99" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -68,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="90" column="15" selection-start-line="90" selection-start-column="15" selection-end-line="90" selection-end-column="15" />
+              <caret line="86" column="37" selection-start-line="86" selection-start-column="37" selection-end-line="86" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -408,11 +379,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453121709733</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Modal.js">
+      <created>1453121748183</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1453121748183</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="959" height="744" extended-state="6" />
+    <frame x="65" y="24" width="959" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25130343" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -888,15 +865,15 @@
     <entry file="file://$PROJECT_DIR$/public/js/my-functions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="90" column="15" selection-start-line="90" selection-start-column="15" selection-end-line="90" selection-end-column="15" />
+          <caret line="86" column="37" selection-start-line="86" selection-start-column="37" selection-end-line="86" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/HashParams.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51140064">
-          <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.4397394">
+          <caret line="99" column="75" selection-start-line="99" selection-start-column="75" selection-end-line="99" selection-end-column="75" />
           <folding />
         </state>
       </provider>

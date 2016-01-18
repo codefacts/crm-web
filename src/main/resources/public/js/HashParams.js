@@ -10,15 +10,7 @@ function HashParams() {
         return location.hash || "";
     }
 
-    function path() {
-        var hs = getHash();
-        var idx = hs.indexOf("#");
-        var idxHs = hs.indexOf("?");
-        var s = hs.slice(idx < 0 ? 0 : (idx + 1), idxHs < 0 ? hs.length : idxHs);
-        return s == "" ? "/" : s;
-    }
-
-    function setParams(params) {
+    function serialize(params) {
         var strings = [];
         if (Array.isArray(params)) {
             params.forEach(function (p) {
@@ -29,7 +21,19 @@ function HashParams() {
                 strings.push(encodeURIComponent(x) + "=" + encodeURIComponent(params[x]));
             }
         }
-        setHash(path() + "?" + strings.join("&"));
+        return strings.join("&");
+    }
+
+    function path() {
+        var hs = getHash();
+        var idx = hs.indexOf("#");
+        var idxHs = hs.indexOf("?");
+        var s = hs.slice(idx < 0 ? 0 : (idx + 1), idxHs < 0 ? hs.length : idxHs);
+        return s == "" ? "/" : s;
+    }
+
+    function setParams(params) {
+        setHash(path() + "?" + serialize(params));
     }
 
     function getParams(hash) {
@@ -88,9 +92,11 @@ function HashParams() {
 
         on: on,
 
+        serialize: serialize,
+
         goto: function (uri, params) {
             uri = uri.startsWith("/") ? uri : "/" + uri;
-            uri = uri + "?" + $.param(params || {});
+            uri = uri + "?" + serialize(params || {});
             setHash(uri.endsWith("?") ? uri.slice(0, uri.length - 1) : uri);
         },
         reload: function () {
@@ -211,7 +217,7 @@ function HashParams() {
             if (!!params) {
                 setParams(params);
             } else {
-                return getParams();
+                return getParams(params);
             }
         },
         hash: function (hash) {
