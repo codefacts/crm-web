@@ -86,6 +86,7 @@ function PaginationUtil(args) {
 
         nav: function (navLength) {
             var builder = [];
+            navLength = navLength || pg.navLength;
             navLength = navLength < 2 ? 2 : navLength;
 
             var nvLen = navLength > pg.pageCount ? pg.pageCount : navLength;

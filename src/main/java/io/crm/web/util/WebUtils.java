@@ -1,6 +1,9 @@
 package io.crm.web.util;
 
 import io.crm.intfs.ConsumerUnchecked;
+import io.crm.promise.Promises;
+import io.crm.promise.intfs.Defer;
+import io.crm.promise.intfs.Promise;
 import io.crm.util.ExceptionUtil;
 import io.crm.util.Util;
 import io.crm.util.touple.immutable.Tpl2;
@@ -18,13 +21,20 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.ResultSet;
+import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static io.crm.util.Util.apply;
+import static io.crm.util.Util.accept;
 
 /**
  * Created by someone on 22/09/2015.
@@ -36,7 +46,7 @@ final public class WebUtils {
 
     public static void redirect(final String uri, final HttpServerResponse response) {
         response.setStatusCode(HttpResponseStatus.TEMPORARY_REDIRECT.code())
-                .headers().set(HttpHeaders.LOCATION, uri);
+            .headers().set(HttpHeaders.LOCATION, uri);
         response.end();
     }
 
@@ -76,10 +86,10 @@ final public class WebUtils {
         final StringBuilder builder = new StringBuilder();
         multiMap.forEach(e -> {
             builder
-                    .append(ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8.name())))
-                    .append("=")
-                    .append(ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8.name())))
-                    .append("&")
+                .append(ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8.name())))
+                .append("=")
+                .append(ExceptionUtil.toRuntimeCall(() -> URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8.name())))
+                .append("&")
             ;
         });
         if (builder.length() > 0) {
@@ -91,26 +101,26 @@ final public class WebUtils {
     public static PaginationTemplateBuilder createPaginationTemplateBuilder(final String uriPath, final String queryString, final Pagination pagination, final int paginationNavLength) {
         int size = pagination.getSize();
         return new PaginationTemplateBuilder()
-                .addClass(BootstrapCss.PULL_RIGHT.value)
-                .first(uriPath + pageQueryString(pagination.first(), size, queryString), pagination.isFirst())
-                .prev(uriPath + pageQueryString(pagination.prev(), size, queryString), pagination.hasPrev())
-                .addAllItems(items -> {
-                    pagination.nav(paginationNavLength).forEach(p -> items.add(
-                            new PaginationItemTemplateBuilder()
-                                    .setLabel("" + p)
-                                    .setHref(uriPath + pageQueryString(p, size, queryString))
-                                    .addClass(pagination.isCurrentPage(p) ? BootstrapCss.ACTIVE.value : "")
-                                    .createPaginationItemTemplate()
-                    ));
-                })
-                .next(uriPath + pageQueryString(pagination.next(), size, queryString), pagination.hasNext())
-                .last(uriPath + pageQueryString(pagination.last(), size, queryString), pagination.isLast());
+            .addClass(BootstrapCss.PULL_RIGHT.value)
+            .first(uriPath + pageQueryString(pagination.first(), size, queryString), pagination.isFirst())
+            .prev(uriPath + pageQueryString(pagination.prev(), size, queryString), pagination.hasPrev())
+            .addAllItems(items -> {
+                pagination.nav(paginationNavLength).forEach(p -> items.add(
+                    new PaginationItemTemplateBuilder()
+                        .setLabel("" + p)
+                        .setHref(uriPath + pageQueryString(p, size, queryString))
+                        .addClass(pagination.isCurrentPage(p) ? BootstrapCss.ACTIVE.value : "")
+                        .createPaginationItemTemplate()
+                ));
+            })
+            .next(uriPath + pageQueryString(pagination.next(), size, queryString), pagination.hasNext())
+            .last(uriPath + pageQueryString(pagination.last(), size, queryString), pagination.isLast());
     }
 
     public static JsonObject pageSize(HttpServerRequest request) {
         final JsonObject requestJson = new JsonObject()
-                .put(ST.page, Converters.toInt(request.params().get(ST.page)))
-                .put(ST.size, Converters.toInt(request.params().get(ST.size)));
+            .put(ST.page, Converters.toInt(request.params().get(ST.page)))
+            .put(ST.size, Converters.toInt(request.params().get(ST.size)));
         return requestJson;
     }
 
@@ -143,7 +153,55 @@ final public class WebUtils {
         }
     }
 
-    public static void main(String... args) {
+    public static void main(String args[]) {
+        System.out.println(toTitle(""));
+    }
 
+    public static String toTitle(String src) {
+        Pattern pattern = Pattern.compile("");
+        String str = Stream.of(src).map(s -> s.replace('_', ' ')).map(s -> s.split(" "))
+            .flatMap(strings -> Arrays.asList(strings).stream())
+            .map(s -> splitCamelCase(s, " "))
+            .flatMap(s -> Arrays.asList(s.split(" ")).stream())
+            .map(String::trim)
+            .map(s -> s.toCharArray())
+            .map(chars -> accept(chars, chs -> {
+                if (chs.length > 0)
+                    chs[0] = Character.toUpperCase(chs[0]);
+            }))
+            .map(chars -> new String(chars))
+            .collect(Collectors.joining(" "));
+        ;
+        return str;
+    }
+
+    public static String splitCamelCase(String s, String replace) {
+        String regex = "([a-z])([A-Z])";
+        String replacement = "$1" + replace + "$2";
+        return s.replaceAll(regex, replacement);
+    }
+
+    public static Promise<ResultSet> query(String sql, JDBCClient jdbcClient) {
+        return sqlConnection(jdbcClient)
+            .mapToPromise(con -> Promises.from(con).mapToPromise(cn -> {
+                Defer<ResultSet> defer = Promises.defer();
+                cn.query(sql, Util.makeDeferred(defer));
+                return defer.promise();
+            }).complete(p -> con.close()));
+    }
+
+    public static Promise<ResultSet> queryWithParams(String sql, JsonArray params, JDBCClient jdbcClient) {
+        return sqlConnection(jdbcClient)
+            .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
+                Defer<ResultSet> defer = Promises.defer();
+                con.queryWithParams(sql, params, Util.makeDeferred(defer));
+                return defer.promise();
+            }).complete(p -> conn.close()));
+    }
+
+    public static Promise<SQLConnection> sqlConnection(JDBCClient jdbcClient) {
+        Defer<SQLConnection> defer = Promises.defer();
+        jdbcClient.getConnection(Util.makeDeferred(defer));
+        return defer.promise();
     }
 }

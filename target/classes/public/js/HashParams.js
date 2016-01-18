@@ -40,6 +40,8 @@ function HashParams() {
         }
         if (hash.lastIndexOf("?") >= 0) {
             hash = hash.substr(hash.lastIndexOf("?") + 1);
+        } else {
+            return {};
         }
 
         if (hash.trim() == "") return _params;

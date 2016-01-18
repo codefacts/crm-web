@@ -65,3 +65,42 @@ function merge(object1, object2) {
     return obj;
 }
 
+function merge2(object1, object2) {
+    var obj = {};
+    for (var x in object1) {
+        obj[x] = object1[x];
+    }
+    for (var x in object2) {
+        obj[x] = object2[x];
+    }
+    return obj;
+}
+
+function exclude(obj1, arrayOfKeys) {
+    var obj = copy(obj1);
+    for (var x in arrayOfKeys) {
+        delete obj[arrayOfKeys[x]];
+    }
+    return obj;
+}
+
+function include(obj1, arrayOfKeys) {
+    var obj = {};
+    for (var x in arrayOfKeys) {
+        var key = arrayOfKeys[x];
+        obj[key] = obj1[key];
+    }
+    return obj;
+}
+
+function removeEmptyNullWhiteSpaces(srcObj) {
+    var obj = {};
+    for (var x in srcObj) {
+        var val = srcObj[x];
+        if (val !== false && (!val || ((typeof val == "string") && !val.trim()))) {
+            continue;
+        }
+        obj[x] = val;
+    }
+    return obj;
+}

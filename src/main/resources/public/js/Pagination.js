@@ -7,6 +7,10 @@ window.Pagination = React.createClass({
             navLength: 5,
             onPageRequest: function (e) {
                 console.log(e)
+            },
+            style: {
+                marginBottom: '10px',
+                marginTop: '10px'
             }
         };
     },
@@ -44,7 +48,7 @@ window.Pagination = React.createClass({
         var pu = PaginationUtil(xxx);
         console.log(pu);
 
-        var list = pu.nav(5).map(function (p) {
+        var list = pu.nav().map(function (p) {
             return (
                 <li key={p} className={pu.isCurrentPage(p) ? "active" : ""}>
                     <span data-page={p} onClick={_self.onPageClick}>{p}</span>
@@ -55,7 +59,7 @@ window.Pagination = React.createClass({
         return (
 
             <nav>
-                <ul className="pagination pagination-sm" style={{marginBottom: '0'}}>
+                <ul className="pagination pagination-sm" style={this.props.style}>
                     <li className={!pu.hasPrev() ? "disabled" : ""}>
                         <a href="#" aria-label="Prev" data-page={pu.prev()} onClick={this.onPrevClick}>
                             <span aria-hidden="true">&laquo;</span>

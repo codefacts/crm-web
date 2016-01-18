@@ -34,6 +34,7 @@ window.DateRange = React.createClass({
 
     onToChange: function (to) {
         var $this = this;
+        console.log(to)
         this.props.onChange({from: $this.props.from, to: to});
     },
 
