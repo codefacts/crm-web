@@ -26,37 +26,45 @@ function PaginationUtil(args) {
         pg: pg,
         getPage: function () {
             return pg.page;
-        }.bind(this),
+        }.bind($this),
 
         getSize: function () {
             return pg.size;
         },
 
         hasPrev: function (p) {
+
+            if (!p) return pg.page > 1;
+
             p = parseInt(p);
             if (!!p) {
                 return p > 1;
             }
-            return pg.page > 1;
         },
 
         hasNext: function (p) {
+
+            if (!p) return pg.page < pg.pageCount;
+
             p = parseInt(p);
             if (!!p) return p < pg.pageCount;
-            return pg.page < pg.pageCount;
         },
 
         isFirst: function (p) {
-            console.log(this);
+
+            if (!p) return pg.page <= $this.first();
+
             p = parseInt(p);
             if (!!p) return p <= $this.first();
-            return pg.page <= $this.first();
         }.bind($this),
 
         isLast: function (p) {
+
+            if (!p) return pg.page >= $this.last();
+
             p = parseInt(p);
             if (!!p)return p >= $this.last();
-            return pg.page >= $this.last();
+
         }.bind($this),
 
         isCurrentPage: function (aPage) {
@@ -65,15 +73,17 @@ function PaginationUtil(args) {
         },
 
         next: function (pageTo) {
+
+            if (!pageTo) return pg.page < pg.pageCount ? pg.page + 1 : pg.pageCount;
+
             pageTo = parseInt(pageTo);
             if (!!pageTo) return pageTo < pg.pageCount ? pageTo + 1 : pg.pageCount;
-            return pg.page < pg.pageCount ? pg.page + 1 : pg.pageCount;
         },
 
         prev: function (pageFrom) {
+            if (!pageFrom) return pg.page > 1 ? pg.page - 1 : 1;
             pageFrom = parseInt(pageFrom);
             if (!!pageFrom) return pageFrom > 1 ? pageFrom - 1 : 1;
-            return pg.page > 1 ? pg.page - 1 : 1;
         },
 
         first: function () {
@@ -94,13 +104,13 @@ function PaginationUtil(args) {
                 builder.push(pg.page);
                 return builder;
             }
-            var mid = nvLen / 2;
+            var mid = (nvLen % 2 === 0) ? (nvLen / 2) : ((nvLen - 1) / 2);
             var trk = pg.page - mid;
             trk = trk < 1 ? 1 : trk;
 
             for (var i = 0; i < nvLen; i++) {
                 var track = trk + i;
-                if (track >= 1 && track <= pg.pageCount) builder.push(parseInt(track));
+                if (track >= 1 && track <= pg.pageCount) builder.push(track);
             }
             return builder;
         }

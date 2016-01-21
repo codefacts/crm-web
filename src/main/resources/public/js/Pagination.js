@@ -48,7 +48,8 @@ window.Pagination = React.createClass({
         var pu = PaginationUtil(xxx);
         console.log(pu);
 
-        var list = pu.nav().map(function (p) {
+        var nav = pu.nav();
+        var list = nav.map(function (p) {
             return (
                 <li key={p} className={pu.isCurrentPage(p) ? "active" : ""}>
                     <span data-page={p} onClick={_self.onPageClick}>{p}</span>
@@ -60,20 +61,31 @@ window.Pagination = React.createClass({
 
             <nav>
                 <ul className="pagination pagination-sm" style={this.props.style}>
+                    <li style={_self.isVisible(nav, 1) ? {display: 'none'} : {}}>
+                        <span data-page={pu.first()} onClick={this.onPageClick}>{pu.first()}</span>
+                    </li>
+                    <li style={_self.isVisible(nav, 1) ? {display: 'none'} : {}}>
+                        <span>...</span>
+                    </li>
                     <li className={!pu.hasPrev() ? "disabled" : ""}>
-                        <a href="#" aria-label="Prev" data-page={pu.prev()} onClick={this.onPrevClick}>
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
+                        <span data-page={pu.prev()} onClick={this.onPrevClick}>&laquo;</span>
                     </li>
                     {list}
                     <li className={!pu.hasNext() ? "disabled" : ""}>
-                        <a href="#" aria-label="Next" data-page={pu.next()} onClick={this.onNextClick}>
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
+                        <span data-page={pu.next()} onClick={this.onNextClick}>&raquo;</span>
+                    </li>
+                    <li style={_self.isVisible(nav, pu.last()) ? {display: 'none'} : {}}>
+                        <span>...</span>
+                    </li>
+                    <li style={_self.isVisible(nav, pu.last()) ? {display: 'none'} : {}}>
+                        <span data-page={pu.last()} onClick={this.onPageClick}>{pu.last()}</span>
                     </li>
                 </ul>
             </nav>
         );
+    },
+    isVisible: function (nav, page) {
+        return nav.indexOf(page) !== -1;
     }
 })
 ;

@@ -204,4 +204,8 @@ final public class WebUtils {
         jdbcClient.getConnection(Util.makeDeferred(defer));
         return defer.promise();
     }
+
+    public static String attachmentFilename(String filename) {
+        return "attachment; filename=" + filename + ";";
+    }
 }
