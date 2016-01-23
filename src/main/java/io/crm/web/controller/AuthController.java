@@ -27,9 +27,9 @@ final public class AuthController {
 
     public AuthController(final Vertx vertx, Router router) {
         this.vertx = vertx;
-        login(router);
-        logout(router);
-        sessionCount(router);
+//        login(router);
+//        logout(router);
+//        sessionCount(router);
     }
 
     public void login(final Router router) {
@@ -42,7 +42,7 @@ final public class AuthController {
             .error(ctx::fail));
     }
 
-    private static void setSessionMonitorTimer(final Session session, Vertx vertx) {
+    public static void setSessionMonitorTimer(final Session session, Vertx vertx) {
         vertx.setTimer(5 * 60_000, event -> {
             if (!session.isDestroyed()) CURRENT_USER_COUNT.decrementAndGet();
             else setSessionMonitorTimer(session, vertx);
@@ -65,7 +65,7 @@ final public class AuthController {
         });
     }
 
-    private void sessionCount(final Router router) {
+    public void sessionCount(final Router router) {
         router.get(Uris.SESSION_COUNT.value).handler(ctx -> {
             ctx.response().end(
                 new JsonObject()
