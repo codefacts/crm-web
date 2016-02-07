@@ -36,6 +36,7 @@ final public class ST {
     public static final String numberOfElements = "numberOfElements";
     public static final String search = "search";
     public static final String clear = "clear";
+    public static final String IS_CALL_AGENT = "IS_CALL_AGENT";
 
     public static final class Form {
         public static final String __action__ = "__action__";

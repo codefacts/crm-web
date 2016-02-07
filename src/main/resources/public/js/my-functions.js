@@ -49,6 +49,42 @@ function formatDateTime(date) {
     return day + "-" + monthNames[monthIndex] + "-" + year + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 }
 
+function formatTimeAmPm(date) {
+    if (!date) {
+        return "";
+    }
+
+    var hours = date.getHours();
+    var amPm = hours < 12 ? "AM" : "PM";
+    hours = hours - 12;
+    hours = hours == 0 ? 12 : hours;
+
+    return Math.abs(hours) + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + amPm;
+}
+
+function formatDateTimeAmPm(date) {
+    if (!date) {
+        return "";
+    }
+    var monthNames = [
+        "Jan", "Feb", "Mar",
+        "Apr", "May", "Jun", "Jul",
+        "Aug", "Sep", "Oct",
+        "Nov", "Dec"
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    var hours = date.getHours();
+    var amPm = hours < 12 ? "AM" : "PM";
+    hours = hours - 12;
+    hours = hours == 0 ? 12 : hours;
+
+    return day + "-" + monthNames[monthIndex] + "-" + year + " " + Math.abs(hours) + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + amPm;
+}
+
 function copy(v) {
     if (v === undefined) return v;
     return JSON.parse(JSON.stringify(v))

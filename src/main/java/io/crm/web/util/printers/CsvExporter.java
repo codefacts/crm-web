@@ -62,7 +62,7 @@ public class CsvExporter {
     }
 
     private String minimalWrap(Object value) {
-        return value.getClass() == String.class ? "\"" + escape(value.toString()) + "\"" : value.toString();
+        return value == null ? "" : value.getClass() == String.class ? "\"" + escape(value.toString()) + "\"" : value.toString();
     }
 
     public Buffer wrap(String src, Buffer buffer) {

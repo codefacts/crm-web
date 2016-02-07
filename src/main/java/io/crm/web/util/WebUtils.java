@@ -24,6 +24,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.ResultSet;
 import io.vertx.ext.sql.SQLConnection;
+import io.vertx.ext.sql.UpdateResult;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 
@@ -182,7 +183,7 @@ final public class WebUtils {
     }
 
     public static Promise<ResultSet> query(String sql, JDBCClient jdbcClient) {
-        return sqlConnection(jdbcClient)
+        return getConnection(jdbcClient)
             .mapToPromise(con -> Promises.from(con).mapToPromise(cn -> {
                 Defer<ResultSet> defer = Promises.defer();
                 cn.query(sql, Util.makeDeferred(defer));
@@ -191,7 +192,7 @@ final public class WebUtils {
     }
 
     public static Promise<ResultSet> queryWithParams(String sql, JsonArray params, JDBCClient jdbcClient) {
-        return sqlConnection(jdbcClient)
+        return getConnection(jdbcClient)
             .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
                 Defer<ResultSet> defer = Promises.defer();
                 con.queryWithParams(sql, params, Util.makeDeferred(defer));
@@ -199,7 +200,25 @@ final public class WebUtils {
             }).complete(p -> conn.close()));
     }
 
-    public static Promise<SQLConnection> sqlConnection(JDBCClient jdbcClient) {
+    public static Promise<UpdateResult> update(String sql, JDBCClient jdbcClient) {
+        return getConnection(jdbcClient)
+            .mapToPromise(con -> Promises.from(con).mapToPromise(cn -> {
+                Defer<UpdateResult> defer = Promises.defer();
+                cn.update(sql, Util.makeDeferred(defer));
+                return defer.promise();
+            }).complete(p -> con.close()));
+    }
+
+    public static Promise<UpdateResult> updateWithParams(String sql, JsonArray params, JDBCClient jdbcClient) {
+        return getConnection(jdbcClient)
+            .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
+                Defer<UpdateResult> defer = Promises.defer();
+                con.updateWithParams(sql, params, Util.makeDeferred(defer));
+                return defer.promise();
+            }).complete(p -> conn.close()));
+    }
+
+    public static Promise<SQLConnection> getConnection(JDBCClient jdbcClient) {
         Defer<SQLConnection> defer = Promises.defer();
         jdbcClient.getConnection(Util.makeDeferred(defer));
         return defer.promise();

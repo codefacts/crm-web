@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 
-import static io.crm.util.Util.getOrDefault;
 import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
 
 /**
@@ -34,7 +33,7 @@ public class Page extends Template {
 
     @Override
     protected void addSubTemplates(TemplateMap.SubTemplates subTemplates) {
-        subTemplates.add("body", getOrDefault(body, EMPTY_TEMPLATE));
+        subTemplates.add("body", Util.or(body, EMPTY_TEMPLATE));
     }
 
     @Override

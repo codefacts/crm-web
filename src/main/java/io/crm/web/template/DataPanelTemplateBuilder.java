@@ -1,6 +1,7 @@
 package io.crm.web.template;
 
 import com.google.common.collect.ImmutableList;
+import io.crm.util.Util;
 import io.crm.web.css.bootstrap.TableClasses;
 import io.crm.web.template.pagination.PaginationTemplate;
 import io.crm.web.template.table.*;
@@ -9,8 +10,6 @@ import io.crm.web.util.WebUtils;
 import io.vertx.core.json.JsonObject;
 
 import java.util.List;
-
-import static io.crm.util.Util.getOrDefault;
 
 public class DataPanelTemplateBuilder {
     public static final JsonObject EMPTY_HEADER = new JsonObject();
@@ -80,7 +79,7 @@ public class DataPanelTemplateBuilder {
                                     rows.add(
                                             new TableRowBuilder()
                                                     .addTableCells(cells -> {
-                                                        final JsonObject headerObject = getOrDefault(header, EMPTY_HEADER);
+                                                        final JsonObject headerObject = Util.or(header, EMPTY_HEADER);
                                                         headerObject.forEach(e -> {
                                                             cells.add(
                                                                     new ThBuilder()
@@ -97,12 +96,12 @@ public class DataPanelTemplateBuilder {
                 .setBody(
                         new TableBodyBuilder()
                                 .addTableRows(rows -> {
-                                    final List<JsonObject> listData = getOrDefault(data, EMPTY_DATA);
+                                    final List<JsonObject> listData = Util.or(data, EMPTY_DATA);
                                     listData.forEach(json -> {
                                         rows.add(
                                                 new TableRowBuilder()
                                                         .addTableCells(cells -> {
-                                                            final JsonObject headerObject = getOrDefault(header, EMPTY_HEADER);
+                                                            final JsonObject headerObject = Util.or(header, EMPTY_HEADER);
                                                             headerObject.forEach(e -> {
                                                                 cells.add(
                                                                         new TableCellBuilder()
@@ -120,12 +119,12 @@ public class DataPanelTemplateBuilder {
                 .setFooter(
                         new TableFooterBuilder()
                                 .addTableRows(rows -> {
-                                    final JsonObject footerObject = getOrDefault(footer, EMPTY_FOOTER);
+                                    final JsonObject footerObject = Util.or(footer, EMPTY_FOOTER);
                                     if (footerObject.size() <= 0) return;
                                     rows.add(
                                             new TableRowBuilder()
                                                     .addTableCells(cells -> {
-                                                        final JsonObject headerObject = getOrDefault(header, EMPTY_HEADER);
+                                                        final JsonObject headerObject = Util.or(header, EMPTY_HEADER);
                                                         headerObject.forEach(f -> {
                                                             cells.add(
                                                                     new TableCellBuilder()

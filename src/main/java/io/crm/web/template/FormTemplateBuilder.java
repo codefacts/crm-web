@@ -1,6 +1,7 @@
 package io.crm.web.template;
 
 import io.crm.intfs.ConsumerUnchecked;
+import io.crm.util.Util;
 import io.crm.web.template.form.DefaultFooterBuilder;
 import io.crm.web.template.form.FormRowBuilder;
 import org.watertemplate.Template;
@@ -9,7 +10,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static io.crm.util.Util.getOrDefault;
 import static java.util.Collections.EMPTY_SET;
 
 /**
@@ -77,7 +77,7 @@ final public class FormTemplateBuilder {
     }
 
     public FormTemplate build() {
-        return new FormTemplate(id, String.join(" ", getOrDefault(classes, EMPTY_SET)), getOrDefault(templates, EMPTY_SET));
+        return new FormTemplate(id, String.join(" ", Util.or(classes, EMPTY_SET)), Util.or(templates, EMPTY_SET));
     }
 
 }

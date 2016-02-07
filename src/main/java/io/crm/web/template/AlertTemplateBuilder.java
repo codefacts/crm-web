@@ -1,7 +1,6 @@
 package io.crm.web.template;
 
 import io.crm.util.Util;
-import org.watertemplate.Template;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,25 +17,25 @@ public class AlertTemplateBuilder {
 
     public AlertTemplateBuilder success(String body) {
         classesSet.add("alert-success");
-        this.body = Util.getOrDefault(body, "");
+        this.body = Util.or(body, "");
         return this;
     }
 
     public AlertTemplateBuilder info(String body) {
         classesSet.add("alert-info");
-        this.body = Util.getOrDefault(body, "");
+        this.body = Util.or(body, "");
         return this;
     }
 
     public AlertTemplateBuilder warning(String body) {
         classesSet.add("alert-warning");
-        this.body = Util.getOrDefault(body, "");
+        this.body = Util.or(body, "");
         return this;
     }
 
     public AlertTemplateBuilder danger(String body) {
         classesSet.add("alert-danger");
-        this.body = Util.getOrDefault(body, "");
+        this.body = Util.or(body, "");
         return this;
     }
 

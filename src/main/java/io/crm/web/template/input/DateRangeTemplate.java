@@ -1,11 +1,10 @@
 package io.crm.web.template.input;
 
+import io.crm.util.Util;
 import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
 import java.util.Date;
-
-import static io.crm.util.Util.getOrDefault;
 
 /**
  * Created by someone on 30/09/2015.
@@ -13,14 +12,14 @@ import static io.crm.util.Util.getOrDefault;
 public class DateRangeTemplate extends Template {
 
     public DateRangeTemplate(String id, String classes, String name, Date from, Date to, String placeholderFrom, String placeholderTo) {
-        add("id", getOrDefault(id, ""));
-        add("class", getOrDefault(classes, ""));
-        add("name", getOrDefault(name, ""));
+        add("id", Util.or(id, ""));
+        add("class", Util.or(classes, ""));
+        add("name", Util.or(name, ""));
         add("from", from == null ? "" : DateInputTemplate.DATE_FORMAT.format(from));
         add("to", to == null ? "" : DateInputTemplate.DATE_FORMAT.format(to));
         addMappedObject("placeholder", new Object(), m -> {
-            m.add("from", getOrDefault(placeholderFrom, ""));
-            m.add("to", getOrDefault(placeholderTo, ""));
+            m.add("from", Util.or(placeholderFrom, ""));
+            m.add("to", Util.or(placeholderTo, ""));
         });
     }
 

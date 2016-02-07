@@ -18,7 +18,7 @@ public class GoogleMapController {
         router.get(Uris.GOOGLE_MAP.value).handler(ctx -> {
             ctx.response().end(
                     new GoogleMapTemplate(
-                            Util.getOrDefault(ctx.request().params().get("marker_title"), ""),
+                            Util.or(ctx.request().params().get("marker_title"), ""),
                             Converters.toDouble(ctx.request().params().get("lat")),
                             Converters.toDouble(ctx.request().params().get("lng"))).render()
             );

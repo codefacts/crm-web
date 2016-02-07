@@ -3,18 +3,16 @@ package io.crm.web.template;
 import io.crm.util.Util;
 import org.watertemplate.Template;
 
-import static io.crm.util.Util.getOrDefault;
-
 /**
  * Created by someone on 30/09/2015.
  */
 public class RowTemplate extends Template {
 
     public RowTemplate(String id, String classes, String name, String content) {
-        add("id", getOrDefault(id, ""));
-        add("class", getOrDefault(classes, ""));
-        add("name", getOrDefault(name, ""));
-        add("body", getOrDefault(content, ""));
+        add("id", Util.or(id, ""));
+        add("class", Util.or(classes, ""));
+        add("name", Util.or(name, ""));
+        add("body", Util.or(content, ""));
     }
 
     @Override

@@ -7,9 +7,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.function.Function;
 
-import static io.crm.util.Util.getOrDefault;
 import static io.crm.util.Util.isEmptyOrNullOrSpaces;
 
 /**
@@ -54,7 +52,7 @@ final public class Converters {
     }
 
     public static String trim(final String val) {
-        return getOrDefault(val, "").trim();
+        return Util.or(val, "").trim();
     }
 
     public static final String identity(String t) {

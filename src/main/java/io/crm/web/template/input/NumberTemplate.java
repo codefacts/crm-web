@@ -1,9 +1,8 @@
 package io.crm.web.template.input;
 
+import io.crm.util.Util;
 import io.crm.web.template.Page;
 import org.watertemplate.Template;
-
-import static io.crm.util.Util.getOrDefault;
 
 /**
  * Created by someone on 30/09/2015.
@@ -11,11 +10,11 @@ import static io.crm.util.Util.getOrDefault;
 public class NumberTemplate extends Template {
 
     public NumberTemplate(String id, String classes, String name, String value, String placeholder) {
-        add("id", getOrDefault(id, ""));
-        add("class", getOrDefault(classes, ""));
-        add("name", getOrDefault(name, ""));
-        add("value", getOrDefault(value, ""));
-        add("placeholder", getOrDefault(placeholder, ""));
+        add("id", Util.or(id, ""));
+        add("class", Util.or(classes, ""));
+        add("name", Util.or(name, ""));
+        add("value", Util.or(value, ""));
+        add("placeholder", Util.or(placeholder, ""));
     }
 
     @Override

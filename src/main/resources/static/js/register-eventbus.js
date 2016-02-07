@@ -1,4 +1,4 @@
-var eb = new EventBus('http://localhost:8085/eventbus');
+var eb = new EventBus('http://' + location.host + '/eventbus');
 
 eb.onopen = function onopen() {
 

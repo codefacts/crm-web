@@ -1,9 +1,9 @@
 package io.crm.web.template;
 
+import io.crm.util.Util;
 import io.crm.web.template.table.TableTemplate;
 import org.watertemplate.Template;
 
-import static io.crm.util.Util.getOrDefault;
 import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
 
 /**
@@ -12,10 +12,10 @@ import static io.crm.web.template.TemplateUtil.EMPTY_TEMPLATE;
 public class DataPanelTemplate extends Template {
 
     public DataPanelTemplate(final String title, final TableTemplate tableTemplate, final Template paginationTemplate, final String exportButton) {
-        add("title", getOrDefault(title, ""));
-        add("table", getOrDefault(tableTemplate, EMPTY_TEMPLATE).render());
-        add("pagination", getOrDefault(paginationTemplate, EMPTY_TEMPLATE).render());
-        add("exportButton", getOrDefault(exportButton, ""));
+        add("title", Util.or(title, ""));
+        add("table", Util.or(tableTemplate, EMPTY_TEMPLATE).render());
+        add("pagination", Util.or(paginationTemplate, EMPTY_TEMPLATE).render());
+        add("exportButton", Util.or(exportButton, ""));
     }
 
     @Override

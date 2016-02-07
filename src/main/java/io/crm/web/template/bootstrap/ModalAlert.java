@@ -4,18 +4,16 @@ import io.crm.util.Util;
 import io.crm.web.template.Page;
 import org.watertemplate.Template;
 
-import static io.crm.util.Util.getOrDefault;
-
 /**
  * Created by someone on 13/10/2015.
  */
 final public class ModalAlert extends Template {
     ModalAlert(String id, final String clasz, final String title, final String body, boolean show) {
-        id = getOrDefault(id, "modal-alert");
+        id = Util.or(id, "modal-alert");
         add("id", id);
-        add("class", getOrDefault(clasz, ""));
-        add("title", getOrDefault(title, ""));
-        add("body", getOrDefault(body, ""));
+        add("class", Util.or(clasz, ""));
+        add("title", Util.or(title, ""));
+        add("body", Util.or(body, ""));
         add("script", show ? showScript(id) : "");
     }
 
