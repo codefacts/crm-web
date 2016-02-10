@@ -2,10 +2,18 @@ var eb = new EventBus('http://' + location.host + '/eventbus');
 
 eb.onopen = function onopen() {
 
-    // set a handler to receive a message
-    eb.registerHandler('some-address', function (err, message) {
-        console.log('received a message: ' + JSON.stringify(message));
-    });
+    console.info("EVENT_BUS OPENED");
 
-    eb.send('some-address', {'message': 'eventbus ready'});
+    var event = new Event('EVENT_BUS_CONNECTED');
+
+    document.dispatchEvent(event);
+}
+
+eb.onclose = function () {
+
+    console.info("EVENT_BUS CLOSED");
+
+    var event = new Event('EVENT_BUS_DISCONNECTED');
+
+    document.dispatchEvent(event);
 }
