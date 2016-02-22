@@ -227,4 +227,8 @@ final public class WebUtils {
     public static String attachmentFilename(String filename) {
         return "attachment; filename=" + filename + ";";
     }
+
+    public static int offset(int page, int size) {
+        return (page - 1) * size;
+    }
 }

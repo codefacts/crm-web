@@ -1,6 +1,7 @@
 package io.crm.web.util;
 
 import com.google.common.collect.ImmutableList;
+import io.vertx.core.json.JsonObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +22,8 @@ final public class Pagination {
         this.total = total < 0 ? 0 : total;
         pageCount = (int) ((total % size == 0) ? (total / size) : (total / size) + 1);
         this.page = page < 1 ? 1
-                : page > pageCount ? pageCount
-                : page;
+            : page > pageCount ? pageCount
+            : page;
     }
 
     public int getPage() {
@@ -125,9 +126,18 @@ final public class Pagination {
 
     public static void main(String... args) {
         System.out.println(String.join(", ", Arrays.asList(
-                new Pagination(8, 20, 200).nav(5))
-                .stream().map(t -> {
-                    return t + "";
-                }).collect(Collectors.toList())));
+            new Pagination(8, 20, 200).nav(5))
+            .stream().map(t -> {
+                return t + "";
+            }).collect(Collectors.toList())));
+    }
+
+    public JsonObject toJson() {
+        return new JsonObject()
+            .put("page", getPage())
+            .put("size", getSize())
+            .put("pageCount", getPageCount())
+            .put("total", getTotal())
+            ;
     }
 }

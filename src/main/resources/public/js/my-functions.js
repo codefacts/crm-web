@@ -140,3 +140,26 @@ function removeEmptyNullWhiteSpaces(srcObj) {
     }
     return obj;
 }
+
+function convert(src, converters) {
+    src = src || {};
+    var to = {};
+    for (var x in converters) {
+        if (!!src[x]) {
+            to[x] = converters[x](src[x]);
+        }
+    }
+    return to;
+}
+
+function removeEmptyChilds(array) {
+    array = array || [];
+    var newArray = [];
+    for (var x in array) {
+        var val = array[x];
+        if (Object.keys(val).length > 0) {
+            newArray.push(val);
+        }
+    }
+    return newArray;
+}
