@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="" />
+    <list default="true" id="7b52c9e0-9844-4f93-ac95-707752ff96d0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Converters.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Converters.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/parsers/CsvParser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/DataPanelTemplateBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/DateRangeTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadStatusTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FileUploadTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FormTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/FormTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/controller/GoogleMapController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/ImageUploadForm.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/Page.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Pagination.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/Pagination.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplateBuilder.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/pagination/PaginationTemplateBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/RangeTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/input/SelectTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/SidebarTemplate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableBody.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableFooter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableHeader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableRow.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/template/table/TableRow.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" afterPath="$PROJECT_DIR$/../../../target/classes/io/crm/web/util/WebUtils.class" />
+    </list>
     <ignored path="html_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -79,9 +101,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
+    <option name="y" value="24" />
     <option name="width" value="959" />
-    <option name="height" value="772" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -316,7 +338,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="959" height="772" extended-state="6" />
+    <frame x="65" y="24" width="959" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2586027" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
