@@ -12,16 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="common-crm" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.4" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.4" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: io.reactivex:rxjava:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-lang-js:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.0.0" level="project" />
@@ -31,6 +21,9 @@
     <orderEntry type="library" name="Maven: io.netty:netty-handler:4.0.28.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec:4.0.28.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec-http:4.0.28.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-hazelcast:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.hazelcast:hazelcast:3.5" level="project" />
     <orderEntry type="library" name="Maven: com.eclipsesource.minimal-json:minimal-json:0.9.2" level="project" />
