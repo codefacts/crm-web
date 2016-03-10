@@ -41,6 +41,11 @@ import static io.crm.util.Util.accept;
  * Created by someone on 22/09/2015.
  */
 final public class WebUtils {
+    private static final String DATE = "date";
+    private static final String DATETIME = "datetime";
+    private static final String TIME = "time";
+    private static final String TIMESTAMP = "timestamp";
+
     public static boolean isLoggedIn(final Session session) {
         return session.get(ST.currentUser) != null;
     }
@@ -230,5 +235,14 @@ final public class WebUtils {
 
     public static int offset(int page, int size) {
         return (page - 1) * size;
+    }
+
+    public static boolean inferDateTypeFromTitle(String title) {
+
+        String lowerCase = title.toLowerCase();
+        return lowerCase.endsWith(DATE)
+            || lowerCase.endsWith(DATETIME)
+            || lowerCase.endsWith(TIME)
+            || lowerCase.endsWith(TIMESTAMP);
     }
 }

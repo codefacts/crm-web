@@ -18,12 +18,16 @@ final public class Pagination {
     private final int pageCount;
 
     public Pagination(int page, int size, long total) {
-        this.size = size < 1 ? DEFAULT_SIZE : size;
-        this.total = total < 0 ? 0 : total;
+        size = size < 1 ? DEFAULT_SIZE : size;
+        total = total < 0 ? 0 : total;
         pageCount = (int) ((total % size == 0) ? (total / size) : (total / size) + 1);
-        this.page = page < 1 ? 1
+        page = page < 1 ? 1
             : page > pageCount ? pageCount
             : page;
+
+        this.page = page;
+        this.size = size;
+        this.total = total;
     }
 
     public int getPage() {
