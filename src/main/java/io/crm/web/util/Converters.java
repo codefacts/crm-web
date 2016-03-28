@@ -6,6 +6,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalField;
 import java.util.Date;
 
 import static io.crm.util.Util.isEmptyOrNullOrSpaces;
@@ -36,7 +39,7 @@ final public class Converters {
 
     public static Date toDate(final String val) {
         if (isEmptyOrNullOrSpaces(val)) return null;
-        return ExceptionUtil.toRuntimeCall(() -> new SimpleDateFormat("dd-MMM-yyyy").parse(val.trim()));
+        return new Date(DateTimeFormatter.ISO_INSTANT.parse(val).getLong(ChronoField.INSTANT_SECONDS) * 1000);
     }
 
     public static boolean yesNoToBoolean(final String val) {

@@ -4,6 +4,7 @@ import io.crm.intfs.ConsumerUnchecked;
 import io.crm.promise.Promises;
 import io.crm.promise.intfs.Defer;
 import io.crm.promise.intfs.Promise;
+import io.crm.sql.SqlUtils;
 import io.crm.util.ExceptionUtil;
 import io.crm.util.Util;
 import io.crm.util.touple.immutable.Tpl2;
@@ -31,6 +32,7 @@ import io.vertx.ext.web.Session;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,6 +47,7 @@ final public class WebUtils {
     private static final String DATETIME = "datetime";
     private static final String TIME = "time";
     private static final String TIMESTAMP = "timestamp";
+    private static final String ID = "id";
 
     public static boolean isLoggedIn(final Session session) {
         return session.get(ST.currentUser) != null;
@@ -221,6 +224,46 @@ final public class WebUtils {
                 con.updateWithParams(sql, params, Util.makeDeferred(defer));
                 return defer.promise();
             }).complete(p -> conn.close()));
+    }
+
+    public static Promise<Long> create(String table, JsonObject params, JDBCClient jdbcClient) {
+        return WebUtils.updateWithParams(
+            SqlUtils.create(table, params.fieldNames()),
+            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), jdbcClient)
+            .map(rs -> rs.getKeys().getLong(0));
+    }
+
+    public static Promise<UpdateResult> update(String table, JsonObject params, JsonObject where, JDBCClient jdbcClient) {
+        StringBuilder builder = new StringBuilder();
+
+        builder
+            .append("update ")
+            .append(table)
+            .append(" set ")
+        ;
+
+        final String COMMA = ", ";
+        params.fieldNames().forEach(name -> builder.append(name).append(" = ?").append(COMMA));
+
+        builder.delete(builder.lastIndexOf(COMMA), builder.length());
+
+        builder
+            .append(" ")
+            .append("where ")
+        ;
+
+        where.fieldNames().forEach(name -> builder.append(name).append(" = ?").append(COMMA));
+
+        builder.delete(builder.lastIndexOf(COMMA), builder.length());
+
+        JsonArray cond1 = new JsonArray(params.getMap().values().stream().collect(Collectors.toList()));
+        JsonArray cond2 = new JsonArray(where.getMap().values().stream().collect(Collectors.toList()));
+
+        return updateWithParams(builder.toString(), cond1.addAll(cond2), jdbcClient);
+    }
+
+    public static Promise<UpdateResult> update(String table, JsonObject params, long id, JDBCClient jdbcClient) {
+        return update(table, params, new JsonObject().put(ID, id), jdbcClient);
     }
 
     public static Promise<SQLConnection> getConnection(JDBCClient jdbcClient) {
