@@ -27,26 +27,7 @@
 
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-lang-js</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <!-- Add hazelcast deps if you want it clusterable -->
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-hazelcast</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-mongo-client</artifactId>
             <version>3.0.0</version>
         </dependency>
 
@@ -60,12 +41,6 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-sql-common</artifactId>
             <version>3.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-pool</artifactId>
-            <version>5.11.1</version>
         </dependency>
 
         <dependency>

@@ -32,7 +32,6 @@ import io.vertx.ext.web.Session;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -287,5 +286,10 @@ final public class WebUtils {
             || lowerCase.endsWith(DATETIME)
             || lowerCase.endsWith(TIME)
             || lowerCase.endsWith(TIMESTAMP);
+    }
+
+    public static Promise<Integer> delete(final String tableName, final long id, JDBCClient jdbcClient) {
+        return update("delete from " + tableName + " where id = " + id, jdbcClient)
+            .map(updateResult -> updateResult.getUpdated());
     }
 }
