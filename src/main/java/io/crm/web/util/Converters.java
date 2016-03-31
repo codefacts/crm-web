@@ -17,56 +17,96 @@ import static io.crm.util.Util.isEmptyOrNullOrSpaces;
  * Created by someone on 12/10/2015.
  */
 final public class Converters {
-    public static int toInt(final String val) {
-        if (isEmptyOrNullOrSpaces(val)) return 0;
-        return (int) Double.parseDouble(val);
+    public static int toInt(final Object val) {
+
+        if (val instanceof Number) {
+            return ((Number) val).intValue();
+        } else {
+            String str = val.toString();
+            if (isEmptyOrNullOrSpaces(str)) return 0;
+            return (int) Double.parseDouble(str);
+        }
     }
 
-    public static long toLong(final String val) {
-        if (isEmptyOrNullOrSpaces(val)) return 0L;
-        return (long) Double.parseDouble(val);
+    public static long toLong(final Object val) {
+        if (val instanceof Number) {
+            return ((Number) val).longValue();
+        } else {
+            String str = val.toString();
+            if (isEmptyOrNullOrSpaces(str)) return 0L;
+            return (long) Double.parseDouble(str);
+        }
     }
 
-    public static float toFloat(final String val) {
-        if (isEmptyOrNullOrSpaces(val)) return 0.0F;
-        return Float.parseFloat(val);
+    public static float toFloat(final Object val) {
+        if (val instanceof Number) {
+            return ((Number) val).floatValue();
+        } else {
+            String str = val.toString();
+            if (isEmptyOrNullOrSpaces(str)) return 0.0F;
+            return Float.parseFloat(str);
+        }
     }
 
-    public static double toDouble(final String val) {
-        if (isEmptyOrNullOrSpaces(val)) return 0.0;
-        return Double.parseDouble(val);
+    public static double toDouble(final Object val) {
+        if (val instanceof Double) {
+            return ((Double) val).doubleValue();
+        } else {
+            String str = val.toString();
+            if (isEmptyOrNullOrSpaces(str)) return 0.0;
+            return Double.parseDouble(str);
+        }
     }
 
-    public static Date toDate(final String val) {
-        if (isEmptyOrNullOrSpaces(val)) return null;
-        return new Date(DateTimeFormatter.ISO_INSTANT.parse(val).getLong(ChronoField.INSTANT_SECONDS) * 1000);
+    public static Date toDate(final Object val) {
+        if (val == null) return null;
+        if (val instanceof Date) {
+            return (Date) val;
+        } else {
+            String str = val.toString();
+            if (isEmptyOrNullOrSpaces(str)) return null;
+            return new Date(DateTimeFormatter.ISO_INSTANT
+                .parse(str).getLong(ChronoField.INSTANT_SECONDS) * 1000);
+        }
     }
 
-    public static boolean yesNoToBoolean(final String val) {
-        if (val == null) {
+    public static boolean yesNoToBoolean(final Object val) {
+        String str = val.toString();
+        if (str == null) {
             return false;
         }
-        return val.equalsIgnoreCase("Yes") ? true : false;
+        return str.trim().equalsIgnoreCase("Yes") ? true : false;
     }
 
-    public static boolean toBoolean(final String val) {
+    public static boolean toBoolean(final Object val) {
         if (val == null) return false;
-        return Boolean.parseBoolean(val);
+        if (val instanceof Boolean) {
+            return ((Boolean) val).booleanValue();
+        } else {
+            String str = val.toString();
+            return Boolean.parseBoolean(str);
+        }
     }
 
     public static String trim(final String val) {
         return Util.or(val, "").trim();
     }
 
-    public static final String identity(String t) {
+    public static final <T> T identity(T t) {
         return t;
     }
 
-    public static JsonArray toJsonArray(final String jsonStrng) {
-        return new JsonArray(jsonStrng);
+    public static JsonArray toJsonArray(final Object jsonStrng) {
+        if (jsonStrng instanceof JsonArray) {
+            return (JsonArray) jsonStrng;
+        }
+        return new JsonArray(jsonStrng.toString());
     }
 
-    public static JsonObject toJsonObject(final String jsonStrng) {
-        return new JsonObject(jsonStrng);
+    public static JsonObject toJsonObject(final Object jsonStrng) {
+        if (jsonStrng instanceof JsonObject) {
+            return (JsonObject) jsonStrng;
+        }
+        return new JsonObject(jsonStrng.toString());
     }
 }

@@ -1,10 +1,12 @@
 package io.crm.web.util;
 
+import io.crm.ErrorCodes;
 import io.crm.intfs.ConsumerUnchecked;
 import io.crm.promise.Promises;
 import io.crm.promise.intfs.Defer;
 import io.crm.promise.intfs.Promise;
 import io.crm.sql.SqlUtils;
+import io.crm.util.DataTypes;
 import io.crm.util.ExceptionUtil;
 import io.crm.util.Util;
 import io.crm.util.touple.immutable.Tpl2;
@@ -17,6 +19,8 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
+import io.vertx.core.eventbus.DeliveryOptions;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
@@ -47,6 +51,10 @@ final public class WebUtils {
     private static final String TIME = "time";
     private static final String TIMESTAMP = "timestamp";
     private static final String ID = "id";
+    private static final String FIELD = "field";
+    private static final String LABEL = "label";
+    private static final String IS_KEY = "isKey";
+    private static final String DATA_TYPE = "dataType";
 
     public static boolean isLoggedIn(final Session session) {
         return session.get(ST.currentUser) != null;
@@ -261,8 +269,8 @@ final public class WebUtils {
         return updateWithParams(builder.toString(), cond1.addAll(cond2), jdbcClient);
     }
 
-    public static Promise<UpdateResult> update(String table, JsonObject params, long id, JDBCClient jdbcClient) {
-        return update(table, params, new JsonObject().put(ID, id), jdbcClient);
+    public static Promise<Integer> update(String table, JsonObject params, long id, JDBCClient jdbcClient) {
+        return update(table, params, new JsonObject().put(ID, id), jdbcClient).map(UpdateResult::getUpdated);
     }
 
     public static Promise<SQLConnection> getConnection(JDBCClient jdbcClient) {
@@ -290,6 +298,29 @@ final public class WebUtils {
 
     public static Promise<Integer> delete(final String tableName, final long id, JDBCClient jdbcClient) {
         return update("delete from " + tableName + " where id = " + id, jdbcClient)
-            .map(updateResult -> updateResult.getUpdated());
+            .map(UpdateResult::getUpdated);
+    }
+
+    public static JsonObject describeField(String field) {
+
+        final String title = Util.parseCamelOrSnake(field);
+
+        JsonObject jsonObject = new JsonObject()
+            .put(FIELD, field)
+            .put(LABEL, title);
+
+        {
+            if (field.equals("id")) {
+                jsonObject.put(IS_KEY, true);
+            }
+        }
+
+        {
+            if (WebUtils.inferDateTypeFromTitle(title)) {
+                jsonObject.put(DATA_TYPE, DataTypes.DATE);
+            }
+        }
+
+        return jsonObject;
     }
 }
