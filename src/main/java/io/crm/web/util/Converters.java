@@ -18,42 +18,45 @@ import static io.crm.util.Util.isEmptyOrNullOrSpaces;
  */
 final public class Converters {
     public static int toInt(final Object val) {
-
+        if (val == null) return 0;
         if (val instanceof Number) {
             return ((Number) val).intValue();
         } else {
             String str = val.toString();
-            if (isEmptyOrNullOrSpaces(str)) return 0;
+            if (emptyOrSpace(str)) return 0;
             return (int) Double.parseDouble(str);
         }
     }
 
     public static long toLong(final Object val) {
+        if (val == null) return 0;
         if (val instanceof Number) {
             return ((Number) val).longValue();
         } else {
             String str = val.toString();
-            if (isEmptyOrNullOrSpaces(str)) return 0L;
+            if (emptyOrSpace(str)) return 0L;
             return (long) Double.parseDouble(str);
         }
     }
 
     public static float toFloat(final Object val) {
+        if (val == null) return 0;
         if (val instanceof Number) {
             return ((Number) val).floatValue();
         } else {
             String str = val.toString();
-            if (isEmptyOrNullOrSpaces(str)) return 0.0F;
+            if (emptyOrSpace(str)) return 0.0F;
             return Float.parseFloat(str);
         }
     }
 
     public static double toDouble(final Object val) {
+        if (val == null) return 0;
         if (val instanceof Double) {
             return ((Double) val).doubleValue();
         } else {
             String str = val.toString();
-            if (isEmptyOrNullOrSpaces(str)) return 0.0;
+            if (emptyOrSpace(str)) return 0.0;
             return Double.parseDouble(str);
         }
     }
@@ -64,24 +67,25 @@ final public class Converters {
             return (Date) val;
         } else {
             String str = val.toString();
-            if (isEmptyOrNullOrSpaces(str)) return null;
+            if (emptyOrSpace(str)) return null;
             return new Date(DateTimeFormatter.ISO_INSTANT
                 .parse(str).getLong(ChronoField.INSTANT_SECONDS) * 1000);
         }
     }
 
     public static boolean yesNoToBoolean(final Object val) {
+        if (val == null) return false;
         String str = val.toString();
         if (str == null) {
             return false;
         }
-        return str.trim().equalsIgnoreCase("Yes") ? true : false;
+        return str.trim().equalsIgnoreCase("Yes");
     }
 
     public static boolean toBoolean(final Object val) {
         if (val == null) return false;
         if (val instanceof Boolean) {
-            return ((Boolean) val).booleanValue();
+            return (Boolean) val;
         } else {
             String str = val.toString();
             return Boolean.parseBoolean(str);
@@ -108,5 +112,9 @@ final public class Converters {
             return (JsonObject) jsonStrng;
         }
         return new JsonObject(jsonStrng.toString());
+    }
+
+    public static boolean emptyOrSpace(String str) {
+        return str.trim().isEmpty();
     }
 }
