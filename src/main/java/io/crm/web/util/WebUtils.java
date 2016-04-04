@@ -1,6 +1,6 @@
 package io.crm.web.util;
 
-import io.crm.ErrorCodes;
+import com.google.common.collect.ImmutableList;
 import io.crm.intfs.ConsumerUnchecked;
 import io.crm.promise.Promises;
 import io.crm.promise.intfs.Defer;
@@ -19,8 +19,6 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
-import io.vertx.core.eventbus.DeliveryOptions;
-import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
@@ -35,7 +33,7 @@ import io.vertx.ext.web.Session;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -224,6 +222,15 @@ final public class WebUtils {
             }).complete(p -> con.close()));
     }
 
+    public static Promise<UpdateResult> updateWithParams(String sql, JsonArray params, SQLConnection sqlConnection) {
+        return Promises.from(sqlConnection)
+            .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
+                Defer<UpdateResult> defer = Promises.defer();
+                con.updateWithParams(sql, params, Util.makeDeferred(defer));
+                return defer.promise();
+            }));
+    }
+
     public static Promise<UpdateResult> updateWithParams(String sql, JsonArray params, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
             .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
@@ -231,6 +238,13 @@ final public class WebUtils {
                 con.updateWithParams(sql, params, Util.makeDeferred(defer));
                 return defer.promise();
             }).complete(p -> conn.close()));
+    }
+
+    public static Promise<Long> create(String table, JsonObject params, SQLConnection sqlConnection) {
+        return WebUtils.updateWithParams(
+            SqlUtils.create(table, params.fieldNames()),
+            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), sqlConnection)
+            .map(rs -> rs.getKeys().getLong(0));
     }
 
     public static Promise<Long> create(String table, JsonObject params, JDBCClient jdbcClient) {
@@ -322,5 +336,42 @@ final public class WebUtils {
         }
 
         return jsonObject;
+    }
+
+    public static Promise<UpdateResult> createMulti(String tableName, List<JsonObject> list, SQLConnection con) {
+
+        Set<String> fieldNames = list.stream().findFirst().orElse(Util.EMPTY_JSON_OBJECT).fieldNames();
+        String sql = "insert into `" + tableName + "` (" + fieldNames.stream()
+            .map(name -> "`" + name + "`")
+            .collect(Collectors.joining(", ")) + ") " +
+            "values ";
+
+        final String QQ = ", ";
+        final StringBuilder builder = new StringBuilder();
+        for (int line = 0; line < list.size(); line++) {
+
+            builder
+                .append("(")
+            ;
+
+            for (int i = 0; i < fieldNames.size(); i++) {
+                builder.append("?").append(QQ);
+            }
+
+            builder.delete(builder.lastIndexOf(QQ), builder.length());
+
+            builder
+                .append(")")
+                .append(QQ)
+            ;
+
+        }
+
+        builder.delete(builder.lastIndexOf(QQ), builder.length());
+
+        ImmutableList.Builder<Object> bldr = ImmutableList.builder();
+        list.forEach(js -> bldr.addAll(fieldNames.stream().map(key -> js.getValue(key)).collect(Collectors.toList())));
+
+        return WebUtils.updateWithParams(sql + builder.toString(), new JsonArray(bldr.build()), con);
     }
 }
