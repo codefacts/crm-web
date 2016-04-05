@@ -15,6 +15,7 @@ import io.crm.web.ST;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
+import io.crm.web.util.sql.SqlUtil;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
@@ -240,18 +241,49 @@ final public class WebUtils {
             }).complete(p -> conn.close()));
     }
 
-    public static Promise<Long> create(String table, JsonObject params, SQLConnection sqlConnection) {
+    public static Promise<UpdateResult> create(String table, JsonObject params, SQLConnection sqlConnection) {
         return WebUtils.updateWithParams(
             SqlUtils.create(table, params.fieldNames()),
-            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), sqlConnection)
-            .map(rs -> rs.getKeys().getLong(0));
+            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), sqlConnection);
     }
 
-    public static Promise<Long> create(String table, JsonObject params, JDBCClient jdbcClient) {
+    public static Promise<UpdateResult> update(String tableName, JsonObject object, JsonObject where, SQLConnection con) {
+
+        final StringBuilder builder = new StringBuilder();
+        final String e = "`";
+        builder.append("UPDATE ").append(e).append(tableName).append(e)
+            .append(" set ");
+
+        final JsonArray params = new JsonArray();
+
+        Set<String> fieldNames = object.fieldNames();
+
+        final String QQ = ", ";
+        fieldNames.forEach(name -> {
+            builder.append(e).append(name).append(e).append(" = ").append("?").append(QQ);
+            params.add(object.getValue(name));
+        });
+
+        builder.delete(builder.lastIndexOf(QQ), builder.length());
+
+        builder.append(" where ");
+
+        Set<String> fieldNames2 = where.fieldNames();
+
+        fieldNames2.forEach(name -> {
+            builder.append(e).append(name).append(e).append(" = ").append("?").append(QQ);
+            params.add(where.getValue(name));
+        });
+
+        builder.delete(builder.lastIndexOf(QQ), builder.length());
+
+        return updateWithParams(builder.toString(), params, con);
+    }
+
+    public static Promise<UpdateResult> create(String table, JsonObject params, JDBCClient jdbcClient) {
         return WebUtils.updateWithParams(
             SqlUtils.create(table, params.fieldNames()),
-            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), jdbcClient)
-            .map(rs -> rs.getKeys().getLong(0));
+            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), jdbcClient);
     }
 
     public static Promise<UpdateResult> update(String table, JsonObject params, JsonObject where, JDBCClient jdbcClient) {
@@ -283,8 +315,8 @@ final public class WebUtils {
         return updateWithParams(builder.toString(), cond1.addAll(cond2), jdbcClient);
     }
 
-    public static Promise<Integer> update(String table, JsonObject params, long id, JDBCClient jdbcClient) {
-        return update(table, params, new JsonObject().put(ID, id), jdbcClient).map(UpdateResult::getUpdated);
+    public static Promise<UpdateResult> update(String table, JsonObject params, long id, JDBCClient jdbcClient) {
+        return update(table, params, new JsonObject().put(ID, id), jdbcClient);
     }
 
     public static Promise<SQLConnection> getConnection(JDBCClient jdbcClient) {
@@ -373,5 +405,23 @@ final public class WebUtils {
         list.forEach(js -> bldr.addAll(fieldNames.stream().map(key -> js.getValue(key)).collect(Collectors.toList())));
 
         return WebUtils.updateWithParams(sql + builder.toString(), new JsonArray(bldr.build()), con);
+    }
+
+    public static Promise<UpdateResult> delete(String tableName, JsonObject where, SQLConnection con) {
+
+        final StringBuilder builder = new StringBuilder();
+        final JsonArray params = new JsonArray();
+        final String e = "`";
+        final String QQ = ", ";
+        builder.append("DELETE FROM `").append(tableName).append("` WHERE ");
+        Set<String> fieldNames = where.fieldNames();
+        fieldNames.forEach(name -> {
+            builder.append(e).append(name).append(e).append(" = ?").append(QQ);
+            params.add(where.getValue(name));
+        });
+
+        builder.delete(builder.lastIndexOf(QQ), builder.length());
+
+        return WebUtils.updateWithParams(builder.toString(), params, con);
     }
 }
