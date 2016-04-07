@@ -15,7 +15,6 @@ import io.crm.web.ST;
 import io.crm.web.css.bootstrap.BootstrapCss;
 import io.crm.web.template.pagination.PaginationItemTemplateBuilder;
 import io.crm.web.template.pagination.PaginationTemplateBuilder;
-import io.crm.web.util.sql.SqlUtil;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
@@ -315,7 +314,7 @@ final public class WebUtils {
         return updateWithParams(builder.toString(), cond1.addAll(cond2), jdbcClient);
     }
 
-    public static Promise<UpdateResult> update(String table, JsonObject params, long id, JDBCClient jdbcClient) {
+    public static Promise<UpdateResult> update(String table, JsonObject params, Object id, JDBCClient jdbcClient) {
         return update(table, params, new JsonObject().put(ID, id), jdbcClient);
     }
 
@@ -342,9 +341,8 @@ final public class WebUtils {
             || lowerCase.endsWith(TIMESTAMP);
     }
 
-    public static Promise<Integer> delete(final String tableName, final long id, JDBCClient jdbcClient) {
-        return update("delete from " + tableName + " where id = " + id, jdbcClient)
-            .map(UpdateResult::getUpdated);
+    public static Promise<UpdateResult> delete(final String tableName, final Object id, JDBCClient jdbcClient) {
+        return update("delete from " + tableName + " where id = " + id, jdbcClient);
     }
 
     public static JsonObject describeField(String field) {

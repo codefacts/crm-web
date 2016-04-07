@@ -52,7 +52,7 @@ final public class Converters {
 
     public static double toDouble(final Object val) {
         if (val == null) return 0;
-        if (val instanceof Double) {
+        if (val instanceof Number) {
             return ((Double) val).doubleValue();
         } else {
             String str = val.toString();
