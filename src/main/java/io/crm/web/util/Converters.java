@@ -5,6 +5,7 @@ import io.crm.util.Util;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
@@ -17,6 +18,13 @@ import static io.crm.util.Util.isEmptyOrNullOrSpaces;
  * Created by someone on 12/10/2015.
  */
 final public class Converters {
+    private static final ThreadLocal<DateFormat> DATE_FORMAT_THREAD_LOCAL = new ThreadLocal<DateFormat>() {
+        @Override
+        public DateFormat get() {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+    };
+
     public static int toInt(final Object val) {
         if (val == null) return 0;
         if (val instanceof Number) {
@@ -53,7 +61,7 @@ final public class Converters {
     public static double toDouble(final Object val) {
         if (val == null) return 0;
         if (val instanceof Number) {
-            return ((Double) val).doubleValue();
+            return ((Number) val).doubleValue();
         } else {
             String str = val.toString();
             if (emptyOrSpace(str)) return 0.0;
@@ -116,5 +124,12 @@ final public class Converters {
 
     public static boolean emptyOrSpace(String str) {
         return str.trim().isEmpty();
+    }
+
+    public static String toMySqlDateString(Object o) {
+        if (o == null) return null;
+        String isoStr = o.toString();
+        Date date = new Date(DateTimeFormatter.ISO_INSTANT.parse(isoStr).getLong(ChronoField.INSTANT_SECONDS) * 1000);
+        return DATE_FORMAT_THREAD_LOCAL.get().format(date);
     }
 }
