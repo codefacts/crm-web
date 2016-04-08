@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static io.crm.util.Util.accept;
+import static java.util.stream.Collectors.*;
 
 /**
  * Created by someone on 22/09/2015.
@@ -184,7 +185,7 @@ final public class WebUtils {
                     chs[0] = Character.toUpperCase(chs[0]);
             }))
             .map(chars -> new String(chars))
-            .collect(Collectors.joining(" "));
+            .collect(joining(" "));
         ;
         return str;
     }
@@ -243,7 +244,7 @@ final public class WebUtils {
     public static Promise<UpdateResult> create(String table, JsonObject params, SQLConnection sqlConnection) {
         return WebUtils.updateWithParams(
             SqlUtils.create(table, params.fieldNames()),
-            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), sqlConnection);
+            new JsonArray(params.getMap().values().stream().collect(toList())), sqlConnection);
     }
 
     public static Promise<UpdateResult> update(String tableName, JsonObject object, JsonObject where, SQLConnection con) {
@@ -282,7 +283,7 @@ final public class WebUtils {
     public static Promise<UpdateResult> create(String table, JsonObject params, JDBCClient jdbcClient) {
         return WebUtils.updateWithParams(
             SqlUtils.create(table, params.fieldNames()),
-            new JsonArray(params.getMap().values().stream().collect(Collectors.toList())), jdbcClient);
+            new JsonArray(params.getMap().values().stream().collect(toList())), jdbcClient);
     }
 
     public static Promise<UpdateResult> update(String table, JsonObject params, JsonObject where, JDBCClient jdbcClient) {
@@ -308,8 +309,8 @@ final public class WebUtils {
 
         builder.delete(builder.lastIndexOf(COMMA), builder.length());
 
-        JsonArray cond1 = new JsonArray(params.getMap().values().stream().collect(Collectors.toList()));
-        JsonArray cond2 = new JsonArray(where.getMap().values().stream().collect(Collectors.toList()));
+        JsonArray cond1 = new JsonArray(params.getMap().values().stream().collect(toList()));
+        JsonArray cond2 = new JsonArray(where.getMap().values().stream().collect(toList()));
 
         return updateWithParams(builder.toString(), cond1.addAll(cond2), jdbcClient);
     }
@@ -373,7 +374,7 @@ final public class WebUtils {
         Set<String> fieldNames = list.stream().findFirst().orElse(Util.EMPTY_JSON_OBJECT).fieldNames();
         String sql = "insert into `" + tableName + "` (" + fieldNames.stream()
             .map(name -> "`" + name + "`")
-            .collect(Collectors.joining(", ")) + ") " +
+            .collect(joining(", ")) + ") " +
             "values ";
 
         final String QQ = ", ";
@@ -400,7 +401,7 @@ final public class WebUtils {
         builder.delete(builder.lastIndexOf(QQ), builder.length());
 
         ImmutableList.Builder<Object> bldr = ImmutableList.builder();
-        list.forEach(js -> bldr.addAll(fieldNames.stream().map(key -> js.getValue(key)).collect(Collectors.toList())));
+        list.forEach(js -> bldr.addAll(fieldNames.stream().map(js::getValue).collect(toList())));
 
         return WebUtils.updateWithParams(sql + builder.toString(), new JsonArray(bldr.build()), con);
     }

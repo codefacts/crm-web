@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
  */
 final public class Pagination {
     public static final int DEFAULT_SIZE = 20;
+    public static final String PAGE = "page";
+    public static final java.lang.String SIZE = "size";
     private final int page;
     private final int size;
     private final long total;
