@@ -31,7 +31,7 @@ public class StaticHandlerImpl implements StaticHandler {
 
     private static final Logger log = LoggerFactory.getLogger(StaticHandlerImpl.class);
 
-    private final DateFormat dateTimeFormatter = Utils.createISODateTimeFormatter();
+    private final DateFormat dateTimeFormatter = Utils.createRFC1123DateTimeFormatter();
     private Map<String, CacheEntry> propsCache;
     private String webRoot = DEFAULT_WEB_ROOT;
     private long maxAgeSeconds = DEFAULT_MAX_AGE_SECONDS; // One day
@@ -260,6 +260,12 @@ public class StaticHandlerImpl implements StaticHandler {
     }
 
     @Override
+    public StaticHandler setAllowRootFileSystemAccess(boolean b) {
+
+        return this;
+    }
+
+    @Override
     public StaticHandler setWebRoot(String webRoot) {
         setRoot(webRoot);
         return this;
@@ -305,6 +311,11 @@ public class StaticHandlerImpl implements StaticHandler {
     public StaticHandler setDirectoryTemplate(String directoryTemplate) {
         this.directoryTemplateResource = directoryTemplate;
         this.directoryTemplate = null;
+        return this;
+    }
+
+    @Override
+    public StaticHandler setEnableRangeSupport(boolean b) {
         return this;
     }
 
@@ -437,9 +448,9 @@ public class StaticHandlerImpl implements StaticHandler {
 
                     request.response().putHeader("content-type", "text/html");
                     request.response().end(
-                            directoryTemplate(context.vertx()).replace("{directory}", normalizedDir)
-                                    .replace("{parent}", parent)
-                                    .replace("{files}", files.toString()));
+                        directoryTemplate(context.vertx()).replace("{directory}", normalizedDir)
+                            .replace("{parent}", parent)
+                            .replace("{files}", files.toString()));
                 } else if (accept.contains("json")) {
                     String file;
                     JsonArray json = new JsonArray();

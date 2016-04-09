@@ -14,7 +14,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <main.verticle>io.crm.web.MainVerticle</main.verticle>
         <start-class>io.crm.web.App</start-class>
-        <vertx.version>3.0.0</vertx.version>
+        <vertx.version>3.2.1</vertx.version>
     </properties>
 
     <dependencies>
@@ -28,19 +28,25 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
-            <version>3.0.0</version>
+            <version>${vertx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-jdbc-client</artifactId>
-            <version>3.1.0</version>
+            <version>${vertx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-sql-common</artifactId>
-            <version>3.1.0</version>
+            <version>${vertx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>${vertx.version}</version>
         </dependency>
 
         <dependency>
@@ -60,12 +66,6 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-            <version>3.0.0</version>
         </dependency>
 
         <dependency>

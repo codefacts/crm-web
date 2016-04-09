@@ -205,7 +205,7 @@ final public class WebUtils {
             }).complete(p -> con.close()));
     }
 
-    public static Promise<ResultSet> queryWithParams(String sql, JsonArray params, JDBCClient jdbcClient) {
+    public static Promise<ResultSet> query(String sql, JsonArray params, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
             .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
                 Defer<ResultSet> defer = Promises.defer();
