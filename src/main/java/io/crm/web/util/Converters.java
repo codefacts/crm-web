@@ -128,6 +128,9 @@ final public class Converters {
 
     public static String toMySqlDateString(Object o) {
         if (o == null) return null;
+        if (o instanceof Date) {
+            return DATE_FORMAT_THREAD_LOCAL.get().format(o);
+        }
         String isoStr = o.toString();
         Date date = new Date(DateTimeFormatter.ISO_INSTANT.parse(isoStr).getLong(ChronoField.INSTANT_SECONDS) * 1000);
         return DATE_FORMAT_THREAD_LOCAL.get().format(date);
