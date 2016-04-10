@@ -214,6 +214,16 @@ final public class WebUtils {
             }).complete(p -> conn.close()));
     }
 
+    public static Promise<UpdateResult> update(String sql, SQLConnection con) {
+        return Promises
+            .from(con)
+            .mapToPromise(cn -> {
+                Defer<UpdateResult> defer = Promises.defer();
+                cn.update(sql, Util.makeDeferred(defer));
+                return defer.promise();
+            });
+    }
+
     public static Promise<UpdateResult> update(String sql, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
             .mapToPromise(con -> Promises.from(con).mapToPromise(cn -> {
@@ -422,5 +432,37 @@ final public class WebUtils {
         builder.delete(builder.lastIndexOf(QQ), builder.length());
 
         return WebUtils.updateWithParams(builder.toString(), params, con);
+    }
+
+    public static Promise<List<UpdateResult>> multiUpdate(List<String> updates, JDBCClient jdbcClient) {
+        return getConnection(jdbcClient)
+            .mapToPromise(con -> {
+                try {
+                    Defer<Void> defer = Promises.defer();
+                    con.setAutoCommit(false, Util.makeDeferred(defer));
+                    return defer.promise().map(v -> con).error(e -> con.close());
+                } catch (Exception e) {
+                    con.close();
+                    return Promises.fromError(e);
+                }
+            })
+            .mapToPromise(con -> {
+                try {
+                    ImmutableList.Builder<Promise<UpdateResult>> builder = ImmutableList.builder();
+                    updates.forEach(sql -> {
+                        builder.add(update(sql, con));
+                    });
+                    return Promises.when(builder.build())
+                        .mapToPromise(v -> {
+                            Defer<Void> defer = Promises.defer();
+                            con.commit(Util.makeDeferred(defer));
+                            return defer.promise().map(k -> v);
+                        }).complete(v -> con.close());
+                } catch (Exception e) {
+                    con.close();
+                    return Promises.fromError(e);
+                }
+            })
+            ;
     }
 }
