@@ -35,7 +35,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static io.crm.util.Util.accept;
@@ -194,6 +193,14 @@ final public class WebUtils {
         String regex = "([a-z])([A-Z])";
         String replacement = "$1" + replace + "$2";
         return s.replaceAll(regex, replacement);
+    }
+
+    public static Promise<ResultSet> query(String sql, SQLConnection con) {
+        final Defer<ResultSet> defer = Promises.defer();
+
+        con.query(sql, Util.makeDeferred(defer));
+
+        return defer.promise();
     }
 
     public static Promise<ResultSet> query(String sql, JDBCClient jdbcClient) {
@@ -464,5 +471,19 @@ final public class WebUtils {
                 }
             })
             ;
+    }
+
+    public static Promise<List<ResultSet>> multiQuery(Collection<String> strings, JDBCClient jdbcClient) {
+        return getConnection(jdbcClient)
+            .mapToPromise(
+                con -> Promises.from(con)
+                    .mapToPromise(cn -> {
+                        final ImmutableList.Builder<Promise<ResultSet>> builder = ImmutableList.builder();
+
+                        strings.forEach(s -> builder.add(query(s, cn)));
+
+                        return Promises.when(builder.build());
+                    })
+                    .complete(v -> con.close()));
     }
 }
