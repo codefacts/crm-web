@@ -1,6 +1,7 @@
 package io.crm.web.util;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.primitives.Chars;
 import io.crm.intfs.ConsumerUnchecked;
 import io.crm.promise.Promises;
 import io.crm.promise.intfs.Defer;
@@ -485,5 +486,15 @@ final public class WebUtils {
                         return Promises.when(builder.build());
                     })
                     .complete(v -> con.close()));
+    }
+
+    public static String toFirstUpper(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+
+        final char[] chars = name.toCharArray();
+        chars[0] = Character.toUpperCase(chars[0]);
+        return new String(chars);
     }
 }
