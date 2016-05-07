@@ -20,8 +20,8 @@ import java.util.function.Function;
 public class DbConInitializer<T> implements Function<T, Promise<Map<String, Object>>> {
     private final JDBCClient jdbcClient;
 
-    public DbConInitializer(Vertx vertx, JsonObject dbConfig) {
-        this.jdbcClient = JDBCClient.createShared(vertx, dbConfig);
+    public DbConInitializer(Vertx vertx, JDBCClient jdbcClient) {
+        this.jdbcClient = jdbcClient;
     }
 
     @Override

@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import io.crm.promise.Promises;
 import io.crm.promise.intfs.Promise;
 import io.crm.statemachine.CallbacksBuilder;
-import io.crm.statemachine.StateCallbacks;
 import io.crm.statemachine.StateMachineBuilder;
 import io.crm.transformation.JsonTransformationPipeline;
 import io.crm.transformation.JsonTransformationPipelineDeferred;
@@ -20,13 +19,16 @@ import io.crm.validator.ValidationPipelineDeferred;
 import io.crm.validator.Validator;
 import io.crm.validator.ValidatorDeferred;
 import io.vertx.core.Vertx;
-import io.vertx.core.eventbus.Message<JsonObject>;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import webcomposer.chain.cleanups.DbCleaner;
 import webcomposer.chain.initializers.DbConInitializer;
 import webcomposer.transormations.Defaults;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -39,6 +41,10 @@ import static io.crm.statemachine.States.on;
  * Created by shahadat on 5/3/16.
  */
 public class CreateHandlerComposer {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateHandlerComposer.class);
+
+
     private final DomainInfo domainInfo;
     private final Vertx vertx;
 
@@ -160,25 +166,35 @@ public class CreateHandlerComposer {
 
             .from(Cnst.CREATE_NEW_STATE, on(Cnst.CREATE_SUCCESS_EVENT).to(Cnst.END_STATE))
 
-            .from(Cnst.VALIDATION_ERROR_STATE, on(Cnst.NEXT_TO_EVENT).to(Cnst.END_STATE))
+            .from(Cnst.VALIDATION_ERROR_STATE, on(Cnst.GOTO_END_EVENT).to(Cnst.END_STATE))
 
             .callbacks(Cnst.CREATE_NEW_STATE,
                 new CallbacksBuilder<Message<JsonObject>>()
                     .setInitialize(this::initializer)
                     .setCleanup(this::cleanup)
-                    .setExecute((context1, message1) -> {
-
-
-
-                    })
+                    .setExecute(this::executor)
                     .createState())
             .callbacks(Cnst.VALIDATION_ERROR_STATE,
-                new CallbacksBuilder<>()
-                    .setExecute((context, o) -> {
-
-                    })
+                new CallbacksBuilder<JsonObject>()
+                    .setExecute((context, jsonObject) -> null)
                     .createState())
             ;
+    }
+
+    private Promise<Map<String, Object>> executor(Context context, Message<JsonObject> message) {
+
+        final ImmutableList.Builder<Promise<Map<String, Object>>> builder = ImmutableList.<Promise<Map<String, Object>>>builder();
+
+        executeList.forEach(function -> builder.add(function.apply(context, message)));
+
+        return Promises.when(builder.build())
+            .map(maps -> {
+                final ImmutableMap.Builder<String, Object> builder1 = ImmutableMap.<String, Object>builder();
+
+                maps.forEach(builder1::putAll);
+
+                return builder1.build();
+            });
     }
 
     private Promise<Void> cleanup(Context context, Message<JsonObject> message) {
@@ -194,14 +210,29 @@ public class CreateHandlerComposer {
         final ImmutableList.Builder<Promise<Map<String, Object>>> promiseBuilder =
             ImmutableList.<Promise<Map<String, Object>>>builder();
         initializeList.forEach(messagePromiseFunction -> promiseBuilder.add(messagePromiseFunction.apply(message)));
-        return Promises.when(promiseBuilder.build())
-            .map(maps -> {
-                final ImmutableMap.Builder<String, Object> builder = ImmutableMap.builder();
+        return Promises.allComplete(promiseBuilder.build())
+            .map(
+                promises -> {
+                    try {
 
-                maps.forEach(builder::putAll);
+                        final ImmutableMap.Builder<String, Object> builder = ImmutableMap.builder();
 
-                return builder.build();
-            });
+                        promises
+                            .stream()
+                            .filter(
+                                Promise::isSuccess)
+                            .map(Promise::get)
+                            .forEach(builder::putAll);
+
+                        return builder.build();
+
+                    } catch (Exception e) {
+                        LOGGER.error("FATAL_ERROR_IN_INITIALIZER", e);
+                        return Collections.EMPTY_MAP;
+                    }
+                }
+            )
+            ;
     }
 
     private JsonTransformationPipelineDeferred transformationsDeferred() {

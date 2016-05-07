@@ -19,7 +19,7 @@ public class DbCleaner<T> implements BiFunction<Context, T, Promise<Void>> {
     public Promise<Void> apply(Context context, T message) {
         final Defer<Void> defer = Promises.defer();
         if (context.containsKey(Cnst.CON)) {
-            final SQLConnection connection = context.getAs(Cnst.CON, SQLConnection.class);
+            final SQLConnection connection = context.getAs(Cnst.CON);
             connection.close(Util.makeDeferred(defer));
         }
         return defer.promise();

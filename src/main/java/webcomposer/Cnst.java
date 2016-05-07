@@ -12,5 +12,9 @@ public class Cnst {
     public static final String VALIDATION_ERROR_EVENT = "VALIDATION_ERROR_EVENT";
     public static final String CREATE_SUCCESS_EVENT = "CREATE_SUCCESS_EVENT";
     public static final String END_STATE = "END_STATE";
-    public static final String NEXT_TO_EVENT = "NEXT_TO_EVENT";
+    public static final String GOTO_END_EVENT = "NEXT_TO_EVENT";
+    public static final String MESSAGE = "message";
+
+
+    public static final String VALIDATION_RESULTS = "VALIDATION_RESULTS";
 }
