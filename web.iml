@@ -47,5 +47,10 @@
     <orderEntry type="library" name="Maven: org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:2.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.persistence:org.eclipse.persistence.core:2.6.0" level="project" />
     <orderEntry type="library" name="Maven: codefacts.watertemplate:watertemplate-engine-custom:1.2.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.jooq:jool:0.9.10" level="project" />
+    <orderEntry type="library" name="Maven: org.jooq:jooq-meta:3.7.3" level="project" />
+    <orderEntry type="library" name="Maven: org.jooq:jooq:3.7.3" level="project" />
+    <orderEntry type="library" name="Maven: org.jooq:jooq-codegen:3.7.3" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.18" level="project" />
   </component>
 </module>

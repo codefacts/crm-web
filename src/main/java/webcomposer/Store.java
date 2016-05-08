@@ -14,6 +14,10 @@ public class Store extends Context implements Map<String, Object> {
         super(new HashMap<>());
     }
 
+    public Store(Map<String, Object> storeMap) {
+        super(storeMap);
+    }
+
     @Override
     public Object put(String key, Object value) {
         return map.put(key, value);
