@@ -1,8 +1,8 @@
 package io.crm.web.util;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.primitives.Chars;
 import io.crm.intfs.ConsumerUnchecked;
+import io.crm.intfs.FunctionUnchecked;
 import io.crm.promise.Promises;
 import io.crm.promise.intfs.Defer;
 import io.crm.promise.intfs.Promise;
@@ -496,5 +496,80 @@ final public class WebUtils {
         final char[] chars = name.toCharArray();
         chars[0] = Character.toUpperCase(chars[0]);
         return new String(chars);
+    }
+
+    public <R> Promise<R> execute(JDBCClient jdbcClient, FunctionUnchecked<SQLConnection, Promise<R>> functionUnchecked) {
+        return getConnection(jdbcClient)
+            .mapToPromise(connection -> functionUnchecked.apply(connection).complete(p -> connection.close()));
+    }
+
+    public Promise<List<ResultSet>> queryMulti(SQLConnection connection, List<String> queries) {
+
+        final ImmutableList.Builder<Promise<ResultSet>> builder = ImmutableList.builder();
+
+        queries.forEach(sql -> {
+
+            final Defer<ResultSet> defer = Promises.defer();
+            connection.query(sql, Util.makeDeferred(defer));
+
+            builder.add(defer.promise());
+        });
+
+        return Promises.when(builder.build());
+
+    }
+
+    public Promise<List<UpdateResult>> executeMulti(SQLConnection connection, List<String> queries) {
+
+        final ImmutableList.Builder<Promise<UpdateResult>> builder = ImmutableList.builder();
+
+        queries.forEach(sql -> {
+
+            final Defer<UpdateResult> defer = Promises.defer();
+            connection.update(sql, Util.makeDeferred(defer));
+
+            builder.add(defer.promise());
+        });
+
+        return Promises.when(builder.build());
+    }
+
+    public Promise<List<ResultSet>> queryMulti(SQLConnection connection, List<String> queries, List<JsonArray> jsonArrayList) {
+
+        final ImmutableList.Builder<Promise<ResultSet>> builder = ImmutableList.builder();
+
+        assert queries.size() == jsonArrayList.size();
+
+        for (int i = 0; i < queries.size(); i++) {
+            final String sql = queries.get(i);
+            final JsonArray jsonArray = jsonArrayList.get(i);
+
+            final Defer<ResultSet> defer = Promises.defer();
+            connection.queryWithParams(sql, jsonArray, Util.makeDeferred(defer));
+
+            builder.add(defer.promise());
+        }
+
+        return Promises.when(builder.build());
+
+    }
+
+    public Promise<List<UpdateResult>> executeMulti(SQLConnection connection, List<String> queries, List<JsonArray> jsonArrayList) {
+
+        final ImmutableList.Builder<Promise<UpdateResult>> builder = ImmutableList.builder();
+
+        assert queries.size() == jsonArrayList.size();
+
+        for (int i = 0; i < queries.size(); i++) {
+            final String sql = queries.get(i);
+            final JsonArray jsonArray = jsonArrayList.get(i);
+
+            final Defer<UpdateResult> defer = Promises.defer();
+            connection.updateWithParams(sql, jsonArray, Util.makeDeferred(defer));
+
+            builder.add(defer.promise());
+        }
+
+        return Promises.when(builder.build());
     }
 }
