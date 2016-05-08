@@ -1,6 +1,5 @@
 package webcomposer;
 
-import io.crm.util.Util;
 import io.crm.web.util.WebUtils;
 
 /**
@@ -16,7 +15,7 @@ public class DomainInfo {
         this(name, null, null, null);
     }
 
-    public DomainInfo(String name, String plural) {
+    private DomainInfo(String name, String plural) {
         this(name, plural, null, null);
     }
 
@@ -25,5 +24,9 @@ public class DomainInfo {
         this.plural = plural == null ? name + "s" : plural;
         this.label = (label == null) ? WebUtils.toTitle(name) : label;
         this.labelPlural = labelPlural == null ? WebUtils.toTitle(plural) : labelPlural;
+    }
+
+    public static DomainInfo create(String name, String plural) {
+        return new DomainInfoBuilder().setName(name).setPlural(plural).createDomainInfo();
     }
 }

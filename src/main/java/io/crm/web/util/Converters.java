@@ -25,8 +25,8 @@ final public class Converters {
         }
     };
 
-    public static int toInt(final Object val) {
-        if (val == null) return 0;
+    public static Integer toInt(final Object val) {
+        if (val == null) return null;
         if (val instanceof Number) {
             return ((Number) val).intValue();
         } else {

@@ -12,30 +12,50 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.sql.*;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
  * Created by shahadat on 3/27/16.
  */
-public class Services {
-    public static final Logger LOGGER = LoggerFactory.getLogger(Services.class);
-    public static final String SIZE = "size";
-    public static final String DATA = "data";
-    public static final String ID = "id";
-    public static final String DATABASE = "um_database";
+public class ConfigCommon {
+    public static final Logger LOGGER = LoggerFactory.getLogger(ConfigCommon.class);
 
-    public static final Map<Integer, String> JDBC_TYPES;
-    public static final Map<Integer, DataTypes> DATA_TYPES_MAP;
-    public static final Map<Integer, Function<Object, Object>> TYPE_CONVERTERS;
-    public static final String MESSAGE_CODE = "messageCode";
-    public static final Map<Integer, JsonObject> ERROR_CODES_MAP;
+    public final String SIZE = "size";
+    public final String DATA = "data";
+    public final String ID = "id";
 
-    static {
-        JDBC_TYPES = ImmutableMap.copyOf(Arrays.asList(Types.class.getDeclaredFields())
+    public final String ERROR_CODE = "errorCode";
+    public final String HTTP_RESPONSE_CODE = "httpResponseCode";
+    public final String MESSAGE_CODE = "messageCode";
+
+    public final Map<Integer, String> JDBC_TYPES;
+    public final Map<Integer, DataTypes> DATA_TYPES_MAP;
+    public final Map<Integer, Function<Object, Object>> TYPE_CONVERTERS;
+    public final Map<Integer, JsonObject> ERROR_CODES_MAP;
+
+    private ConfigCommon(
+        Map<Integer, String> jdbc_types,
+        Map<Integer, DataTypes> data_types_map,
+        Map<Integer, Function<Object, Object>> type_converters,
+        Map<Integer, JsonObject> error_codes_map) {
+        JDBC_TYPES = jdbc_types;
+        DATA_TYPES_MAP = data_types_map;
+        TYPE_CONVERTERS = type_converters;
+        ERROR_CODES_MAP = error_codes_map;
+    }
+
+    public static ConfigCommon create(
+        Map<Integer, String> jdbc_types,
+        Map<Integer, DataTypes> data_types_map,
+        Map<Integer, Function<Object, Object>> type_converters,
+        Map<Integer, JsonObject> error_codes_map) {
+        return new ConfigCommon(jdbc_types, data_types_map, type_converters, error_codes_map);
+    }
+
+    public ImmutableMap<Integer, Object> jdbcTypes() {
+        return ImmutableMap.copyOf(Arrays.asList(Types.class.getDeclaredFields())
             .stream()
             .filter(fs -> Modifier.isFinal(fs.getModifiers()) && Modifier.isPublic(fs.getModifiers())
                 && Modifier.isStatic(fs.getModifiers()))
@@ -45,7 +65,7 @@ public class Services {
                 ExceptionUtil.toRuntimeCall(() -> Field::getName))));
     }
 
-    static {
+    public ImmutableMap<Integer, DataTypes> dataTypesMap() {
         ImmutableMap.Builder<Integer, DataTypes> builder = ImmutableMap.builder();
         builder
             .put(4, DataTypes.LONG)
@@ -56,10 +76,10 @@ public class Services {
             .put(93, DataTypes.DATE)
             .put(8, DataTypes.DATE.DOUBLE)
         ;
-        DATA_TYPES_MAP = builder.build();
+        return builder.build();
     }
 
-    static {
+    public ImmutableMap<Integer, Function<Object, Object>> typeConverters() {
         ImmutableMap.Builder<Integer, Function<Object, Object>> builder = ImmutableMap.builder();
         builder
             .put(4, Converters::toLong)
@@ -71,14 +91,10 @@ public class Services {
             .put(8, Converters::toDouble)
         ;
 
-        TYPE_CONVERTERS = builder.build();
+        return builder.build();
     }
 
-    private static final String ERROR_CODE = "errorCode";
-
-    private static final String HTTP_RESPONSE_CODE = "httpResponseCode";
-
-    static {
+    public ImmutableMap<Integer, JsonObject> errorCodesMap(Iterator<ErrorRsp> iterator) {
         ImmutableMap.Builder<Integer, JsonObject> builder = ImmutableMap.builder();
 
         Arrays.asList(ErrorCodes.values())
@@ -88,21 +104,21 @@ public class Services {
                     .put(MESSAGE_CODE, ec.messageCode())
                     .put(HTTP_RESPONSE_CODE, ec.httpResponseCode())));
 
-        Arrays.asList(UmErrorCodes.values())
-            .forEach(ec -> builder.put(ec.code(),
-                new JsonObject()
-                    .put(ERROR_CODE, ec.code())
-                    .put(MESSAGE_CODE, ec.messageCode())
-                    .put(HTTP_RESPONSE_CODE, ec.httpResponseCode())));
+        iterator.forEachRemaining(
+            ec ->
+                builder.put(ec.code,
+                    new JsonObject()
+                        .put(ERROR_CODE, ec.code)
+                        .put(MESSAGE_CODE, ec.messageCode)
+                        .put(HTTP_RESPONSE_CODE, ec.httpResponseCode)));
 
-        ERROR_CODES_MAP = builder.build();
+        return builder.build();
     }
 
-    public static ImmutableMap<String, Function<Object, Object>> converters(String[] fields, String tableName) {
-        JsonObject db = MyApp.loadConfig().getJsonObject(Services.DATABASE);
-        String url = db.getString("url");
-        String user = db.getString("user");
-        String password = db.getString("password");
+    public ImmutableMap<String, Function<Object, Object>> converters(String[] fields, String tableName, JsonObject dbConfig) {
+        String url = dbConfig.getString("url");
+        String user = dbConfig.getString("user");
+        String password = dbConfig.getString("password");
 
         ImmutableMap.Builder<String, Function<Object, Object>> builder = ImmutableMap.builder();
         try {
@@ -115,11 +131,11 @@ public class Services {
                 int columnCount = metaData.getColumnCount();
                 for (int i = 0; i < columnCount; i++) {
                     int columnType = metaData.getColumnType(i + 1);
-                    Function<Object, Object> converter = Services.TYPE_CONVERTERS.get(columnType);
+                    Function<Object, Object> converter = TYPE_CONVERTERS.get(columnType);
                     Objects.requireNonNull(converter, "Type Converter can't be null for Type: " +
-                        "[" + fields[i] + " " + columnType + ": " + Services.JDBC_TYPES.get(columnType) + "]");
+                        "[" + fields[i] + " " + columnType + ": " + JDBC_TYPES.get(columnType) + "]");
                     builder.put(fields[i], converter);
-                    System.out.println(columnType + ": " + Services.JDBC_TYPES.get(columnType));
+                    System.out.println(columnType + ": " + JDBC_TYPES.get(columnType));
                 }
             }
         } catch (SQLException e) {
