@@ -10,7 +10,7 @@ import io.crm.statemachine.StateTrigger;
 import io.crm.transformation.impl.json.object.IncludeExcludeTransformation;
 import io.crm.web.util.WebUtils;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.sql.UpdateResult;
+import webcomposer.Cnst;
 import webcomposer.DomainInfo;
 import webcomposer.MSG;
 import webcomposer.util.EventCn;
@@ -18,14 +18,13 @@ import webcomposer.util.EventCn;
 import java.util.List;
 
 /**
- * Created by shahadat on 5/8/16.
+ * Created by shahadat on 5/9/16.
  */
-public class CreateNewHandler {
-
+public class UpdateHandler {
     final DomainInfo domainInfo;
     final IncludeExcludeTransformation includeExcludeTransformation;
 
-    public CreateNewHandler(List<String> fields, DomainInfo domainInfo) {
+    public UpdateHandler(List<String> fields, DomainInfo domainInfo) {
         this.domainInfo = domainInfo;
 
         this.includeExcludeTransformation = new IncludeExcludeTransformation(ImmutableSet.copyOf(fields), null);
@@ -35,11 +34,13 @@ public class CreateNewHandler {
         return msg -> {
 
             final JsonObject transform = includeExcludeTransformation.transform(msg.body);
+            final Long id = transform.getLong(Cnst.ID);
 
-            return WebUtils.create(domainInfo.plural, transform, msg.connection)
-                .map(UpdateResult::getKeys)
-                .map(jsonArray -> jsonArray.getLong(0))
-                .map(id -> StateMachine.trigger(EventCn.CREATE_SUCCESS, msg.builder().setBody(id).build()))
+            return WebUtils.update(domainInfo.plural, transform,
+                new JsonObject()
+                    .put(Cnst.ID, id), msg.connection)
+                .map(updateResult -> StateMachine.trigger(EventCn.CREATE_SUCCESS,
+                    msg.builder().setBody(updateResult).build()))
                 ;
         };
     }

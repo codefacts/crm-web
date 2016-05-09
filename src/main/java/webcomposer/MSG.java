@@ -34,11 +34,12 @@ final public class MSG<T> {
     }
 
     public <R> MSGBuilder<R> builder() {
-        return new MSGBuilder<R>()
-            .setBody(null)
-            .setDeliveryOptions(deliveryOptions)
-            .setMessage(message)
-            .setStore(store)
+        return
+            new MSGBuilder<R>()
+                .setBody(null)
+                .setDeliveryOptions(deliveryOptions)
+                .setMessage(message)
+                .setStore(store)
             ;
     }
 }

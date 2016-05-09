@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import io.crm.intfs.FunctionUnchecked;
 import io.crm.promise.intfs.Promise;
 import io.crm.statemachine.StateCallbacks;
+import io.crm.statemachine.StateCallbacksBuilder;
 import io.crm.statemachine.StateMachine;
 import io.crm.statemachine.StateTrigger;
 import io.crm.transformation.JsonTransformationPipeline;
@@ -12,32 +13,29 @@ import io.vertx.core.json.JsonObject;
 import webcomposer.MSG;
 import webcomposer.util.EventCn;
 
-import java.util.concurrent.Callable;
-
 /**
  * Created by shahadat on 5/8/16.
  */
-public class TransformationHandler extends StateCallbacks<MSG<JsonObject>, MSG<JsonObject>> {
-    protected TransformationHandler(FunctionUnchecked<MSG<JsonObject>, Promise<StateTrigger<MSG<JsonObject>>>> onEnter, Callable<Promise<Void>> onExit, StateHolder stateHolder) {
-        super(enter(stateHolder), onExit);
+public class TransformationHandler {
+    final JsonTransformationPipeline transformationPipeline;
+    final JsonTransformationPipelineDeferred transformationPipelineDeferred;
+
+    public TransformationHandler(JsonTransformationPipeline transformationPipeline, JsonTransformationPipelineDeferred transformationPipelineDeferred) {
+        this.transformationPipeline = transformationPipeline == null ? new JsonTransformationPipeline(ImmutableList.of()) : transformationPipeline;
+        this.transformationPipelineDeferred = transformationPipelineDeferred == null ? new JsonTransformationPipelineDeferred(ImmutableList.of()) : transformationPipelineDeferred;
     }
 
-    private static FunctionUnchecked<MSG<JsonObject>, Promise<StateTrigger<MSG<JsonObject>>>> enter(StateHolder stateHolder) {
+    private FunctionUnchecked<MSG<JsonObject>, Promise<StateTrigger<MSG<JsonObject>>>> enter() {
         return msg -> {
-            final JsonObject transform = stateHolder.transformationPipeline.transform(msg.body);
-            return stateHolder.transformationPipelineDeferred.transform(transform, msg.store)
+            final JsonObject transform = transformationPipeline.transform(msg.body);
+            return transformationPipelineDeferred.transform(transform, msg.store)
                 .map(jsonObject -> StateMachine.trigger(EventCn.NEXT, msg.<JsonObject>builder().setBody(jsonObject).build()))
                 ;
         };
     }
 
-    public static final class StateHolder {
-        final JsonTransformationPipeline transformationPipeline;
-        final JsonTransformationPipelineDeferred transformationPipelineDeferred;
-
-        public StateHolder(JsonTransformationPipeline transformationPipeline, JsonTransformationPipelineDeferred transformationPipelineDeferred) {
-            this.transformationPipeline = transformationPipeline == null ? new JsonTransformationPipeline(ImmutableList.of()) : transformationPipeline;
-            this.transformationPipelineDeferred = transformationPipelineDeferred == null ? new JsonTransformationPipelineDeferred(ImmutableList.of()) : transformationPipelineDeferred;
-        }
+    public StateCallbacks<MSG<JsonObject>, MSG<JsonObject>> toStateCallbacks() {
+        return new StateCallbacksBuilder<MSG<JsonObject>, MSG<JsonObject>>()
+            .onEnter(enter()).build();
     }
 }

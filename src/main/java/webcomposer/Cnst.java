@@ -17,4 +17,5 @@ public class Cnst {
 
 
     public static final String VALIDATION_RESULTS = "VALIDATION_RESULTS";
+    public static final String ID = "id";
 }

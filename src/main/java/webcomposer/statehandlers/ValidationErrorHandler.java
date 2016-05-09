@@ -6,6 +6,7 @@ import io.crm.intfs.FunctionUnchecked;
 import io.crm.promise.Promises;
 import io.crm.promise.intfs.Promise;
 import io.crm.statemachine.StateCallbacks;
+import io.crm.statemachine.StateCallbacksBuilder;
 import io.crm.statemachine.StateMachine;
 import io.crm.statemachine.StateTrigger;
 import io.crm.validator.ValidationResult;
@@ -15,28 +16,31 @@ import webcomposer.Rsp;
 import webcomposer.util.EventCn;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 /**
  * Created by shahadat on 5/8/16.
  */
-public class ValidationErrorHandler extends StateCallbacks<MSG<List<ValidationResult>>, MSG<JsonObject>> {
+public class ValidationErrorHandler {
     public static final String VALIDATION_RESULTS = "validationResults";
+    private final MessageBundle messageBundle;
 
-    protected ValidationErrorHandler(FunctionUnchecked onEnter, Callable onExit, MessageBundle messageBundle) {
-        super(enter(messageBundle), onExit);
+    public ValidationErrorHandler(MessageBundle messageBundle) {
+        this.messageBundle = messageBundle;
     }
 
-    private static FunctionUnchecked<MSG<List<ValidationResult>>,
-        Promise<StateTrigger<MSG<JsonObject>>>>
-    enter(MessageBundle messageBundle) {
+    private FunctionUnchecked
+        <MSG<List<ValidationResult>>,
+            Promise
+                <StateTrigger
+                    <MSG<JsonObject>>>>
+    enter() {
         return listMSG -> {
 
             final List<JsonObject> list = listMSG.body.stream().map(ValidationResult::toJson).collect(Collectors.toList());
 
             return Promises.from(
-                StateMachine.trigger(EventCn.REPLTY_ERROR,
+                StateMachine.trigger(EventCn.REPORT_ERROR,
                     listMSG.<JsonObject>builder()
                         .setBody(
                             new JsonObject()
@@ -48,5 +52,10 @@ public class ValidationErrorHandler extends StateCallbacks<MSG<List<ValidationRe
                                             .put(VALIDATION_RESULTS, list)))
                         ).build()));
         };
+    }
+
+    public StateCallbacks<MSG<List<ValidationResult>>, MSG<JsonObject>> toStateCallbacks() {
+        return new StateCallbacksBuilder<MSG<List<ValidationResult>>, MSG<JsonObject>>()
+            .onEnter(enter()).build();
     }
 }

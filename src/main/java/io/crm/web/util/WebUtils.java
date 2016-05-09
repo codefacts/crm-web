@@ -222,6 +222,13 @@ final public class WebUtils {
             }).complete(p -> conn.close()));
     }
 
+    public static Promise<ResultSet> query(String sql, JsonArray params, SQLConnection con) {
+
+        Defer<ResultSet> defer = Promises.defer();
+        con.queryWithParams(sql, params, Util.makeDeferred(defer));
+        return defer.promise();
+    }
+
     public static Promise<UpdateResult> update(String sql, SQLConnection con) {
         return Promises
             .from(con)
