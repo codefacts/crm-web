@@ -179,12 +179,12 @@ final public class WebUtils {
             .map(s -> splitCamelCase(s, " "))
             .flatMap(s -> Arrays.asList(s.split(" ")).stream())
             .map(String::trim)
-            .map(s -> s.toCharArray())
+            .map(String::toCharArray)
             .map(chars -> accept(chars, chs -> {
                 if (chs.length > 0)
                     chs[0] = Character.toUpperCase(chs[0]);
             }))
-            .map(chars -> new String(chars))
+            .map(String::new)
             .collect(joining(" "));
         ;
         return str;
@@ -267,6 +267,7 @@ final public class WebUtils {
     }
 
     public static Promise<UpdateResult> create(String table, JsonObject params, SQLConnection sqlConnection) {
+        params = params == null ? new JsonObject() : params;
         return WebUtils.updateWithParams(
             SqlUtils.create(table, params.fieldNames()),
             new JsonArray(params.getMap().values().stream().collect(toList())), sqlConnection);
@@ -505,12 +506,12 @@ final public class WebUtils {
         return new String(chars);
     }
 
-    public <R> Promise<R> execute(JDBCClient jdbcClient, FunctionUnchecked<SQLConnection, Promise<R>> functionUnchecked) {
+    public static <R> Promise<R> execute(JDBCClient jdbcClient, FunctionUnchecked<SQLConnection, Promise<R>> functionUnchecked) {
         return getConnection(jdbcClient)
             .mapToPromise(connection -> functionUnchecked.apply(connection).complete(p -> connection.close()));
     }
 
-    public Promise<List<ResultSet>> queryMulti(SQLConnection connection, List<String> queries) {
+    public static Promise<List<ResultSet>> queryMulti(SQLConnection connection, List<String> queries) {
 
         final ImmutableList.Builder<Promise<ResultSet>> builder = ImmutableList.builder();
 
@@ -526,7 +527,7 @@ final public class WebUtils {
 
     }
 
-    public Promise<List<UpdateResult>> executeMulti(SQLConnection connection, List<String> queries) {
+    public static Promise<List<UpdateResult>> executeMulti(SQLConnection connection, List<String> queries) {
 
         final ImmutableList.Builder<Promise<UpdateResult>> builder = ImmutableList.builder();
 
@@ -541,7 +542,7 @@ final public class WebUtils {
         return Promises.when(builder.build());
     }
 
-    public Promise<List<ResultSet>> queryMulti(SQLConnection connection, List<String> queries, List<JsonArray> jsonArrayList) {
+    public static Promise<List<ResultSet>> queryMulti(SQLConnection connection, List<String> queries, List<JsonArray> jsonArrayList) {
 
         final ImmutableList.Builder<Promise<ResultSet>> builder = ImmutableList.builder();
 
@@ -561,7 +562,7 @@ final public class WebUtils {
 
     }
 
-    public Promise<List<UpdateResult>> executeMulti(SQLConnection connection, List<String> queries, List<JsonArray> jsonArrayList) {
+    public static Promise<List<UpdateResult>> executeMulti(SQLConnection connection, List<String> queries, List<JsonArray> jsonArrayList) {
 
         final ImmutableList.Builder<Promise<UpdateResult>> builder = ImmutableList.builder();
 

@@ -7,6 +7,7 @@ import io.crm.statemachine.StateCallbacks;
 import io.crm.statemachine.StateCallbacksBuilder;
 import io.crm.statemachine.StateMachine;
 import io.crm.statemachine.StateTrigger;
+import io.crm.util.Util;
 import io.crm.web.util.WebUtils;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -36,7 +37,7 @@ public class FIndAllHandler {
 
     private FunctionUnchecked<MSG<JsonObject>, Promise<StateTrigger<MSG<JsonObject>>>> enter() {
         return msg -> {
-            final JsonObject body = msg.body;
+            final JsonObject body = msg.body == null ? Util.EMPTY_JSON_OBJECT : msg.body;
             final Set<String> names = body.fieldNames();
             final ImmutableList.Builder<Object> builder = ImmutableList.builder();
             final String ands = names.stream()

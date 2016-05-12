@@ -39,6 +39,7 @@ final public class MSG<T> {
                 .setBody(null)
                 .setDeliveryOptions(deliveryOptions)
                 .setMessage(message)
+                .setConnection(connection)
                 .setStore(store)
             ;
     }

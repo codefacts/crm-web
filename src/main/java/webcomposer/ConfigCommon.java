@@ -22,13 +22,13 @@ import java.util.stream.Collectors;
 public class ConfigCommon {
     public static final Logger LOGGER = LoggerFactory.getLogger(ConfigCommon.class);
 
-    public final String SIZE = "size";
-    public final String DATA = "data";
-    public final String ID = "id";
+    public static final String SIZE = "size";
+    public static final String DATA = "data";
+    public static final String ID = "id";
 
-    public final String ERROR_CODE = "errorCode";
-    public final String HTTP_RESPONSE_CODE = "httpResponseCode";
-    public final String MESSAGE_CODE = "messageCode";
+    public static final String ERROR_CODE = "errorCode";
+    public static final String HTTP_RESPONSE_CODE = "httpResponseCode";
+    public static final String MESSAGE_CODE = "messageCode";
 
     public final Map<Integer, String> JDBC_TYPES;
     public final Map<Integer, DataTypes> DATA_TYPES_MAP;
@@ -54,7 +54,7 @@ public class ConfigCommon {
         return new ConfigCommon(jdbc_types, data_types_map, type_converters, error_codes_map);
     }
 
-    public ImmutableMap<Integer, Object> jdbcTypes() {
+    public static Map<Integer, String> jdbcTypes() {
         return ImmutableMap.copyOf(Arrays.asList(Types.class.getDeclaredFields())
             .stream()
             .filter(fs -> Modifier.isFinal(fs.getModifiers()) && Modifier.isPublic(fs.getModifiers())
@@ -65,7 +65,7 @@ public class ConfigCommon {
                 ExceptionUtil.toRuntimeCall(() -> Field::getName))));
     }
 
-    public ImmutableMap<Integer, DataTypes> dataTypesMap() {
+    public static ImmutableMap<Integer, DataTypes> dataTypesMap() {
         ImmutableMap.Builder<Integer, DataTypes> builder = ImmutableMap.builder();
         builder
             .put(4, DataTypes.LONG)
@@ -79,7 +79,7 @@ public class ConfigCommon {
         return builder.build();
     }
 
-    public ImmutableMap<Integer, Function<Object, Object>> typeConverters() {
+    public static ImmutableMap<Integer, Function<Object, Object>> typeConverters() {
         ImmutableMap.Builder<Integer, Function<Object, Object>> builder = ImmutableMap.builder();
         builder
             .put(4, Converters::toLong)
@@ -94,7 +94,7 @@ public class ConfigCommon {
         return builder.build();
     }
 
-    public ImmutableMap<Integer, JsonObject> errorCodesMap(Iterator<ErrorRsp> iterator) {
+    public static ImmutableMap<Integer, JsonObject> errorCodesMap(Iterator<ErrorRsp> iterator) {
         ImmutableMap.Builder<Integer, JsonObject> builder = ImmutableMap.builder();
 
         Arrays.asList(ErrorCodes.values())

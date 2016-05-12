@@ -14,18 +14,18 @@ import static io.crm.statemachine.StateMachine.on;
  */
 public class DeleteHandlerComposer {
 
-    final StartHandlerJsonObject startHandlerJsonObject;
-    final TransformationHandler transformationHandler;
-    final ValidationHandler validationHandler;
+    final StartHandler startHandler;
+    final TransformationHandler jsonTransformationHandler;
+    final ValidationHandler jsonValidationHandler;
     final ValidationErrorHandler validationErrorHandler;
     final DeleteHandler deleteHandler;
     final PublishEventHandler publishEventHandler;
     final EndHandler endHandler;
 
-    public DeleteHandlerComposer(StartHandlerJsonObject startHandlerJsonObject, TransformationHandler transformationHandler, ValidationHandler validationHandler, ValidationErrorHandler validationErrorHandler, DeleteHandler deleteHandler, PublishEventHandler publishEventHandler, EndHandler endHandler) {
-        this.startHandlerJsonObject = startHandlerJsonObject;
-        this.transformationHandler = transformationHandler;
-        this.validationHandler = validationHandler;
+    public DeleteHandlerComposer(StartHandler startHandler, TransformationHandler jsonTransformationHandler, ValidationHandler jsonValidationHandler, ValidationErrorHandler validationErrorHandler, DeleteHandler deleteHandler, PublishEventHandler publishEventHandler, EndHandler endHandler) {
+        this.startHandler = startHandler;
+        this.jsonTransformationHandler = jsonTransformationHandler;
+        this.jsonValidationHandler = jsonValidationHandler;
         this.validationErrorHandler = validationErrorHandler;
         this.deleteHandler = deleteHandler;
         this.publishEventHandler = publishEventHandler;
@@ -47,13 +47,14 @@ public class DeleteHandlerComposer {
                 on(EventCn.SUCCESS, StateCn.PUBLISH_EVENT))
             .when(StateCn.PUBLISH_EVENT, next(StateCn.END))
 
-            .handlers(StateCn.START, startHandlerJsonObject.toStateCallbacks())
-            .handlers(StateCn.TRANSFORMATION, transformationHandler.toStateCallbacks())
-            .handlers(StateCn.VALIDATION, validationHandler.toStateCallbacks())
+            .handlers(StateCn.START, startHandler.toStateCallbacks())
+            .handlers(StateCn.TRANSFORMATION, jsonTransformationHandler.toStateCallbacks())
+            .handlers(StateCn.VALIDATION, jsonValidationHandler.toStateCallbacks())
             .handlers(StateCn.VALIDATION_ERROR, validationErrorHandler.toStateCallbacks())
             .handlers(StateCn.DELETE, deleteHandler.toStateCallbacks())
             .handlers(StateCn.PUBLISH_EVENT, publishEventHandler.toStateCallbacks())
             .handlers(StateCn.END, endHandler.toStateCallbacks())
+            .setInitialState(StateCn.START)
             .build()
             ;
     }

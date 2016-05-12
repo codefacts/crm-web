@@ -13,23 +13,23 @@ import static io.crm.statemachine.StateMachine.on;
  * Created by shahadat on 5/3/16.
  */
 public class FindHandlerComposer {
-    final StartHandlerJsonObject startHandlerJsonObject;
-    final TransformationHandler transformationHandler;
-    final ValidationHandler validationHandler;
+    final StartHandler startHandler;
+    final TransformationHandler jsonTransformationHandler;
+    final ValidationHandler jsonValidationHandler;
     final ValidationErrorHandler validationErrorHandler;
     final FindHandler findHandler;
     final EndHandler endHandler;
 
-    public FindHandlerComposer(StartHandlerJsonObject startHandlerJsonObject, TransformationHandler transformationHandler, ValidationHandler validationHandler, ValidationErrorHandler validationErrorHandler, FindHandler findHandler, EndHandler endHandler) {
-        this.startHandlerJsonObject = startHandlerJsonObject;
-        this.transformationHandler = transformationHandler;
-        this.validationHandler = validationHandler;
+    public FindHandlerComposer(StartHandler startHandler, TransformationHandler jsonTransformationHandler, ValidationHandler jsonValidationHandler, ValidationErrorHandler validationErrorHandler, FindHandler findHandler, EndHandler endHandler) {
+        this.startHandler = startHandler;
+        this.jsonTransformationHandler = jsonTransformationHandler;
+        this.jsonValidationHandler = jsonValidationHandler;
         this.validationErrorHandler = validationErrorHandler;
         this.findHandler = findHandler;
         this.endHandler = endHandler;
     }
 
-    private final StateMachine build() {
+    public final StateMachine build() {
 
         return builder()
             .when(StateCn.START, next(StateCn.TRANSFORMATION))
@@ -44,12 +44,13 @@ public class FindHandlerComposer {
                 on(EventCn.SUCCESS, StateCn.END))
 
 
-            .handlers(StateCn.START, startHandlerJsonObject.toStateCallbacks())
-            .handlers(StateCn.TRANSFORMATION, transformationHandler.toStateCallbacks())
-            .handlers(StateCn.VALIDATION, validationHandler.toStateCallbacks())
+            .handlers(StateCn.START, startHandler.toStateCallbacks())
+            .handlers(StateCn.TRANSFORMATION, jsonTransformationHandler.toStateCallbacks())
+            .handlers(StateCn.VALIDATION, jsonValidationHandler.toStateCallbacks())
             .handlers(StateCn.VALIDATION_ERROR, validationErrorHandler.toStateCallbacks())
             .handlers(StateCn.FIND_ALL, findHandler.toStateCallbacks())
             .handlers(StateCn.END, endHandler.toStateCallbacks())
+            .setInitialState(StateCn.START)
             .build()
             ;
     }

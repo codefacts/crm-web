@@ -39,7 +39,7 @@ public class CreateNewHandler {
             return WebUtils.create(domainInfo.plural, transform, msg.connection)
                 .map(UpdateResult::getKeys)
                 .map(jsonArray -> jsonArray.getLong(0))
-                .map(id -> StateMachine.trigger(EventCn.CREATE_SUCCESS, msg.builder().setBody(id).build()))
+                .map(id -> StateMachine.trigger(EventCn.NEXT, msg.builder().setBody(id).build()))
                 ;
         };
     }

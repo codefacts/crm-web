@@ -13,20 +13,20 @@ import static io.crm.statemachine.StateMachine.on;
  * Created by shahadat on 5/3/16.
  */
 public class UpdateHandlerComposer {
-    final StartHandlerJsonObject startHandlerJsonObject;
-    final TransformationHandler transformationHandler;
-    final ValidationHandler validationHandler;
+    final StartHandler startHandler;
+    final JsonTransformationHandler jsonTransformationHandler;
+    final JsonValidationHandler jsonValidationHandler;
     final ValidationErrorHandler validationErrorHandler;
-    final CreateNewHandler createNewHandler;
+    final UpdateHandler updateHandler;
     final PublishEventHandler publishEventHandler;
     final EndHandler endHandler;
 
-    public UpdateHandlerComposer(StartHandlerJsonObject startHandlerJsonObject, TransformationHandler transformationHandler, ValidationHandler validationHandler, ValidationErrorHandler validationErrorHandler, CreateNewHandler createNewHandler, PublishEventHandler publishEventHandler, EndHandler endHandler) {
-        this.startHandlerJsonObject = startHandlerJsonObject;
-        this.transformationHandler = transformationHandler;
-        this.validationHandler = validationHandler;
+    public UpdateHandlerComposer(StartHandler startHandler, JsonTransformationHandler jsonTransformationHandler, JsonValidationHandler jsonValidationHandler, ValidationErrorHandler validationErrorHandler, UpdateHandler updateHandler, PublishEventHandler publishEventHandler, EndHandler endHandler) {
+        this.startHandler = startHandler;
+        this.jsonTransformationHandler = jsonTransformationHandler;
+        this.jsonValidationHandler = jsonValidationHandler;
         this.validationErrorHandler = validationErrorHandler;
-        this.createNewHandler = createNewHandler;
+        this.updateHandler = updateHandler;
         this.publishEventHandler = publishEventHandler;
         this.endHandler = endHandler;
     }
@@ -47,13 +47,14 @@ public class UpdateHandlerComposer {
             .when(StateCn.PUBLISH_EVENT, next(StateCn.END))
 
 
-            .handlers(StateCn.START, startHandlerJsonObject.toStateCallbacks())
-            .handlers(StateCn.TRANSFORMATION, transformationHandler.toStateCallbacks())
-            .handlers(StateCn.VALIDATION, validationHandler.toStateCallbacks())
+            .handlers(StateCn.START, startHandler.toStateCallbacks())
+            .handlers(StateCn.TRANSFORMATION, jsonTransformationHandler.toStateCallbacks())
+            .handlers(StateCn.VALIDATION, jsonValidationHandler.toStateCallbacks())
             .handlers(StateCn.VALIDATION_ERROR, validationErrorHandler.toStateCallbacks())
-            .handlers(StateCn.CREATE_NEW, createNewHandler.toStateCallbacks())
+            .handlers(StateCn.CREATE_NEW, updateHandler.toStateCallbacks())
             .handlers(StateCn.PUBLISH_EVENT, publishEventHandler.toStateCallbacks())
             .handlers(StateCn.END, endHandler.toStateCallbacks())
+            .setInitialState(StateCn.START)
             .build()
             ;
     }

@@ -19,24 +19,27 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by shahadat on 5/11/16.
+ * Created by shahadat on 5/8/16.
  */
-public class ValidationHandler {
+public class JsonValidationHandler {
 
-    final ValidationPipeline<Object> validationPipeline;
-    final ValidationPipelineDeferred<Object> validationPipelineDeferred;
+    final ValidationPipeline<JsonObject> validationPipeline;
+    final ValidationPipelineDeferred<JsonObject> validationPipelineDeferred;
 
-    public ValidationHandler(ValidationPipeline<Object> validationPipeline, ValidationPipelineDeferred<Object> validationPipelineDeferred) {
+    public JsonValidationHandler(ValidationPipeline<JsonObject> validationPipeline, ValidationPipelineDeferred validationPipelineDeferred) {
         this.validationPipeline = validationPipeline == null ? validationPipeline : validators();
         this.validationPipelineDeferred = validationPipelineDeferred == null ? new ValidationPipelineDeferred(ImmutableList.of()) : validationPipelineDeferred;
     }
 
-    private ValidationPipeline<Object> validators() {
+    private ValidationPipeline<JsonObject> validators() {
         return new ValidationPipeline<>(Collections.emptyList());
     }
 
-    private FunctionUnchecked<MSG<JsonObject>,
-        Promise<StateTrigger<MSG<Object>>>> enter() {
+    private FunctionUnchecked
+        <MSG<JsonObject>,
+            Promise
+                <StateTrigger
+                    <MSG<Object>>>> enter() {
         return msg -> {
 
             {
