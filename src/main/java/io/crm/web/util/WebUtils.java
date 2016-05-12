@@ -506,7 +506,7 @@ final public class WebUtils {
         return new String(chars);
     }
 
-    public static <R> Promise<R> execute(JDBCClient jdbcClient, FunctionUnchecked<SQLConnection, Promise<R>> functionUnchecked) {
+    public static <R> Promise<R> executeSql(JDBCClient jdbcClient, FunctionUnchecked<SQLConnection, Promise<R>> functionUnchecked) {
         return getConnection(jdbcClient)
             .mapToPromise(connection -> functionUnchecked.apply(connection).complete(p -> connection.close()));
     }

@@ -41,7 +41,7 @@ public class FindHandlerComposer {
             .when(StateCn.VALIDATION_ERROR,
                 on(EventCn.REPORT_ERROR, StateCn.END))
             .when(StateCn.FIND,
-                on(EventCn.SUCCESS, StateCn.END))
+                on(EventCn.NEXT, StateCn.END))
 
 
             .handlers(StateCn.START, startHandler.toStateCallbacks())

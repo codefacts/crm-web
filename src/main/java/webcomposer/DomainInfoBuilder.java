@@ -7,6 +7,7 @@ public class DomainInfoBuilder {
     private String labelPlural = null;
     private String uri = null;
     private String address = null;
+    private String table = null;
 
     public DomainInfoBuilder setName(String name) {
         this.name = name;
@@ -38,7 +39,12 @@ public class DomainInfoBuilder {
         return this;
     }
 
+    public DomainInfoBuilder setTable(String table) {
+        this.table = table;
+        return this;
+    }
+
     public DomainInfo createDomainInfo() {
-        return new DomainInfo(name, plural, label, labelPlural, uri, address);
+        return new DomainInfo(name, plural, label, labelPlural, uri, address, table);
     }
 }

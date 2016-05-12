@@ -32,7 +32,7 @@ public class DeleteHandlerComposer {
         this.endHandler = endHandler;
     }
 
-    private final StateMachine build() {
+    public final StateMachine build() {
 
         return builder()
             .when(StateCn.START, next(StateCn.TRANSFORMATION))
@@ -44,7 +44,7 @@ public class DeleteHandlerComposer {
             .when(StateCn.VALIDATION_ERROR,
                 on(EventCn.REPORT_ERROR, StateCn.END))
             .when(StateCn.DELETE,
-                on(EventCn.SUCCESS, StateCn.PUBLISH_EVENT))
+                on(EventCn.NEXT, StateCn.PUBLISH_EVENT))
             .when(StateCn.PUBLISH_EVENT, next(StateCn.END))
 
             .handlers(StateCn.START, startHandler.toStateCallbacks())

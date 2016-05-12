@@ -2,9 +2,9 @@ package webcomposer;
 
 import io.crm.promise.intfs.Promise;
 import io.crm.statemachine.StateMachine;
+import io.crm.util.ExceptionUtil;
 import io.crm.util.Util;
 import io.crm.web.util.WebUtils;
-import io.vertx.core.MultiMap;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
@@ -103,9 +103,9 @@ final public class AppComposer {
 
         final JsonObject json = ctx.getBody().length() <= 0 ? new JsonObject() : ctx.getBodyAsJson();
 
-        final DeliveryOptions options = header(ctx, json);
+        final DeliveryOptions options = new DeliveryOptions().setHeaders(ctx.request().params());
 
-        Util.send(eventBus, address(domainInfo.address, action), json.getJsonObject(BODY), options)
+        Util.send(eventBus, address(domainInfo.address, action), json, options)
             .then(message -> {
                 final Object body = message.body();
                 if (body instanceof Json) {
@@ -119,28 +119,19 @@ final public class AppComposer {
         ;
     }
 
-    private DeliveryOptions header(RoutingContext ctx, JsonObject json) {
-
-        final JsonObject header = json.getJsonObject(HEADER, new JsonObject());
-
-        final MultiMap params = ctx.request().params();
-        params.names().forEach(name -> header.put(name, params.get(name)));
-
-        return new DeliveryOptions(header);
-    }
-
     private String single(String uri) {
         return uri + "/:id";
     }
 
-    private String address(String address, String findAll) {
-        return address + "/" + findAll;
+    private String address(String address, String action) {
+        return address + "/" + action;
     }
 
-    private void handler(DomainInfo domainInfo, String create) {
-        eventBus.consumer(domainInfo.plural + "/" + create,
-            message -> WebUtils.execute(jdbcClient,
-                connection -> stateMachine(domainInfo, connection, message, create)));
+    private void handler(DomainInfo domainInfo, String eventKey) {
+        eventBus.consumer(address(domainInfo.address, eventKey),
+            message -> WebUtils.executeSql(jdbcClient,
+                connection -> stateMachine(domainInfo, connection, message, eventKey))
+                .error(e -> ExceptionUtil.fail(message, e)));
     }
 
     private <R> Promise<R> stateMachine(DomainInfo domainInfo, SQLConnection connection, Message<Object> message, String eventKey) {

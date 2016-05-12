@@ -8,6 +8,7 @@ import io.crm.statemachine.StateCallbacksBuilder;
 import io.crm.statemachine.StateMachine;
 import io.crm.statemachine.StateTrigger;
 import io.crm.transformation.impl.json.object.IncludeExcludeTransformation;
+import io.crm.web.util.Converters;
 import io.crm.web.util.WebUtils;
 import io.vertx.core.json.JsonObject;
 import webcomposer.Cnst;
@@ -34,13 +35,13 @@ public class UpdateHandler {
         return msg -> {
 
             final JsonObject transform = includeExcludeTransformation.transform(msg.body);
-            final Long id = transform.getLong(Cnst.ID);
+            final Long id = Converters.toLong(msg.message.headers().get(Cnst.ID));
 
-            return WebUtils.update(domainInfo.plural, transform,
+            return WebUtils.update(domainInfo.table, transform,
                 new JsonObject()
                     .put(Cnst.ID, id), msg.connection)
-                .map(updateResult -> StateMachine.trigger(EventCn.CREATE_SUCCESS,
-                    msg.builder().setBody(updateResult).build()))
+                .map(updateResult -> StateMachine.trigger(EventCn.NEXT,
+                    msg.builder().setBody(id).build()))
                 ;
         };
     }

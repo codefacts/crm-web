@@ -36,7 +36,7 @@ public class CreateNewHandler {
 
             final JsonObject transform = includeExcludeTransformation.transform(msg.body);
 
-            return WebUtils.create(domainInfo.plural, transform, msg.connection)
+            return WebUtils.create(domainInfo.table, transform, msg.connection)
                 .map(UpdateResult::getKeys)
                 .map(jsonArray -> jsonArray.getLong(0))
                 .map(id -> StateMachine.trigger(EventCn.NEXT, msg.builder().setBody(id).build()))

@@ -31,7 +31,7 @@ public class UpdateHandlerComposer {
         this.endHandler = endHandler;
     }
 
-    private final StateMachine build() {
+    public final StateMachine build() {
 
         return builder()
             .when(StateCn.START, next(StateCn.TRANSFORMATION))
@@ -43,10 +43,11 @@ public class UpdateHandlerComposer {
             .when(StateCn.VALIDATION_ERROR,
                 on(EventCn.REPORT_ERROR, StateCn.END))
             .when(StateCn.UPDATE,
-                on(EventCn.SUCCESS, StateCn.PUBLISH_EVENT))
+                on(EventCn.NEXT, StateCn.PUBLISH_EVENT))
             .when(StateCn.PUBLISH_EVENT, next(StateCn.END))
 
 
+            .handlers(StateCn.UPDATE, updateHandler.toStateCallbacks())
             .handlers(StateCn.START, startHandler.toStateCallbacks())
             .handlers(StateCn.TRANSFORMATION, jsonTransformationHandler.toStateCallbacks())
             .handlers(StateCn.VALIDATION, jsonValidationHandler.toStateCallbacks())
