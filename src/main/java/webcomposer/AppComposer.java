@@ -10,6 +10,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.SQLConnection;
@@ -19,6 +20,7 @@ import io.vertx.ext.web.handler.BodyHandler;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Created by shahadat on 5/3/16.
@@ -33,6 +35,8 @@ final public class AppComposer {
     final List<DomainInfo> domainInfoList;
     final JDBCClient jdbcClient;
     final EventBus eventBus;
+    public static final Function<Message, Object> defaultMsgMapping = Message::body;
+    public static final Function<Message, Object> headerToBodyMsgMapping = message -> message.headers().get(Cnst.ID);
 
     AppComposer(Map<DomainInfo, Map<String, StateMachine>> stateMachinesByDomainInfo, Router router, List<DomainInfo> domainInfoList, JDBCClient jdbcClient, EventBus eventBus) {
         this.stateMachinesByDomainInfo = stateMachinesByDomainInfo;
@@ -88,15 +92,15 @@ final public class AppComposer {
 
     private void registerEventHandler(DomainInfo domainInfo) {
 
-        handler(domainInfo, Events.CREATE);
+        handler(domainInfo, Events.CREATE, defaultMsgMapping);
 
-        handler(domainInfo, Events.FIND);
+        handler(domainInfo, Events.FIND, headerToBodyMsgMapping);
 
-        handler(domainInfo, Events.FIND_ALL);
+        handler(domainInfo, Events.FIND_ALL, defaultMsgMapping);
 
-        handler(domainInfo, Events.UPDATE);
+        handler(domainInfo, Events.UPDATE, defaultMsgMapping);
 
-        handler(domainInfo, Events.DELETE);
+        handler(domainInfo, Events.DELETE, headerToBodyMsgMapping);
     }
 
     private void controller(RoutingContext ctx, DomainInfo domainInfo, String action) {
@@ -108,9 +112,9 @@ final public class AppComposer {
         Util.send(eventBus, address(domainInfo.address, action), json, options)
             .then(message -> {
                 final Object body = message.body();
-                if (body instanceof Json) {
+                if (body instanceof JsonObject || body instanceof JsonArray) {
                     ctx.response().putHeader(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON);
-                    ctx.response().end(Json.encodePrettily(body));
+                    ctx.response().end(Json.encode(body));
                 } else {
                     ctx.response().end(body.toString());
                 }
@@ -127,17 +131,17 @@ final public class AppComposer {
         return address + "/" + action;
     }
 
-    private void handler(DomainInfo domainInfo, String eventKey) {
+    private void handler(DomainInfo domainInfo, String eventKey, Function<Message, Object> msgBody) {
         eventBus.consumer(address(domainInfo.address, eventKey),
             message -> WebUtils.executeSql(jdbcClient,
-                connection -> stateMachine(domainInfo, connection, message, eventKey))
+                connection -> stateMachine(domainInfo, connection, message, eventKey, msgBody))
                 .error(e -> ExceptionUtil.fail(message, e)));
     }
 
-    private <R> Promise<R> stateMachine(DomainInfo domainInfo, SQLConnection connection, Message<Object> message, String eventKey) {
+    private <R> Promise<R> stateMachine(DomainInfo domainInfo, SQLConnection connection, Message<Object> message, String eventKey, Function<Message, Object> msgBody) {
 
         final MSG<Object> msg = new MSGBuilder<>()
-            .setBody(message.body())
+            .setBody(msgBody.apply(message))
             .setMessage(message)
             .setConnection(connection)
             .build();

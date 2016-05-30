@@ -48,7 +48,7 @@ public class FindHandlerComposer {
             .handlers(StateCn.TRANSFORMATION, jsonTransformationHandler.toStateCallbacks())
             .handlers(StateCn.VALIDATION, jsonValidationHandler.toStateCallbacks())
             .handlers(StateCn.VALIDATION_ERROR, validationErrorHandler.toStateCallbacks())
-            .handlers(StateCn.FIND_ALL, findHandler.toStateCallbacks())
+            .handlers(StateCn.FIND, findHandler.toStateCallbacks())
             .handlers(StateCn.END, endHandler.toStateCallbacks())
             .setInitialState(StateCn.START)
             .build()
