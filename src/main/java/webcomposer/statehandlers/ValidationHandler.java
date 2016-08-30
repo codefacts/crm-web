@@ -51,7 +51,7 @@ public class ValidationHandler {
 
             return validationPipelineDeferred.validate(msg.body, msg.store)
 
-                .mapToPromise(validationResults -> {
+                .mapP(validationResults -> {
 
                     if (validationResults != null) {
                         return Promises.from(

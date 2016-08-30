@@ -206,7 +206,7 @@ final public class WebUtils {
 
     public static Promise<ResultSet> query(String sql, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
-            .mapToPromise(con -> Promises.from(con).mapToPromise(cn -> {
+            .mapP(con -> Promises.from(con).mapP(cn -> {
                 Defer<ResultSet> defer = Promises.defer();
                 cn.query(sql, Util.makeDeferred(defer));
                 return defer.promise();
@@ -215,7 +215,7 @@ final public class WebUtils {
 
     public static Promise<ResultSet> query(String sql, JsonArray params, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
-            .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
+            .mapP(conn -> Promises.from(conn).mapP(con -> {
                 Defer<ResultSet> defer = Promises.defer();
                 con.queryWithParams(sql, params, Util.makeDeferred(defer));
                 return defer.promise();
@@ -232,7 +232,7 @@ final public class WebUtils {
     public static Promise<UpdateResult> update(String sql, SQLConnection con) {
         return Promises
             .from(con)
-            .mapToPromise(cn -> {
+            .mapP(cn -> {
                 Defer<UpdateResult> defer = Promises.defer();
                 cn.update(sql, Util.makeDeferred(defer));
                 return defer.promise();
@@ -241,7 +241,7 @@ final public class WebUtils {
 
     public static Promise<UpdateResult> update(String sql, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
-            .mapToPromise(con -> Promises.from(con).mapToPromise(cn -> {
+            .mapP(con -> Promises.from(con).mapP(cn -> {
                 Defer<UpdateResult> defer = Promises.defer();
                 cn.update(sql, Util.makeDeferred(defer));
                 return defer.promise();
@@ -250,7 +250,7 @@ final public class WebUtils {
 
     public static Promise<UpdateResult> updateWithParams(String sql, JsonArray params, SQLConnection sqlConnection) {
         return Promises.from(sqlConnection)
-            .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
+            .mapP(conn -> Promises.from(conn).mapP(con -> {
                 Defer<UpdateResult> defer = Promises.defer();
                 con.updateWithParams(sql, params, Util.makeDeferred(defer));
                 return defer.promise();
@@ -259,7 +259,7 @@ final public class WebUtils {
 
     public static Promise<UpdateResult> updateWithParams(String sql, JsonArray params, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
-            .mapToPromise(conn -> Promises.from(conn).mapToPromise(con -> {
+            .mapP(conn -> Promises.from(conn).mapP(con -> {
                 Defer<UpdateResult> defer = Promises.defer();
                 con.updateWithParams(sql, params, Util.makeDeferred(defer));
                 return defer.promise();
@@ -452,7 +452,7 @@ final public class WebUtils {
 
     public static Promise<List<UpdateResult>> multiUpdate(List<String> updates, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
-            .mapToPromise(con -> {
+            .mapP(con -> {
                 try {
                     Defer<Void> defer = Promises.defer();
                     con.setAutoCommit(false, Util.makeDeferred(defer));
@@ -462,14 +462,14 @@ final public class WebUtils {
                     return Promises.fromError(e);
                 }
             })
-            .mapToPromise(con -> {
+            .mapP(con -> {
                 try {
                     ImmutableList.Builder<Promise<UpdateResult>> builder = ImmutableList.builder();
                     updates.forEach(sql -> {
                         builder.add(update(sql, con));
                     });
                     return Promises.when(builder.build())
-                        .mapToPromise(v -> {
+                        .mapP(v -> {
                             Defer<Void> defer = Promises.defer();
                             con.commit(Util.makeDeferred(defer));
                             return defer.promise().map(k -> v);
@@ -484,9 +484,9 @@ final public class WebUtils {
 
     public static Promise<List<ResultSet>> multiQuery(Collection<String> strings, JDBCClient jdbcClient) {
         return getConnection(jdbcClient)
-            .mapToPromise(
+            .mapP(
                 con -> Promises.from(con)
-                    .mapToPromise(cn -> {
+                    .mapP(cn -> {
                         final ImmutableList.Builder<Promise<ResultSet>> builder = ImmutableList.builder();
 
                         strings.forEach(s -> builder.add(query(s, cn)));
@@ -508,7 +508,7 @@ final public class WebUtils {
 
     public static <R> Promise<R> executeSql(JDBCClient jdbcClient, FunctionUnchecked<SQLConnection, Promise<R>> functionUnchecked) {
         return getConnection(jdbcClient)
-            .mapToPromise(connection -> functionUnchecked.apply(connection).complete(p -> connection.close()));
+            .mapP(connection -> functionUnchecked.apply(connection).complete(p -> connection.close()));
     }
 
     public static Promise<List<ResultSet>> queryMulti(SQLConnection connection, List<String> queries) {

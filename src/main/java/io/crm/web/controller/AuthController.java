@@ -35,10 +35,10 @@ final public class AuthController {
     public void login(final Router router) {
         router.post(Uris.LOGIN.value).handler(BodyHandler.create());
         router.post(Uris.LOGIN.value).handler(ctx -> Promises.from()
-            .mapToPromise(v -> Util.<JsonObject>send(vertx.eventBus(), ApiEvents.LOGIN_API,
+            .mapP(v -> Util.<JsonObject>send(vertx.eventBus(), ApiEvents.LOGIN_API,
                 WebUtils.toJson(ctx.request().params())))
             .map(m -> m.body())
-            .mapToPromise(user -> login(user, ctx, vertx))
+            .mapP(user -> login(user, ctx, vertx))
             .error(ctx::fail));
     }
 
